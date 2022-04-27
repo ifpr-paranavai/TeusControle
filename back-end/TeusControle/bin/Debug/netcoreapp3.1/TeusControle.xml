@@ -1,0 +1,2710 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TeusControle</name>
+    </assembly>
+    <members>
+        <member name="T:TeusControle.Application.Interfaces.Repository.IBaseDoubleRepository`1">
+            <summary>
+            Interface genérica para repositório para entidade com chave composta. Declaração dos métodos para CRUD.
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Repository.IBaseDoubleRepository`1.Insert(`0)">
+            <summary>
+            Insere um novo registro
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Repository.IBaseDoubleRepository`1.Update(`0)">
+            <summary>
+            Atualiza um registro
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Repository.IBaseDoubleRepository`1.PhysicalDelete(System.Int64,System.Int64)">
+            <summary>
+            Deleta um registro a partir do Id
+            </summary>
+            <param name="id"></param>
+            <param name="id2"></param>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Repository.IBaseDoubleRepository`1.UpdateFields(`0,System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+            <summary>
+            Atualizar alguns campos
+            </summary>
+            <param name="entity"></param>
+            <param name="includeProperties"></param>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Repository.IBaseDoubleRepository`1.Select(System.Int64,System.Int64)">
+            <summary>
+            Busca um registro por Id
+            </summary>
+            <param name="id"></param>
+            <param name="id2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Repository.IBaseDoubleRepository`1.Any(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Retorna se para a condição, existe tal registro
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Repository.IBaseDoubleRepository`1.Query(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Constrói busca no banco
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Repository.IBaseDoubleRepository`1.Count(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Busca quantidade de registros a partir do filtro
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Repository.IBaseDoubleRepository`1.GetPaged(System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Busca página
+            </summary>
+            <param name="initialRow"></param>
+            <param name="pageSize"></param>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TeusControle.Application.Interfaces.Repository.IBaseRepository`1">
+            <summary>
+            Interface genérica para repositório. Declaração dos métodos para CRUD.
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Repository.IBaseRepository`1.Insert(`0)">
+            <summary>
+            Insere um novo registro
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Repository.IBaseRepository`1.Update(`0)">
+            <summary>
+            Atualiza um registro
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Repository.IBaseRepository`1.PhysicalDelete(System.Int64)">
+            <summary>
+            Deleta um registro a partir do Id
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Repository.IBaseRepository`1.UpdateFields(`0,System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+            <summary>
+            Atualizar alguns campos
+            </summary>
+            <param name="entity"></param>
+            <param name="includeProperties"></param>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Repository.IBaseRepository`1.Select">
+            <summary>
+            Busca todos os registros
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Repository.IBaseRepository`1.Select(System.Int64)">
+            <summary>
+            Busca um registro por Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Repository.IBaseRepository`1.Any(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Retorna se para a condição, existe tal registro
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Repository.IBaseRepository`1.Query(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Constrói busca no banco
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Repository.IBaseRepository`1.Count(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Busca quantidade de registros a partir do filtro
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Repository.IBaseRepository`1.GetPaged(System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Busca páginada
+            </summary>
+            <param name="initialRow"></param>
+            <param name="pageSize"></param>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TeusControle.Application.Interfaces.Repository.IDisposalsRepository">
+            <summary>
+            Interface repositório para registros de saída de produtos.
+            </summary>
+        </member>
+        <member name="T:TeusControle.Application.Interfaces.Repository.IEntriesRepository">
+            <summary>
+            Interface repositório para registros de entrada de produto.
+            </summary>
+        </member>
+        <member name="T:TeusControle.Application.Interfaces.Repository.IProductDisposalsRepository">
+            <summary>
+            Interface repositório para registros de produto para uma saída.
+            </summary>
+        </member>
+        <member name="T:TeusControle.Application.Interfaces.Repository.IProductEntriesRepository">
+            <summary>
+            Interface repositório para registros de produto para uma entrada.
+            </summary>
+        </member>
+        <member name="T:TeusControle.Application.Interfaces.Repository.IProductsRepository">
+            <summary>
+            Interface repositório para produtos.
+            </summary>
+        </member>
+        <member name="T:TeusControle.Application.Interfaces.Repository.IUsersRepository">
+            <summary>
+            Interface repositório para usuários.
+            </summary>
+        </member>
+        <member name="T:TeusControle.Application.Interfaces.Services.IBaseDoubleService`1">
+            <summary>
+            Interface da classe genérica dos serviços para entidades com chave composta. Declaração dos métodos para CRUD.
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IBaseDoubleService`1.LogicalDelete(System.Int64,System.Int64)">
+            <summary>
+            Exclui logicamente um registro a partir do id e id2
+            </summary>
+            <param name="id"></param>
+            <param name="id2"></param>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IBaseDoubleService`1.Add``3(``0)">
+            <summary>
+            Cria um novo registro
+            </summary>
+            <typeparam name="TInputModel"></typeparam>
+            <typeparam name="TOutputModel"></typeparam>
+            <typeparam name="TValidator"></typeparam>
+            <param name="inputModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IBaseDoubleService`1.Add``1(`0)">
+            <summary>
+            Cria um novo registro
+            </summary>
+            <typeparam name="TOutputModel"></typeparam>
+            <param name="inputModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IBaseDoubleService`1.PhysicalDelete(System.Int64,System.Int64)">
+            <summary>
+            Exclui fisicamente um registro a partir do id
+            </summary>
+            <param name="id"></param>
+            <param name="id2"></param>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IBaseDoubleService`1.Update``3(``0)">
+            <summary>
+            Atualiza um registro
+            </summary>
+            <typeparam name="TInputModel"></typeparam>
+            <typeparam name="TOutputModel"></typeparam>
+            <typeparam name="TValidator"></typeparam>
+            <param name="inputModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IBaseDoubleService`1.Count(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Busca quantidade de registros a partir do filtro
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IBaseDoubleService`1.Any(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Retorna se para a condição, existe tal registro
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IBaseDoubleService`1.Query(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Constrói busca no banco
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IBaseDoubleService`1.UpdateSomeFields(`0,System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+            <summary>
+            Atualiza alguns campos
+            </summary>
+            <param name="entity"></param>
+            <param name="updatedProperties"></param>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IBaseDoubleService`1.GetPaged(System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Busca páginada
+            </summary>
+            <param name="page"></param>
+            <param name="pageSize"></param>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IBaseDoubleService`1.GetPaged(TeusControle.Infrastructure.Dtos.PaginatedInputModel)">
+            <summary>
+            Busca páginada com parâmetros
+            </summary>
+            <param name="pagingParams"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TeusControle.Application.Interfaces.Services.IBaseService`1">
+            <summary>
+            Interface da classe genérica dos serviços. Declaração dos métodos para CRUD.
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IBaseService`1.Add``3(``0)">
+            <summary>
+            Cria um novo registro
+            </summary>
+            <typeparam name="TInputModel"></typeparam>
+            <typeparam name="TOutputModel"></typeparam>
+            <typeparam name="TValidator"></typeparam>
+            <param name="inputModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IBaseService`1.Add``1(`0)">
+            <summary>
+            Cria um novo registro
+            </summary>
+            <typeparam name="TOutputModel"></typeparam>
+            <param name="inputModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IBaseService`1.PhysicalDelete(System.Int64)">
+            <summary>
+            Exclui fisicamente um registro a partir do id
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IBaseService`1.Update``3(``0)">
+            <summary>
+            Atualiza um registro
+            </summary>
+            <typeparam name="TInputModel"></typeparam>
+            <typeparam name="TOutputModel"></typeparam>
+            <typeparam name="TValidator"></typeparam>
+            <param name="inputModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IBaseService`1.Count(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Busca quantidade de registros a partir do filtro
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IBaseService`1.Any(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Retorna se para a condição, existe tal registro
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IBaseService`1.Query(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Constrói busca no banco
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IBaseService`1.UpdateSomeFields(`0,System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+            <summary>
+            Atualiza alguns campos
+            </summary>
+            <param name="entity"></param>
+            <param name="updatedProperties"></param>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IBaseService`1.GetPaged(TeusControle.Infrastructure.Dtos.PaginatedInputModel)">
+            <summary>
+            Busca páginada com parâmetros
+            </summary>
+            <param name="pagingParams"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IBaseService`1.GetPaged(TeusControle.Infrastructure.Dtos.PaginatedInputModel,System.Func{`0,System.Object})">
+            <summary>
+            Busca páginada com parâmetros
+            </summary>
+            <param name="pagingParams"></param>
+            <param name="selector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IDisposalsService.Insert(TeusControle.Domain.Models.Dtos.CreateDisposalModel)">
+            <summary>
+            Cria um registro de saída de produtos
+            </summary>
+            <param name="disposalModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IDisposalsService.Update(TeusControle.Domain.Models.Dtos.UpdateDisposalModel)">
+            <summary>
+            Atualiza um registro de saída de produtos
+            </summary>
+            <param name="disposalModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IDisposalsService.InsertProductDisposalItem(TeusControle.Domain.Models.Dtos.CreateProductDisposalsModel)">
+            <summary>
+            Insere um item de produto a saída
+            </summary>
+            <param name="productDisposal"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IDisposalsService.DeleteProductDisposalItem(System.Int64,System.Int64)">
+            <summary>
+            Remove um item de produto a entrada
+            </summary>
+            <param name="disposalId"></param>
+            <param name="productId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IDisposalsService.CloseDisposal(System.Int64)">
+            <summary>
+            Fluxo para fechar uma saída de produto e atualizar quantidade em estoque de produtos
+            </summary>
+            <param name="disposalId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IDisposalsService.GetById(System.Int64)">
+            <summary>
+            Busca um registro por Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IDisposalsService.Get(System.Int32,System.Int32)">
+            <summary>
+            Busca lista paginada de todas as saídas de produtos cadastradas
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IDisposalsService.Delete(System.Int64)">
+            <summary>
+            Deleta uma saída
+            </summary>
+            <param name="disposalId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IDisposalsService.Get(TeusControle.Infrastructure.Dtos.PaginatedInputModel)">
+            <summary>
+            Busca lista de todos saídas levando em consideração parametros de filtragem e ordenação
+            </summary>
+            <param name="pagingParams"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IEntriesService.CreateEntry(TeusControle.Domain.Models.Dtos.CreateEntryModel)">
+            <summary>
+            Cria um registro de entrada de produtos
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IEntriesService.Update(TeusControle.Domain.Models.Dtos.UpdateEntryModel)">
+            <summary>
+            Atualiza um registro de entrada de produtos
+            </summary>
+            <param name="entry"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IEntriesService.InsertProductEntryItem(TeusControle.Domain.Models.Dtos.CreateProductEntriesModel)">
+            <summary>
+            Insere um item de produto a entrada
+            </summary>
+            <param name="productEntry"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IEntriesService.DeleteProductEntryItem(System.Int64,System.Int64)">
+            <summary>
+            Remove um item de produto a entrada
+            </summary>
+            <param name="entry_id"></param>
+            <param name="product_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IEntriesService.CloseEntry(System.Int64)">
+            <summary>
+            Fluxo para fechar uma entrada de produto e atualizar quantidade em estoque de produtos
+            </summary>
+            <param name="entry_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IEntriesService.GetById(System.Int64)">
+            <summary>
+            Busca um registro por Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IEntriesService.Get(System.Int32,System.Int32)">
+            <summary>
+            Busca lista paginada de todas as entradas de produtos cadastradas
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IEntriesService.DeleteEntry(System.Int64)">
+            <summary>
+            Deleta uma entrada
+            </summary>
+            <param name="entry_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IEntriesService.Get(TeusControle.Infrastructure.Dtos.PaginatedInputModel)">
+            <summary>
+            Busca lista de todos entradas levando em consideração parametros de filtragem e ordenação
+            </summary>
+            <param name="pagingParams"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.ILoginService.GenerateToken(TeusControle.Domain.Models.Dtos.TokenLogin)">
+            <summary>
+            Gera token de acesso
+            </summary>
+            <param name="credential"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IProductDisposalsService.InsertProductDisposalsItem(TeusControle.Domain.Models.Dtos.CreateProductDisposalsModel)">
+            <summary>
+            Insere um item de produto a saída
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IProductDisposalsService.DeleteProductDisposalItem(System.Int64,System.Int64)">
+            <summary>
+            Remove um item de protudo da saída
+            </summary>
+            <param name="disposalId"></param>
+            <param name="productId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IProductEntriesService.InsertProductEntryItem(TeusControle.Domain.Models.Dtos.CreateProductEntriesModel)">
+            <summary>
+            Insere um item de produto a entrada
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IProductEntriesService.DeleteProductEntryItem(System.Int64,System.Int64)">
+            <summary>
+            Remove um item de protudo da entrada
+            </summary>
+            <param name="entry_id"></param>
+            <param name="product_id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TeusControle.Application.Interfaces.Services.IProductsService">
+            <summary>
+            Inteface para serviço de usuários. Declaração de métodos
+            </summary>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IProductsService.Insert(TeusControle.Domain.Models.Dtos.CreateProductsModel)">
+            <summary>
+            Insere um novo usuário
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IProductsService.Update(TeusControle.Domain.Models.Dtos.UpdateProductsModel)">
+            <summary>
+            Atualiza um registro de usuário
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IProductsService.GetById(System.Int64)">
+            <summary>
+            Busca um registro por Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IProductsService.Get(System.Int32,System.Int32)">
+            <summary>
+            Busca lista de todos os produtos
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IProductsService.DeleteById(System.Int64)">
+            <summary>
+            Deleta um registro de usuário
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IProductsService.IncremetInStock(System.Int64,System.Decimal)">
+            <summary>
+            Incrementa quantidade em estoque em valor informado
+            </summary>
+            <param name="id"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IProductsService.DecrementInStock(System.Int64,System.Decimal)">
+            <summary>
+            Decrementa quantidade em estoque em valor informado
+            </summary>
+            <param name="id"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:TeusControle.Application.Interfaces.Services.IProductsService.Get(TeusControle.Infrastructure.Dtos.PaginatedInputModel)" -->
+        <member name="T:TeusControle.Application.Interfaces.Services.IUsersService">
+            <summary>
+            Inteface para serviço de usuários. Declaração de métodos
+            </summary>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IUsersService.Insert(TeusControle.Domain.Models.Dtos.CreateUserModel)">
+            <summary>
+            Insere um novo usuário
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IUsersService.Update(TeusControle.Domain.Models.Dtos.UpdateUserModel)">
+            <summary>
+            Atualiza um registro de usuário
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IUsersService.GetById(System.Int64)">
+            <summary>
+            Busca um registro por Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IUsersService.Get(System.Int32,System.Int32)">
+            <summary>
+            Busca lista de todos os usuários
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IUsersService.DeleteById(System.Int64)">
+            <summary>
+            Deleta um registro de usuário
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Interfaces.Services.IUsersService.Get(TeusControle.Infrastructure.Dtos.PaginatedInputModel)">
+            <summary>
+            Busca lista de todos usuários levando em consideração parametros de filtragem e ordenação
+            </summary>
+            <param name="pagingParams"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TeusControle.Application.Services.BaseDoubleService`1">
+            <summary>
+            Classe de serviço genérica para entidades associativas. CRUD genérico.
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <summary>
+            Classe de serviço genérica. CRUD genérico.
+            </summary>
+        </member>
+        <member name="M:TeusControle.Application.Services.BaseDoubleService`1.LogicalDelete(System.Int64,System.Int64)">
+            <summary>
+            Exclui logicamente um registro a partir do id e id2
+            </summary>
+            <param name="id"></param>
+            <param name="id2"></param>
+        </member>
+        <member name="M:TeusControle.Application.Services.BaseDoubleService`1.Add``1(`0)">
+            <summary>
+            Cria um novo registro
+            </summary>
+            <typeparam name="TOutputModel"></typeparam>
+            <param name="inputModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.BaseDoubleService`1.PhysicalDelete(System.Int64,System.Int64)">
+            <summary>
+            Exclui fisicamente um registro a partir do id
+            </summary>
+            <param name="id"></param>
+            <param name="id2"></param>
+        </member>
+        <member name="M:TeusControle.Application.Services.BaseDoubleService`1.Update``3(``0)">
+            <summary>
+            Atualiza um registro
+            </summary>
+            <typeparam name="TInputModel"></typeparam>
+            <typeparam name="TOutputModel"></typeparam>
+            <typeparam name="TValidator"></typeparam>
+            <param name="inputModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.BaseDoubleService`1.UpdateSomeFields(`0,System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+            <summary>
+            Atualiza alguns campos
+            </summary>
+            <param name="entity"></param>
+            <param name="updatedProperties"></param>
+        </member>
+        <member name="M:TeusControle.Application.Services.BaseDoubleService`1.Validate(`0,FluentValidation.AbstractValidator{`0})">
+            <summary>
+            Valida o objeto a ser cadastrado
+            </summary>
+            <param name="obj"></param>
+            <param name="validator"></param>
+        </member>
+        <member name="M:TeusControle.Application.Services.BaseDoubleService`1.Any(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Retorna se para a condição, existe tal registro
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.BaseDoubleService`1.Count(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Busca quantidade de registros a partir do filtro
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.BaseDoubleService`1.CalcStartRow(System.Int32,System.Int32)">
+            <summary>
+            Calcula qual a linha de start da listagem, conforme número da pagina atual e total de paginas
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.BaseDoubleService`1.Query(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Constrói busca no banco
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.BaseDoubleService`1.GetPaged(System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Busca páginada
+            </summary>
+            <param name="page"></param>
+            <param name="pageSize"></param>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.BaseDoubleService`1.GetPaged(TeusControle.Infrastructure.Dtos.PaginatedInputModel)">
+            <summary>
+            Busca páginada com parâmetros
+            </summary>
+            <param name="pagingParams"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TeusControle.Application.Services.BaseService`1">
+            <summary>
+            Classe de serviço genérica. CRUD genérico.
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <summary>
+            Classe de serviço genérica. CRUD genérico.
+            </summary>
+        </member>
+        <member name="M:TeusControle.Application.Services.BaseService`1.Add``3(``0)">
+            <summary>
+            Cria um novo registro
+            </summary>
+            <typeparam name="TInputModel"></typeparam>
+            <typeparam name="TOutputModel"></typeparam>
+            <typeparam name="TValidator"></typeparam>
+            <param name="inputModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.BaseService`1.Add``1(`0)">
+            <summary>
+            Cria um novo registro
+            </summary>
+            <typeparam name="TOutputModel"></typeparam>
+            <param name="inputModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.BaseService`1.PhysicalDelete(System.Int64)">
+            <summary>
+            Exclui fisicamente um registro a partir do id
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:TeusControle.Application.Services.BaseService`1.LogicalDelete(System.Int64)">
+            <summary>
+            Exclui logicamente um registro a partir do id
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:TeusControle.Application.Services.BaseService`1.Update``3(``0)">
+            <summary>
+            Atualiza um registro
+            </summary>
+            <typeparam name="TInputModel"></typeparam>
+            <typeparam name="TOutputModel"></typeparam>
+            <typeparam name="TValidator"></typeparam>
+            <param name="inputModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.BaseService`1.Validate(`0,FluentValidation.AbstractValidator{`0})">
+            <summary>
+            Valida o objeto a ser cadastrado
+            </summary>
+            <param name="obj"></param>
+            <param name="validator"></param>
+        </member>
+        <member name="M:TeusControle.Application.Services.BaseService`1.UpdateSomeFields(`0,System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+            <summary>
+            Atualiza alguns campos
+            </summary>
+            <param name="entity"></param>
+            <param name="updatedProperties"></param>
+        </member>
+        <member name="M:TeusControle.Application.Services.BaseService`1.Count(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Busca quantidade de registros a partir do filtro
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.BaseService`1.CalcStartRow(System.Int32,System.Int32)">
+            <summary>
+            Calcula qual a linha de start da listagem, conforme número da pagina atual e total de paginas
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.BaseService`1.Any(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Retorna se para a condição, existe tal registro
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.BaseService`1.Query(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Constrói busca no banco
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.BaseService`1.GetPaged(System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Busca páginada
+            </summary>
+            <param name="page"></param>
+            <param name="pageSize"></param>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.BaseService`1.GetPaged(TeusControle.Infrastructure.Dtos.PaginatedInputModel)">
+            <summary>
+            Busca páginada com parâmetros
+            </summary>
+            <param name="pagingParams"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.BaseService`1.GetPaged(TeusControle.Infrastructure.Dtos.PaginatedInputModel,System.Func{`0,System.Object})">
+            <summary>
+            Busca páginada com parâmetros
+            </summary>
+            <param name="pagingParams"></param>
+            <param name="selector"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TeusControle.Application.Services.DisposalsService">
+            <summary>
+            Saída de produtos
+            </summary>
+        </member>
+        <member name="M:TeusControle.Application.Services.DisposalsService.Insert(TeusControle.Domain.Models.Dtos.CreateDisposalModel)">
+            <summary>
+            Cria um registro de saída de produtos
+            </summary>
+            <param name="disposalModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.DisposalsService.Update(TeusControle.Domain.Models.Dtos.UpdateDisposalModel)">
+            <summary>
+            Atualiza um registro de saída de produtos
+            </summary>
+            <param name="disposalModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.DisposalsService.InsertProductDisposalItem(TeusControle.Domain.Models.Dtos.CreateProductDisposalsModel)">
+            <summary>
+            Insere um item de produto a saída
+            </summary>
+            <param name="productDisposal"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.DisposalsService.DeleteProductDisposalItem(System.Int64,System.Int64)">
+            <summary>
+            Remove um item de produto da saída
+            </summary>
+            <param name="disposalId"></param>
+            <param name="productId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.DisposalsService.Delete(System.Int64)">
+            <summary>
+            Deleta uma saída
+            </summary>
+            <param name="disposalId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.DisposalsService.CloseDisposal(System.Int64)">
+            <summary>
+            Fluxo para fechar uma saída de produto e atualizar quantidade em estoque de produtos
+            </summary>
+            <param name="disposalId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.DisposalsService.GetById(System.Int64)">
+            <summary>
+            Busca informações de uma saída
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.DisposalsService.Get(System.Int32,System.Int32)">
+            <summary>
+            Busca lista paginada de todas as saídas de produtos cadastradas
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.DisposalsService.Get(TeusControle.Infrastructure.Dtos.PaginatedInputModel)">
+            <summary>
+            Busca lista de todos saídas levando em consideração parametros de filtragem e ordenação
+            </summary>
+            <param name="pagingParams"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TeusControle.Application.Services.EntriesService">
+            <summary>
+            Entrada de produtos
+            </summary>
+        </member>
+        <member name="M:TeusControle.Application.Services.EntriesService.CreateEntry(TeusControle.Domain.Models.Dtos.CreateEntryModel)">
+            <summary>
+            Cria um registro de entrada de produtos
+            </summary>
+            <param name="entryModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.EntriesService.Update(TeusControle.Domain.Models.Dtos.UpdateEntryModel)">
+            <summary>
+            Atualiza um registro de entrada de produtos
+            </summary>
+            <param name="entry"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.EntriesService.InsertProductEntryItem(TeusControle.Domain.Models.Dtos.CreateProductEntriesModel)">
+            <summary>
+            Insere um item de produto a entrada
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.EntriesService.DeleteProductEntryItem(System.Int64,System.Int64)">
+            <summary>
+            Remove um item de produto a entrada
+            </summary>
+            <param name="product_id"></param>
+            <param name="entry_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.EntriesService.DeleteEntry(System.Int64)">
+            <summary>
+            Deleta uma entrada
+            </summary>
+            <param name="entry_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.EntriesService.CloseEntry(System.Int64)">
+            <summary>
+            Fluxo para fechar uma entrada de produto e atualizar quantidade em estoque de produtos
+            </summary>
+            <param name="entry_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.EntriesService.GetById(System.Int64)">
+            <summary>
+            Busca informações de uma entrada
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.EntriesService.Get(System.Int32,System.Int32)">
+            <summary>
+            Busca lista paginada de todas as entradas de produtos cadastradas
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.EntriesService.Get(TeusControle.Infrastructure.Dtos.PaginatedInputModel)">
+            <summary>
+            Busca lista de todos entradas levando em consideração parametros de filtragem e ordenação
+            </summary>
+            <param name="pagingParams"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.LoginService.GenerateToken(TeusControle.Domain.Models.Dtos.TokenLogin)">
+            <summary>
+            Gera token de acesso
+            </summary>
+            <param name="credential"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.LoginService.ValidateUser(TeusControle.Domain.Models.Dtos.TokenLogin)">
+            <summary>
+            Usuário existe? Se sim, retorna usuário
+            </summary>
+            <param name="credential"></param>
+            <returns></returns>
+        </member>
+        <member name="P:TeusControle.Application.Services.UserDataToken.Id">
+            <summary>
+            Identificador
+            </summary>
+        </member>
+        <member name="P:TeusControle.Application.Services.UserDataToken.Name">
+            <summary>
+            Nome
+            </summary>
+        </member>
+        <member name="P:TeusControle.Application.Services.UserDataToken.UserName">
+            <summary>
+            Nome de usuário
+            </summary>
+        </member>
+        <member name="P:TeusControle.Application.Services.UserDataToken.Email">
+            <summary>
+            E-mail
+            </summary>
+        </member>
+        <member name="P:TeusControle.Application.Services.UserDataToken.ProfileImage">
+            <summary>
+            Imagem de perfil
+            </summary>
+        </member>
+        <member name="P:TeusControle.Application.Services.UserDataToken.ProfileTypeId">
+            <summary>
+            Id do tipo do perfil
+            </summary>
+        </member>
+        <member name="P:TeusControle.Application.Services.UserDataToken.ProfileTypeDescription">
+            <summary>
+            Descrição do tipo do perfil
+            </summary>
+        </member>
+        <member name="T:TeusControle.Application.Services.ProductDisposalsService">
+            <summary>
+            Associativa para saída de produtos
+            </summary>
+        </member>
+        <member name="M:TeusControle.Application.Services.ProductDisposalsService.InsertProductDisposalsItem(TeusControle.Domain.Models.Dtos.CreateProductDisposalsModel)">
+            <summary>
+            Insere um item de produto a saída
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.ProductDisposalsService.DeleteProductDisposalItem(System.Int64,System.Int64)">
+            <summary>
+            Remove um item de protudo da saída
+            </summary>
+            <param name="disposalId"></param>
+            <param name="productId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TeusControle.Application.Services.ProductEntriesService">
+            <summary>
+            Associativa para entrada de produtos
+            </summary>
+        </member>
+        <member name="M:TeusControle.Application.Services.ProductEntriesService.InsertProductEntryItem(TeusControle.Domain.Models.Dtos.CreateProductEntriesModel)">
+            <summary>
+            Insere um item de produto a entrada
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.ProductEntriesService.DeleteProductEntryItem(System.Int64,System.Int64)">
+            <summary>
+            Remove um item de protudo da entrada
+            </summary>
+            <param name="product_id"></param>
+            <param name="entry_id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TeusControle.Application.Services.ProductsService">
+            <summary>
+            Produtos
+            </summary>
+        </member>
+        <member name="M:TeusControle.Application.Services.ProductsService.Insert(TeusControle.Domain.Models.Dtos.CreateProductsModel)">
+            <summary>
+            Insere um novo produto
+            </summary>
+            <param name="product"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.ProductsService.Update(TeusControle.Domain.Models.Dtos.UpdateProductsModel)">
+            <summary>
+            Atualiza um registro de produto
+            </summary>
+            <param name="product"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.ProductsService.GetById(System.Int64)">
+            <summary>
+            Busca registro por id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.ProductsService.Get(System.Int32,System.Int32)">
+            <summary>
+            Busca lista de todos os produtos
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.ProductsService.DeleteById(System.Int64)">
+            <summary>
+            Deleta um registro de produto
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.ProductsService.IncremetInStock(System.Int64,System.Decimal)">
+            <summary>
+            Incrementa quantidade em estoque em valor informado
+            </summary>
+            <param name="id"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.ProductsService.DecrementInStock(System.Int64,System.Decimal)">
+            <summary>
+            Decrementa quantidade em estoque em valor informado
+            </summary>
+            <param name="id"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.ProductsService.Get(TeusControle.Infrastructure.Dtos.PaginatedInputModel)">
+            <summary>
+            Busca lista de todos produtos levando em consideração parametros de filtragem e ordenação
+            </summary>
+            <param name="pagingParams"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TeusControle.Application.Services.UsersService">
+            <summary>
+            Usuários
+            ToDo: criptografar senhas
+            </summary>
+        </member>
+        <member name="M:TeusControle.Application.Services.UsersService.Insert(TeusControle.Domain.Models.Dtos.CreateUserModel)">
+            <summary>
+            Insere um novo usuário
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.UsersService.Update(TeusControle.Domain.Models.Dtos.UpdateUserModel)">
+            <summary>
+            Atualiza um registro de usuário
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.UsersService.GetById(System.Int64)">
+            <summary>
+            Busca registro por id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.UsersService.Get(System.Int32,System.Int32)">
+            <summary>
+            Busca lista de todos os usuários
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.UsersService.Get(TeusControle.Infrastructure.Dtos.PaginatedInputModel)">
+            <summary>
+            Busca lista de todos usuários levando em consideração parametros de filtragem e ordenação
+            </summary>
+            <param name="pagingParams"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Application.Services.UsersService.DeleteById(System.Int64)">
+            <summary>
+            Deleta um registro de usuário
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TeusControle.Application.Validators.DisposalsValidator">
+            <summary>
+            Validação para objeto do tipo saida de produtos
+            </summary>
+        </member>
+        <member name="T:TeusControle.Application.Validators.EntryValidator">
+            <summary>
+            Validação para objeto do tipo usuário
+            </summary>
+        </member>
+        <member name="T:TeusControle.Application.Validators.ProductsDisposalsValidator">
+            <summary>
+            Validação para objeto do tipo usuário
+            </summary>
+        </member>
+        <member name="T:TeusControle.Application.Validators.ProductsEntryValidator">
+            <summary>
+            Validação para objeto do tipo usuário
+            </summary>
+        </member>
+        <member name="T:TeusControle.Application.Validators.ProductsValidator">
+            <summary>
+            Validação para objeto do tipo usuário
+            </summary>
+        </member>
+        <member name="T:TeusControle.Application.Validators.UsersValidator">
+            <summary>
+            Validação para objeto do tipo usuário
+            </summary>
+        </member>
+        <member name="T:TeusControle.Domain.Models.Dtos.CreateDisposalModel">
+            <summary>
+            Dto para cadastrar uma nova saída de produto
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateDisposalModel.PaymentType">
+            <summary>
+            Tipo de pagamento
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateDisposalModel.CpfCnpj">
+            <summary>
+            Cpf ou Cnpj
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateDisposalModel.DisposalTypesEnum">
+            <summary>
+            Tipo de saída
+            </summary>
+        </member>
+        <member name="T:TeusControle.Domain.Models.Dtos.UpdateDisposalModel">
+            <summary>
+            Dto para atualizar uma saída de produto
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.UpdateDisposalModel.Id">
+            <summary>
+            Identificador
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.UpdateDisposalModel.Active">
+            <summary>
+            Está ativo?
+            </summary>
+        </member>
+        <member name="T:TeusControle.Domain.Models.Dtos.DisposalModel">
+            <summary>
+            Dto com informações da saída de produto
+            </summary>
+        </member>
+        <member name="T:TeusControle.Domain.Models.Dtos.CreateEntryModel">
+            <summary>
+            Dto para cadastrar uma nova entrada de produto
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateEntryModel.Description">
+            <summary>
+            Descrição
+            </summary>
+        </member>
+        <member name="T:TeusControle.Domain.Models.Dtos.UpdateEntryModel">
+            <summary>
+            Dto para atualizar uma entrada de produto
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.UpdateEntryModel.Id">
+            <summary>
+            Identificador
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.UpdateEntryModel.Active">
+            <summary>
+            Está ativo?
+            </summary>
+        </member>
+        <member name="T:TeusControle.Domain.Models.Dtos.EntryModel">
+            <summary>
+            Dto com informações da entrada de produto
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.EntryModel.Status">
+            <summary>
+            Situação da entrada
+            </summary>
+        </member>
+        <member name="T:TeusControle.Domain.Models.Dtos.CreateProductDisposalsModel">
+            <summary>
+            Dto para dar entrada de um produto
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateProductDisposalsModel.Id">
+            <summary>
+            Identificador da saída correspondente
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateProductDisposalsModel.Id2">
+            <summary>
+            Identificador do produto
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateProductDisposalsModel.Amount">
+            <summary>
+            Quantidade de produtos a serem adicionados
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateProductDisposalsModel.UnitPrice">
+            <summary>
+            Preço unitário
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateProductDisposalsModel.PercentualDiscount">
+            <summary>
+            Porcentagem de desconto
+            </summary>
+        </member>
+        <member name="T:TeusControle.Domain.Models.Dtos.UpdateProductDisposalsModel">
+            <summary>
+            Dto para atualizar a entrada de um produto
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.UpdateProductDisposalsModel.Active">
+            <summary>
+            Está ativo?
+            </summary>
+        </member>
+        <member name="T:TeusControle.Domain.Models.Dtos.ProductDisposalsModel">
+            <summary>
+            Dto com informações da entrada de um produto
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.ProductDisposalsModel.TotalPrice">
+            <summary>
+            Preço total
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.ProductDisposalsModel.LiquidPrice">
+            <summary>
+            Preço líquido
+            </summary>
+        </member>
+        <member name="T:TeusControle.Domain.Models.Dtos.CreateProductEntriesModel">
+            <summary>
+            Dto para dar entrada de um produto
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateProductEntriesModel.Id">
+            <summary>
+            Identificador da entrada correspondente
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateProductEntriesModel.Id2">
+            <summary>
+            Identificador do produto
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateProductEntriesModel.Amount">
+            <summary>
+            Quantidade de produtos a serem adicionados
+            </summary>
+        </member>
+        <member name="T:TeusControle.Domain.Models.Dtos.UpdateProductEntriesModel">
+            <summary>
+            Dto para atualizar a entrada de um produto
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.UpdateProductEntriesModel.Active">
+            <summary>
+            Está ativo?
+            </summary>
+        </member>
+        <member name="T:TeusControle.Domain.Models.Dtos.ProductEntriesModel">
+            <summary>
+            Dto com informações da entrada de um produto
+            </summary>
+        </member>
+        <member name="T:TeusControle.Domain.Models.Dtos.CreateProductsModel">
+            <summary>
+            Dto para cadastrar um novo produto
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateProductsModel.Description">
+            <summary>
+            Descrição
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateProductsModel.AvgPrice">
+            <summary>
+            Preço médio
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateProductsModel.Price">
+            <summary>
+            Preço
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateProductsModel.MaxPrice">
+            <summary>
+            Preço máximo
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateProductsModel.GrossWeight">
+            <summary>
+            Pesso bruto
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateProductsModel.NetWeight">
+            <summary>
+            Peso líquido
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateProductsModel.BrandName">
+            <summary>
+            Nome da marca
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateProductsModel.BrandPicture">
+            <summary>
+            Imagem da marca
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateProductsModel.GpcCode">
+            <summary>
+            Código Gpc
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateProductsModel.GpcDescription">
+            <summary>
+            Descrição Gpc
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateProductsModel.Gtin">
+            <summary>
+            Código Gtin
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateProductsModel.Height">
+            <summary>
+            Altura
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateProductsModel.Lenght">
+            <summary>
+            Comprimento
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateProductsModel.Width">
+            <summary>
+            Largura
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateProductsModel.NcmCode">
+            <summary>
+            Código Ncm
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateProductsModel.NcmDescription">
+            <summary>
+            Descrição Ncm
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateProductsModel.NcmFullDescription">
+            <summary>
+            Descrição completa do Ncm
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateProductsModel.Thumbnail">
+            <summary>
+            Imagem do produto
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateProductsModel.InStock">
+            <summary>
+            Quantidade em estoque
+            </summary>
+        </member>
+        <member name="T:TeusControle.Domain.Models.Dtos.UpdateProductsModel">
+            <summary>
+            Dto para atualizar um produto
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.UpdateProductsModel.Id">
+            <summary>
+            Identificador
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.UpdateProductsModel.Active">
+            <summary>
+            Está ativo?
+            </summary>
+        </member>
+        <member name="T:TeusControle.Domain.Models.Dtos.ProductsModel">
+            <summary>
+            Dto com informações do produto
+            </summary>
+        </member>
+        <member name="T:TeusControle.Domain.Models.Dtos.CreateUserModel">
+            <summary>
+            Dto para cadastrar um novo usuário
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateUserModel.Name">
+            <summary>
+            Nome
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateUserModel.CpfCnpj">
+            <summary>
+            Número do Cpf ou Cnpj
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateUserModel.DocumentType">
+            <summary>
+            Tipo do documento
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateUserModel.BirthDate">
+            <summary>
+            Data de nascimento
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateUserModel.ProfileImage">
+            <summary>
+            Imagem de perfil
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateUserModel.ProfileType">
+            <summary>
+            Tipo do perfil
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateUserModel.UserName">
+            <summary>
+            Nome do usuário
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateUserModel.Password">
+            <summary>
+            Senha
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.CreateUserModel.Email">
+            <summary>
+            E-mail
+            </summary>
+        </member>
+        <member name="T:TeusControle.Domain.Models.Dtos.UpdateUserModel">
+            <summary>
+            Dto para atualizar um usuário
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.UpdateUserModel.Id">
+            <summary>
+            Identificador
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Dtos.UpdateUserModel.Active">
+            <summary>
+            Está ativo?
+            </summary>
+        </member>
+        <member name="T:TeusControle.Domain.Models.Dtos.UserModel">
+            <summary>
+            Dto com informações do usuário
+            </summary>
+        </member>
+        <member name="F:TeusControle.Domain.Models.Enums.DisposalsStatusEnum.Open">
+            <summary>
+            0 - Aberto
+            </summary>
+        </member>
+        <member name="F:TeusControle.Domain.Models.Enums.DisposalsStatusEnum.Closed">
+            <summary>
+            2 - Fechado
+            </summary>
+        </member>
+        <member name="F:TeusControle.Domain.Models.Enums.DisposalsStatusEnum.Canceled">
+            <summary>
+            3 - Cancelado
+            </summary>
+        </member>
+        <member name="F:TeusControle.Domain.Models.Enums.DisposalsStatusEnum.Pending">
+            <summary>
+            4 - Pendente
+            </summary>
+        </member>
+        <member name="F:TeusControle.Domain.Models.Enums.DisposalTypesEnum.Sale">
+            <summary>
+            1 - Venda
+            </summary>
+        </member>
+        <member name="F:TeusControle.Domain.Models.Enums.DisposalTypesEnum.Discard">
+            <summary>
+            2 - Descartar
+            </summary>
+        </member>
+        <member name="F:TeusControle.Domain.Models.Enums.EntriesStatusEnum.Open">
+            <summary>
+            0 - Aberto
+            </summary>
+        </member>
+        <member name="F:TeusControle.Domain.Models.Enums.EntriesStatusEnum.Closed">
+            <summary>
+            2 - Fechado
+            </summary>
+        </member>
+        <member name="F:TeusControle.Domain.Models.Enums.EntriesStatusEnum.Canceled">
+            <summary>
+            3 - Cancelado
+            </summary>
+        </member>
+        <member name="F:TeusControle.Domain.Models.Enums.EntriesStatusEnum.Pending">
+            <summary>
+            4 - Pendente
+            </summary>
+        </member>
+        <member name="F:TeusControle.Domain.Models.Enums.PaymentTypesEnum.Money">
+            <summary>
+            1 - Dinheiro
+            </summary>
+        </member>
+        <member name="F:TeusControle.Domain.Models.Enums.PaymentTypesEnum.CreditCard">
+            <summary>
+            2 - Cartão de crédito
+            </summary>
+        </member>
+        <member name="F:TeusControle.Domain.Models.Enums.PaymentTypesEnum.DebitCart">
+            <summary>
+            3 - Cartão de débito
+            </summary>
+        </member>
+        <member name="F:TeusControle.Domain.Models.Enums.PaymentTypesEnum.Pix">
+            <summary>
+            4 - Pix
+            </summary>
+        </member>
+        <member name="F:TeusControle.Domain.Models.Enums.PaymentTypesEnum.OnTimes">
+            <summary>
+            4 - À prazo
+            </summary>
+        </member>
+        <member name="F:TeusControle.Domain.Models.Enums.ProfileTypesEnum.Administrator">
+            <summary>
+            1 - Administrador
+            </summary>
+        </member>
+        <member name="F:TeusControle.Domain.Models.Enums.ProfileTypesEnum.Saler">
+            <summary>
+            2 - Vendedor
+            </summary>
+        </member>
+        <member name="T:TeusControle.Domain.Models.CommonModels.BaseDoubleEntity">
+            <summary>
+            Classe genérica para entidades
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.CommonModels.BaseDoubleEntity.Id">
+            <summary>
+            Identificador
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.CommonModels.BaseDoubleEntity.Id2">
+            <summary>
+            Identificador 2
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.CommonModels.BaseDoubleEntity.Active">
+            <summary>
+            Está ativo?
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.CommonModels.BaseDoubleEntity.Deleted">
+            <summary>
+            Está deletado?
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.CommonModels.BaseDoubleEntity.CreatedDate">
+            <summary>
+            Data de criação do registro
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.CommonModels.BaseDoubleEntity.LastChange">
+            <summary>
+            Data da última atualização do registro
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.CommonModels.BaseDoubleEntity.CreatedBy">
+            <summary>
+            Identificador do usuário que criou o registro
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.CommonModels.BaseDoubleEntity.CreatedByUser">
+            <summary>
+            Usuário que criou o registro
+            </summary>
+        </member>
+        <member name="T:TeusControle.Domain.Models.CommonModels.BaseEntity">
+            <summary>
+            Classe genérica para entidades
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.CommonModels.BaseEntity.Id">
+            <summary>
+            Identificador - ou chave primaria composta
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.CommonModels.BaseEntity.Active">
+            <summary>
+            Está ativo?
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.CommonModels.BaseEntity.Deleted">
+            <summary>
+            Está deletado?
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.CommonModels.BaseEntity.CreatedDate">
+            <summary>
+            Data de criação do registro
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.CommonModels.BaseEntity.LastChange">
+            <summary>
+            Data da última atualização do registro
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.CommonModels.BaseEntity.CreatedBy">
+            <summary>
+            Identificador do usuário que criou o registro
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.CommonModels.BaseEntity.CreatedByUser">
+            <summary>
+            Usuário que criou o registro
+            </summary>
+        </member>
+        <member name="T:TeusControle.Domain.Models.Disposals">
+            <summary>
+            Registro de saída de produtos
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Disposals.CpfCnpj">
+            <summary>
+            Cpf ou Cnpj
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Disposals.PaymentType">
+            <summary>
+            Tipo de pagamento
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Disposals.DisposalType">
+            <summary>
+            Tipo de saida
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Disposals.Status">
+            <summary>
+            Situação da saída
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Disposals.ClosingDate">
+            <summary>
+            Data de fechamento
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Disposals.ProductDisposals">
+            <summary>
+            Produtos de uma saída
+            </summary>
+        </member>
+        <member name="T:TeusControle.Domain.Models.Entries">
+            <summary>
+            Registro de entrada de produtos
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Entries.Description">
+            <summary>
+            Descrição, título da entrada
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Entries.ClosingDate">
+            <summary>
+            Data de fechamento
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Entries.Status">
+            <summary>
+            Status do registro de entradas de produto
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Entries.ProductEntries">
+            <summary>
+            Produto de uma entrada
+            </summary>
+        </member>
+        <member name="T:TeusControle.Domain.Models.ProductDisposals">
+            <summary>
+            Tabela associativa de produtos para tabela de saída de produtos
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.ProductDisposals.Product">
+            <summary>
+            Produto
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.ProductDisposals.Disposal">
+            <summary>
+            Registro da saída de produto relacionada
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.ProductDisposals.Amount">
+            <summary>
+            Quantidade de produtos a sairem do estoque
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.ProductDisposals.UnitPrice">
+            <summary>
+            Preço unitário
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.ProductDisposals.TotalPrice">
+            <summary>
+            Preço total
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.ProductDisposals.LiquidPrice">
+            <summary>
+            Preço líquido
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.ProductDisposals.PercentualDiscount">
+            <summary>
+            Porcentagem de desconto
+            </summary>
+        </member>
+        <member name="T:TeusControle.Domain.Models.ProductEntries">
+            <summary>
+            Tabela associativa de produtos para tabela de entrada de produtos
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.ProductEntries.Product">
+            <summary>
+            Produto
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.ProductEntries.Entry">
+            <summary>
+            Registro da entrada de produto relacionada
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.ProductEntries.Amount">
+            <summary>
+            Quantidade de produtos a serem inseridos
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Products.Description">
+            <summary>
+            Descrição
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Products.AvgPrice">
+            <summary>
+            Preço médio
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Products.Price">
+            <summary>
+            Preço
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Products.MaxPrice">
+            <summary>
+            Preço máximo
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Products.GrossWeight">
+            <summary>
+            Pesso bruto
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Products.NetWeight">
+            <summary>
+            Peso líquido
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Products.BrandName">
+            <summary>
+            Nome da marca
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Products.BrandPicture">
+            <summary>
+            Imagem da marca
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Products.GpcCode">
+            <summary>
+            Código Gpc
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Products.GpcDescription">
+            <summary>
+            Descrição Gpc
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Products.Gtin">
+            <summary>
+            Código Gtin
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Products.Height">
+            <summary>
+            Altura
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Products.Lenght">
+            <summary>
+            Comprimento
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Products.Width">
+            <summary>
+            Largura
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Products.NcmCode">
+            <summary>
+            Código Ncm
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Products.NcmDescription">
+            <summary>
+            Descrição Ncm
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Products.NcmFullDescription">
+            <summary>
+            Descrição completa do Ncm
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Products.Thumbnail">
+            <summary>
+            Imagem do produto
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Products.InStock">
+            <summary>
+            Quantidade em estoque
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Products.ProductEntries">
+            <summary>
+            Produto de uma entrada
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Products.ProductDisposals">
+            <summary>
+            Produto de uma saída
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Users.Name">
+            <summary>
+            Nome
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Users.CpfCnpj">
+            <summary>
+            Número do Cpf ou Cnpj
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Users.DocumentType">
+            <summary>
+            Tipo do documento
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Users.BirthDate">
+            <summary>
+            Data de nascimento
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Users.ProfileImage">
+            <summary>
+            Imagem de perfil
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Users.ProfileType">
+            <summary>
+            Tipo de perfil
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Users.UserName">
+            <summary>
+            Nome de usuário
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Users.Password">
+            <summary>
+            Senha
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Users.Email">
+            <summary>
+            E-mail
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Users.Products">
+            <summary>
+            Produtos
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Users.Entries">
+            <summary>
+            Registro para entrada de produtos
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Users.CreatorUsers">
+            <summary>
+            Usuários
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Users.ProductEntries">
+            <summary>
+            Produtos de uma entrada
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Users.Disposals">
+            <summary>
+            Saídas de produtos
+            </summary>
+        </member>
+        <member name="P:TeusControle.Domain.Models.Users.ProductDisposals">
+            <summary>
+            Produtos de uma saída
+            </summary>
+        </member>
+        <member name="T:TeusControle.Infrastructure.Context.DisposalsMapping">
+            <summary>
+            Mapping entidade disposal - saída
+            </summary>
+        </member>
+        <member name="T:TeusControle.Infrastructure.Context.EntriesMapping">
+            <summary>
+            Mapping entidade users - usuário
+            </summary>
+        </member>
+        <member name="T:TeusControle.Infrastructure.Context.ProductDisposalsMapping">
+            <summary>
+            Mapping entidade associativa de produtos para saída de produtos
+            </summary>
+        </member>
+        <member name="T:TeusControle.Infrastructure.Context.ProductEntriesMapping">
+            <summary>
+            Mapping entidade associativa de produtos para entrada de produtos
+            </summary>
+        </member>
+        <member name="T:TeusControle.Infrastructure.Context.UsersMapping">
+            <summary>
+            Mapping entidade users - usuário
+            </summary>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Controllers.DisposalsController.CreateDisposal(TeusControle.Domain.Models.Dtos.CreateDisposalModel)">
+            <summary>
+            Criar uma saída de produto
+            </summary>
+            <param name="disposalModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Controllers.DisposalsController.UpdateEntry(TeusControle.Domain.Models.Dtos.UpdateDisposalModel)">
+            <summary>
+            Atualiza uma saída de produto
+            </summary>
+            <param name="disposalModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Controllers.DisposalsController.DeleteDisposal(System.Int64)">
+            <summary>
+            Deleta uma saída de produto
+            </summary>
+            <param name="disposalId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Controllers.DisposalsController.InsertProductEntryItem(TeusControle.Domain.Models.Dtos.CreateProductDisposalsModel)">
+            <summary>
+            Insere um novo item de produto a uma respectiva saída de produtos
+            </summary>
+            <param name="productDisposal"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Controllers.DisposalsController.DeleteProductItem(System.Int64,System.Int64)">
+            <summary>
+            Remove um item de produto de uma respectiva saída de produtos
+            </summary>
+            <param name="entityId"></param>
+            <param name="productId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Controllers.DisposalsController.CloseDisposal(System.Int64)">
+            <summary>
+            Finaliza saída de produtos
+            </summary>
+            <param name="disposalId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Controllers.DisposalsController.GetPaged(TeusControle.Infrastructure.Dtos.PaginatedInputModel)">
+            <summary>
+            Busca todas as saídas
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Controllers.DisposalsController.GetById(System.Int64)">
+            <summary>
+            Busca informações de uma saída
+            </summary>
+            <param name="disposalId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Controllers.EntriesController.CreateEntry(TeusControle.Domain.Models.Dtos.CreateEntryModel)">
+            <summary>
+            Criar uma entrada de produto
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Controllers.EntriesController.UpdateEntry(TeusControle.Domain.Models.Dtos.UpdateEntryModel)">
+            <summary>
+            Atualiza uma entrada de produto
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Controllers.EntriesController.InsertProductEntryItem(TeusControle.Domain.Models.Dtos.CreateProductEntriesModel)">
+            <summary>
+            Insere um novo item de produto a uma respectiva entrada de produtos
+            </summary>
+            <param name="productEntry"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Controllers.EntriesController.DeleteProductItem(System.Int64,System.Int64)">
+            <summary>
+            Remove um item de produto de uma respectiva entrada de produtos
+            </summary>
+            <param name="entity_id"></param>
+            <param name="product_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Controllers.EntriesController.DeleteEntry(System.Int64)">
+            <summary>
+            Deleta uma entrada de produto
+            </summary>
+            <param name="entity_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Controllers.EntriesController.CloseEntry(System.Int64)">
+            <summary>
+            Finaliza entrada de produtos
+            </summary>
+            <param name="entry_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Controllers.EntriesController.GetPaged(TeusControle.Infrastructure.Dtos.PaginatedInputModel)">
+            <summary>
+            Busca todas as entradas
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Controllers.EntriesController.GetById(System.Int64)">
+            <summary>
+            Busca informações de uma entrada
+            </summary>
+            <param name="entry_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Controllers.LoginController.Token(TeusControle.Domain.Models.Dtos.TokenLogin)">
+            <summary>
+            Gera token de acesso
+            </summary>
+            <param name="login"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TeusControle.Infrastructure.Controllers.ProductsController">
+            <summary>
+            Controlador para CRUD de produtos
+            </summary>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Controllers.ProductsController.Insert(TeusControle.Domain.Models.Dtos.CreateProductsModel)">
+            <summary>
+            Inserir um novo produto
+            </summary>
+            <param name="sentProduct"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Controllers.ProductsController.Update(TeusControle.Domain.Models.Dtos.UpdateProductsModel)">
+            <summary>
+            Atualizar um produto
+            </summary>
+            <param name="sentProduct"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Controllers.ProductsController.GetById(System.Int64)">
+            <summary>
+            Buscar um produto por id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Controllers.ProductsController.GetPaged(TeusControle.Infrastructure.Dtos.PaginatedInputModel)">
+            <summary>
+            Busca todos os produtos
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Controllers.ProductsController.Delete(System.Int64)">
+            <summary>
+            Excluir um produto por id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TeusControle.Infrastructure.Controllers.UsersController">
+            <summary>
+            Controlador para CRUD de usuário
+            </summary>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Controllers.UsersController.Insert(TeusControle.Domain.Models.Dtos.CreateUserModel)">
+            <summary>
+            Inserir um novo usuário
+            </summary>
+            <param name="sentUser"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Controllers.UsersController.Update(TeusControle.Domain.Models.Dtos.UpdateUserModel)">
+            <summary>
+            Atualizar um usuário
+            </summary>
+            <param name="sentUser"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Controllers.UsersController.GetById(System.Int64)">
+            <summary>
+            Buscar usuário por id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Controllers.UsersController.GetPaged(TeusControle.Infrastructure.Dtos.PaginatedInputModel)">
+            <summary>
+            Busca todos os usuários
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Controllers.UsersController.Delete(System.Int64)">
+            <summary>
+            Excluir um usuário por id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="P:TeusControle.Infrastructure.Dtos.FilterParams.ColumnName">
+            <summary>
+            Nome da coluna a ser filtrada
+            </summary>
+        </member>
+        <member name="P:TeusControle.Infrastructure.Dtos.FilterParams.FilterValue">
+            <summary>
+            Valor buscado no filtro
+            </summary>
+        </member>
+        <member name="P:TeusControle.Infrastructure.Dtos.FilterParams.FilterOption">
+            <summary>
+            Tipo do filtro a ser aplicado
+            </summary>
+        </member>
+        <member name="T:TeusControle.Infrastructure.Dtos.PageResponse">
+            <summary>
+            Retorno para busca páginada
+            </summary>
+        </member>
+        <member name="P:TeusControle.Infrastructure.Dtos.PageResponse.Data">
+            <summary>
+            Informações
+            </summary>
+        </member>
+        <member name="P:TeusControle.Infrastructure.Dtos.PageResponse.Count">
+            <summary>
+            Quantidade de registros
+            </summary>
+        </member>
+        <member name="T:TeusControle.Infrastructure.Dtos.PaginatedInputModel">
+            <summary>  
+            This class contains properites used for paging, sorting, grouping, filtering and will be used as a parameter model  
+              
+            SortOrder   - enum of sorting orders  
+            SortColumn  - Name of the column on which sorting has to be done,  
+                          as for now sorting can be performed only on one column at a time.  
+            FilterParams - Filtering can be done on multiple columns and for one column multiple values can be selected  
+                          key :- will be column name, Value :- will be array list of multiple values  
+            PageNumber   - Page Number to be displayed in UI, default to 1  
+            PageSize     - Number of items per page, default to 25  
+            </summary>  
+        </member>
+        <member name="P:TeusControle.Infrastructure.Dtos.PaginatedInputModel.SortingParams">
+            <summary>
+            Parâmetros de ordenação
+            </summary>
+        </member>
+        <member name="P:TeusControle.Infrastructure.Dtos.PaginatedInputModel.FilterParams">
+            <summary>
+            Parâmetros de filtragem
+            </summary>
+        </member>
+        <member name="F:TeusControle.Infrastructure.Dtos.PaginatedInputModel.pageNumber">
+            <summary>
+            Número da página
+            </summary>
+        </member>
+        <member name="P:TeusControle.Infrastructure.Dtos.PaginatedInputModel.PageNumber">
+            <summary>
+            Número da página
+            </summary>
+        </member>
+        <member name="F:TeusControle.Infrastructure.Dtos.PaginatedInputModel.pageSize">
+            <summary>
+            Tamanho da página
+            </summary>
+        </member>
+        <member name="P:TeusControle.Infrastructure.Dtos.PaginatedInputModel.PageSize">
+            <summary>
+            Tamanho da página
+            </summary>
+        </member>
+        <member name="T:TeusControle.Infrastructure.Dtos.ResponseMessages`1">
+            <summary>
+            Classe de retorno para 
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:TeusControle.Infrastructure.Dtos.ResponseMessages`1.Status">
+            <summary>
+            Situação
+            </summary>
+        </member>
+        <member name="P:TeusControle.Infrastructure.Dtos.ResponseMessages`1.TimeStamp">
+            <summary>
+            Data e hora
+            </summary>
+        </member>
+        <member name="P:TeusControle.Infrastructure.Dtos.ResponseMessages`1.Messages">
+            <summary>
+            Mensagens
+            </summary>
+        </member>
+        <member name="P:TeusControle.Infrastructure.Dtos.ResponseMessages`1.Data">
+            <summary>
+            Informações
+            </summary>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Dtos.ResponseMessages`1.AddMessage(System.String)">
+            <summary>
+            Adiciona uma mensagem a ser retornado
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="P:TeusControle.Infrastructure.Dtos.Messages.Message">
+            <summary>
+            Mensagem
+            </summary>
+        </member>
+        <member name="T:TeusControle.Infrastructure.Dtos.ReturnData`1">
+            <summary>
+            Classe de retorno para métodos internos
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:TeusControle.Infrastructure.Dtos.ReturnData`1.Sucess">
+            <summary>
+            Situação do retorno - verdadeiro/falso
+            </summary>
+        </member>
+        <member name="P:TeusControle.Infrastructure.Dtos.ReturnData`1.Data">
+            <summary>
+            Informação
+            </summary>
+        </member>
+        <member name="P:TeusControle.Infrastructure.Dtos.SortingParams.SortOrder">
+            <summary>
+            Tipo de ordenação
+            </summary>
+        </member>
+        <member name="P:TeusControle.Infrastructure.Dtos.SortingParams.ColumnName">
+            <summary>
+            Nome da coluna
+            </summary>
+        </member>
+        <member name="F:TeusControle.Infrastructure.Enums.FilterEnum.StartsWith">
+            <summary>
+            1 - Começa com
+            </summary>
+        </member>
+        <member name="F:TeusControle.Infrastructure.Enums.FilterEnum.EndsWith">
+            <summary>
+            2 - Termina com
+            </summary>
+        </member>
+        <member name="F:TeusControle.Infrastructure.Enums.FilterEnum.Contains">
+            <summary>
+            3 - Contém
+            </summary>
+        </member>
+        <member name="F:TeusControle.Infrastructure.Enums.FilterEnum.DoesNotContain">
+            <summary>
+            4 - Não Contém
+            </summary>
+        </member>
+        <member name="F:TeusControle.Infrastructure.Enums.FilterEnum.IsEmpty">
+            <summary>
+            5 - Está Vazio
+            </summary>
+        </member>
+        <member name="F:TeusControle.Infrastructure.Enums.FilterEnum.IsNotEmpty">
+            <summary>
+            6 - Não Está Vazio
+            </summary>
+        </member>
+        <member name="F:TeusControle.Infrastructure.Enums.FilterEnum.IsGreaterThan">
+            <summary>
+            7 - É Maior
+            </summary>
+        </member>
+        <member name="F:TeusControle.Infrastructure.Enums.FilterEnum.IsGreaterThanOrEqualTo">
+            <summary>
+            8 - É Maior ou Igual
+            </summary>
+        </member>
+        <member name="F:TeusControle.Infrastructure.Enums.FilterEnum.IsLessThan">
+            <summary>
+            9 - É Menor
+            </summary>
+        </member>
+        <member name="F:TeusControle.Infrastructure.Enums.FilterEnum.IsLessThanOrEqualTo">
+            <summary>
+            10 - É Menor ou Igual
+            </summary>
+        </member>
+        <member name="F:TeusControle.Infrastructure.Enums.FilterEnum.IsEqualTo">
+            <summary>
+            11 - É Igual
+            </summary>
+        </member>
+        <member name="F:TeusControle.Infrastructure.Enums.FilterEnum.IsNotEqualTo">
+            <summary>
+            12 - Ñão é Igual
+            </summary>
+        </member>
+        <member name="T:TeusControle.Infrastructure.Enums.SortEnum">
+            <summary>
+            Enumeradores para ordenação
+            </summary>
+        </member>
+        <member name="F:TeusControle.Infrastructure.Enums.SortEnum.Asc">
+            <summary>
+            1 - Ascendente
+            </summary>
+        </member>
+        <member name="F:TeusControle.Infrastructure.Enums.SortEnum.Desc">
+            <summary>
+            2 - Descendente
+            </summary>
+        </member>
+        <member name="T:TeusControle.Infrastructure.Queries.Filter`1">
+            <summary>
+            Classe genérica responsável por filtrar informações
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:TeusControle.Infrastructure.Queries.PaginatedList`1.Data">
+            <summary>
+            Informações
+            </summary>
+        </member>
+        <member name="P:TeusControle.Infrastructure.Queries.PaginatedList`1.PageIndex">
+            <summary>
+            Índice da pagina
+            </summary>
+        </member>
+        <member name="P:TeusControle.Infrastructure.Queries.PaginatedList`1.TotalPages">
+            <summary>
+            Total de páginas
+            </summary>
+        </member>
+        <member name="P:TeusControle.Infrastructure.Queries.PaginatedList`1.TotalItems">
+            <summary>
+            Total de itens
+            </summary>
+        </member>
+        <member name="P:TeusControle.Infrastructure.Queries.PaginatedList`1.HasPreviousPage">
+            <summary>
+            Tem página anterior?
+            </summary>
+        </member>
+        <member name="P:TeusControle.Infrastructure.Queries.PaginatedList`1.HasNextPage">
+            <summary>
+            Tem próxima página?
+            </summary>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Queries.PaginatedList`1.CreateAsync(System.Collections.Generic.IList{`0},System.Int32,System.Int32)">
+            <summary>
+            Cria busca assíncrona
+            </summary>
+            <param name="source"></param>
+            <param name="pageIndex"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Queries.Sorting`1.GroupingData(System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Actual grouping will be done in ui,   
+            from api we will send sorted data based on grouping columns  
+            </summary>  
+            <param name="data"></param>  
+            <param name="groupingColumns"></param>  
+            <returns></returns>  
+        </member>
+        <member name="M:TeusControle.Infrastructure.Queries.Sorting`1.SortData(System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEnumerable{TeusControle.Infrastructure.Dtos.SortingParams})">
+            <summary>
+             Sorting the data on multiple columns using reflection
+            </summary>
+            <param name="data"></param>
+            <param name="sortingParams"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TeusControle.Infrastructure.Repository.BaseDoubleRepository`1">
+            <summary>
+            Classe genérica para repositório. CRUD genério.
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <summary>
+            Classe genérica para repositório. CRUD genério.
+            </summary>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Repository.BaseDoubleRepository`1.Insert(`0)">
+            <summary>
+            Insere um novo registro
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Repository.BaseDoubleRepository`1.Update(`0)">
+            <summary>
+            Atualiza um registro
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Repository.BaseDoubleRepository`1.PhysicalDelete(System.Int64,System.Int64)">
+            <summary>
+            Deleta um registro a partir do Id
+            </summary>
+            <param name="id"></param>
+            <param name="id2"></param>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Repository.BaseDoubleRepository`1.UpdateFields(`0,System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+            <summary>
+            Atualizar alguns campos
+            </summary>
+            <param name="entity"></param>
+            <param name="includeProperties"></param>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Repository.BaseDoubleRepository`1.Select(System.Int64,System.Int64)">
+            <summary>
+            Busca um registro por Id
+            </summary>
+            <param name="id"></param>
+            <param name="id2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Repository.BaseDoubleRepository`1.Any(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Retorna se para a condição, existe tal registro
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Repository.BaseDoubleRepository`1.Query(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Constrói busca no banco
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Repository.BaseDoubleRepository`1.Count(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Busca quantidade de registros a partir do filtro
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Repository.BaseDoubleRepository`1.GetPaged(System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Busca página
+            </summary>
+            <param name="initialRow"></param>
+            <param name="pageSize"></param>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TeusControle.Infrastructure.Repository.BaseRepository`1">
+            <summary>
+            Classe genérica para repositório. CRUD genério.
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <summary>
+            Classe genérica para repositório. CRUD genério.
+            </summary>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Repository.BaseRepository`1.Insert(`0)">
+            <summary>
+            Insere um novo registro
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Repository.BaseRepository`1.Update(`0)">
+            <summary>
+            Atualiza um registro
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Repository.BaseRepository`1.PhysicalDelete(System.Int64)">
+            <summary>
+            Deleta um registro a partir do Id
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Repository.BaseRepository`1.UpdateFields(`0,System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+            <summary>
+            Atualizar alguns campos
+            </summary>
+            <param name="entity"></param>
+            <param name="includeProperties"></param>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Repository.BaseRepository`1.Select">
+            <summary>
+            Busca todos os registros
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Repository.BaseRepository`1.Select(System.Int64)">
+            <summary>
+            Busca um registro por Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Repository.BaseRepository`1.Any(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Retorna se para a condição, existe tal registro
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Repository.BaseRepository`1.Query(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Constrói busca no banco
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Repository.BaseRepository`1.Count(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Busca quantidade de registros a partir do filtro
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControle.Infrastructure.Repository.BaseRepository`1.GetPaged(System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Busca página
+            </summary>
+            <param name="initialRow"></param>
+            <param name="pageSize"></param>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TeusControle.Infrastructure.Repository.DisposalsRepository">
+            <summary>
+            Repositório para registro de saídas de produtos
+            </summary>
+        </member>
+        <member name="T:TeusControle.Infrastructure.Repository.EntriesRepository">
+            <summary>
+            Repositório para registro de entrada de produtos
+            </summary>
+        </member>
+        <member name="T:TeusControle.Infrastructure.Repository.ProductDisposalsRepository">
+            <summary>
+            Repositório para registro de saída de produtos
+            </summary>
+        </member>
+        <member name="T:TeusControle.Infrastructure.Repository.ProductEntriesRepository">
+            <summary>
+            Repositório para registro de entrada de produtos
+            </summary>
+        </member>
+        <member name="T:TeusControle.Infrastructure.Repository.ProductsRepository">
+            <summary>
+            Repositório para produtos
+            </summary>
+        </member>
+        <member name="T:TeusControle.Infrastructure.Repository.UsersRepository">
+            <summary>
+            Repositório para usuários
+            </summary>
+        </member>
+    </members>
+</doc>
