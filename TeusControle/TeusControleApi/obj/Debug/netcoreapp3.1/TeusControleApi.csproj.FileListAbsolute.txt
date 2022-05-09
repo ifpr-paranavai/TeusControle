@@ -60,3 +60,17 @@ D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\D
 D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\TeusControleApi.xml
 D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Core.Shared.xml
 D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\MicroElements.Swashbuckle.FluentValidation.dll
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Hosting.Abstractions.dll
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Serilog.dll
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Serilog.AspNetCore.dll
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Serilog.Extensions.Hosting.dll
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Serilog.Extensions.Logging.dll
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Serilog.Formatting.Compact.dll
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Serilog.Settings.Configuration.dll
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Serilog.Sinks.Console.dll
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Serilog.Sinks.Debug.dll
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Serilog.Sinks.File.dll
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Serilog.Sinks.Async.dll
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\SerilogTimings.dll

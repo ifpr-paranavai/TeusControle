@@ -3,6 +3,8 @@ using Core.Shared.Models.User;
 using Manager.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using SerilogTimings;
 using System.Threading.Tasks;
 
 namespace TeusControleApi.Controllers
@@ -12,10 +14,12 @@ namespace TeusControleApi.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUsersManager usersManager;
+        private readonly ILogger<UsersController> logger;
 
-        public UsersController(IUsersManager usersManager)
+        public UsersController(IUsersManager usersManager, ILogger<UsersController> logger)
         {
             this.usersManager = usersManager;
+            this.logger = logger;
         }
 
         /// <summary>
@@ -51,7 +55,14 @@ namespace TeusControleApi.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Post([FromBody] CreateUserModel newUser)
         {
-            var createdUser = await usersManager.InsertUserAsync(newUser);
+            logger.LogInformation("Objeto recebido {@newUser}", newUser);
+            Users createdUser;
+            using (Operation.Time("Tempo de adição de um novo usuário."))
+            {
+                logger.LogInformation("Foi requisitada a inserção de um novo usuário.");
+                createdUser = await usersManager.InsertUserAsync(newUser);
+            }
+           
             return CreatedAtAction(nameof(Get), new { id = createdUser.Id }, createdUser);
         }
 
