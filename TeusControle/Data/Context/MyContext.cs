@@ -1,4 +1,5 @@
 ﻿using Core.Domain;
+using Data.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Context
@@ -9,6 +10,13 @@ namespace Data.Context
 
         public MyContext(DbContextOptions<MyContext> options) : base(options)
         {
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfiguration(new UsersConfiguration());
         }
     }
 }
