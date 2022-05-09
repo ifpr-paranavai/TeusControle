@@ -10,3 +10,6 @@ D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Manager\obj\Debug\net
 D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Manager\bin\Debug\netcoreapp3.1\Core.dll
 D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Manager\bin\Debug\netcoreapp3.1\Core.pdb
 D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Manager\obj\Debug\netcoreapp3.1\Manager.csproj.CopyComplete
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Manager\bin\Debug\netcoreapp3.1\Core.Shared.dll
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Manager\bin\Debug\netcoreapp3.1\Core.Shared.pdb
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Manager\bin\Debug\netcoreapp3.1\Core.Shared.xml

@@ -1,0 +1,10 @@
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Core.Shared\bin\Debug\netcoreapp3.1\Core.Shared.deps.json
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Core.Shared\bin\Debug\netcoreapp3.1\Core.Shared.dll
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Core.Shared\bin\Debug\netcoreapp3.1\Core.Shared.pdb
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Core.Shared\obj\Debug\netcoreapp3.1\Core.Shared.csproj.AssemblyReference.cache
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Core.Shared\obj\Debug\netcoreapp3.1\Core.Shared.AssemblyInfoInputs.cache
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Core.Shared\obj\Debug\netcoreapp3.1\Core.Shared.AssemblyInfo.cs
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Core.Shared\obj\Debug\netcoreapp3.1\Core.Shared.csproj.CoreCompileInputs.cache
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Core.Shared\obj\Debug\netcoreapp3.1\Core.Shared.dll
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Core.Shared\obj\Debug\netcoreapp3.1\Core.Shared.pdb
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Core.Shared\bin\Debug\netcoreapp3.1\Core.Shared.xml

@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Core.Shared</name>
+    </assembly>
+    <members>
+        <member name="T:Core.Shared.Models.User.CreateUserModel">
+            <summary>
+            Objeto para criação de um novo usuário
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.User.CreateUserModel.Name">
+            <summary>
+            Nome do usuário
+            </summary>
+            <example>John Doe</example>
+        </member>
+        <member name="P:Core.Shared.Models.User.CreateUserModel.CpfCnpj">
+            <summary>
+            Documento do usuário CPF ou CNPJ
+            </summary>
+            <example>69909465043</example>
+        </member>
+        <member name="P:Core.Shared.Models.User.CreateUserModel.DocumentType">
+            <summary>
+            Tipo do documento do usuário
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:Core.Shared.Models.User.CreateUserModel.BirthDate">
+            <summary>
+            Data de nascimento do usuário
+            </summary>
+            <example>2001-11-27</example>
+        </member>
+        <member name="P:Core.Shared.Models.User.CreateUserModel.ProfileImage">
+            <summary>
+            Imagem de perfil do usuário
+            </summary>
+            <example>https://ciclovivo.com.br/wp-content/uploads/2018/10/iStock-536613027-696x464.jpg</example>
+        </member>
+        <member name="P:Core.Shared.Models.User.CreateUserModel.Password">
+            <summary>
+            Senha do usuário
+            </summary>
+            <example>minhaSenha123</example>
+        </member>
+        <member name="P:Core.Shared.Models.User.CreateUserModel.Email">
+            <summary>
+            E-mail do usuário
+            </summary>
+            <example>johndoe@email.com</example>
+        </member>
+        <member name="T:Core.Shared.Models.User.UpdateUserModel">
+            <summary>
+            Objeto para alteração de um usuário
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.User.UpdateUserModel.Id">
+            <summary>
+            Id do usuário
+            </summary>
+            <example>123</example>
+        </member>
+        <member name="P:Core.Shared.Models.User.UpdateUserModel.Active">
+            <summary>
+            Status do registro
+            </summary>
+            <example>true</example>
+        </member>
+        <member name="T:Core.Shared.Models.User.UserModel">
+            <summary>
+            Objeto de retorno de usuário
+            </summary>
+        </member>
+    </members>
+</doc>

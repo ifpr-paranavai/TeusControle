@@ -15,3 +15,6 @@ D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Data\obj\Debug\netcor
 D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Data\obj\Debug\netcoreapp3.1\Data.genruntimeconfig.cache
 D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Data\bin\Debug\netcoreapp3.1\Manager.dll
 D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Data\bin\Debug\netcoreapp3.1\Manager.pdb
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Data\bin\Debug\netcoreapp3.1\Core.Shared.dll
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Data\bin\Debug\netcoreapp3.1\Core.Shared.pdb
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Data\bin\Debug\netcoreapp3.1\Core.Shared.xml

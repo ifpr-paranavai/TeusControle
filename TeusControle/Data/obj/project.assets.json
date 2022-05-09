@@ -2,6 +2,18 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
+      "AutoMapper/11.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/AutoMapper.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/AutoMapper.dll": {}
+        }
+      },
       "FluentValidation/11.0.0": {
         "type": "package",
         "compile": {
@@ -305,11 +317,23 @@
           "bin/placeholder/Core.dll": {}
         }
       },
+      "Core.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/Core.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Core.Shared.dll": {}
+        }
+      },
       "Manager/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
+          "AutoMapper": "11.0.1",
           "Core": "1.0.0",
+          "Core.Shared": "1.0.0",
           "FluentValidation.AspNetCore": "11.0.0"
         },
         "compile": {
@@ -322,6 +346,21 @@
     }
   },
   "libraries": {
+    "AutoMapper/11.0.1": {
+      "sha512": "WIadGC1pIwbnyTubvI577p3F++Bsj9q2Q3OaAc1I0QS+JhupN1xkdrPBhI9bPIeg63zM81tZplUNYkqU1HE5jQ==",
+      "type": "package",
+      "path": "automapper/11.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "automapper.11.0.1.nupkg.sha512",
+        "automapper.nuspec",
+        "icon.png",
+        "lib/netstandard2.1/AutoMapper.dll",
+        "lib/netstandard2.1/AutoMapper.xml"
+      ]
+    },
     "FluentValidation/11.0.0": {
       "sha512": "cD0VaOQfVZGxp3UFBDET5KztMe1W0QUgk7vP/e1zus0ofALqab5/B5S319+XEFvhw0KEStS3yfCDGpvQM10C6A==",
       "type": "package",
@@ -942,6 +981,11 @@
       "type": "project",
       "path": "../Core/Core.csproj",
       "msbuildProject": "../Core/Core.csproj"
+    },
+    "Core.Shared/1.0.0": {
+      "type": "project",
+      "path": "../Core.Shared/Core.Shared.csproj",
+      "msbuildProject": "../Core.Shared/Core.Shared.csproj"
     },
     "Manager/1.0.0": {
       "type": "project",

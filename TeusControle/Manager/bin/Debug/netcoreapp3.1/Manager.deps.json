@@ -8,11 +8,24 @@
     ".NETCoreApp,Version=v3.1": {
       "Manager/1.0.0": {
         "dependencies": {
+          "AutoMapper": "11.0.1",
           "Core": "1.0.0",
+          "Core.Shared": "1.0.0",
           "FluentValidation.AspNetCore": "11.0.0"
         },
         "runtime": {
           "Manager.dll": {}
+        }
+      },
+      "AutoMapper/11.0.1": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0"
+        },
+        "runtime": {
+          "lib/netstandard2.1/AutoMapper.dll": {
+            "assemblyVersion": "11.0.0.0",
+            "fileVersion": "11.0.1.0"
+          }
         }
       },
       "FluentValidation/11.0.0": {
@@ -47,10 +60,16 @@
           }
         }
       },
+      "Microsoft.CSharp/4.7.0": {},
       "Microsoft.Extensions.DependencyInjection.Abstractions/2.1.0": {},
       "Core/1.0.0": {
         "runtime": {
           "Core.dll": {}
+        }
+      },
+      "Core.Shared/1.0.0": {
+        "runtime": {
+          "Core.Shared.dll": {}
         }
       }
     }
@@ -60,6 +79,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AutoMapper/11.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-WIadGC1pIwbnyTubvI577p3F++Bsj9q2Q3OaAc1I0QS+JhupN1xkdrPBhI9bPIeg63zM81tZplUNYkqU1HE5jQ==",
+      "path": "automapper/11.0.1",
+      "hashPath": "automapper.11.0.1.nupkg.sha512"
     },
     "FluentValidation/11.0.0": {
       "type": "package",
@@ -82,6 +108,13 @@
       "path": "fluentvalidation.dependencyinjectionextensions/11.0.0",
       "hashPath": "fluentvalidation.dependencyinjectionextensions.11.0.0.nupkg.sha512"
     },
+    "Microsoft.CSharp/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA==",
+      "path": "microsoft.csharp/4.7.0",
+      "hashPath": "microsoft.csharp.4.7.0.nupkg.sha512"
+    },
     "Microsoft.Extensions.DependencyInjection.Abstractions/2.1.0": {
       "type": "package",
       "serviceable": true,
@@ -90,6 +123,11 @@
       "hashPath": "microsoft.extensions.dependencyinjection.abstractions.2.1.0.nupkg.sha512"
     },
     "Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Core.Shared/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

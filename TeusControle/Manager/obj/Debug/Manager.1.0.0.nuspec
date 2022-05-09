@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Manager</id>
+    <version>1.0.0</version>
+    <authors>Manager</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework=".NETCoreApp3.1">
+        <dependency id="Core.Shared" version="1.0.0" exclude="Build,Analyzers" />
+        <dependency id="Core" version="1.0.0" exclude="Build,Analyzers" />
+        <dependency id="AutoMapper" version="11.0.1" exclude="Build,Analyzers" />
+        <dependency id="FluentValidation.AspNetCore" version="11.0.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Manager\bin\Debug\netcoreapp3.1\Manager.dll" target="lib\netcoreapp3.1\Manager.dll" />
+  </files>
+</package>

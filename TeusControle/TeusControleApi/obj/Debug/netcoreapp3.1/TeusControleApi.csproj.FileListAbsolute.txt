@@ -52,3 +52,11 @@ D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\D
 D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\FluentValidation.dll
 D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\FluentValidation.AspNetCore.dll
 D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\FluentValidation.DependencyInjectionExtensions.dll
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\AutoMapper.dll
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Core.Shared.dll
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Core.Shared.pdb
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\TeusControleApi.xml
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Core.Shared.xml
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\MicroElements.Swashbuckle.FluentValidation.dll
