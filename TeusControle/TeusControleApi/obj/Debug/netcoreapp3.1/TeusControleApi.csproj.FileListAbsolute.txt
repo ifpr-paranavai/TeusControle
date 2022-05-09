@@ -75,3 +75,7 @@ D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\D
 D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Serilog.Sinks.Async.dll
 D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\SerilogTimings.dll
 D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Serilog.Exceptions.dll
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll

@@ -1,18 +1,19 @@
 ﻿using Core.Domain.Base;
 using System;
+using System.Collections.Generic;
 
 namespace Core.Domain
 {
     public class Users : BaseEntity
     {
-        /*public Users()
+        public Users()
         {
             CreatorUsers = new HashSet<Users>();
-            Products = new HashSet<Products>();
+            /*Products = new HashSet<Products>();
             Entries = new HashSet<Entries>();
             ProductEntries = new HashSet<ProductEntries>();
-            Disposals = new HashSet<Disposals>();
-        }*/
+            Disposals = new HashSet<Disposals>();*/
+        }
         public string Name { get; set; }
 
         public string CpfCnpj { get; set; }
@@ -33,7 +34,7 @@ namespace Core.Domain
 
         // public ICollection<Entries> Entries { get; set; }
 
-        // public ICollection<Users> CreatorUsers { get; set; }
+        public ICollection<Users> CreatorUsers { get; set; }
 
         // public ICollection<ProductEntries> ProductEntries { get; set; }
 

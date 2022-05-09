@@ -9,6 +9,11 @@ namespace Data.Configurations
         public void Configure(EntityTypeBuilder<Users> builder)
         {
             builder.Property(p => p.Name).HasMaxLength(200).IsRequired();
+
+            builder.HasOne(p => p.CreatedByUser)
+                .WithMany(p => p.CreatorUsers)
+                .HasForeignKey(p => p.CreatedBy)
+                .IsRequired(false);
         }
     }
 }
