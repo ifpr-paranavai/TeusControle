@@ -43,6 +43,8 @@
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.10.14",
           "Pomelo.EntityFrameworkCore.MySql": "5.0.4",
           "Serilog.AspNetCore": "5.0.0",
+          "Serilog.Exceptions": "8.1.0",
+          "Serilog.Formatting.Compact": "1.1.0",
           "Serilog.Settings.Configuration": "3.3.0",
           "Serilog.Sinks.Async": "1.5.0",
           "Serilog.Sinks.File": "5.0.0",
@@ -247,7 +249,7 @@
           "System.Reflection.Extensions": "4.1.2.0",
           "System.Reflection.Metadata": "1.4.5.0",
           "System.Reflection.Primitives": "4.1.2.0",
-          "System.Reflection.TypeExtensions": "4.1.2.0",
+          "System.Reflection.TypeExtensions.Reference": "4.1.2.0",
           "System.Resources.Reader": "4.1.2.0",
           "System.Resources.ResourceManager": "4.1.2.0",
           "System.Resources.Writer": "4.1.2.0",
@@ -748,6 +750,21 @@
           "lib/netcoreapp3.1/Serilog.AspNetCore.dll": {}
         }
       },
+      "Serilog.Exceptions/8.1.0": {
+        "dependencies": {
+          "Serilog": "2.10.0",
+          "System.Reflection.TypeExtensions": "4.7.0"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Serilog.Exceptions.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.1.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.1/Serilog.Exceptions.dll": {}
+        }
+      },
       "Serilog.Extensions.Hosting/4.2.0": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
@@ -961,6 +978,7 @@
           "lib/netstandard1.3/System.Diagnostics.DiagnosticSource.dll": {}
         }
       },
+      "System.Reflection.TypeExtensions/4.7.0": {},
       "System.Runtime.CompilerServices.Unsafe/6.0.0": {
         "runtime": {
           "lib/netcoreapp3.1/System.Runtime.CompilerServices.Unsafe.dll": {
@@ -2210,7 +2228,7 @@
         },
         "compileOnly": true
       },
-      "System.Reflection.TypeExtensions/4.1.2.0": {
+      "System.Reflection.TypeExtensions.Reference/4.1.2.0": {
         "compile": {
           "System.Reflection.TypeExtensions.dll": {}
         },
@@ -2878,6 +2896,13 @@
       "path": "serilog.aspnetcore/5.0.0",
       "hashPath": "serilog.aspnetcore.5.0.0.nupkg.sha512"
     },
+    "Serilog.Exceptions/8.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-hgNCB4Suv7bRCa+eHPdbwxO1aedveGE3D9H62k55PddcnMv/hy4n34y8QqydFvp6jEr+OirnToNMgtiVYTLOSg==",
+      "path": "serilog.exceptions/8.1.0",
+      "hashPath": "serilog.exceptions.8.1.0.nupkg.sha512"
+    },
     "Serilog.Extensions.Hosting/4.2.0": {
       "type": "package",
       "serviceable": true,
@@ -2989,6 +3014,13 @@
       "sha512": "sha512-uXQEYqav2V3zP6OwkOKtLv+qIi6z3m1hsGyKwXX7ZA7htT4shoVccGxnJ9kVRFPNAsi1ArZTq2oh7WOto6GbkQ==",
       "path": "system.diagnostics.diagnosticsource/5.0.1",
       "hashPath": "system.diagnostics.diagnosticsource.5.0.1.nupkg.sha512"
+    },
+    "System.Reflection.TypeExtensions/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VybpaOQQhqE6siHppMktjfGBw1GCwvCqiufqmP8F1nj7fTUNtW35LOEt3UZTEsECfo+ELAl/9o9nJx3U91i7vA==",
+      "path": "system.reflection.typeextensions/4.7.0",
+      "hashPath": "system.reflection.typeextensions.4.7.0.nupkg.sha512"
     },
     "System.Runtime.CompilerServices.Unsafe/6.0.0": {
       "type": "package",
@@ -4019,7 +4051,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "System.Reflection.TypeExtensions/4.1.2.0": {
+    "System.Reflection.TypeExtensions.Reference/4.1.2.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""

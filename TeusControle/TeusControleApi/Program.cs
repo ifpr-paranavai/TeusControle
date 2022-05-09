@@ -43,7 +43,7 @@ namespace TeusControleApi
 
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile($"appsettings.{environment}.json")
+                .AddJsonFile($"appsettings.{environment}.json", optional: true)
                 .Build();
             return configuration;
         }
