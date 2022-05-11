@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Shared.Models.Enums;
+using System;
 
 namespace Core.Shared.Models.User
 {
@@ -36,8 +37,11 @@ namespace Core.Shared.Models.User
         /// </summary>
         /// <example>https://ciclovivo.com.br/wp-content/uploads/2018/10/iStock-536613027-696x464.jpg</example>
         public string ProfileImage { get; set; }
-
-        // public int ProfileType { get; set; }
+        
+        /// <summary>
+        /// Tipo de Usuário
+        /// </summary>
+        public ProfileTypesEnum ProfileType { get; set; }
 
         /// <summary>
         /// Senha do usuário

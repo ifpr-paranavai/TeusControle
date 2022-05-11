@@ -3,12 +3,12 @@ using FluentValidation;
 
 namespace Manager.Validator.User
 {
-    public class UpdateUsersValidator : AbstractValidator<UpdateUserModel>
+    public class UpdateUserValidator : AbstractValidator<UpdateUserModel>
     {
-        public UpdateUsersValidator()
+        public UpdateUserValidator()
         {
             RuleFor(x => x.Id).NotNull().NotEmpty().GreaterThan(0);
-            Include(new CreateUsersValidator());
+            Include(new CreateUserValidator());
         }
     }
 }

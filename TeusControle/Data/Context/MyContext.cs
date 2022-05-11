@@ -6,7 +6,7 @@ namespace Data.Context
 {
     public class MyContext : DbContext
     {
-        public DbSet<Users> Users { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public MyContext(DbContextOptions<MyContext> options) : base(options)
         {
@@ -16,7 +16,7 @@ namespace Data.Context
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.ApplyConfiguration(new UsersConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
         }
     }
 }

@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Meus Docs\\Desktop\\4º ano\\TCC\\TeusControle\\TeusControle\\Core.Shared\\Core.Shared.csproj",
+      "projectUniqueName": "D:\\Meus Docs\\Desktop\\4ano\\TCC\\TeusControle\\TeusControle\\Core.Shared\\Core.Shared.csproj",
       "projectName": "Core.Shared",
-      "projectPath": "D:\\Meus Docs\\Desktop\\4º ano\\TCC\\TeusControle\\TeusControle\\Core.Shared\\Core.Shared.csproj",
+      "projectPath": "D:\\Meus Docs\\Desktop\\4ano\\TCC\\TeusControle\\TeusControle\\Core.Shared\\Core.Shared.csproj",
       "packagesPath": "C:\\Users\\mateu\\.nuget\\packages\\",
-      "outputPath": "D:\\Meus Docs\\Desktop\\4º ano\\TCC\\TeusControle\\TeusControle\\Core.Shared\\obj\\",
+      "outputPath": "D:\\Meus Docs\\Desktop\\4ano\\TCC\\TeusControle\\TeusControle\\Core.Shared\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

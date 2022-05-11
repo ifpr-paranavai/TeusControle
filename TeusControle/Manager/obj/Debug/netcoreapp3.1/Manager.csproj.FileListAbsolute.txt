@@ -13,3 +13,18 @@ D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Manager\obj\Debug\net
 D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Manager\bin\Debug\netcoreapp3.1\Core.Shared.dll
 D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Manager\bin\Debug\netcoreapp3.1\Core.Shared.pdb
 D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Manager\bin\Debug\netcoreapp3.1\Core.Shared.xml
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Manager\bin\Debug\netcoreapp3.1\Manager.deps.json
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Manager\bin\Debug\netcoreapp3.1\Manager.dll
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Manager\bin\Debug\netcoreapp3.1\Manager.pdb
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Manager\bin\Debug\netcoreapp3.1\Core.dll
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Manager\bin\Debug\netcoreapp3.1\Core.Shared.dll
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Manager\bin\Debug\netcoreapp3.1\Core.Shared.pdb
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Manager\bin\Debug\netcoreapp3.1\Core.Shared.xml
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Manager\bin\Debug\netcoreapp3.1\Core.pdb
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Manager\obj\Debug\netcoreapp3.1\Manager.csproj.AssemblyReference.cache
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Manager\obj\Debug\netcoreapp3.1\Manager.AssemblyInfoInputs.cache
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Manager\obj\Debug\netcoreapp3.1\Manager.AssemblyInfo.cs
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Manager\obj\Debug\netcoreapp3.1\Manager.csproj.CoreCompileInputs.cache
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Manager\obj\Debug\netcoreapp3.1\Manager.csproj.CopyComplete
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Manager\obj\Debug\netcoreapp3.1\Manager.dll
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Manager\obj\Debug\netcoreapp3.1\Manager.pdb

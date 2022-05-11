@@ -1049,6 +1049,9 @@
       },
       "System.Text.Json/4.6.0": {},
       "Core/1.0.0": {
+        "dependencies": {
+          "Core.Shared": "1.0.0"
+        },
         "runtime": {
           "Core.dll": {}
         },

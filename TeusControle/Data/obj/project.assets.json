@@ -310,6 +310,9 @@
       "Core/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Core.Shared": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/Core.dll": {}
         },
@@ -1009,11 +1012,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Meus Docs\\Desktop\\4º ano\\TCC\\TeusControle\\TeusControle\\Data\\Data.csproj",
+      "projectUniqueName": "D:\\Meus Docs\\Desktop\\4ano\\TCC\\TeusControle\\TeusControle\\Data\\Data.csproj",
       "projectName": "Data",
-      "projectPath": "D:\\Meus Docs\\Desktop\\4º ano\\TCC\\TeusControle\\TeusControle\\Data\\Data.csproj",
+      "projectPath": "D:\\Meus Docs\\Desktop\\4ano\\TCC\\TeusControle\\TeusControle\\Data\\Data.csproj",
       "packagesPath": "C:\\Users\\mateu\\.nuget\\packages\\",
-      "outputPath": "D:\\Meus Docs\\Desktop\\4º ano\\TCC\\TeusControle\\TeusControle\\Data\\obj\\",
+      "outputPath": "D:\\Meus Docs\\Desktop\\4ano\\TCC\\TeusControle\\TeusControle\\Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1034,11 +1037,11 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "D:\\Meus Docs\\Desktop\\4º ano\\TCC\\TeusControle\\TeusControle\\Core\\Core.csproj": {
-              "projectPath": "D:\\Meus Docs\\Desktop\\4º ano\\TCC\\TeusControle\\TeusControle\\Core\\Core.csproj"
+            "D:\\Meus Docs\\Desktop\\4ano\\TCC\\TeusControle\\TeusControle\\Core\\Core.csproj": {
+              "projectPath": "D:\\Meus Docs\\Desktop\\4ano\\TCC\\TeusControle\\TeusControle\\Core\\Core.csproj"
             },
-            "D:\\Meus Docs\\Desktop\\4º ano\\TCC\\TeusControle\\TeusControle\\Manager\\Manager.csproj": {
-              "projectPath": "D:\\Meus Docs\\Desktop\\4º ano\\TCC\\TeusControle\\TeusControle\\Manager\\Manager.csproj"
+            "D:\\Meus Docs\\Desktop\\4ano\\TCC\\TeusControle\\TeusControle\\Manager\\Manager.csproj": {
+              "projectPath": "D:\\Meus Docs\\Desktop\\4ano\\TCC\\TeusControle\\TeusControle\\Manager\\Manager.csproj"
             }
           }
         }

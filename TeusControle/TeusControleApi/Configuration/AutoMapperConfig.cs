@@ -1,4 +1,4 @@
-﻿using Manager.Mapping.User;
+﻿using Manager.Mapping;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace TeusControleApi.Configuration

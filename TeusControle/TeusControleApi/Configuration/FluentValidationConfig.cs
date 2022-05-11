@@ -1,9 +1,10 @@
 ﻿using FluentValidation.AspNetCore;
-using Manager.Mapping.User;
 using Manager.Validator.User;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System.Globalization;
+using System.Text.Json.Serialization;
 
 namespace TeusControleApi.Configuration
 {
@@ -12,10 +13,16 @@ namespace TeusControleApi.Configuration
         public static void AddFluentValidationConfiguration(this IServiceCollection services)
         {
             services.AddControllers()
-                .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore)
+                .AddNewtonsoftJson(x => {
+                    x.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                    x.SerializerSettings.Converters.Add(new StringEnumConverter());
+                })
+                .AddJsonOptions(p => {
+                    p.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                })
                 .AddFluentValidation(p => {
-                    p.RegisterValidatorsFromAssemblyContaining<CreateUsersValidator>();
-                    p.RegisterValidatorsFromAssemblyContaining<UpdateUsersValidator>();
+                    p.RegisterValidatorsFromAssemblyContaining<CreateUserValidator>();
+                    p.RegisterValidatorsFromAssemblyContaining<UpdateUserValidator>();
                     p.ValidatorOptions.LanguageManager.Culture = new CultureInfo("pt-BR");
                 });
         }

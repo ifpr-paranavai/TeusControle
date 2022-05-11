@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "H3tdVLCSoiQnQahKGF6/RalAtekcZWNfvrew7Y89Lzef1N/NPfn6ovr000W1d+s0dQaCXTw4LqLAO6tHmDG13Q==",
+  "dgSpecHash": "xHiAWQeiceH9bMRvuaYNYeMOHMJlq2YRtWRtgjclmEE/Y0Etg+ONHfpFySXErDDWpOQYH5inv1ybBJETycvfWA==",
   "success": true,
-  "projectFilePath": "D:\\Meus Docs\\Desktop\\4º ano\\TCC\\TeusControle\\TeusControle\\Data\\Data.csproj",
+  "projectFilePath": "D:\\Meus Docs\\Desktop\\4ano\\TCC\\TeusControle\\TeusControle\\Data\\Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mateu\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\fluentvalidation\\11.0.0\\fluentvalidation.11.0.0.nupkg.sha512",

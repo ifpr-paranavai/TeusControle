@@ -7,3 +7,16 @@ D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Core\obj\Debug\netcor
 D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Core\obj\Debug\netcoreapp3.1\Core.csproj.CoreCompileInputs.cache
 D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Core\obj\Debug\netcoreapp3.1\Core.dll
 D:\Meus Docs\Desktop\4º ano\TCC\TeusControle\TeusControle\Core\obj\Debug\netcoreapp3.1\Core.pdb
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Core\bin\Debug\netcoreapp3.1\Core.deps.json
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Core\bin\Debug\netcoreapp3.1\Core.dll
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Core\bin\Debug\netcoreapp3.1\Core.pdb
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Core\obj\Debug\netcoreapp3.1\Core.csproj.AssemblyReference.cache
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Core\obj\Debug\netcoreapp3.1\Core.AssemblyInfoInputs.cache
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Core\obj\Debug\netcoreapp3.1\Core.AssemblyInfo.cs
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Core\obj\Debug\netcoreapp3.1\Core.csproj.CoreCompileInputs.cache
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Core\obj\Debug\netcoreapp3.1\Core.dll
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Core\obj\Debug\netcoreapp3.1\Core.pdb
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Core\bin\Debug\netcoreapp3.1\Core.Shared.dll
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Core\bin\Debug\netcoreapp3.1\Core.Shared.pdb
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Core\bin\Debug\netcoreapp3.1\Core.Shared.xml
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Core\obj\Debug\netcoreapp3.1\Core.csproj.CopyComplete

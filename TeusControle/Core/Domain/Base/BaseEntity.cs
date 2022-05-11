@@ -16,6 +16,6 @@ namespace Core.Domain.Base
 
         public int CreatedBy { get; set; }
 
-        public Users CreatedByUser { get; set; }
+        public User CreatedByUser { get; set; }
     }
 }

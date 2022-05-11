@@ -9,8 +9,8 @@ namespace TeusControleApi.Configuration
     {
         public static void UseDependencyInjectionConfiguration(this IServiceCollection services)
         {
-            services.AddScoped<IUsersRepository, UsersRepository>();
-            services.AddScoped<IUsersManager, UsersManager>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserManager, UserManager>();
         }
     }
 }

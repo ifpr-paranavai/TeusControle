@@ -4,30 +4,30 @@
         <name>TeusControleApi</name>
     </assembly>
     <members>
-        <member name="M:TeusControleApi.Controllers.UsersController.Get">
+        <member name="M:TeusControleApi.Controllers.UserController.Get">
             <summary>
             Retorna todos os usuários.
             </summary>
         </member>
-        <member name="M:TeusControleApi.Controllers.UsersController.Get(System.Int32)">
+        <member name="M:TeusControleApi.Controllers.UserController.Get(System.Int32)">
             <summary>
             Retorna um usuário buscado pelo id.
             </summary>
             <param name="id" example="123">Id do usuário.</param>
         </member>
-        <member name="M:TeusControleApi.Controllers.UsersController.Post(Core.Shared.Models.User.CreateUserModel)">
+        <member name="M:TeusControleApi.Controllers.UserController.Post(Core.Shared.Models.User.CreateUserModel)">
             <summary>
             Insere um novo usuário.
             </summary>
             <param name="newUser"></param>
         </member>
-        <member name="M:TeusControleApi.Controllers.UsersController.Put(Core.Shared.Models.User.UpdateUserModel)">
+        <member name="M:TeusControleApi.Controllers.UserController.Put(Core.Shared.Models.User.UpdateUserModel)">
             <summary>
             Altera um usuário.
             </summary>
             <param name="user"></param>
         </member>
-        <member name="M:TeusControleApi.Controllers.UsersController.Delete(System.Int32)">
+        <member name="M:TeusControleApi.Controllers.UserController.Delete(System.Int32)">
             <summary>
             Exclui um usuário por id.
             </summary>

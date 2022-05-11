@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20220509200649_tamanho-nome")]
-    partial class tamanhonome
+    [Migration("20220511012201_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,6 +33,9 @@ namespace Data.Migrations
 
                     b.Property<string>("CpfCnpj")
                         .HasColumnType("longtext");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime(6)");
@@ -62,7 +65,25 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Core.Domain.Users", b =>
+                {
+                    b.HasOne("Core.Domain.Users", "CreatedByUser")
+                        .WithMany("CreatorUsers")
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CreatedByUser");
+                });
+
+            modelBuilder.Entity("Core.Domain.Users", b =>
+                {
+                    b.Navigation("CreatorUsers");
                 });
 #pragma warning restore 612, 618
         }

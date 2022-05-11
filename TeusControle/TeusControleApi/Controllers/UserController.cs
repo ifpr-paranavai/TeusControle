@@ -12,12 +12,12 @@ namespace TeusControleApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class UserController : ControllerBase
     {
-        private readonly IUsersManager usersManager;
-        private readonly ILogger<UsersController> logger;
+        private readonly IUserManager usersManager;
+        private readonly ILogger<UserController> logger;
 
-        public UsersController(IUsersManager usersManager, ILogger<UsersController> logger)
+        public UserController(IUserManager usersManager, ILogger<UserController> logger)
         {
             this.usersManager = usersManager;
             this.logger = logger;
@@ -27,7 +27,7 @@ namespace TeusControleApi.Controllers
         /// Retorna todos os usuários.
         /// </summary>
         [HttpGet]
-        [ProducesResponseType(typeof(Users), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(User), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get()
         {
@@ -39,7 +39,7 @@ namespace TeusControleApi.Controllers
         /// </summary>
         /// <param name="id" example="123">Id do usuário.</param>
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(Users), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(User), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get(int id)
@@ -52,12 +52,12 @@ namespace TeusControleApi.Controllers
         /// </summary>
         /// <param name="newUser"></param>
         [HttpPost]
-        [ProducesResponseType(typeof(Users), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(User), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Post([FromBody] CreateUserModel newUser)
         {
             logger.LogInformation("Objeto recebido {@newUser}", newUser);
-            Users createdUser;
+            User createdUser;
             using (Operation.Time("Tempo de adição de um novo usuário."))
             {
                 logger.LogInformation("Foi requisitada a inserção de um novo usuário.");
@@ -72,7 +72,7 @@ namespace TeusControleApi.Controllers
         /// </summary>
         /// <param name="user"></param>
         [HttpPut]
-        [ProducesResponseType(typeof(Users), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(User), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Put([FromBody] UpdateUserModel user)
@@ -89,7 +89,7 @@ namespace TeusControleApi.Controllers
         /// Exclui um usuário por id.
         /// </summary>
         /// <param name="id" example="123">Id do usuário.</param>
-        [ProducesResponseType(typeof(Users), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(User), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpDelete("{id}")]

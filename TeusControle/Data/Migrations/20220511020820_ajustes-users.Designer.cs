@@ -3,14 +3,16 @@ using System;
 using Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20220511020820_ajustes-users")]
+    partial class ajustesusers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,6 +33,9 @@ namespace Data.Migrations
 
                     b.Property<string>("CpfCnpj")
                         .HasColumnType("longtext");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime(6)");
@@ -58,9 +63,31 @@ namespace Data.Migrations
                     b.Property<string>("ProfileImage")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("ProfileType")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Core.Domain.Users", b =>
+                {
+                    b.HasOne("Core.Domain.Users", "CreatedByUser")
+                        .WithMany("CreatedUsers")
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CreatedByUser");
+                });
+
+            modelBuilder.Entity("Core.Domain.Users", b =>
+                {
+                    b.Navigation("CreatedUsers");
                 });
 #pragma warning restore 612, 618
         }

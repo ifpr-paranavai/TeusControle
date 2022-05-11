@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kqIJ5P/FP6/l4yf7RUVBsomkq97aQnLdkr8DWPp5GQqA01EI7aa0fntHLIxsQUEhPIGUB97zeOY5zWwsrG7KdA==",
+  "dgSpecHash": "dsVgzQaNn7iMGcNb5l33PLD/wBaBTMMZTAmGRhYezGDvcGLnf68jlPcRLg1WUSdNDbjzD0a4lKRPH5LhIXt7mQ==",
   "success": true,
-  "projectFilePath": "D:\\Meus Docs\\Desktop\\4º ano\\TCC\\TeusControle\\TeusControle\\TeusControleApi\\TeusControleApi.csproj",
+  "projectFilePath": "D:\\Meus Docs\\Desktop\\4ano\\TCC\\TeusControle\\TeusControle\\TeusControleApi\\TeusControleApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mateu\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",

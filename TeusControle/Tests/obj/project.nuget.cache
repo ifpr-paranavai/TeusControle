@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kIjL6ugEQ0xveJ75C7jQkCPuEQbWeOr4b6Iq3VqitQ1nYYXOpWYrQVRYTcU6+teNjqAKG0ImVq1jiknNYcRMCg==",
+  "dgSpecHash": "tk7vmOZ/D+oOv0QFtVZfBa5uqkGgvPhH23QA9TrAeV+/czQ1/JpvMJriduCMxzdrYXN1g0UYfZYn8Rl5g/aRCQ==",
   "success": true,
-  "projectFilePath": "D:\\Meus Docs\\Desktop\\4º ano\\TCC\\TeusControle\\TeusControle\\Tests\\Tests.csproj",
+  "projectFilePath": "D:\\Meus Docs\\Desktop\\4ano\\TCC\\TeusControle\\TeusControle\\Tests\\Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mateu\\.nuget\\packages\\coverlet.collector\\3.0.2\\coverlet.collector.3.0.2.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\microsoft.codecoverage\\16.9.4\\microsoft.codecoverage.16.9.4.nupkg.sha512",

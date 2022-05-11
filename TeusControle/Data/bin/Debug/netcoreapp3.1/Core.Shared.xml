@@ -39,6 +39,11 @@
             </summary>
             <example>https://ciclovivo.com.br/wp-content/uploads/2018/10/iStock-536613027-696x464.jpg</example>
         </member>
+        <member name="P:Core.Shared.Models.User.CreateUserModel.ProfileType">
+            <summary>
+            Tipo de Usuário
+            </summary>
+        </member>
         <member name="P:Core.Shared.Models.User.CreateUserModel.Password">
             <summary>
             Senha do usuário

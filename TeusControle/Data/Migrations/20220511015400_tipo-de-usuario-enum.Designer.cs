@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20220504011203_ajuste-birthdate-usuarios")]
-    partial class ajustebirthdateusuarios
+    [Migration("20220511015400_tipo-de-usuario-enum")]
+    partial class tipodeusuarioenum
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,6 +34,9 @@ namespace Data.Migrations
                     b.Property<string>("CpfCnpj")
                         .HasColumnType("longtext");
 
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime(6)");
 
@@ -50,7 +53,9 @@ namespace Data.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
 
                     b.Property<string>("Password")
                         .HasColumnType("longtext");
@@ -58,9 +63,31 @@ namespace Data.Migrations
                     b.Property<string>("ProfileImage")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("ProfileType")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Core.Domain.Users", b =>
+                {
+                    b.HasOne("Core.Domain.Users", "CreatedByUser")
+                        .WithMany("CreatorUsers")
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CreatedByUser");
+                });
+
+            modelBuilder.Entity("Core.Domain.Users", b =>
+                {
+                    b.Navigation("CreatorUsers");
                 });
 #pragma warning restore 612, 618
         }

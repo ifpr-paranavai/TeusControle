@@ -3,16 +3,14 @@ using System;
 using Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20220504002235_novos-campos-usuarios")]
-    partial class novoscamposusuarios
+    partial class MyContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,6 +32,9 @@ namespace Data.Migrations
                     b.Property<string>("CpfCnpj")
                         .HasColumnType("longtext");
 
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime(6)");
 
@@ -50,7 +51,9 @@ namespace Data.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
 
                     b.Property<string>("Password")
                         .HasColumnType("longtext");
@@ -58,9 +61,31 @@ namespace Data.Migrations
                     b.Property<string>("ProfileImage")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("ProfileType")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Core.Domain.Users", b =>
+                {
+                    b.HasOne("Core.Domain.Users", "CreatedByUser")
+                        .WithMany("CreatedUsers")
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CreatedByUser");
+                });
+
+            modelBuilder.Entity("Core.Domain.Users", b =>
+                {
+                    b.Navigation("CreatedUsers");
                 });
 #pragma warning restore 612, 618
         }

@@ -7,35 +7,36 @@ using System.Threading.Tasks;
 
 namespace Data.Repository
 {
-    public class UsersRepository : IUsersRepository
+    public class UserRepository : IUserRepository
     {
         private readonly MyContext myContext;
 
-        public UsersRepository(MyContext context)
+        public UserRepository(MyContext context)
         {
             this.myContext = context;
         }
 
-        public async Task<IEnumerable<Users>> GetUsersAsync()
+        public async Task<IEnumerable<User>> GetUsersAsync()
         {
             return await myContext.Users.AsNoTracking()
                 .ToListAsync();
         }
 
-        public async Task<Users> GetUserAsync(int id)
+        public async Task<User> GetUserAsync(int id)
         {
             return await myContext.Users.FindAsync(id);
         }
 
-        public async Task<Users> InsertUserAsync(Users user)
+        public async Task<User> InsertUserAsync(User user)
         {
+            user.CreatedBy = 1; // TODO: buscar do usuario logado
             await myContext.Users.AddAsync(user);
             await myContext.SaveChangesAsync();
 
             return user;
         }
 
-        public async Task<Users> UpdateUserAsync(Users user)
+        public async Task<User> UpdateUserAsync(User user)
         {
             var dbUser = await GetUserAsync(user.Id);
             if (dbUser == null)
