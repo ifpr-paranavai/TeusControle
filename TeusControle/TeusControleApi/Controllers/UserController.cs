@@ -1,17 +1,18 @@
 ﻿using Core.Domain;
 using Core.Shared.Models.User;
 using Manager.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SerilogTimings;
-using System;
 using System.Threading.Tasks;
 
 namespace TeusControleApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserManager usersManager;

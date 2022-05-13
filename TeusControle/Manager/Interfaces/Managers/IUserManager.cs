@@ -1,4 +1,5 @@
 ﻿using Core.Domain;
+using Core.Shared.Models.Request;
 using Core.Shared.Models.User;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -16,5 +17,7 @@ namespace Manager.Interfaces
         Task<User> UpdateUserAsync(UpdateUserModel updatedUser);
 
         Task DeleteUserAsync(int id);
+
+        Task<string> ValidatePasswordGenerateTokenAsync(LoginRequest login);
     }
 }

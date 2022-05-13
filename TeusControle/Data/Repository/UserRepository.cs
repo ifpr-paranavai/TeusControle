@@ -4,6 +4,7 @@ using Data.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Data.Repository
 {
@@ -25,6 +26,11 @@ namespace Data.Repository
         public async Task<User> GetUserAsync(int id)
         {
             return await myContext.Users.FindAsync(id);
+        }
+
+        public async Task<User> GetUserByEmailAsync(string email)
+        {
+            return await myContext.Users.Where(p => p.Email == email).FirstOrDefaultAsync();
         }
 
         public async Task<User> InsertUserAsync(User user)

@@ -4,6 +4,18 @@
         <name>Core.Shared</name>
     </assembly>
     <members>
+        <member name="P:Core.Shared.Models.Request.LoginRequest.Email">
+            <summary>
+            E-mail do usuário
+            </summary>
+            <example>johndoe@email.com</example>
+        </member>
+        <member name="P:Core.Shared.Models.Request.LoginRequest.Password">
+            <summary>
+            Senha do usuário
+            </summary>
+            <example>minhaSenha123</example>
+        </member>
         <member name="T:Core.Shared.Models.User.CreateUserModel">
             <summary>
             Objeto para criação de um novo usuário

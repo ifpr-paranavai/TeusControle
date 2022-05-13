@@ -23,6 +23,8 @@ namespace TeusControleApi
         {
             services.AddControllers();
 
+            services.AddJwtConfiguration(Configuration);
+
             services.AddFluentValidationConfiguration();
 
             services.AddAutoMapperConfiguration();
@@ -51,7 +53,7 @@ namespace TeusControleApi
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseJwtConfiguration();
 
             app.UseEndpoints(endpoints =>
             {

@@ -160,3 +160,10 @@ D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\TeusControleApi\obj\Debu
 D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\TeusControleApi\obj\Debug\netcoreapp3.1\TeusControleApi.dll
 D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\TeusControleApi\obj\Debug\netcoreapp3.1\TeusControleApi.pdb
 D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\TeusControleApi\obj\Debug\netcoreapp3.1\TeusControleApi.genruntimeconfig.cache
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll

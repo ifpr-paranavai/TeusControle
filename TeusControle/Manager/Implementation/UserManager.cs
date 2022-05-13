@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Core.Domain;
+using Core.Shared.Models.Request;
 using Core.Shared.Models.User;
 using Manager.Interfaces;
+using Manager.Interfaces.Services;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -13,11 +15,13 @@ namespace Manager.Implementation
     {
         private readonly IUserRepository userRepository;
         private readonly IMapper mapper;
+        private readonly IJwtService jwtService;
 
-        public UserManager(IUserRepository usersRepository, IMapper mapper)
+        public UserManager(IUserRepository usersRepository, IMapper mapper, IJwtService jwtService)
         {
             this.userRepository = usersRepository;
             this.mapper = mapper;
+            this.jwtService = jwtService;
         }
 
         public async Task<IEnumerable<User>> GetUsersAsync()
@@ -65,21 +69,25 @@ namespace Manager.Implementation
             user.Password = passwordHasher.HashPassword(user, user.Password);
         }
 
-        public async Task<bool> ValidatePassWordAsync(User user)
+        public async Task<string> ValidatePasswordGenerateTokenAsync(LoginRequest login)
         {
-            var userDb = await userRepository.GetUserAsync(user.Id);
-            if (userDb == null)
+            var user = await userRepository.GetUserByEmailAsync(login.Email);
+            if (user == null)
             {
-                return false;
+                return null;
             }
 
-            return await ValidateAndUpdateHashAsync(user, userDb.Password);
+            if (await ValidateAndUpdateHashAsync(user, login.Password))
+            {
+                return jwtService.GenerateToken(user);
+            }
+            return null;
         }
 
-        private async Task<bool> ValidateAndUpdateHashAsync(User user, string hash)
+        private async Task<bool> ValidateAndUpdateHashAsync(User user, string loginPassword)
         {
             var passwordHasher = new PasswordHasher<User>();
-            var status = passwordHasher.VerifyHashedPassword(user, hash, user.Password);
+            var status = passwordHasher.VerifyHashedPassword(user, user.Password, loginPassword);
             switch (status)
             {
                 case PasswordVerificationResult.Failed:

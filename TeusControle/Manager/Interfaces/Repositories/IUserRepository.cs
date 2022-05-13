@@ -15,5 +15,7 @@ namespace Manager.Interfaces
         Task<User> UpdateUserAsync(User user);
 
         Task DeleteUserAsync(int id);
+        
+        Task<User> GetUserByEmailAsync(string email);
     }
 }
