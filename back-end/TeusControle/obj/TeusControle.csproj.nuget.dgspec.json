@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Meus Docs\\Desktop\\4º ano\\TCC\\TeusControle\\back-end\\TeusControle\\TeusControle.csproj": {}
+    "D:\\Meus Docs\\Desktop\\4ano\\TCC\\TeusControle\\back-end\\TeusControle\\TeusControle.csproj": {}
   },
   "projects": {
-    "D:\\Meus Docs\\Desktop\\4º ano\\TCC\\TeusControle\\back-end\\TeusControle\\TeusControle.csproj": {
+    "D:\\Meus Docs\\Desktop\\4ano\\TCC\\TeusControle\\back-end\\TeusControle\\TeusControle.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Meus Docs\\Desktop\\4º ano\\TCC\\TeusControle\\back-end\\TeusControle\\TeusControle.csproj",
+        "projectUniqueName": "D:\\Meus Docs\\Desktop\\4ano\\TCC\\TeusControle\\back-end\\TeusControle\\TeusControle.csproj",
         "projectName": "TeusControle",
-        "projectPath": "D:\\Meus Docs\\Desktop\\4º ano\\TCC\\TeusControle\\back-end\\TeusControle\\TeusControle.csproj",
+        "projectPath": "D:\\Meus Docs\\Desktop\\4ano\\TCC\\TeusControle\\back-end\\TeusControle\\TeusControle.csproj",
         "packagesPath": "C:\\Users\\mateu\\.nuget\\packages\\",
-        "outputPath": "D:\\Meus Docs\\Desktop\\4º ano\\TCC\\TeusControle\\back-end\\TeusControle\\obj\\",
+        "outputPath": "D:\\Meus Docs\\Desktop\\4ano\\TCC\\TeusControle\\back-end\\TeusControle\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

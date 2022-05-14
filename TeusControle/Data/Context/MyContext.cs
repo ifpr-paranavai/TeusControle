@@ -8,6 +8,11 @@ namespace Data.Context
     {
         public DbSet<User> Users { get; set; }
 
+        public MyContext()
+        {
+
+        }
+
         public MyContext(DbContextOptions<MyContext> options) : base(options)
         {
         }

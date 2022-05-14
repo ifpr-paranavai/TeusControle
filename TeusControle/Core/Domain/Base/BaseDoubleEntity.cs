@@ -4,9 +4,9 @@ namespace Core.Domain.Base
 {
     public class BaseDoubleEntity
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
         
-        public long Id2 { get; set; }
+        public int Id2 { get; set; }
         
         public bool Active { get; set; }
 
@@ -16,7 +16,7 @@ namespace Core.Domain.Base
 
         public DateTime? LastChange { get; set; }
 
-        public long CreatedBy { get; set; }
+        public int CreatedBy { get; set; }
 
         // public Users CreatedByUser { get; set; }
     }

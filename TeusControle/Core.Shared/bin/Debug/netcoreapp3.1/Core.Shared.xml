@@ -4,6 +4,96 @@
         <name>Core.Shared</name>
     </assembly>
     <members>
+        <member name="F:Core.Shared.Models.Enums.FilterEnum.StartsWith">
+            <summary>
+            1 - Começa com
+            </summary>
+        </member>
+        <member name="F:Core.Shared.Models.Enums.FilterEnum.EndsWith">
+            <summary>
+            2 - Termina com
+            </summary>
+        </member>
+        <member name="F:Core.Shared.Models.Enums.FilterEnum.Contains">
+            <summary>
+            3 - Contém
+            </summary>
+        </member>
+        <member name="F:Core.Shared.Models.Enums.FilterEnum.DoesNotContain">
+            <summary>
+            4 - Não Contém
+            </summary>
+        </member>
+        <member name="F:Core.Shared.Models.Enums.FilterEnum.IsEmpty">
+            <summary>
+            5 - Está Vazio
+            </summary>
+        </member>
+        <member name="F:Core.Shared.Models.Enums.FilterEnum.IsNotEmpty">
+            <summary>
+            6 - Não Está Vazio
+            </summary>
+        </member>
+        <member name="F:Core.Shared.Models.Enums.FilterEnum.IsGreaterThan">
+            <summary>
+            7 - É Maior
+            </summary>
+        </member>
+        <member name="F:Core.Shared.Models.Enums.FilterEnum.IsGreaterThanOrEqualTo">
+            <summary>
+            8 - É Maior ou Igual
+            </summary>
+        </member>
+        <member name="F:Core.Shared.Models.Enums.FilterEnum.IsLessThan">
+            <summary>
+            9 - É Menor
+            </summary>
+        </member>
+        <member name="F:Core.Shared.Models.Enums.FilterEnum.IsLessThanOrEqualTo">
+            <summary>
+            10 - É Menor ou Igual
+            </summary>
+        </member>
+        <member name="F:Core.Shared.Models.Enums.FilterEnum.IsEqualTo">
+            <summary>
+            11 - É Igual
+            </summary>
+        </member>
+        <member name="F:Core.Shared.Models.Enums.FilterEnum.IsNotEqualTo">
+            <summary>
+            12 - Ñão é Igual
+            </summary>
+        </member>
+        <member name="T:Core.Shared.Models.Enums.SortEnum">
+            <summary>
+            Enumeradores para ordenação
+            </summary>
+        </member>
+        <member name="F:Core.Shared.Models.Enums.SortEnum.Asc">
+            <summary>
+            1 - Ascendente
+            </summary>
+        </member>
+        <member name="F:Core.Shared.Models.Enums.SortEnum.Desc">
+            <summary>
+            2 - Descendente
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Request.FilterParamsRequest.ColumnName">
+            <summary>
+            Nome da coluna a ser filtrada
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Request.FilterParamsRequest.FilterValue">
+            <summary>
+            Valor buscado no filtro
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Request.FilterParamsRequest.FilterOption">
+            <summary>
+            Tipo do filtro a ser aplicado
+            </summary>
+        </member>
         <member name="P:Core.Shared.Models.Request.LoginRequest.Email">
             <summary>
             E-mail do usuário
@@ -15,6 +105,105 @@
             Senha do usuário
             </summary>
             <example>minhaSenha123</example>
+        </member>
+        <member name="T:Core.Shared.Models.Request.PaginatedRequest">
+            <summary>  
+            Propriedades usadas para paginação, ordenação e filtro
+            </summary>  
+        </member>
+        <member name="P:Core.Shared.Models.Request.PaginatedRequest.SortingParams">
+            <summary>
+            Parâmetros de ordenação
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Request.PaginatedRequest.FilterParams">
+            <summary>
+            Parâmetros de filtragem
+            </summary>
+        </member>
+        <member name="F:Core.Shared.Models.Request.PaginatedRequest.pageNumber">
+            <summary>
+            Número da página
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Request.PaginatedRequest.PageNumber">
+            <summary>
+            Número da página
+            </summary>
+        </member>
+        <member name="F:Core.Shared.Models.Request.PaginatedRequest.pageSize">
+            <summary>
+            Tamanho da página
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Request.PaginatedRequest.PageSize">
+            <summary>
+            Tamanho da página
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Request.SortingParamsRequest.SortOrder">
+            <summary>
+            Tipo de ordenação
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Request.SortingParamsRequest.ColumnName">
+            <summary>
+            Nome da coluna
+            </summary>
+        </member>
+        <member name="T:Core.Shared.Models.Responses.PageResponse">
+            <summary>
+            Retorno para busca páginada
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Responses.PageResponse.Data">
+            <summary>
+            Informações
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Responses.PageResponse.Count">
+            <summary>
+            Quantidade de registros
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Responses.PaginatedResponse`1.Data">
+            <summary>
+            Informações
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Responses.PaginatedResponse`1.PageIndex">
+            <summary>
+            Índice da pagina
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Responses.PaginatedResponse`1.TotalPages">
+            <summary>
+            Total de páginas
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Responses.PaginatedResponse`1.TotalItems">
+            <summary>
+            Total de itens
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Responses.PaginatedResponse`1.HasPreviousPage">
+            <summary>
+            Tem página anterior?
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Responses.PaginatedResponse`1.HasNextPage">
+            <summary>
+            Tem próxima página?
+            </summary>
+        </member>
+        <member name="M:Core.Shared.Models.Responses.PaginatedResponse`1.CreateAsync(System.Collections.Generic.IList{`0},System.Int32,System.Int32)">
+            <summary>
+            Cria busca assíncrona
+            </summary>
+            <param name="source"></param>
+            <param name="pageIndex"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
         </member>
         <member name="T:Core.Shared.Models.User.CreateUserModel">
             <summary>

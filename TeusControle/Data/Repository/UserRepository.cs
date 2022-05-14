@@ -1,10 +1,10 @@
-﻿using Manager.Interfaces;
-using Core.Domain;
+﻿using Core.Domain;
 using Data.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
+using Manager.Interfaces.Repositories;
 
 namespace Data.Repository
 {

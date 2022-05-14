@@ -3,8 +3,8 @@
     "",
     "\\Core",
     "\\Core.Shared",
-    "\\Data"
+    "\\Data",
+    "\\Data\\Repository"
   ],
-  "SelectedNode": "\\TeusControle.sln",
   "PreviewInSolutionExplorer": false
 }

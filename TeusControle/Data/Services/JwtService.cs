@@ -1,4 +1,5 @@
 ﻿using Core.Domain;
+using Core.Shared.Models;
 using Manager.Interfaces.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -25,8 +26,12 @@ namespace Data.Services
             var key = Encoding.ASCII.GetBytes(configuration.GetSection("JWT:Secret").Value);
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.Name),
-                new Claim(ClaimTypes.Role, user.ProfileType.ToString())
+                new Claim(CustomClaimTypes.Id, user.Id.ToString()),
+                new Claim(CustomClaimTypes.Name, user.Name.ToString()),
+                new Claim(CustomClaimTypes.Email, user.Email.ToString()),
+                new Claim(CustomClaimTypes.ProfileImage, user.ProfileImage != null ? user.ProfileImage.ToString() : ""),
+                new Claim(CustomClaimTypes.ProfileTypeId, user.ProfileType.ToString()),
+                /*new Claim(CustomClaimTypes.ProfileTypeDescription, user.ProfileTypeDescription.ToString()),// alterar para descrição do enumerador*/
             };
 
             var tokenDescription = new SecurityTokenDescriptor

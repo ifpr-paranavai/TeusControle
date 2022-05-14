@@ -3,6 +3,7 @@ using Core.Domain;
 using Core.Shared.Models.Request;
 using Core.Shared.Models.User;
 using Manager.Interfaces;
+using Manager.Interfaces.Repositories;
 using Manager.Interfaces.Services;
 using Microsoft.AspNetCore.Identity;
 using System;
