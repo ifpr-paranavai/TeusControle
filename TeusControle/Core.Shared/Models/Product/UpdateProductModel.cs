@@ -6,7 +6,7 @@
     public class UpdateProductModel : CreateProductModel
     {
         /// <summary>
-        /// Id do usuário
+        /// Id do produto
         /// </summary>
         /// <example>123</example>
         public int Id { get; set; }
