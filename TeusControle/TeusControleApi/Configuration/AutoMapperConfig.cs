@@ -1,4 +1,5 @@
-﻿using Manager.Mapping;
+﻿using Manager.Mapping.Product;
+using Manager.Mapping.User;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace TeusControleApi.Configuration
@@ -7,7 +8,9 @@ namespace TeusControleApi.Configuration
     {
         public static void AddAutoMapperConfiguration(this IServiceCollection services)
         {
-            services.AddAutoMapper(typeof(CreateUserMappingProfile), typeof(UpdateUserMappingProfile), typeof(UserModelMappingProfile));
+            services.AddAutoMapper(
+                typeof(CreateUserMappingProfile), typeof(UpdateUserMappingProfile), typeof(UserModelMappingProfile),
+                typeof(CreateProductMappingProfile), typeof(UpdateProductMappingProfile), typeof(ProductModelMappingProfile));
         }
     }
 }

@@ -4,29 +4,26 @@ using Manager.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
 namespace TeusControleApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(Policy = "Admin")]
     public class UserController : ControllerBase
     {
         private readonly IUserManager usersManager;
-        private readonly ILogger<UserController> logger;
 
-        public UserController(IUserManager usersManager, ILogger<UserController> logger)
+        public UserController(IUserManager usersManager)
         {
             this.usersManager = usersManager;
-            this.logger = logger;
         }
 
         /// <summary>
         /// Retorna todos os usuários paginado.
         /// </summary>
-        [HttpGet] // todo: verifica como trazer objetos em url query params
+        [HttpGet]
         [ProducesResponseType(typeof(UserModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get([FromQuery] PaginatedRequest pagingParams)
@@ -67,7 +64,6 @@ namespace TeusControleApi.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Post([FromBody] CreateUserModel newUser)
         {
-            logger.LogInformation(" Objeto recebido {@newUser}", newUser);
             var createdUser = await usersManager.Insert(newUser); 
             if (createdUser == null)
             {

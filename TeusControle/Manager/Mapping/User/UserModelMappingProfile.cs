@@ -1,20 +1,17 @@
 ﻿using AutoMapper;
-using Core.Domain;
 using Core.Shared.Models.User;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Manager.Mapping
+
+namespace Manager.Mapping.User
 {
     public class UserModelMappingProfile : Profile
     {
         public UserModelMappingProfile()
         {
-            CreateMap<UserModel, User>()
+            CreateMap<UserModel, Core.Domain.User>()
                 .ForMember(d => d.BirthDate, o => o.MapFrom(x => x.BirthDate.Date));
 
-            CreateMap<User, UserModel>();
+            CreateMap<Core.Domain.User, UserModel>();
         }
     }
 }

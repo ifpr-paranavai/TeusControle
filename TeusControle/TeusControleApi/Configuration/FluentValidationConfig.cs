@@ -1,4 +1,5 @@
 ﻿using FluentValidation.AspNetCore;
+using Manager.Validator.Product;
 using Manager.Validator.User;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
@@ -23,6 +24,8 @@ namespace TeusControleApi.Configuration
                 .AddFluentValidation(p => {
                     p.RegisterValidatorsFromAssemblyContaining<CreateUserValidator>();
                     p.RegisterValidatorsFromAssemblyContaining<UpdateUserValidator>();
+                    p.RegisterValidatorsFromAssemblyContaining<CreateProductValidator>();
+                    p.RegisterValidatorsFromAssemblyContaining<UpdateProductValidator>();
                     p.ValidatorOptions.LanguageManager.Culture = new CultureInfo("pt-BR");
                 });
         }

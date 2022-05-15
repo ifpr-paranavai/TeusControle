@@ -7,6 +7,7 @@ namespace Data.Context
     public class MyContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         public MyContext()
         {
@@ -22,6 +23,7 @@ namespace Data.Context
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductConfiguration());
         }
     }
 }

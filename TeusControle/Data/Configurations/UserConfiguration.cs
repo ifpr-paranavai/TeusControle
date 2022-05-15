@@ -10,6 +10,8 @@ namespace Data.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
+            builder.ToTable("users");
+
             builder.Property(p => p.Name).HasMaxLength(200).IsRequired();
 
             builder.HasMany(p => p.CreatedUsers)

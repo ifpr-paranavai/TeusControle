@@ -79,6 +79,33 @@
             2 - Descendente
             </summary>
         </member>
+        <member name="T:Core.Shared.Models.Product.CreateProductModel">
+            <summary>
+            Objeto para criação de um novo produto
+            </summary>
+        </member>
+        <member name="T:Core.Shared.Models.Product.ProductModel">
+            <summary>
+            Objeto de retorno de produto
+            </summary>
+        </member>
+        <member name="T:Core.Shared.Models.Product.UpdateProductModel">
+            <summary>
+            Objeto para alteração de um produto
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Product.UpdateProductModel.Id">
+            <summary>
+            Id do usuário
+            </summary>
+            <example>123</example>
+        </member>
+        <member name="P:Core.Shared.Models.Product.UpdateProductModel.Active">
+            <summary>
+            Status do registro
+            </summary>
+            <example>true</example>
+        </member>
         <member name="P:Core.Shared.Models.Request.FilterParamsRequest.ColumnName">
             <summary>
             Nome da coluna a ser filtrada

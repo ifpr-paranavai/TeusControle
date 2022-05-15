@@ -10,9 +10,38 @@
             </summary>
             <param name="login"></param>
         </member>
+        <member name="M:TeusControleApi.Controllers.ProductController.Get(Core.Shared.Models.Request.PaginatedRequest)">
+            <summary>
+            Retorna todos os produtos paginado.
+            </summary>
+        </member>
+        <member name="M:TeusControleApi.Controllers.ProductController.Get(System.Int32)">
+            <summary>
+            Retorna um produto buscado pelo id.
+            </summary>
+            <param name="id" example="123">Id do produto.</param>
+        </member>
+        <member name="M:TeusControleApi.Controllers.ProductController.Post(Core.Shared.Models.Product.CreateProductModel)">
+            <summary>
+            Insere um novo produto.
+            </summary>
+            <param name="newProduct"></param>
+        </member>
+        <member name="M:TeusControleApi.Controllers.ProductController.Put(Core.Shared.Models.Product.UpdateProductModel)">
+            <summary>
+            Altera um produto.
+            </summary>
+            <param name="product"></param>
+        </member>
+        <member name="M:TeusControleApi.Controllers.ProductController.Delete(System.Int32)">
+            <summary>
+            Exclui um produto por id.
+            </summary>
+            <param name="id" example="123">Id do usuário.</param>
+        </member>
         <member name="M:TeusControleApi.Controllers.UserController.Get(Core.Shared.Models.Request.PaginatedRequest)">
             <summary>
-            Retorna todos os usuários paginados.
+            Retorna todos os usuários paginado.
             </summary>
         </member>
         <member name="M:TeusControleApi.Controllers.UserController.Get(System.Int32)">

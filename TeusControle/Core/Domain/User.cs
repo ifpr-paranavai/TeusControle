@@ -7,6 +7,12 @@ namespace Core.Domain
 {
     public class User : BaseEntity
     {
+        public User()
+        {
+            CreatedUsers = new HashSet<User>();
+            Products = new HashSet<Product>();
+        }
+
         public string Name { get; set; }
 
         public string CpfCnpj { get; set; }
@@ -25,13 +31,13 @@ namespace Core.Domain
 
         public ICollection<User> CreatedUsers { get; set; }
 
+        public ICollection<Product> Products { get; set; }
+
         // public ICollection<ProductEntries> ProductEntries { get; set; }
 
         // public ICollection<Disposals> Disposals { get; set; }
 
         // public ICollection<ProductDisposals> ProductDisposals { get; set; }
-
-        // public ICollection<Products> Products { get; set; }
 
         // public ICollection<Entries> Entries { get; set; }
     }
