@@ -1,7 +1,6 @@
 ﻿using Core.Domain.Base;
 using Core.Shared.Models.Request;
 using Core.Shared.Models.Responses;
-using FluentValidation;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
@@ -18,41 +17,26 @@ namespace Manager.Interfaces.Managers.Base
         /// <summary>
         /// Cria um novo registro
         /// </summary>
-        /// <typeparam name="TInputModel"></typeparam>
-        /// <typeparam name="TOutputModel"></typeparam>
-        /// <typeparam name="TValidator"></typeparam>
-        /// <param name="inputModel"></param>
-        /// <returns></returns>
-        Task<TOutputModel> AddAsync<TInputModel, TOutputModel, TValidator>(TInputModel inputModel)
-            where TValidator : AbstractValidator<TEntity>
-            where TInputModel : class
-            where TOutputModel : class;
-
-        /// <summary>
-        /// Cria um novo registro
-        /// </summary>
         /// <typeparam name="TOutputModel"></typeparam>
         /// <param name="inputModel"></param>
         /// <returns></returns>
-        public Task<TOutputModel> AddAsync<TOutputModel>(TEntity inputModel)
+        Task<TOutputModel> AddAsync<TOutputModel>(TEntity inputModel)
             where TOutputModel : class;
 
         /// <summary>
         /// Exclui fisicamente um registro a partir do id
         /// </summary>
         /// <param name="id"></param>
-        Task PhysicalDeleteAsync(long id);
+        Task PhysicalDeleteAsync(int id);
 
         /// <summary>
         /// Atualiza um registro
         /// </summary>
         /// <typeparam name="TInputModel"></typeparam>
         /// <typeparam name="TOutputModel"></typeparam>
-        /// <typeparam name="TValidator"></typeparam>
         /// <param name="inputModel"></param>
         /// <returns></returns>
-        Task<TOutputModel> UpdateAsync<TInputModel, TOutputModel, TValidator>(TInputModel inputModel)
-            where TValidator : AbstractValidator<TEntity>
+        Task<TOutputModel> UpdateAsync<TInputModel, TOutputModel>(TInputModel inputModel)
             where TInputModel : class
             where TOutputModel : class;
 
@@ -104,8 +88,12 @@ namespace Manager.Interfaces.Managers.Base
         /// Busca páginada com parâmetros
         /// </summary>
         /// <param name="pagingParams"></param>
+        /// <param name="selector"></param>
         /// <returns></returns>
-        Task<PaginatedResponse<Object>> GetPagedAsync(PaginatedRequest pagingParams, Func<TEntity, Object> selector);
+        Task<PaginatedResponse<Object>> GetPagedAsync(
+            PaginatedRequest pagingParams, 
+            Func<TEntity, Object> selector
+        );
         
         /// <summary>
         /// Exclusão lógica

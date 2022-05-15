@@ -1,5 +1,4 @@
-﻿using Core.Domain;
-using Core.Shared.Models.Request;
+﻿using Core.Shared.Models.Request;
 using Manager.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -32,7 +31,6 @@ namespace TeusControleApi.Controllers
                 return Ok(token);
             }
             return Unauthorized();
-            
         }
     }
 }

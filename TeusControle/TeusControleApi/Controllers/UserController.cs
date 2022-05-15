@@ -1,11 +1,10 @@
-﻿using Core.Domain;
+﻿using Core.Shared.Models.Request;
 using Core.Shared.Models.User;
 using Manager.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SerilogTimings;
 using System.Threading.Tasks;
 
 namespace TeusControleApi.Controllers
@@ -25,27 +24,38 @@ namespace TeusControleApi.Controllers
         }
 
         /// <summary>
-        /// Retorna todos os usuários.
+        /// Retorna todos os usuários paginado.
         /// </summary>
-        [HttpGet]
-        [ProducesResponseType(typeof(User), StatusCodes.Status200OK)]
+        [HttpGet] // todo: verifica como trazer objetos em url query params
+        [ProducesResponseType(typeof(UserModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery] PaginatedRequest pagingParams)
         {
-            return Ok(await usersManager.GetUsersAsync());
-        }
+            var paged = await usersManager.GetPaged(pagingParams);
+            if (paged == null)
+            {
+                return Problem("Não foi possivel buscar usuários.");
+            }
 
+            return Ok(paged);
+        }
+         
         /// <summary>
         /// Retorna um usuário buscado pelo id.
         /// </summary>
         /// <param name="id" example="123">Id do usuário.</param>
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(User), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(UserModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get(int id)
         {
-            return Ok(await usersManager.GetUserAsync(id));
+            var user = await usersManager.GetById(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
         }
 
         /// <summary>
@@ -53,18 +63,17 @@ namespace TeusControleApi.Controllers
         /// </summary>
         /// <param name="newUser"></param>
         [HttpPost]
-        [ProducesResponseType(typeof(User), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(UserModel), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Post([FromBody] CreateUserModel newUser)
         {
-            logger.LogInformation("Objeto recebido {@newUser}", newUser);
-            User createdUser;
-            using (Operation.Time("Tempo de adição de um novo usuário."))
+            logger.LogInformation(" Objeto recebido {@newUser}", newUser);
+            var createdUser = await usersManager.Insert(newUser); 
+            if (createdUser == null)
             {
-                logger.LogInformation("Foi requisitada a inserção de um novo usuário.");
-                createdUser = await usersManager.InsertUserAsync(newUser);
+                return Problem("Não foi possivel cadastrar usuário.");
             }
-           
+
             return CreatedAtAction(nameof(Get), new { id = createdUser.Id }, createdUser);
         }
 
@@ -73,12 +82,12 @@ namespace TeusControleApi.Controllers
         /// </summary>
         /// <param name="user"></param>
         [HttpPut]
-        [ProducesResponseType(typeof(User), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(UserModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Put([FromBody] UpdateUserModel user)
         {
-            var updatedUser = await usersManager.UpdateUserAsync(user);
+            var updatedUser = await usersManager.Update(user);
             if (updatedUser == null)
             {
                 return NotFound();
@@ -90,13 +99,13 @@ namespace TeusControleApi.Controllers
         /// Exclui um usuário por id.
         /// </summary>
         /// <param name="id" example="123">Id do usuário.</param>
-        [ProducesResponseType(typeof(User), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(UserModel), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            await usersManager.DeleteUserAsync(id);
+            await usersManager.DeleteById(id);
             return NoContent();
         }
     }

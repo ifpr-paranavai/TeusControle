@@ -7,7 +7,7 @@ namespace TeusControleApi.Configuration
     {
         public static void AddAutoMapperConfiguration(this IServiceCollection services)
         {
-            services.AddAutoMapper(typeof(CreateUserMappingProfile), typeof(UpdateUserMappingProfile));
+            services.AddAutoMapper(typeof(CreateUserMappingProfile), typeof(UpdateUserMappingProfile), typeof(UserModelMappingProfile));
         }
     }
 }

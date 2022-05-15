@@ -14,8 +14,8 @@ namespace Core.Domain.Base
 
         public DateTime? LastChange { get; set; }
 
-        public int CreatedBy { get; set; }
+        public int? CreatedBy { get; set; }
 
-        public User CreatedByUser { get; set; }
+        public virtual User CreatedByUser { get; set; }
     }
 }

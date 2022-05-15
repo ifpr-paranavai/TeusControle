@@ -4,7 +4,9 @@
     "\\Core",
     "\\Core.Shared",
     "\\Data",
-    "\\Data\\Repository"
+    "\\Data\\Repository",
+    "\\Manager"
   ],
+  "SelectedNode": "\\TeusControle.sln",
   "PreviewInSolutionExplorer": false
 }

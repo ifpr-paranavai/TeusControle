@@ -9,7 +9,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-
 namespace Manager.Implementation.Base
 {
     /// <summary>
@@ -43,7 +42,7 @@ namespace Manager.Implementation.Base
         /// <param name="pageNumber"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        protected int CalcStartRow(int pageNumber, int pageSize)
+        public int CalcStartRow(int pageNumber, int pageSize)
         {
             var startRow = (pageNumber - 1) * pageSize;
             if (startRow < 0)

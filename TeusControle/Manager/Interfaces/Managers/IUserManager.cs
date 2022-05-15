@@ -1,23 +1,18 @@
 ﻿using Core.Domain;
 using Core.Shared.Models.Request;
 using Core.Shared.Models.User;
-using System.Collections.Generic;
+using Manager.Interfaces.Managers.Base;
 using System.Threading.Tasks;
 
 namespace Manager.Interfaces
 {
-    public interface IUserManager
+    public interface IUserManager : IBaseManager<User>
     {
-        Task<User> GetUserAsync(int id);
-
-        Task<IEnumerable<User>> GetUsersAsync();
-
-        Task<User> InsertUserAsync(CreateUserModel newuUser);
-
-        Task<User> UpdateUserAsync(UpdateUserModel updatedUser);
-
-        Task DeleteUserAsync(int id);
-
+        Task DeleteById(int id);
+        Task<object> GetById(long id);
+        Task<object> GetPaged(PaginatedRequest pagingParams);
+        Task<UserModel> Insert(CreateUserModel newUser);
+        Task<UserModel> Update(UpdateUserModel updatedUser);
         Task<string> ValidatePasswordGenerateTokenAsync(LoginRequest login);
     }
 }

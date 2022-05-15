@@ -19,7 +19,7 @@
     "TeusControleApi": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "teuscontrole",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

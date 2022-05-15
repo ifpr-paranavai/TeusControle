@@ -10,9 +10,9 @@
             </summary>
             <param name="login"></param>
         </member>
-        <member name="M:TeusControleApi.Controllers.UserController.Get">
+        <member name="M:TeusControleApi.Controllers.UserController.Get(Core.Shared.Models.Request.PaginatedRequest)">
             <summary>
-            Retorna todos os usuários.
+            Retorna todos os usuários paginados.
             </summary>
         </member>
         <member name="M:TeusControleApi.Controllers.UserController.Get(System.Int32)">

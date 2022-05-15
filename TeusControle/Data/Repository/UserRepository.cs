@@ -5,62 +5,17 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using Manager.Interfaces.Repositories;
+using Data.Repository.Base;
 
 namespace Data.Repository
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : BaseRepository<User>, IUserRepository 
     {
         private readonly MyContext myContext;
 
-        public UserRepository(MyContext context)
+        public UserRepository(MyContext context) : base(context)
         {
             this.myContext = context;
-        }
-
-        public async Task<IEnumerable<User>> GetUsersAsync()
-        {
-            return await myContext.Users.AsNoTracking()
-                .ToListAsync();
-        }
-
-        public async Task<User> GetUserAsync(int id)
-        {
-            return await myContext.Users.FindAsync(id);
-        }
-
-        public async Task<User> GetUserByEmailAsync(string email)
-        {
-            return await myContext.Users.Where(p => p.Email == email).FirstOrDefaultAsync();
-        }
-
-        public async Task<User> InsertUserAsync(User user)
-        {
-            user.CreatedBy = 1; // TODO: buscar do usuario logado
-            await myContext.Users.AddAsync(user);
-            await myContext.SaveChangesAsync();
-
-            return user;
-        }
-
-        public async Task<User> UpdateUserAsync(User user)
-        {
-            var dbUser = await GetUserAsync(user.Id);
-            if (dbUser == null)
-            {
-                return null;
-            }
-
-            myContext.Entry(dbUser).CurrentValues.SetValues(user);
-            await myContext.SaveChangesAsync();
-
-            return dbUser;
-        }
-
-        public async Task DeleteUserAsync(int id)
-        {
-            var dbUser = await GetUserAsync(id);
-            myContext.Users.Remove(dbUser);
-            await myContext.SaveChangesAsync();
         }
     }
 }

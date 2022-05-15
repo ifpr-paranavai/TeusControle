@@ -40,24 +40,13 @@ namespace Manager.Implementation.Base
         /// <typeparam name="TValidator"></typeparam>
         /// <param name="inputModel"></param>
         /// <returns></returns>
-        public async virtual Task<TOutputModel> AddAsync<TInputModel, TOutputModel, TValidator>(TInputModel inputModel)
-            where TValidator : AbstractValidator<TEntity>
+        public async virtual Task<TOutputModel> AddAsync<TInputModel, TOutputModel>(TInputModel inputModel)
             where TInputModel : class
             where TOutputModel : class
         {
             TEntity entity = _mapper.Map<TEntity>(inputModel);
 
-            entity.CreatedBy = int.Parse(_httpContextAccessor
-                .HttpContext.User.FindFirst(
-                    CustomClaimTypes.Id
-                )
-                .Value
-            );
-            await _baseRepository.InsertAsync(entity);
-
-            TOutputModel outputModel = _mapper.Map<TOutputModel>(entity);
-
-            return outputModel;
+            return await AddAsync<TOutputModel>(entity);
         }
 
         /// <summary>
@@ -86,7 +75,7 @@ namespace Manager.Implementation.Base
         /// Exclui fisicamente um registro a partir do id
         /// </summary>
         /// <param name="id"></param>
-        public async Task PhysicalDeleteAsync(long id) => await _baseRepository.PhysicalDeleteAsync((int)id);
+        public async Task PhysicalDeleteAsync(int id) => await _baseRepository.PhysicalDeleteAsync(id);
 
         /// <summary>
         /// Exclui logicamente um registro a partir do id
@@ -117,22 +106,33 @@ namespace Manager.Implementation.Base
         /// <typeparam name="TValidator"></typeparam>
         /// <param name="inputModel"></param>
         /// <returns></returns>
-        public async Task<TOutputModel> UpdateAsync<TInputModel, TOutputModel, TValidator>(TInputModel inputModel)
-            where TValidator : AbstractValidator<TEntity>
+        public async Task<TOutputModel> UpdateAsync<TInputModel, TOutputModel>(TInputModel inputModel)
             where TInputModel : class
             where TOutputModel : class
         {
             TEntity entity = _mapper.Map<TEntity>(inputModel);
 
-            entity.CreatedBy = int.Parse(_httpContextAccessor
+            return await UpdateAsync<TOutputModel>(entity);
+        }
+
+        /// <summary>
+        /// Atualiza um registro
+        /// </summary>
+        /// <typeparam name="TOutputModel"></typeparam>
+        /// <param name="inputModel"></param>
+        /// <returns></returns>
+        public async Task<TOutputModel> UpdateAsync<TOutputModel>(TEntity inputModel)
+            where TOutputModel : class
+        {
+            inputModel.CreatedBy = int.Parse(_httpContextAccessor
                 .HttpContext.User.FindFirst(
                     CustomClaimTypes.Id
                 )
                 .Value
             );
-            await _baseRepository.UpdateAsync(entity);
+            await _baseRepository.UpdateAsync(inputModel);
 
-            TOutputModel outputModel = _mapper.Map<TOutputModel>(entity);
+            TOutputModel outputModel = _mapper.Map<TOutputModel>(inputModel);
 
             return outputModel;
         }
