@@ -37,7 +37,7 @@
             <summary>
             Exclui um produto por id.
             </summary>
-            <param name="id" example="123">Id do usuário.</param>
+            <param name="id" example="123">Id do produto.</param>
         </member>
         <member name="M:TeusControleApi.Controllers.UserController.Get(Core.Shared.Models.Request.PaginatedRequest)">
             <summary>

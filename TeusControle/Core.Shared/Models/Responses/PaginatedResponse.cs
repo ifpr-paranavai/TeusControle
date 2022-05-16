@@ -6,12 +6,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Core.Shared.Models.Responses
 {
-    public class PaginatedResponse<T>
+    public class PaginatedResponse<T> : ICloneable where T : ICloneable
     {
+        public PaginatedResponse()
+        {
+
+        }
         /// <summary>
         /// Informações
         /// </summary>
@@ -69,13 +72,13 @@ namespace Core.Shared.Models.Responses
         }
 
         /// <summary>
-        /// Cria busca assíncrona
+        /// Cria busca
         /// </summary>
         /// <param name="source"></param>
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public static async Task<PaginatedResponse<T>> CreateAsync(
+        public static PaginatedResponse<T> Create(
             IList<T> source, 
             int pageIndex,
             int pageSize
@@ -92,6 +95,20 @@ namespace Core.Shared.Models.Responses
                 pageIndex, 
                 pageSize
             );
+        }
+
+        public object Clone()
+        {
+            var paginated = (PaginatedResponse<T>)MemberwiseClone();
+            var t = new List<T>();
+            paginated.Data.ToList().ForEach(p => t.Add((T)p.Clone()));
+            paginated.Data = t;
+            return paginated;
+        }
+
+        public PaginatedResponse<T> CloneTyped()
+        {
+            return (PaginatedResponse<T>)Clone();
         }
     }
 }

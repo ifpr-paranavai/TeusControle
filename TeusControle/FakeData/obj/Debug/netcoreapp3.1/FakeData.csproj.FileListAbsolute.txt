@@ -1,0 +1,13 @@
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\FakeData\bin\Debug\netcoreapp3.1\FakeData.deps.json
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\FakeData\bin\Debug\netcoreapp3.1\FakeData.dll
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\FakeData\bin\Debug\netcoreapp3.1\FakeData.pdb
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\FakeData\obj\Debug\netcoreapp3.1\FakeData.csproj.AssemblyReference.cache
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\FakeData\obj\Debug\netcoreapp3.1\FakeData.AssemblyInfoInputs.cache
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\FakeData\obj\Debug\netcoreapp3.1\FakeData.AssemblyInfo.cs
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\FakeData\obj\Debug\netcoreapp3.1\FakeData.csproj.CoreCompileInputs.cache
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\FakeData\obj\Debug\netcoreapp3.1\FakeData.dll
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\FakeData\obj\Debug\netcoreapp3.1\FakeData.pdb
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\FakeData\bin\Debug\netcoreapp3.1\Core.Shared.dll
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\FakeData\bin\Debug\netcoreapp3.1\Core.Shared.pdb
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\FakeData\bin\Debug\netcoreapp3.1\Core.Shared.xml
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\FakeData\obj\Debug\netcoreapp3.1\FakeData.csproj.CopyComplete

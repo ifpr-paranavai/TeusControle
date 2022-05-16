@@ -154,47 +154,100 @@
             <summary>
             Altura
             </summary>
-            
+            <example>10.05</example>
         </member>
         <member name="P:Core.Shared.Models.Product.CreateProductModel.Lenght">
             <summary>
             Comprimento
             </summary>
+            <example>10.05</example>
         </member>
         <member name="P:Core.Shared.Models.Product.CreateProductModel.Width">
             <summary>
             Largura
             </summary>
+            <example>10.05</example>
         </member>
         <member name="P:Core.Shared.Models.Product.CreateProductModel.NcmCode">
             <summary>
             Código NCM
             Definem as alíquotas de impostos no comércio exterior e de diversos tributos internos
             </summary>
+            <example>83052000</example>
         </member>
         <member name="P:Core.Shared.Models.Product.CreateProductModel.NcmDescription">
             <summary>
             Descrição do NCM
             </summary>
+            <example>Grampos apresentados em barretas</example>
         </member>
         <member name="P:Core.Shared.Models.Product.CreateProductModel.NcmFullDescription">
             <summary>
             Descrição completa do NCM
             </summary>
+            <example>Obras diversas de metais comuns - Ferragens para encadernação de folhas 
+            móveis ou para classificadores, molas para papéis, cantos para cartas, clipes...</example>
         </member>
         <member name="P:Core.Shared.Models.Product.CreateProductModel.Thumbnail">
             <summary>
             Imagem do produto
             </summary>
+            <example>https://ciclovivo.com.br/wp-content/uploads/2018/10/iStock-536613027-696x464.jpg</example>
         </member>
         <member name="P:Core.Shared.Models.Product.CreateProductModel.InStock">
             <summary>
             Quantidade em estoque
             </summary>
+            <example>10</example>
         </member>
         <member name="T:Core.Shared.Models.Product.ProductModel">
             <summary>
             Objeto de retorno de produto
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Product.ProductModel.CreatedDate">
+            <summary>
+            Data e hora de criação do registro
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Product.ProductModel.LastChange">
+            <summary>
+            Data e hora da última atualização do registro
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Product.ProductPagedModel.Id">
+            <summary>
+            Identificador
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Product.ProductPagedModel.Description">
+            <summary>
+            Descrição
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Product.ProductPagedModel.Gtin">
+            <summary>
+            Código de barras
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Product.ProductPagedModel.BrandName">
+            <summary>
+            Marca
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Product.ProductPagedModel.Price">
+            <summary>
+            Preço
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Product.ProductPagedModel.Thumbnail">
+            <summary>
+            Imagem do produto
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Product.ProductPagedModel.Active">
+            <summary>
+            Status
             </summary>
         </member>
         <member name="T:Core.Shared.Models.Product.UpdateProductModel">
@@ -204,7 +257,7 @@
         </member>
         <member name="P:Core.Shared.Models.Product.UpdateProductModel.Id">
             <summary>
-            Id do usuário
+            Id do produto
             </summary>
             <example>123</example>
         </member>
@@ -331,9 +384,9 @@
             Tem próxima página?
             </summary>
         </member>
-        <member name="M:Core.Shared.Models.Responses.PaginatedResponse`1.CreateAsync(System.Collections.Generic.IList{`0},System.Int32,System.Int32)">
+        <member name="M:Core.Shared.Models.Responses.PaginatedResponse`1.Create(System.Collections.Generic.IList{`0},System.Int32,System.Int32)">
             <summary>
-            Cria busca assíncrona
+            Cria busca
             </summary>
             <param name="source"></param>
             <param name="pageIndex"></param>
@@ -412,6 +465,41 @@
         <member name="T:Core.Shared.Models.User.UserModel">
             <summary>
             Objeto de retorno de usuário
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.User.UserModel.CreatedDate">
+            <summary>
+            Data e hora de criação do registro
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.User.UserModel.LastChange">
+            <summary>
+            Data e hora da última atualização do registro
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.User.UserPagedModel.Id">
+            <summary>
+            Identificador
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.User.UserPagedModel.Name">
+            <summary>
+            Nome
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.User.UserPagedModel.CpfCnpj">
+            <summary>
+            Cpf ou Cnpj
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.User.UserPagedModel.Email">
+            <summary>
+            E-mail
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.User.UserPagedModel.BirthDate">
+            <summary>
+            Data de nascimento
             </summary>
         </member>
     </members>

@@ -94,7 +94,7 @@ namespace Manager.Implementation.Base
         /// <param name="pagingParams"></param>
         /// <author>Sabyasachi Senapati</author>
         /// <returns></returns>
-        public async Task<PaginatedResponse<TEntity>> GetPagedAsync(PaginatedRequest pagingParams)
+        public PaginatedResponse<TEntity> GetPaged(PaginatedRequest pagingParams)
         {
             var data = _baseRepository.Query(x => !x.Deleted).ToList();
 
@@ -126,7 +126,7 @@ namespace Manager.Implementation.Base
             #endregion
 
             #region [Paging]  
-            return await PaginatedResponse<TEntity>.CreateAsync(
+            return PaginatedResponse<TEntity>.Create(
                 data,
                 pagingParams.PageNumber,
                 pagingParams.PageSize

@@ -81,7 +81,7 @@ namespace Manager.Implementation.Base
         /// Exclui logicamente um registro a partir do id
         /// </summary>
         /// <param name="id"></param>
-        public async Task LogicalDeleteAsync(int id)
+        public async Task<TOutputModel> LogicalDeleteAsync<TOutputModel>(int id)
         {
             if (!await _baseRepository.AnyAsync(x => 
                 x.Id == id && 
@@ -96,6 +96,9 @@ namespace Manager.Implementation.Base
             };
 
             await _baseRepository.UpdateFieldsAsync(entity, b => b.Deleted);
+
+            TOutputModel outputModel = _mapper.Map<TOutputModel>(entity);
+            return outputModel;
         }
 
         /// <summary>

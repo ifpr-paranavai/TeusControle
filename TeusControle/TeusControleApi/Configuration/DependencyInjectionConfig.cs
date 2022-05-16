@@ -16,10 +16,12 @@ namespace TeusControleApi.Configuration
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddScoped(typeof(IBaseDoubleRepository<>), typeof(BaseDoubleRepository<>));
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
             #endregion
 
             #region [Manager]
             services.AddScoped<IUserManager, UserManager>();
+            services.AddScoped<IProductManager, ProductManager>();
             #endregion
         }
     }

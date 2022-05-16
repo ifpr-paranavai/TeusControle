@@ -12,7 +12,7 @@ namespace Manager.Interfaces.Managers.Base
     /// Interface da classe genérica dos serviços. Declaração dos métodos para CRUD.
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public interface IBaseManager<TEntity> where TEntity : BaseEntity
+    public interface IBaseManager<TEntity> where TEntity : BaseEntity, new()
     {
         /// <summary>
         /// Cria um novo registro
@@ -90,24 +90,24 @@ namespace Manager.Interfaces.Managers.Base
         /// <param name="pagingParams"></param>
         /// <param name="selector"></param>
         /// <returns></returns>
-        Task<PaginatedResponse<Object>> GetPagedAsync(
-            PaginatedRequest pagingParams, 
-            Func<TEntity, Object> selector
-        );
-        
+        PaginatedResponse<TOutputModel> GetPaged<TOutputModel>(
+            PaginatedRequest pagingParams,
+            Func<TEntity, TOutputModel> selector
+        ) where TOutputModel : ICloneable;
+
         /// <summary>
         /// Exclusão lógica
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task LogicalDeleteAsync(int id);
+        Task<TOutputModel> LogicalDeleteAsync<TOutputModel>(int id);
 
         /// <summary>
         /// Busca páginada com parâmetros
         /// </summary>
         /// <param name="pagingParams"></param>
         /// <returns></returns>
-        Task<PaginatedResponse<TEntity>> GetPagedAsync(PaginatedRequest pagingParams);
+        PaginatedResponse<TEntity> GetPaged(PaginatedRequest pagingParams);
 
         /* /// <summary>
          /// Busca páginada com parâmetros

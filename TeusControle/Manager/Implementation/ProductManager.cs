@@ -2,6 +2,7 @@
 using Core.Domain;
 using Core.Shared.Models.Product;
 using Core.Shared.Models.Request;
+using Core.Shared.Models.Responses;
 using Manager.Implementation.Base;
 using Manager.Interfaces;
 using Manager.Interfaces.Repositories;
@@ -55,19 +56,21 @@ namespace Manager.Implementation
             return null;
         }
 
-        public async Task DeleteById(int id)
+        public async Task<ProductModel> DeleteById(int id)
         {
             try
             {
-                await LogicalDeleteAsync(id);
+                var product = await LogicalDeleteAsync<ProductModel>(id);
+                return product;
             }
             catch (Exception ex)
             {
                 logger.LogError("ERRO AO EXCLUIR PRODUTO COM ID: {@id}", id, ex);
+                return null;
             }
         }
 
-        public async Task<object> GetById(long id)
+        public async Task<ProductModel> GetById(long id)
         {
             try
             {
@@ -79,29 +82,30 @@ namespace Manager.Implementation
                     throw new Exception("Registro não encontrado.");
 
                 var data = Query(x => x.Id == id)
-                    .Select(s => new
+                    .Select(s => new ProductModel
                     {
-                        s.Id,
-                        s.Description,
-                        s.Gtin,
-                        s.NcmCode,
-                        s.NcmDescription,
-                        s.NcmFullDescription,
-                        s.GpcCode,
-                        s.GpcDescription,
-                        s.GrossWeight,
-                        s.Height,
-                        s.Lenght,
-                        s.Width,
-                        s.BrandName,
-                        s.BrandPicture,
-                        s.InStock,
-                        s.MaxPrice,
-                        s.Price,
-                        s.AvgPrice,
-                        s.Thumbnail,
-                        s.Active,
-                        s.CreatedDate
+                        Id = s.Id,
+                        Description = s.Description,
+                        Gtin = s.Gtin,
+                        NcmCode = s.NcmCode,
+                        NcmDescription = s.NcmDescription,
+                        NcmFullDescription = s.NcmFullDescription,
+                        GpcCode = s.GpcCode,
+                        GpcDescription =s.GpcDescription,
+                        GrossWeight = s.GrossWeight,
+                        Height = s.Height,
+                        Lenght = s.Lenght,
+                        Width = s.Width,
+                        BrandName = s.BrandName,
+                        BrandPicture = s.BrandPicture,
+                        InStock = s.InStock,
+                        MaxPrice = s.MaxPrice,
+                        Price = s.Price,
+                        AvgPrice = s.AvgPrice,
+                        Thumbnail = s.Thumbnail,
+                        Active = s.Active,
+                        CreatedDate = s.CreatedDate,
+                        LastChange = s.LastChange
                     })
                     .FirstOrDefault();
 
@@ -114,34 +118,21 @@ namespace Manager.Implementation
             return null;
         }
 
-        public async Task<object> GetPaged(PaginatedRequest pagingParams)
+        public new PaginatedResponse<ProductPagedModel> GetPaged(PaginatedRequest pagingParams)
         {
             try
             {
-                var paginatedUsers = await GetPagedAsync(
+                var paginatedUsers = GetPaged(
                     pagingParams,
-                    x => new {
-                        x.Id,
-                        x.Description,
-                        x.Gtin,
-                        x.NcmCode,
-                        x.NcmDescription,
-                        x.NcmFullDescription,
-                        x.GpcCode,
-                        x.GpcDescription,
-                        x.GrossWeight,
-                        x.Height,
-                        x.Lenght,
-                        x.Width,
-                        x.BrandName,
-                        x.BrandPicture,
-                        x.InStock,
-                        x.MaxPrice,
-                        x.Price,
-                        x.AvgPrice,
-                        x.Thumbnail,
-                        x.Active,
-                        x.CreatedDate
+                    x => new ProductPagedModel {
+                        Id = x.Id,
+                        Description = x.Description,
+                        Gtin = x.Gtin,
+                        BrandName = x.BrandName,
+                        InStock = x.InStock.ToString(),
+                        Price = x.Price,
+                        Thumbnail = x.Thumbnail,
+                        Active = x.Active
                     }
                 );
 

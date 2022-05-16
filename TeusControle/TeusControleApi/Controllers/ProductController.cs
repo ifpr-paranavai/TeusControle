@@ -1,6 +1,6 @@
 ﻿using Core.Shared.Models.Product;
 using Core.Shared.Models.Request;
-using Core.Shared.Models.User;
+using Core.Shared.Models.Responses;
 using Manager.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -11,7 +11,7 @@ namespace TeusControleApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Policy = "Admin")]
+    [Authorize]
     public class ProductController : ControllerBase
     {
         private readonly IProductManager productManager;
@@ -25,11 +25,11 @@ namespace TeusControleApi.Controllers
         /// Retorna todos os produtos paginado.
         /// </summary>
         [HttpGet]
-        [ProducesResponseType(typeof(UserModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(PaginatedResponse<ProductPagedModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Get([FromQuery] PaginatedRequest pagingParams)
+        public IActionResult Get([FromQuery] PaginatedRequest pagingParams)
         {
-            var paged = await productManager.GetPaged(pagingParams);
+            var paged = productManager.GetPaged(pagingParams);
             if (paged == null)
             {
                 return Problem("Não foi possivel buscar produtos.");
@@ -43,7 +43,7 @@ namespace TeusControleApi.Controllers
         /// </summary>
         /// <param name="id" example="123">Id do produto.</param>
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(UserModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProductModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get(int id)
@@ -61,7 +61,7 @@ namespace TeusControleApi.Controllers
         /// </summary>
         /// <param name="newProduct"></param>
         [HttpPost]
-        [ProducesResponseType(typeof(UserModel), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ProductModel), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Post([FromBody] CreateProductModel newProduct)
         {
@@ -79,7 +79,7 @@ namespace TeusControleApi.Controllers
         /// </summary>
         /// <param name="product"></param>
         [HttpPut]
-        [ProducesResponseType(typeof(UserModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProductModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Put([FromBody] UpdateProductModel product)
@@ -95,14 +95,19 @@ namespace TeusControleApi.Controllers
         /// <summary>
         /// Exclui um produto por id.
         /// </summary>
-        /// <param name="id" example="123">Id do usuário.</param>
-        [ProducesResponseType(typeof(UserModel), StatusCodes.Status204NoContent)]
+        /// <param name="id" example="123">Id do produto.</param>
+        [ProducesResponseType(typeof(ProductModel), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            await productManager.DeleteById(id);
+            
+            var product = await productManager.DeleteById(id);
+            if (product == null)
+            {
+                return Problem("Não foi possível excluir produto.");
+            }
             return NoContent();
         }
     }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Core.Domain;
 using Core.Shared.Models.Request;
+using Core.Shared.Models.Responses;
 using Core.Shared.Models.User;
 using Manager.Implementation.Base;
 using Manager.Interfaces;
@@ -43,7 +44,7 @@ namespace Manager.Implementation
                 ConvertPasswordToHash(user);
 
                 var data = await AddAsync<UserModel>(user);
-                data.Password = ""; // TODO: Remover senha do objeto de retorno
+                data.Password = "";
                 return data;
             }
             catch (Exception ex)
@@ -61,7 +62,7 @@ namespace Manager.Implementation
                 ConvertPasswordToHash(user);
 
                 var data = await UpdateAsync<UserModel>(user);
-                data.Password = ""; // TODO: Remover senha do objeto de retorno
+                data.Password = "";
                 return data;
             }
             catch (Exception ex)
@@ -71,19 +72,22 @@ namespace Manager.Implementation
             return null;
         }
 
-        public async Task DeleteById(int id)
+        public async Task<UserModel> DeleteById(int id)
         {
             try
             {
-                await LogicalDeleteAsync(id);
+                var user = await LogicalDeleteAsync<UserModel>(id);
+                user.Password = "";
+                return user;
             }
             catch (Exception ex)
             {
                 logger.LogError("ERRO AO EXCLUIR USUÁRIO COM ID: {@id}", id, ex);
+                return null;
             }
         }
 
-        public async Task<object> GetById(long id)
+        public virtual async Task<UserModel> GetById(long id)
         {
             try
             {
@@ -95,18 +99,19 @@ namespace Manager.Implementation
                     throw new Exception("Registro não encontrado.");
 
                 var data = Query(x => x.Id == id)
-                    .Select(s => new
+                    .Select(s => new UserModel
                     {
-                        s.Id,
-                        s.Name,
-                        s.CpfCnpj,
-                        s.DocumentType,
-                        s.ProfileImage,
-                        s.ProfileType,
-                        s.Email,
-                        s.Active,
-                        s.CreatedDate,
-                        s.BirthDate
+                        Id = s.Id,
+                        Name = s.Name,
+                        CpfCnpj = s.CpfCnpj,
+                        DocumentType = s.DocumentType,
+                        ProfileImage = s.ProfileImage,
+                        ProfileType = s.ProfileType,
+                        Email = s.Email,
+                        Active = s.Active,
+                        CreatedDate = s.CreatedDate,
+                        LastChange = s.LastChange,
+                        BirthDate = (DateTime)s.BirthDate
                     })
                     .FirstOrDefault();
 
@@ -119,17 +124,17 @@ namespace Manager.Implementation
             return null;
         }
 
-        public async Task<object> GetPaged(PaginatedRequest pagingParams)
+        public new PaginatedResponse<UserPagedModel> GetPaged(PaginatedRequest pagingParams)
         {
             try
             {
-                var paginatedUsers = await GetPagedAsync(
+                var paginatedUsers = GetPaged(
                     pagingParams,
-                    x => new {
-                        x.Id,
-                        x.Name,
-                        x.CpfCnpj,
-                        x.Email,
+                    x => new UserPagedModel {
+                        Id = x.Id,
+                        Name = x.Name,
+                        CpfCnpj = x.CpfCnpj,
+                        Email = x.Email,
                         BirthDate = x.BirthDate.Value.ToString("dd/MM/yyyy")
                     }
                 );

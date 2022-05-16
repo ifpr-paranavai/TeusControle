@@ -1,6 +1,5 @@
 ﻿using Core.Shared.Models.Product;
 using FluentValidation;
-using System;
 
 namespace Manager.Validator.Product
 {
@@ -8,7 +7,10 @@ namespace Manager.Validator.Product
     {
         public CreateProductValidator()
         {
-            
+            RuleFor(x => x.Description).NotNull().NotEmpty();
+            RuleFor(x => x.Gtin).NotNull().NotEmpty();
+            RuleFor(x => x.Price).NotNull().NotEmpty().GreaterThan(0);
+            RuleFor(x => x.InStock).NotNull().NotEmpty().GreaterThan(0);
         }
     }
 }

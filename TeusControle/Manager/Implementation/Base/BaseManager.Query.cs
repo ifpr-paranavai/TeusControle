@@ -98,7 +98,7 @@ namespace Manager.Implementation.Base
         /// <param name="pagingParams"></param>
         /// <author>Sabyasachi Senapati</author>
         /// <returns></returns>
-        public async Task<PaginatedResponse<TEntity>> GetPagedAsync(PaginatedRequest pagingParams)
+        public PaginatedResponse<TEntity> GetPaged(PaginatedRequest pagingParams)
         {
             var data = _baseRepository.Query(x => !x.Deleted)
                 .ToList();
@@ -122,7 +122,7 @@ namespace Manager.Implementation.Base
             #endregion
 
             #region [Paging]  
-            return await PaginatedResponse<TEntity>.CreateAsync(
+            return PaginatedResponse<TEntity>.Create(
                 data, 
                 pagingParams.PageNumber, 
                 pagingParams.PageSize
@@ -137,7 +137,10 @@ namespace Manager.Implementation.Base
         /// <param name="selector"></param>
         /// <author>Sabyasachi Senapati</author>
         /// <returns></returns>
-        public async Task<PaginatedResponse<Object>> GetPagedAsync(PaginatedRequest pagingParams, Func<TEntity, Object> selector)
+        public PaginatedResponse<TOutputModel> GetPaged<TOutputModel>(
+            PaginatedRequest pagingParams, 
+            Func<TEntity, TOutputModel> selector
+        ) where TOutputModel : ICloneable
         {
             var data = _baseRepository.Query(x => !x.Deleted)
                 .Select(selector)
@@ -146,7 +149,7 @@ namespace Manager.Implementation.Base
             #region [Filter]  
             if (pagingParams != null && pagingParams.FilterParams != null)
                 if (pagingParams.FilterParams.Any())
-                    data = Filter<Object>.FilteredData(
+                    data = Filter<TOutputModel>.FilteredData(
                         pagingParams.FilterParams,
                         data
                     ).ToList() ?? data;
@@ -155,14 +158,14 @@ namespace Manager.Implementation.Base
             #region [Sorting]  
             if (pagingParams != null && pagingParams.SortingParams != null)
                 if (pagingParams.SortingParams.Count() > 0)
-                    data = Sorting<Object>.SortData(
+                    data = Sorting<TOutputModel>.SortData(
                         data,
                         pagingParams.SortingParams
                     ).ToList();
             #endregion
 
             #region [Paging]  
-            return await PaginatedResponse<Object>.CreateAsync(
+            return PaginatedResponse<TOutputModel>.Create(
                 data,
                 pagingParams.PageNumber,
                 pagingParams.PageSize

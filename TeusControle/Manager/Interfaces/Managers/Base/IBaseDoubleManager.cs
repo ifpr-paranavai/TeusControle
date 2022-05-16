@@ -116,6 +116,6 @@ namespace Manager.Interfaces.Managers.Base
         /// </summary>
         /// <param name="pagingParams"></param>
         /// <returns></returns>
-        Task<PaginatedResponse<TEntity>> GetPagedAsync(PaginatedRequest pagingParams);
+        PaginatedResponse<TEntity> GetPaged(PaginatedRequest pagingParams);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Core.Shared.Models.Request;
+using Core.Shared.Models.Responses;
 using Core.Shared.Models.User;
 using Manager.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -10,7 +11,7 @@ namespace TeusControleApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Policy = "Admin")]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserManager usersManager;
@@ -24,16 +25,16 @@ namespace TeusControleApi.Controllers
         /// Retorna todos os usuários paginado.
         /// </summary>
         [HttpGet]
-        [ProducesResponseType(typeof(UserModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(PaginatedResponse<UserPagedModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Get([FromQuery] PaginatedRequest pagingParams)
+        public IActionResult Get([FromQuery] PaginatedRequest pagingParams)
         {
-            var paged = await usersManager.GetPaged(pagingParams);
+            var paged = usersManager.GetPaged(pagingParams);
             if (paged == null)
             {
-                return Problem("Não foi possivel buscar usuários.");
+                return NotFound("Não foi possível buscar usuários.");
             }
-
             return Ok(paged);
         }
          
@@ -50,7 +51,7 @@ namespace TeusControleApi.Controllers
             var user = await usersManager.GetById(id);
             if (user == null)
             {
-                return NotFound();
+                return NotFound("Não foi possível buscar usuário.");
             }
             return Ok(user);
         }
@@ -101,7 +102,11 @@ namespace TeusControleApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            await usersManager.DeleteById(id);
+            var user = await usersManager.DeleteById(id);
+            if (user == null)
+            {
+                return NotFound("Não foi possível excluir usuário.");
+            }
             return NoContent();
         }
     }

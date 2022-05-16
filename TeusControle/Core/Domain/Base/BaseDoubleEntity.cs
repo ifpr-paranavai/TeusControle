@@ -2,7 +2,7 @@
 
 namespace Core.Domain.Base
 {
-    public class BaseDoubleEntity
+    public class BaseDoubleEntity : ICloneable
     {
         public int Id { get; set; }
         
@@ -17,6 +17,11 @@ namespace Core.Domain.Base
         public DateTime? LastChange { get; set; }
 
         public int CreatedBy { get; set; }
+
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
 
         // public Users CreatedByUser { get; set; }
     }

@@ -2,7 +2,7 @@
 
 namespace Core.Domain.Base
 {
-    public class BaseEntity
+    public class BaseEntity : ICloneable
     {
         public int Id { get; set; }
 
@@ -17,5 +17,10 @@ namespace Core.Domain.Base
         public int? CreatedBy { get; set; }
 
         public virtual User CreatedByUser { get; set; }
+
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
     }
 }
