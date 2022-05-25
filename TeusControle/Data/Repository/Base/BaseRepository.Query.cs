@@ -26,7 +26,7 @@ namespace Data.Repository.Base
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<TEntity> SelectAsync(long id) =>
+        public async Task<TEntity> SelectAsync(int id) =>
             await _context.Set<TEntity>().FindAsync(id);
 
         /// <summary>

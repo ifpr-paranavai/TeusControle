@@ -2602,6 +2602,7 @@
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
           "Bogus": "34.0.2",
+          "Core": "1.0.0",
           "Core.Shared": "1.0.0"
         },
         "compile": {

@@ -87,7 +87,7 @@ namespace Manager.Implementation
             }
         }
 
-        public virtual async Task<UserModel> GetById(long id)
+        public virtual async Task<UserModel> GetById(int id)
         {
             try
             {

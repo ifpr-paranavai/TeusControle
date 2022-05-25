@@ -15,8 +15,6 @@ namespace Manager.Implementation.Base
     /// </summary>
     public abstract partial class BaseManager<TEntity> : IBaseManager<TEntity> where TEntity : BaseEntity, new()
     {
-
-
         /// <summary>
         /// Busca quantidade de registros a partir do filtro
         /// </summary>

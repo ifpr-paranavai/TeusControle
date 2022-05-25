@@ -43,7 +43,7 @@ namespace Data.Repository.Base
         /// Deleta um registro a partir do Id
         /// </summary>
         /// <param name="id"></param>
-        public async Task PhysicalDeleteAsync(long id)
+        public async Task PhysicalDeleteAsync(int id)
         {
             _context.Set<TEntity>().Remove(await SelectAsync(id));
             await _context.SaveChangesAsync();

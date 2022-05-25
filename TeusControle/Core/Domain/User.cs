@@ -33,6 +33,17 @@ namespace Core.Domain
 
         public ICollection<Product> Products { get; set; }
 
+        
+        public override object Clone()
+        {
+            return MemberwiseClone();
+        }
+
+        public User CloneTyped()
+        {
+            return (User)Clone();
+        }
+
         // public ICollection<ProductEntries> ProductEntries { get; set; }
 
         // public ICollection<Disposals> Disposals { get; set; }

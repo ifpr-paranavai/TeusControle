@@ -11,6 +11,19 @@
           "lib/netstandard2.0/Bogus.dll": {}
         }
       },
+      "Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Core.Shared": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Core.dll": {}
+        }
+      },
       "Core.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -43,6 +56,11 @@
         "lib/netstandard2.0/Bogus.xml"
       ]
     },
+    "Core/1.0.0": {
+      "type": "project",
+      "path": "../Core/Core.csproj",
+      "msbuildProject": "../Core/Core.csproj"
+    },
     "Core.Shared/1.0.0": {
       "type": "project",
       "path": "../Core.Shared/Core.Shared.csproj",
@@ -52,6 +70,7 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "Bogus >= 34.0.2",
+      "Core >= 1.0.0",
       "Core.Shared >= 1.0.0"
     ]
   },
@@ -89,6 +108,9 @@
           "projectReferences": {
             "D:\\Meus Docs\\Desktop\\4ano\\TCC\\TeusControle\\TeusControle\\Core.Shared\\Core.Shared.csproj": {
               "projectPath": "D:\\Meus Docs\\Desktop\\4ano\\TCC\\TeusControle\\TeusControle\\Core.Shared\\Core.Shared.csproj"
+            },
+            "D:\\Meus Docs\\Desktop\\4ano\\TCC\\TeusControle\\TeusControle\\Core\\Core.csproj": {
+              "projectPath": "D:\\Meus Docs\\Desktop\\4ano\\TCC\\TeusControle\\TeusControle\\Core\\Core.csproj"
             }
           }
         }

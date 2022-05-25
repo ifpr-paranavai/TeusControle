@@ -245,6 +245,9 @@
             "projectReferences": {
               "D:\\Meus Docs\\Desktop\\4ano\\TCC\\TeusControle\\TeusControle\\Core.Shared\\Core.Shared.csproj": {
                 "projectPath": "D:\\Meus Docs\\Desktop\\4ano\\TCC\\TeusControle\\TeusControle\\Core.Shared\\Core.Shared.csproj"
+              },
+              "D:\\Meus Docs\\Desktop\\4ano\\TCC\\TeusControle\\TeusControle\\Core\\Core.csproj": {
+                "projectPath": "D:\\Meus Docs\\Desktop\\4ano\\TCC\\TeusControle\\TeusControle\\Core\\Core.csproj"
               }
             }
           }

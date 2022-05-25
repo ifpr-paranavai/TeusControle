@@ -11,7 +11,7 @@ namespace Manager.Interfaces
     public interface IUserManager : IBaseManager<User>
     {
         Task<UserModel> DeleteById(int id);
-        Task<UserModel> GetById(long id);
+        Task<UserModel> GetById(int id);
         new PaginatedResponse<UserPagedModel> GetPaged(PaginatedRequest pagingParams);
         Task<UserModel> Insert(CreateUserModel newUser);
         Task<UserModel> Update(UpdateUserModel updatedUser);

@@ -29,7 +29,7 @@ namespace Manager.Interfaces.Repositories.Base
         /// Deleta um registro a partir do Id
         /// </summary>
         /// <param name="id"></param>
-        Task PhysicalDeleteAsync(long id);
+        Task PhysicalDeleteAsync(int id);
 
         /// <summary>
         /// Atualizar alguns campos
@@ -52,7 +52,7 @@ namespace Manager.Interfaces.Repositories.Base
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<TEntity> SelectAsync(long id);
+        Task<TEntity> SelectAsync(int id);
 
         /// <summary>
         /// Retorna se para a condição, existe tal registro

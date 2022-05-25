@@ -11,3 +11,5 @@ D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\FakeData\bin\Debug\netco
 D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\FakeData\bin\Debug\netcoreapp3.1\Core.Shared.pdb
 D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\FakeData\bin\Debug\netcoreapp3.1\Core.Shared.xml
 D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\FakeData\obj\Debug\netcoreapp3.1\FakeData.csproj.CopyComplete
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\FakeData\bin\Debug\netcoreapp3.1\Core.dll
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\FakeData\bin\Debug\netcoreapp3.1\Core.pdb

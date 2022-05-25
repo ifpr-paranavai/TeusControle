@@ -1827,6 +1827,7 @@
       "FakeData/1.0.0": {
         "dependencies": {
           "Bogus": "34.0.2",
+          "Core": "1.0.0",
           "Core.Shared": "1.0.0"
         },
         "runtime": {
