@@ -32,7 +32,7 @@ namespace TeusControleApi.Controllers
             var paged = productManager.GetPaged(pagingParams);
             if (paged == null)
             {
-                return Problem("Não foi possivel buscar produtos.");
+                return NotFound("Não foi possivel buscar produtos.");
             }
 
             return Ok(paged);
@@ -51,7 +51,7 @@ namespace TeusControleApi.Controllers
             var user = await productManager.GetById(id);
             if (user == null)
             {
-                return NotFound();
+                return NotFound("Não foi possível buscar produto.");
             }
             return Ok(user);
         }
@@ -106,7 +106,7 @@ namespace TeusControleApi.Controllers
             var product = await productManager.DeleteById(id);
             if (product == null)
             {
-                return Problem("Não foi possível excluir produto.");
+                return NotFound("Não foi possível excluir produto.");
             }
             return NoContent();
         }

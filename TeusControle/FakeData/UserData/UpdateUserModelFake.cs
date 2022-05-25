@@ -9,7 +9,6 @@ namespace FakeData.UserData
     {
         public UpdateUserModelFake()
         {
-            RuleFor(p => p.Id, f => new Faker().Random.Number(1, 50));
             RuleFor(p => p.Name, f => f.Person.FullName);
             RuleFor(p => p.CpfCnpj, f => f.Person.Cpf());
             RuleFor(p => p.BirthDate, f => f.Person.DateOfBirth);

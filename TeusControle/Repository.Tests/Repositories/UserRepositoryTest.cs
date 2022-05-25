@@ -71,7 +71,6 @@ namespace Repository.Tests.Repositories
             var registers = await InsertUsers();
             await userRepository.PhysicalDeleteAsync(registers.First().Id);
 
-
             var dbRegisters = await userRepository.SelectAsync();
             dbRegisters.Should().NotContain(registers.First());
         }
