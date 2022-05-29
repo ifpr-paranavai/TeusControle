@@ -152,6 +152,7 @@ class _TextInputField extends State<TextInputField> {
               _corDaBorda = widget.color!;
             });
           }
+          return;
         },
       ),
     );

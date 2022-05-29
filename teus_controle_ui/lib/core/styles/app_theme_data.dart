@@ -3,6 +3,18 @@ import 'package:flutter/material.dart';
 final ThemeData appThemeData = ThemeData(
   primarySwatch: createMaterialColor(const Color(0xff01879c)),
   brightness: Brightness.light,
+  dataTableTheme: DataTableThemeData(
+    headingRowHeight: 45.0,
+    dataRowHeight: 45.0,
+    headingRowColor: MaterialStateProperty.all(const Color(0xff01879c)),
+    headingTextStyle: const TextStyle(
+      color: Colors.white,
+      fontWeight: FontWeight.bold,
+    ),
+    checkboxHorizontalMargin: 20,
+    dividerThickness: 0,
+    columnSpacing: 10,
+  ),
 );
 
 MaterialColor createMaterialColor(Color color) {

@@ -76,6 +76,7 @@ class _CustomTableState extends State<CustomPaginatedTable> {
 
     isFirstPage = widget.pageIndex == 1;
     isLastPage = widget.pageIndex == widget.totalPages;
+    print(cardWidth);
 
     return Card(
       child: Column(
@@ -93,7 +94,7 @@ class _CustomTableState extends State<CustomPaginatedTable> {
             height: 0,
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(21.0, 8.0, 8.0, 8.0),
+            padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.0),
             child: _getTableFooter(),
           ),
           _getTotalCountWidget(),
@@ -138,12 +139,13 @@ class _CustomTableState extends State<CustomPaginatedTable> {
 
   Widget _getTotalCountWidget() {
     return Container(
-      color: const Color(0xff829AB2),
+      color: Theme.of(context).primaryColorLight,
       child: Center(
         child: Padding(
           padding: const EdgeInsets.only(bottom: 5),
           child: Text(
-            "Total ${widget.totalItems} items",
+            (canBeSelected ? 'Selecionados: ${selected.length} de ' : "") +
+                "${widget.totalItems} items",
             style: const TextStyle(color: Colors.white),
           ),
         ),
@@ -155,9 +157,8 @@ class _CustomTableState extends State<CustomPaginatedTable> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        if (canBeSelected) Text('Selecionados: ${selected.length}'),
-        Expanded(child: Container()),
-        const Text('Linhas por Página: '),
+        // Expanded(child: Container()),
+        const Text('Linhas: '),
         SizedBox(
           width: 100,
           height: 40,

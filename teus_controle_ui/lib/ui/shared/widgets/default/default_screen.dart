@@ -1,31 +1,37 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:teus_controle_ui/core/models/paginated/paged_model.dart';
 
+import '../../../../core/services/base_service.dart';
 import '../buttons/circle_icon_button.dart';
 import '../buttons/rounded_button.dart';
 import '../inputs/text_input_field.dart';
+import '../tables/paginated/custom_paginated_table.dart';
+import '../tables/paginated/table_data.dart';
 import 'page_header.dart';
 
-class DefaultScreen extends StatefulWidget {
+class DefaultScreen<T> extends StatefulWidget {
+  final BaseService service;
   final String pageName;
   final Widget? filterDialog;
   final Widget? addDialog;
-  final List<DataColumn> dataColumn;
+  final List<TableColumn> columns;
 
   const DefaultScreen({
     Key? key,
+    required this.service,
     required this.pageName,
     this.addDialog,
     this.filterDialog,
-    required this.dataColumn,
+    required this.columns,
   }) : super(key: key);
 
   @override
-  _DefaultScreenState createState() => _DefaultScreenState();
+  _DefaultScreenState<T> createState() => _DefaultScreenState<T>();
 }
 
-class _DefaultScreenState extends State<DefaultScreen> {
+class _DefaultScreenState<T> extends State<DefaultScreen> {
   final ScrollController verticalScroll = ScrollController();
   int x = 10;
 
@@ -48,33 +54,35 @@ class _DefaultScreenState extends State<DefaultScreen> {
               const SizedBox(
                 height: 10,
               ),
-              FutureBuilder(
-                future: Future(() {}),
+              FutureBuilder<PagedModel<T>?>(
+                future: widget.service.getPagedRequest(context)
+                    as Future<PagedModel<T>?>,
                 builder: (context, snapShot) {
-                  return PaginatedDataTable(
-                    //columns: widget.dataColumn,
-                    showCheckboxColumn: true,
-                    onSelectAll: (value) {},
-                    availableRowsPerPage: const [10, 20, 50, 100],
-                    rowsPerPage: x,
-                    onRowsPerPageChanged: (value) {
-                      setState(() {
-                        x = value ?? 10;
-                      });
-                    },
-                    columnSpacing:
-                        175, //TODO: achar um jeito de obter e deixar tamanho fixo
-                    columns: const [
-                      DataColumn(label: Text('ID')),
-                      DataColumn(label: Text('Name')),
-                      DataColumn(label: Text('Price')),
-                      DataColumn(label: Text('Price')),
-                      DataColumn(label: Text('Price')),
-                      DataColumn(label: Text('Price')),
-                      DataColumn(label: Text('Price')),
-                      DataColumn(label: Text('Price')),
-                    ],
-                    source: MyData(),
+                  // return Container();
+                  return CustomPaginatedTable(
+                    totalPages:
+                        !snapShot.hasData ? 0 : snapShot.data!.totalPages,
+                    totalItems:
+                        !snapShot.hasData ? 0 : snapShot.data!.totalItems,
+                    pageIndex: !snapShot.hasData ? 1 : snapShot.data!.pageIndex,
+                    tableData: TableData(
+                      columns: widget.columns,
+                      data: !snapShot.hasData ? [] : snapShot.data!.data,
+                    ),
+                    onDeleteAction: () {},
+                    onEditAction: () {},
+                    onInfoAction: () {},
+                    isLoading: !snapShot.hasData &&
+                        snapShot.connectionState != ConnectionState.done,
+                    nextPage: () => setState(() {
+                      widget.service.nextPage();
+                    }),
+                    previousPage: () => setState(() {
+                      widget.service.previousPage();
+                    }),
+                    changePageSize: (size) => setState(() {
+                      widget.service.changePageSize(size);
+                    }),
                   );
                 },
               ),

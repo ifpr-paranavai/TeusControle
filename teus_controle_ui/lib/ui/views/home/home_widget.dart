@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:teus_controle_ui/core/services/user_service.dart';
 
 import '../../shared/utils/global.dart' as globals;
 import '../../shared/widgets/default/default_screen.dart';
 import '../../shared/widgets/drawer/drawer_list_item.dart';
+import '../../shared/widgets/tables/paginated/table_data.dart';
 import 'home_page.dart';
 
 class HomeWidget extends State<HomePage> with SingleTickerProviderStateMixin {
@@ -10,7 +12,34 @@ class HomeWidget extends State<HomePage> with SingleTickerProviderStateMixin {
   int active = 0;
 
   List<Widget> tabsScreen = [
-    const DefaultScreen(dataColumn: [], pageName: "Usuários"),
+    DefaultScreen(
+      columns: [
+        TableColumn(
+          label: "Id",
+          reference: "id",
+          isId: true,
+          show: false,
+        ),
+        TableColumn(
+          label: "Nome",
+          reference: "name",
+        ),
+        TableColumn(
+          label: "CPF",
+          reference: "cpfCnpj",
+        ),
+        TableColumn(
+          label: "E-mail",
+          reference: "email",
+        ),
+        TableColumn(
+          label: "Data de Nascimento",
+          reference: "birthDate",
+        ),
+      ],
+      pageName: "Usuários",
+      service: UserService(),
+    ),
   ];
 
   @override

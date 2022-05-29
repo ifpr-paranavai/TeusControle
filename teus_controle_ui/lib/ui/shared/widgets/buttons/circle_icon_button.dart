@@ -4,7 +4,7 @@ class CircleIconButton extends StatelessWidget {
   const CircleIconButton({
     Key? key,
     this.onPressed,
-    this.color = const Color(0xff829AB2),
+    this.color,
     required this.icon,
     this.iconSize = 24.0,
     this.iconColor = Colors.white,
@@ -23,7 +23,9 @@ class CircleIconButton extends StatelessWidget {
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       constraints: const BoxConstraints(minWidth: 0),
       elevation: 2.0,
-      fillColor: onPressed == null ? Colors.grey : color,
+      fillColor: onPressed == null
+          ? Colors.grey
+          : color ?? Theme.of(context).primaryColor,
       child: Center(
         child: Icon(
           icon,

@@ -37,7 +37,7 @@ class DropDownField<T> extends StatelessWidget {
                 Radius.circular(25),
               ),
               borderSide: BorderSide(
-                color: Theme.of(context).colorScheme.primaryVariant,
+                color: Theme.of(context).primaryColor,
               ),
             ),
           ),

@@ -24,4 +24,7 @@ class TableColumn {
   });
 }
 
-enum OrderByType { Asc, Desc }
+enum OrderByType {
+  asc,
+  desc,
+}

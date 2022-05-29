@@ -1,3 +1,4 @@
+import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -12,6 +13,8 @@ const String jwtToken = 'jwt-token';
 void main() async {
   // https://femaletechentrepreneur.com/flutter-scalable-app-folder-structure/
   WidgetsFlutterBinding.ensureInitialized();
+  await DesktopWindow.setMinWindowSize(const Size(390, 400));
+
   runApp(const MyApp());
 }
 
