@@ -96,7 +96,7 @@ namespace TeusControleApi.Controllers
         /// Exclui um usuário por id.
         /// </summary>
         /// <param name="id" example="123">Id do usuário.</param>
-        [ProducesResponseType(typeof(UserModel), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpDelete("{id}")]

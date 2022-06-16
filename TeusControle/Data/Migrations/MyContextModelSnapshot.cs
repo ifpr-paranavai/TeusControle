@@ -70,7 +70,7 @@ namespace Data.Migrations
                     b.Property<DateTime?>("LastChange")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<decimal?>("Lenght")
+                    b.Property<decimal?>("Length")
                         .HasColumnType("decimal(65,30)");
 
                     b.Property<decimal?>("MaxPrice")

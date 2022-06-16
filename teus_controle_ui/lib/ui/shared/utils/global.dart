@@ -1,3 +1,118 @@
 library my_prj.globals;
 
+import 'package:another_flushbar/flushbar.dart';
+import 'package:flutter/material.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../core/models/user/user_logged_model.dart';
+
 bool isCollapsed = true;
+const String jwtTokenRef = 'jwt-token';
+const String userIdRef = 'user-id';
+const String userRoleRef = 'profile-type-id';
+const String userProfileImage = 'profile-image';
+const String userName = 'profile-name';
+final navigatorKey = GlobalKey<NavigatorState>();
+
+//#region USER
+void setJwtToken(String jwt) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  await prefs.setString(jwtTokenRef, jwt);
+  setUserData(jwt);
+}
+
+Future<String> getJwtToken() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  return prefs.getString(jwtTokenRef) ?? '';
+}
+
+Future setUserData(String jwt) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  UserLoggedModel payload = UserLoggedModel.fromJson(JwtDecoder.decode(jwt));
+
+  await prefs.setString(userIdRef, payload.id);
+  await prefs.setString(userRoleRef, payload.profiletypeid);
+  await prefs.setString(userName, payload.name);
+  await prefs.setString(userProfileImage, payload.profileimage);
+}
+
+Future<bool> isJwtValid(String jwt) async {
+  return !JwtDecoder.isExpired(jwt);
+}
+
+Future<String> getLoggedUserId() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  return prefs.getString(userIdRef) ?? '';
+}
+
+Future<String> getLoggedUserRole() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  return prefs.getString(userRoleRef) ?? '';
+}
+
+Future<String> getLoggedUserName() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  return prefs.getString(userName) ?? '';
+}
+
+Future<String> getLoggedUserImage() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  return prefs.getString(userProfileImage) ?? '';
+}
+
+Future disconnectUser() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  await prefs.setString(jwtTokenRef, '');
+  await prefs.setString(userIdRef, '');
+  await prefs.setString(userRoleRef, '');
+}
+//#endregion
+
+//#region SNACKBARS
+void errorSnackBar({
+  required BuildContext context,
+  required String message,
+  String? code,
+}) {
+  Flushbar(
+    flushbarPosition: FlushbarPosition.BOTTOM,
+    message: 'Erro${code != null ? ' ' + code : ''}: $message',
+    duration: const Duration(seconds: 3),
+    backgroundColor: Colors.red,
+  ).show(context);
+}
+
+void successSnackBar({
+  required BuildContext context,
+  required String message,
+  int durationSeconds = 3,
+}) {
+  Flushbar(
+    flushbarPosition: FlushbarPosition.BOTTOM,
+    message: message,
+    duration: Duration(seconds: durationSeconds),
+    backgroundColor: Colors.green,
+  ).show(context);
+}
+//#endregion
+
+//#region FUNCTIONS
+String formatSentDate(String outDate) {
+  List<String> dates = outDate.split('/');
+  return '${dates[2]}-${dates[1]}-${dates[0]}';
+}
+
+String formatReceivedDate(String inDate) {
+  List<String> dates = inDate.split('T').first.split('-');
+
+  return '${dates[2]}/${dates[1]}/${dates[0]}';
+}
+//#endregion

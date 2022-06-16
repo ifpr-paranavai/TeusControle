@@ -1,18 +1,35 @@
-import 'package:teus_controle_ui/core/models/users/user_paged_model.dart';
-
-import '../models/paginated/paged_model.dart';
+import '../models/user/user_get_response_model.dart';
+import '../models/user/user_post_response_model.dart';
+import '../models/user/user_put_response_model.dart';
 import 'base_service.dart';
 
 class UserService extends BaseService {
-  UserService() : super(endpoint: "Users");
+  UserService() : super(endpoint: "User");
 
   @override
-  dynamic deserializePagedResponse(responseData) {
-    var pagedResponse = PagedModel<UserPagedModel>.fromJson(
+  UserPostResponseModel deserializePostResponse(responseData) {
+    var postResponse = UserPostResponseModel.fromJson(
       responseData,
-      (json) => UserPagedModel.fromJson(json as Map<String, dynamic>),
     );
 
-    return pagedResponse;
+    return postResponse;
+  }
+
+  @override
+  UserGetResponseModel deserializeGetResponse(responseData) {
+    var getResponse = UserGetResponseModel.fromJson(
+      responseData,
+    );
+
+    return getResponse;
+  }
+
+  @override
+  UserPutResponseModel deserializePutResponse(responseData) {
+    var getResponse = UserPutResponseModel.fromJson(
+      responseData,
+    );
+
+    return getResponse;
   }
 }

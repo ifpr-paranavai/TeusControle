@@ -5,7 +5,24 @@ class TableData {
   TableData({
     required this.columns,
     required this.data,
-  });
+  }) : assert(columns.any((element) => element.showInPrint),
+            "Deve existir ao menos uma coluna com showInPrint TRUE");
+
+  String printValue(int id, String idReference) {
+    String value = '';
+    dynamic obj = data.where((e) => e[idReference] == id).first;
+    for (var e in columns) {
+      if (e.showInPrint) {
+        value += '${obj[e.reference]} - ';
+      }
+    }
+
+    if (value.isNotEmpty) {
+      value = value.substring(0, value.length - 3);
+    }
+
+    return '"$value"';
+  }
 }
 
 class TableColumn {
@@ -14,6 +31,7 @@ class TableColumn {
   final OrderByType? orderByType;
   final bool isId;
   final bool show;
+  final bool showInPrint;
 
   TableColumn({
     required this.label,
@@ -21,6 +39,7 @@ class TableColumn {
     this.orderByType,
     this.isId = false,
     this.show = true,
+    this.showInPrint = false,
   });
 }
 

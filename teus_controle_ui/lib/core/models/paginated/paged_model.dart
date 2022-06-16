@@ -2,9 +2,9 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'paged_model.g.dart';
 
-@JsonSerializable(genericArgumentFactories: true)
-class PagedModel<T> {
-  late final List<T> data;
+@JsonSerializable()
+class PagedModel {
+  late final List data;
   late final int pageIndex;
   late final int totalPages;
   late final int totalItems;
@@ -22,12 +22,8 @@ class PagedModel<T> {
 
   PagedModel.empty();
 
-  factory PagedModel.fromJson(
-    Map<String, dynamic> json,
-    T Function(Object? json) fromJsonT,
-  ) =>
-      _$PagedModelFromJson(json, fromJsonT);
+  factory PagedModel.fromJson(Map<String, dynamic> json) =>
+      _$PagedModelFromJson(json);
 
-  Map<String, dynamic> toJson(Object? Function(T value) toJsonT) =>
-      _$PagedModelToJson(this, toJsonT);
+  Map<String, dynamic> toJson() => _$PagedModelToJson(this);
 }

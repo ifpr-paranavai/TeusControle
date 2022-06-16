@@ -6,12 +6,8 @@ part of 'paged_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PagedModel<T> _$PagedModelFromJson<T>(
-  Map<String, dynamic> json,
-  T Function(Object? json) fromJsonT,
-) =>
-    PagedModel<T>(
-      data: (json['data'] as List<dynamic>).map(fromJsonT).toList(),
+PagedModel _$PagedModelFromJson(Map<String, dynamic> json) => PagedModel(
+      data: json['data'] as List<dynamic>,
       pageIndex: json['pageIndex'] as int,
       totalPages: json['totalPages'] as int,
       totalItems: json['totalItems'] as int,
@@ -19,12 +15,9 @@ PagedModel<T> _$PagedModelFromJson<T>(
       hasNextPage: json['hasNextPage'] as bool,
     );
 
-Map<String, dynamic> _$PagedModelToJson<T>(
-  PagedModel<T> instance,
-  Object? Function(T value) toJsonT,
-) =>
+Map<String, dynamic> _$PagedModelToJson(PagedModel instance) =>
     <String, dynamic>{
-      'data': instance.data.map(toJsonT).toList(),
+      'data': instance.data,
       'pageIndex': instance.pageIndex,
       'totalPages': instance.totalPages,
       'totalItems': instance.totalItems,

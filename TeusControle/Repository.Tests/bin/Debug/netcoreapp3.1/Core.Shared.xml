@@ -156,7 +156,7 @@
             </summary>
             <example>10.05</example>
         </member>
-        <member name="P:Core.Shared.Models.Product.CreateProductModel.Lenght">
+        <member name="P:Core.Shared.Models.Product.CreateProductModel.Length">
             <summary>
             Comprimento
             </summary>

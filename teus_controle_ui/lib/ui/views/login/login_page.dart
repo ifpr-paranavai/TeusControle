@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'login_widget.dart';
+import 'widgets/login_widget.dart';
 
 class LoginPage extends StatefulWidget {
   static const String route = '/login';

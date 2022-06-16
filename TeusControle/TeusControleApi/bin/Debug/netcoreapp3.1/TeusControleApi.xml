@@ -4,7 +4,7 @@
         <name>TeusControleApi</name>
     </assembly>
     <members>
-        <member name="M:TeusControleApi.Controllers.LoginController.Login(Core.Shared.Models.Request.LoginRequest)">
+        <member name="M:TeusControleApi.Controllers.AuthController.Login(Core.Shared.Models.Request.LoginRequest)">
             <summary>
             Realiza login
             </summary>

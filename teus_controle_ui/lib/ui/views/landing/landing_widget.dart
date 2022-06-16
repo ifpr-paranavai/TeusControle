@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../main.dart';
+import '../../shared/utils/global.dart' as globals;
 import '../home/home_page.dart';
 import '../login/login_page.dart';
 import 'landing_page.dart';
@@ -16,15 +15,14 @@ class LandingWidget extends State<LandingPage> {
   }
 
   _loadUserInfo() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    _jwtToken = (prefs.getString(jwtToken) ?? "");
-    if (_jwtToken == "") {
+    _jwtToken = await globals.getJwtToken();
+    if (_jwtToken == "" || !await globals.isJwtValid(_jwtToken)) {
       Navigator.pushNamedAndRemoveUntil(
           context, LoginPage.route, ModalRoute.withName(LoginPage.route));
-    } else {
-      Navigator.pushNamedAndRemoveUntil(
-          context, HomePage.route, ModalRoute.withName(HomePage.route));
     }
+
+    Navigator.pushNamedAndRemoveUntil(
+        context, HomePage.route, ModalRoute.withName(HomePage.route));
   }
 
   @override

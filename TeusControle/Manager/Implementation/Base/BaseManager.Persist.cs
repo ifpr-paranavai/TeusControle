@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Core.Domain.Base;
 using Core.Shared.Models;
-using FluentValidation;
 using Manager.Interfaces.Managers.Base;
 using Manager.Interfaces.Repositories.Base;
 using Microsoft.AspNetCore.Http;

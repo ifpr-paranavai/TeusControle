@@ -76,8 +76,7 @@ namespace Manager.Implementation
             {
                 if (!await AnyAsync(x =>
                     x.Id == id &&
-                    !x.Deleted &&
-                    x.Active
+                    !x.Deleted
                 ))
                     throw new Exception("Registro não encontrado.");
 
@@ -94,7 +93,7 @@ namespace Manager.Implementation
                         GpcDescription =s.GpcDescription,
                         GrossWeight = s.GrossWeight,
                         Height = s.Height,
-                        Lenght = s.Lenght,
+                        Length = s.Length,
                         Width = s.Width,
                         BrandName = s.BrandName,
                         BrandPicture = s.BrandPicture,

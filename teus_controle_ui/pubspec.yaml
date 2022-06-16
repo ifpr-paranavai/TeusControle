@@ -22,11 +22,16 @@ dev_dependencies:
   flutter_lints: ^1.0.0
   flutter_secure_storage: ^5.0.2
   mask_text_input_formatter: ^2.3.0
+  brasil_fields: ^1.4.5
   shared_preferences: ^2.0.15
   dio: ^4.0.6
   build_runner: ^2.1.11
   json_serializable: ^6.2.0
   desktop_window: ^0.4.0 # compativel apenas com desktop
+  form_field_validator: ^1.1.0
+  jwt_decoder: ^2.0.1
+  another_flushbar: ^1.10.29
+  shimmer: ^2.0.0
 
 flutter:
   uses-material-design: true

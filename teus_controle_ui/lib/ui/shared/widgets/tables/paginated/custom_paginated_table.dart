@@ -22,9 +22,10 @@ class CustomPaginatedTable extends StatefulWidget {
   }) : super(key: key);
 
   final TableData tableData;
-  final void Function()? onDeleteAction;
-  final void Function()? onEditAction;
-  final void Function()? onInfoAction;
+  final void Function(int id, String value, Function() callBack)?
+      onDeleteAction;
+  final void Function(int id)? onEditAction;
+  final void Function(int id)? onInfoAction;
   final bool isLoading;
   final int pageIndex;
   final int totalPages;
@@ -39,6 +40,7 @@ class CustomPaginatedTable extends StatefulWidget {
 
 class _CustomTableState extends State<CustomPaginatedTable> {
   final ScrollController horizontalScroll = ScrollController();
+  final ScrollController verticalScroll = ScrollController();
   final double width = 12;
   List<int> selected = [];
   late final bool canBeSelected;
@@ -63,8 +65,10 @@ class _CustomTableState extends State<CustomPaginatedTable> {
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
+    final double screenHeight = MediaQuery.of(context).size.height;
     final double tableMinWidth =
         screenWidth - (globals.isCollapsed ? 49 : 358.5);
+    final double tableMaxHeight = screenHeight - 296;
 
     final double cardWidth = screenWidth;
     // (altura das rows * quantidade de rows)  + espaço para scrollbar
@@ -76,7 +80,6 @@ class _CustomTableState extends State<CustomPaginatedTable> {
 
     isFirstPage = widget.pageIndex == 1;
     isLastPage = widget.pageIndex == widget.totalPages;
-    print(cardWidth);
 
     return Card(
       child: Column(
@@ -85,6 +88,7 @@ class _CustomTableState extends State<CustomPaginatedTable> {
             cardHeight: cardHeight,
             cardWidth: cardWidth,
             tableMinWidth: tableMinWidth,
+            tableMaxHeight: tableMaxHeight,
           ),
           if (widget.isLoading)
             LinearProgressIndicator(
@@ -107,27 +111,36 @@ class _CustomTableState extends State<CustomPaginatedTable> {
     required double cardWidth,
     required double cardHeight,
     required double tableMinWidth,
+    required double tableMaxHeight,
   }) {
-    return SizedBox(
-      width: cardWidth,
+    return Container(
+      constraints: BoxConstraints(
+        maxWidth: cardWidth,
+        maxHeight: tableMaxHeight,
+      ),
       height: cardHeight,
       child: Column(
         children: [
-          SingleChildScrollView(
+          Scrollbar(
             controller: horizontalScroll,
-            scrollDirection: Axis.horizontal,
-            child: Scrollbar(
+            scrollbarOrientation: ScrollbarOrientation.bottom,
+            child: SingleChildScrollView(
               controller: horizontalScroll,
-              scrollbarOrientation: ScrollbarOrientation.bottom,
+              scrollDirection: Axis.horizontal,
               child: Container(
                 constraints: BoxConstraints(
                   minWidth: tableMinWidth,
+                  maxHeight: tableMaxHeight,
                 ),
-                child: DataTable(
-                  onSelectAll: canBeSelected ? onSelectAll : null,
-                  columns: getColumns(),
-                  rows: getRows(),
-                  columnSpacing: 2.0,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  controller: verticalScroll,
+                  child: DataTable(
+                    onSelectAll: canBeSelected ? _onSelectAll : null,
+                    columns: _getColumns(),
+                    rows: _getRows(),
+                    columnSpacing: 2.0,
+                  ),
                 ),
               ),
             ),
@@ -206,7 +219,7 @@ class _CustomTableState extends State<CustomPaginatedTable> {
     );
   }
 
-  void onSelectAll(bool? value) {
+  void _onSelectAll(bool? value) {
     if (value != null) {
       setState(
         () {
@@ -232,7 +245,7 @@ class _CustomTableState extends State<CustomPaginatedTable> {
     }
   }
 
-  List<DataColumn> getColumns() {
+  List<DataColumn> _getColumns() {
     List<DataColumn> columns = widget.tableData.columns
         .skipWhile((element) => !element.show)
         .map(
@@ -259,7 +272,7 @@ class _CustomTableState extends State<CustomPaginatedTable> {
     return columns;
   }
 
-  List<DataRow> getRows() {
+  List<DataRow> _getRows() {
     int rowIndex = 1;
     // se VAZIA ou CARREGANDO ou ERRO
     if (widget.tableData.data.isEmpty || widget.isLoading) {
@@ -306,7 +319,7 @@ class _CustomTableState extends State<CustomPaginatedTable> {
           .map(
             (column) => DataCell(
               Center(
-                child: Text((row[column.reference])),
+                child: Text((row[column.reference]).toString()),
               ),
             ),
           )
@@ -317,13 +330,15 @@ class _CustomTableState extends State<CustomPaginatedTable> {
           widget.onInfoAction != null) {
         List<IconButton> actionsChildren = [];
 
+        int id = row[idReference];
+
         if (widget.onInfoAction != null) {
           actionsChildren.add(
             IconButton(
-              onPressed: widget.onInfoAction,
-              icon: const Icon(
+              onPressed: () => widget.onInfoAction!(id),
+              icon: Icon(
                 Icons.info,
-                color: Colors.grey,
+                color: Theme.of(context).primaryColorDark,
               ),
             ),
           );
@@ -332,10 +347,10 @@ class _CustomTableState extends State<CustomPaginatedTable> {
         if (widget.onEditAction != null) {
           actionsChildren.add(
             IconButton(
-              onPressed: widget.onEditAction,
-              icon: const Icon(
+              onPressed: () => widget.onEditAction!(id),
+              icon: Icon(
                 Icons.edit,
-                color: Colors.grey,
+                color: Theme.of(context).primaryColorDark,
               ),
             ),
           );
@@ -344,10 +359,14 @@ class _CustomTableState extends State<CustomPaginatedTable> {
         if (widget.onDeleteAction != null) {
           actionsChildren.add(
             IconButton(
-              onPressed: widget.onDeleteAction,
-              icon: const Icon(
+              onPressed: () => widget.onDeleteAction!(
+                id,
+                widget.tableData.printValue(id, idReference),
+                () => selected.remove(id),
+              ),
+              icon: Icon(
                 Icons.delete,
-                color: Colors.grey,
+                color: Theme.of(context).primaryColorDark,
               ),
             ),
           );

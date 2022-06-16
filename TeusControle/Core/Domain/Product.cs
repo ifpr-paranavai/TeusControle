@@ -34,7 +34,7 @@ namespace Core.Domain
 
         public decimal? Height { get; set; }
 
-        public decimal? Lenght { get; set; }
+        public decimal? Length { get; set; }
 
         public decimal? Width { get; set; }
 

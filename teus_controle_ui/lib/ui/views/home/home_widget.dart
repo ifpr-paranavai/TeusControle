@@ -1,45 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:teus_controle_ui/core/services/user_service.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../shared/utils/global.dart' as globals;
-import '../../shared/widgets/default/default_screen.dart';
 import '../../shared/widgets/drawer/drawer_list_item.dart';
-import '../../shared/widgets/tables/paginated/table_data.dart';
+import '../login/login_page.dart';
+import '../product/product_page.dart';
+import '../user/user_page.dart';
 import 'home_page.dart';
 
 class HomeWidget extends State<HomePage> with SingleTickerProviderStateMixin {
+  String? userFullName;
+  String? userProfileImage;
+  bool isLoadingDrawer = true;
   late TabController tabController;
   int active = 0;
 
   List<Widget> tabsScreen = [
-    DefaultScreen(
-      columns: [
-        TableColumn(
-          label: "Id",
-          reference: "id",
-          isId: true,
-          show: false,
-        ),
-        TableColumn(
-          label: "Nome",
-          reference: "name",
-        ),
-        TableColumn(
-          label: "CPF",
-          reference: "cpfCnpj",
-        ),
-        TableColumn(
-          label: "E-mail",
-          reference: "email",
-        ),
-        TableColumn(
-          label: "Data de Nascimento",
-          reference: "birthDate",
-        ),
-      ],
-      pageName: "Usuários",
-      service: UserService(),
-    ),
+    const UserPage(),
+    const ProductPage(),
   ];
 
   @override
@@ -57,6 +35,18 @@ class HomeWidget extends State<HomePage> with SingleTickerProviderStateMixin {
           );
         },
       );
+
+    Future.wait([
+      globals.getLoggedUserName(),
+      globals.getLoggedUserImage(),
+    ]).then((value) {
+      userFullName = value[0];
+      userProfileImage = value[1];
+
+      setState(() {
+        isLoadingDrawer = !isLoadingDrawer;
+      });
+    });
     super.initState();
   }
 
@@ -73,10 +63,10 @@ class HomeWidget extends State<HomePage> with SingleTickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: globals.isCollapsed,
-        title: Image.asset(
-          'assets/images/TEUS_CONTROLE_WHITE.png',
-          height: 25,
-        ),
+        title: _appLogoImage(),
+        actions: [
+          _disconnectUser(),
+        ],
       ),
       body: Row(
         children: <Widget>[
@@ -87,7 +77,7 @@ class HomeWidget extends State<HomePage> with SingleTickerProviderStateMixin {
                   height: MediaQuery.of(context).size.height,
                   width: 310,
                   color: Colors.white,
-                  child: listDrawerItems(false),
+                  child: _listDrawerItems(false),
                 ),
           SizedBox(
             width: globals.isCollapsed
@@ -102,12 +92,33 @@ class HomeWidget extends State<HomePage> with SingleTickerProviderStateMixin {
         ],
       ),
       drawer: Drawer(
-        child: listDrawerItems(true),
+        child: _listDrawerItems(true),
       ),
     );
   }
 
-  Widget listDrawerItems(bool drawerStatus) {
+  Image _appLogoImage() {
+    return Image.asset(
+      'assets/images/TEUS_CONTROLE_WHITE.png',
+      height: 25,
+    );
+  }
+
+  Widget _disconnectUser() {
+    return IconButton(
+      onPressed: () {
+        globals.disconnectUser();
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          LoginPage.route,
+          ModalRoute.withName(LoginPage.route),
+        );
+      },
+      icon: const Icon(Icons.logout),
+    );
+  }
+
+  Widget _listDrawerItems(bool drawerStatus) {
     return ListView(
       children: <Widget>[
         Padding(
@@ -126,6 +137,14 @@ class HomeWidget extends State<HomePage> with SingleTickerProviderStateMixin {
           context: context,
           onChangePage: () => tabController.animateTo(0),
         ),
+        DrawerListItem(
+          icon: Icons.shopping_bag,
+          title: "Produtos",
+          isActive: tabController.index == 1,
+          drawerStatus: drawerStatus,
+          context: context,
+          onChangePage: () => tabController.animateTo(1),
+        ),
       ],
     );
   }
@@ -133,30 +152,82 @@ class HomeWidget extends State<HomePage> with SingleTickerProviderStateMixin {
   Widget _userInformation() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        const CircleAvatar(
-          radius: 45.0,
-          backgroundImage: NetworkImage(
-            'https://lh3.googleusercontent.com/a-/AOh14GhtQX9-QpRsg2G_iSAR--pnMwXpM5F5P084ypqSMAk=s288-p-rw-no',
-          ),
-        ),
-        const SizedBox(
-          height: 10.0,
-        ),
-        RichText(
-          maxLines: 2,
-          strutStyle: const StrutStyle(fontSize: 25.0),
-          textAlign: TextAlign.center,
-          text: const TextSpan(
-            style: TextStyle(
-              fontSize: 25.0,
-              fontWeight: FontWeight.w300,
-              color: Colors.black,
+      children: isLoadingDrawer
+          ? [_shimmerEffect()]
+          : [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(45.0),
+                child: Image.network(
+                  userProfileImage ?? '',
+                  width: 90,
+                  height: 90,
+                  fit: BoxFit.fill,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      alignment: Alignment.center,
+                      width: 90,
+                      height: 90,
+                      color: Theme.of(context).primaryColor,
+                      child: Icon(
+                        Icons.person,
+                        size: 50,
+                        color: Theme.of(context).primaryColorLight,
+                      ),
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(
+                height: 10.0,
+              ),
+              RichText(
+                maxLines: 2,
+                strutStyle: const StrutStyle(fontSize: 25.0),
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  style: const TextStyle(
+                    fontSize: 25.0,
+                    fontWeight: FontWeight.w300,
+                    color: Colors.black,
+                  ),
+                  text: userFullName ?? '',
+                ),
+              ),
+            ],
+    );
+  }
+
+  Widget _shimmerEffect() {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey.shade300,
+      highlightColor: Colors.grey.shade100,
+      enabled: true, // isLoading,
+      child: SizedBox(
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: 90,
+              width: 90,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(color: Colors.white),
+                borderRadius: const BorderRadius.all(Radius.circular(100)),
+              ),
             ),
-            text: "Mateus Barbeiro Garcia",
-          ),
+            const SizedBox(
+              height: 18.0,
+            ),
+            Container(
+              height: 25,
+              width: 280,
+              color: Colors.white,
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }

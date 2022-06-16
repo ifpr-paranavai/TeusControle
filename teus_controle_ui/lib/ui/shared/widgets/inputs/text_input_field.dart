@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:flutter/services.dart';
 
 class TextInputField extends StatefulWidget {
   const TextInputField({
@@ -8,16 +8,16 @@ class TextInputField extends StatefulWidget {
     this.onChanged,
     this.isPassword = false,
     this.keyboardType,
-    required this.paddingBottom,
     this.maxLength,
+    this.paddingBottom = 5,
     this.paddingTop = 0,
     this.mask,
     this.color = const Color(0xff01879c),
-    this.isDarkMode = false,
     this.controller,
     this.icon,
+    this.validator,
   })  : assert(
-          !(isDarkMode && icon != null),
+          !(isPassword && icon != null),
           'Não é permitido informar um ícone e ser um campo de senha ao mesmo tempo.',
         ),
         super(key: key);
@@ -29,12 +29,12 @@ class TextInputField extends StatefulWidget {
   final bool isPassword;
   final TextInputType? keyboardType;
   final double paddingBottom;
-  final double? paddingTop;
+  final double paddingTop;
   final int? maxLength;
-  final String? mask;
-  final Color? color;
-  final bool isDarkMode;
+  final List<TextInputFormatter>? mask;
+  final Color color;
   final TextEditingController? controller;
+  final String? Function(String?)? validator;
 
   @override
   _TextInputField createState() => _TextInputField();
@@ -47,7 +47,7 @@ class _TextInputField extends State<TextInputField> {
   @override
   void initState() {
     if (widget.color != _corDaBorda) {
-      _corDaBorda = widget.color!;
+      _corDaBorda = widget.color;
     }
     super.initState();
   }
@@ -57,22 +57,11 @@ class _TextInputField extends State<TextInputField> {
     return Padding(
       padding: EdgeInsets.only(
         bottom: widget.paddingBottom,
-        top: widget.paddingTop!,
+        top: widget.paddingTop,
       ),
       child: TextFormField(
-        inputFormatters: [
-          MaskTextInputFormatter(
-            mask: widget.mask,
-          )
-        ],
+        inputFormatters: widget.mask,
         controller: widget.controller,
-        style: widget.isDarkMode
-            ? const TextStyle(
-                color: Colors.white,
-              )
-            : const TextStyle(
-                color: Colors.black,
-              ),
         maxLength: widget.maxLength,
         cursorColor: widget.color,
         onChanged: widget.onChanged,
@@ -90,13 +79,9 @@ class _TextInputField extends State<TextInputField> {
             ),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: widget.isDarkMode
-                ? BorderSide(
-                    color: Theme.of(context).primaryColor,
-                  )
-                : BorderSide(
-                    color: Theme.of(context).primaryColorDark,
-                  ),
+            borderSide: BorderSide(
+              color: Theme.of(context).primaryColorDark,
+            ),
             borderRadius: const BorderRadius.all(
               Radius.circular(25),
             ),
@@ -109,52 +94,39 @@ class _TextInputField extends State<TextInputField> {
           ),
           labelText: widget.labelText,
           labelStyle: TextStyle(
-            color: widget.isDarkMode
-                ? Colors.white
-                : Theme.of(context).primaryColorDark,
+            color: Theme.of(context).primaryColorDark,
             fontWeight: FontWeight.w400,
             fontSize: 17,
           ),
-          suffixIcon: widget.isPassword == true
-              ? GestureDetector(
-                  //Ícone para ocultar ou não a senha na tela
-                  child: Icon(
-                    _esconderTextSenha
-                        ? Icons.visibility
-                        : Icons.visibility_off,
-                    color: widget.isDarkMode
-                        ? Colors.white
-                        : Theme.of(context).primaryColorDark,
-                  ),
-                  onTap: () {
-                    setState(() {
-                      _esconderTextSenha = !_esconderTextSenha;
-                    });
-                  },
-                )
-              : widget.icon != null
-                  ? Icon(
-                      widget.icon,
-                      color: widget.isDarkMode
-                          ? Colors.white
-                          : Theme.of(context).primaryColorDark,
-                    )
-                  : null,
+          suffixIcon: _passwordSuffix(),
         ),
-        //Trocar de cor os campos caso sejam deixados nulos
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            setState(() {
-              _corDaBorda = Theme.of(context).primaryColorDark;
-            });
-          } else {
-            setState(() {
-              _corDaBorda = widget.color!;
-            });
-          }
-          return;
-        },
+        validator: widget.validator,
       ),
+    );
+  }
+
+  Widget? _passwordSuffix() {
+    return Padding(
+      padding: const EdgeInsets.only(right: 20),
+      child: widget.isPassword == true
+          ? GestureDetector(
+              //Ícone para ocultar ou não a senha na tela
+              child: Icon(
+                _esconderTextSenha ? Icons.visibility : Icons.visibility_off,
+                color: Theme.of(context).primaryColorDark,
+              ),
+              onTap: () {
+                setState(() {
+                  _esconderTextSenha = !_esconderTextSenha;
+                });
+              },
+            )
+          : widget.icon != null
+              ? Icon(
+                  widget.icon,
+                  color: Theme.of(context).primaryColorDark,
+                )
+              : null,
     );
   }
 }

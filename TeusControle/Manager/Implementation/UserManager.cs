@@ -93,8 +93,7 @@ namespace Manager.Implementation
             {
                 if (!await AnyAsync(x =>
                     x.Id == id &&
-                    !x.Deleted &&
-                    x.Active
+                    !x.Deleted
                 ))
                     throw new Exception("Registro não encontrado.");
 
@@ -111,7 +110,7 @@ namespace Manager.Implementation
                         Active = s.Active,
                         CreatedDate = s.CreatedDate,
                         LastChange = s.LastChange,
-                        BirthDate = (DateTime)s.BirthDate
+                        BirthDate = (DateTime)s.BirthDate,
                     })
                     .FirstOrDefault();
 

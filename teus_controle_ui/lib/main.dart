@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -8,12 +10,11 @@ import 'ui/views/home/home_page.dart';
 import 'ui/views/landing/landing_page.dart';
 import 'ui/views/login/login_page.dart';
 
-const String jwtToken = 'jwt-token';
-
 void main() async {
-  // https://femaletechentrepreneur.com/flutter-scalable-app-folder-structure/
+  HttpOverrides.global = MyHttpOverrides();
+
   WidgetsFlutterBinding.ensureInitialized();
-  await DesktopWindow.setMinWindowSize(const Size(390, 400));
+  await DesktopWindow.setMinWindowSize(const Size(400, 400));
 
   runApp(const MyApp());
 }
@@ -42,5 +43,14 @@ class MyApp extends StatelessWidget {
         HomePage.route: (context) => const HomePage(),
       },
     );
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }

@@ -84,7 +84,7 @@ namespace Core.Shared.Models.Product
         /// Comprimento
         /// </summary>
         /// <example>10.05</example>
-        public decimal? Lenght { get; set; }
+        public decimal? Length { get; set; }
 
         /// <summary>
         /// Largura
