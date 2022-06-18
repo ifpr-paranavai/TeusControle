@@ -18,7 +18,7 @@ ProductGetResponseModel _$ProductGetResponseModelFromJson(
       price: (json['price'] as num).toDouble(),
       maxPrice: (json['maxPrice'] as num).toDouble(),
       grossWeight: (json['grossWeight'] as num).toDouble(),
-      netWeight: json['netWeight'] as String?,
+      netWeight: (json['netWeight'] as num).toDouble(),
       brandName: json['brandName'] as String,
       brandPicture: json['brandPicture'] as String,
       gpcCode: json['gpcCode'] as String,
@@ -31,7 +31,7 @@ ProductGetResponseModel _$ProductGetResponseModelFromJson(
       ncmDescription: json['ncmDescription'] as String,
       ncmFullDescription: json['ncmFullDescription'] as String,
       thumbnail: json['thumbnail'] as String,
-      inStock: json['inStock'] as int,
+      inStock: (json['inStock'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$ProductGetResponseModelToJson(

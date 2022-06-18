@@ -298,23 +298,23 @@ class ProductController {
   Future<bool> _postRequest(BuildContext context) async {
     var data = ProductPostRequestModel(
       description: descriptionController.text,
-      height: double.parse(heightController.text),
-      width: double.parse(widthController.text),
-      length: double.parse(lengthController.text),
-      avgPrice: double.parse(avgPriceController.text),
+      height: stringToDouble(heightController.text),
+      width: stringToDouble(widthController.text),
+      length: stringToDouble(lengthController.text),
+      avgPrice: stringToDouble(avgPriceController.text),
       brandName: brandNameController.text,
       brandPicture: brandImageController.text,
       gpcCode: gpcCodeController.text,
       gpcDescription: gpcDescriptionController.text,
-      grossWeight: double.parse(grossWeightController.text),
+      grossWeight: stringToDouble(grossWeightController.text),
       gtin: gtinController.text,
-      inStock: int.parse(inStockController.text),
-      maxPrice: double.parse(maxPriceController.text),
+      inStock: stringToDouble(inStockController.text),
+      maxPrice: stringToDouble(maxPriceController.text),
       ncmCode: ncmCodeController.text,
       ncmDescription: ncmDescriptionController.text,
       ncmFullDescription: ncmFullDescriptionController.text,
-      netWeight: double.parse(netWeightController.text),
-      price: double.parse(priceController.text),
+      netWeight: stringToDouble(netWeightController.text),
+      price: stringToDouble(priceController.text),
       thumbnail: thumbnailController.text,
     );
 
@@ -333,23 +333,23 @@ class ProductController {
   Future<bool> _putRequest(BuildContext context, int id, bool active) async {
     var data = ProductPutRequestModel(
       description: descriptionController.text,
-      height: double.parse(heightController.text),
-      width: double.parse(widthController.text),
-      length: double.parse(lengthController.text),
-      avgPrice: double.parse(avgPriceController.text),
+      height: stringToDouble(heightController.text),
+      width: stringToDouble(widthController.text),
+      length: stringToDouble(lengthController.text),
+      avgPrice: stringToDouble(avgPriceController.text),
       brandName: brandNameController.text,
       brandPicture: brandImageController.text,
       gpcCode: gpcCodeController.text,
       gpcDescription: gpcDescriptionController.text,
-      grossWeight: double.parse(grossWeightController.text),
+      grossWeight: stringToDouble(grossWeightController.text),
       gtin: gtinController.text,
-      inStock: int.parse(inStockController.text),
-      maxPrice: double.parse(maxPriceController.text),
+      inStock: stringToDouble(inStockController.text),
+      maxPrice: stringToDouble(maxPriceController.text),
       ncmCode: ncmCodeController.text,
       ncmDescription: ncmDescriptionController.text,
       ncmFullDescription: ncmFullDescriptionController.text,
-      netWeight: double.parse(netWeightController.text),
-      price: double.parse(priceController.text),
+      netWeight: stringToDouble(netWeightController.text),
+      price: stringToDouble(priceController.text),
       thumbnail: thumbnailController.text,
       active: active,
       id: id,
@@ -382,5 +382,12 @@ class ProductController {
     int id,
   ) async {
     await service.deleteRequest(context, id);
+  }
+
+  double stringToDouble(String value) {
+    if (value.isEmpty) {
+      return 0.0;
+    }
+    return double.parse(value);
   }
 }

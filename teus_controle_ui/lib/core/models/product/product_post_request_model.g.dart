@@ -27,7 +27,7 @@ ProductPostRequestModel _$ProductPostRequestModelFromJson(
       ncmDescription: json['ncmDescription'] as String,
       ncmFullDescription: json['ncmFullDescription'] as String,
       thumbnail: json['thumbnail'] as String,
-      inStock: json['inStock'] as int,
+      inStock: (json['inStock'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$ProductPostRequestModelToJson(

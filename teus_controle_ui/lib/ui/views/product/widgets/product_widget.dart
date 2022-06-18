@@ -51,29 +51,31 @@ class ProductWidget extends State<ProductPage> {
         show: false,
       ),
       TableColumn(
+        label: "Imagem",
+        reference: "thumbnail",
+        isImage: true,
+        imageType: ImageType.network,
+      ),
+      TableColumn(
         label: "Descrição",
         reference: "description",
         showInPrint: true,
-      ),
-      TableColumn(
-        label: "Código de Barras",
-        reference: "gtin",
       ),
       TableColumn(
         label: "Marca",
         reference: "brandName",
       ),
       TableColumn(
-        label: "Em Estoque",
-        reference: "inStock",
+        label: "Código",
+        reference: "gtin",
       ),
       TableColumn(
         label: "Preço",
         reference: "price",
       ),
       TableColumn(
-        label: "Imagem",
-        reference: "thumbnail",
+        label: "Em Estoque",
+        reference: "inStock",
       ),
     ];
   }

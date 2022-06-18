@@ -27,7 +27,7 @@ ProductPutRequestModel _$ProductPutRequestModelFromJson(
       ncmDescription: json['ncmDescription'] as String,
       ncmFullDescription: json['ncmFullDescription'] as String,
       thumbnail: json['thumbnail'] as String,
-      inStock: json['inStock'] as int,
+      inStock: (json['inStock'] as num).toDouble(),
       id: json['id'] as int,
       active: json['active'] as bool,
     );

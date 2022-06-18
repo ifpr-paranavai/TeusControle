@@ -72,7 +72,7 @@ class _CustomTableState extends State<CustomPaginatedTable> {
 
     final double cardWidth = screenWidth;
     // (altura das rows * quantidade de rows)  + espaço para scrollbar
-    final double cardHeight = (45 *
+    final double cardHeight = ((_getRowHeight() ?? 45) *
             (widget.isLoading || widget.tableData.data.isEmpty
                 ? 3
                 : widget.tableData.data.length)) +
@@ -140,6 +140,7 @@ class _CustomTableState extends State<CustomPaginatedTable> {
                     columns: _getColumns(),
                     rows: _getRows(),
                     columnSpacing: 2.0,
+                    dataRowHeight: _getRowHeight(),
                   ),
                 ),
               ),
@@ -148,6 +149,14 @@ class _CustomTableState extends State<CustomPaginatedTable> {
         ],
       ),
     );
+  }
+
+  double? _getRowHeight() {
+    return widget.tableData.columns.any((element) => element.isImage) &&
+            !widget.isLoading &&
+            widget.tableData.data.isNotEmpty
+        ? 120
+        : null;
   }
 
   Widget _getTotalCountWidget() {
@@ -314,16 +323,40 @@ class _CustomTableState extends State<CustomPaginatedTable> {
     }
 
     return widget.tableData.data.map((row) {
-      List<DataCell> cells = widget.tableData.columns
-          .skipWhile((element) => !element.show)
-          .map(
-            (column) => DataCell(
-              Center(
-                child: Text((row[column.reference]).toString()),
+      List<DataCell> cells =
+          widget.tableData.columns.skipWhile((element) => !element.show).map(
+        (column) {
+          var rowValue = (row[column.reference]).toString();
+
+          if (column.isImage) {
+            return DataCell(Center(
+              child: Image.network(
+                rowValue,
+                width: 100,
+                height: 100,
+                fit: BoxFit.fill,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    alignment: Alignment.center,
+                    width: 100,
+                    height: 100,
+                    color: Theme.of(context).primaryColor,
+                    child: Icon(
+                      Icons.image_not_supported,
+                      size: 50,
+                      color: Theme.of(context).primaryColorLight,
+                    ),
+                  );
+                },
               ),
-            ),
-          )
-          .toList();
+            ));
+          }
+
+          return DataCell(Center(
+            child: Text(rowValue.isEmpty ? '-' : rowValue),
+          ));
+        },
+      ).toList();
 
       if (widget.onDeleteAction != null ||
           widget.onEditAction != null ||

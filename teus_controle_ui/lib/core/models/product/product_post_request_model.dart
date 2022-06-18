@@ -43,7 +43,7 @@ class ProductPostRequestModel {
   late final String ncmDescription;
   late final String ncmFullDescription;
   late final String thumbnail;
-  late final int inStock;
+  late final double inStock;
 
   factory ProductPostRequestModel.fromJson(Map<String, dynamic> json) =>
       _$ProductPostRequestModelFromJson(json);

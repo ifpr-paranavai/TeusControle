@@ -44,9 +44,6 @@ class _DefaultScreenState<T> extends State<DefaultScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // body: SingleChildScrollView(
-      //   controller: verticalScroll,
-      //   child: Padding(
       body: Padding(
         padding: const EdgeInsets.all(19.0),
         child: Column(
@@ -124,7 +121,6 @@ class _DefaultScreenState<T> extends State<DefaultScreen> {
           ],
         ),
       ),
-      // ),
     );
   }
 

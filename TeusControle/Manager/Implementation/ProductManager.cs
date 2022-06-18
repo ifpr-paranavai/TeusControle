@@ -92,6 +92,7 @@ namespace Manager.Implementation
                         GpcCode = s.GpcCode,
                         GpcDescription =s.GpcDescription,
                         GrossWeight = s.GrossWeight,
+                        NetWeight = s.NetWeight,
                         Height = s.Height,
                         Length = s.Length,
                         Width = s.Width,

@@ -45,7 +45,7 @@ class ProductPutRequestModel {
   late final String ncmDescription;
   late final String ncmFullDescription;
   late final String thumbnail;
-  late final int inStock;
+  late final double inStock;
   late final int id;
   late final bool active;
 

@@ -14,7 +14,7 @@ class ProductGetResponseModel {
     required this.price,
     required this.maxPrice,
     required this.grossWeight,
-    this.netWeight,
+    required this.netWeight,
     required this.brandName,
     required this.brandPicture,
     required this.gpcCode,
@@ -38,7 +38,7 @@ class ProductGetResponseModel {
   late final double price;
   late final double maxPrice;
   late final double grossWeight;
-  late final String? netWeight;
+  late final double netWeight;
   late final String brandName;
   late final String brandPicture;
   late final String gpcCode;
@@ -51,7 +51,7 @@ class ProductGetResponseModel {
   late final String ncmDescription;
   late final String ncmFullDescription;
   late final String thumbnail;
-  late final int inStock;
+  late final double inStock;
 
   factory ProductGetResponseModel.fromJson(Map<String, dynamic> json) =>
       _$ProductGetResponseModelFromJson(json);
