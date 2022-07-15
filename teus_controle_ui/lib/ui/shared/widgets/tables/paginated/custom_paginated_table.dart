@@ -139,7 +139,7 @@ class _CustomTableState extends State<CustomPaginatedTable> {
                     onSelectAll: canBeSelected ? _onSelectAll : null,
                     columns: _getColumns(),
                     rows: _getRows(),
-                    columnSpacing: 2.0,
+                    columnSpacing: 20,
                     dataRowHeight: _getRowHeight(),
                   ),
                 ),
@@ -335,6 +335,23 @@ class _CustomTableState extends State<CustomPaginatedTable> {
                 width: 100,
                 height: 100,
                 fit: BoxFit.fill,
+                loadingBuilder: (
+                  BuildContext context,
+                  Widget child,
+                  ImageChunkEvent? loadingProgress,
+                ) {
+                  if (loadingProgress == null) {
+                    return child;
+                  }
+                  return Center(
+                    child: CircularProgressIndicator(
+                      value: loadingProgress.expectedTotalBytes != null
+                          ? loadingProgress.cumulativeBytesLoaded /
+                              loadingProgress.expectedTotalBytes!
+                          : null,
+                    ),
+                  );
+                },
                 errorBuilder: (context, error, stackTrace) {
                   return Container(
                     alignment: Alignment.center,
@@ -349,6 +366,14 @@ class _CustomTableState extends State<CustomPaginatedTable> {
                   );
                 },
               ),
+            ));
+          }
+
+          if (column.isMoney) {
+            return DataCell(Center(
+              child: Text(rowValue.isEmpty
+                  ? '-'
+                  : globals.oCcy.format(double.parse(rowValue))),
             ));
           }
 

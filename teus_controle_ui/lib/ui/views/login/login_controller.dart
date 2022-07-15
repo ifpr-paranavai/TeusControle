@@ -25,12 +25,12 @@ class LoginController {
     _isLoading = !_isLoading;
   }
 
-  String? get getButtonLabel {
-    return _isLoading ? null : 'ENTRAR';
+  bool get isLoading {
+    return _isLoading;
   }
 
-  Widget? get getButtonWidget {
-    return _isLoading ? const CircularProgressIndicator() : null;
+  String get getButtonLabel {
+    return 'ENTRAR';
   }
 
   MultiValidator get emailValidator {

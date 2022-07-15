@@ -153,8 +153,6 @@ D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\TeusControleApi\obj\Debu
 D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\TeusControleApi\obj\Debug\netcoreapp3.1\TeusControleApi.MvcApplicationPartsAssemblyInfo.cs
 D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\TeusControleApi\obj\Debug\netcoreapp3.1\TeusControleApi.MvcApplicationPartsAssemblyInfo.cache
 D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\TeusControleApi\obj\Debug\netcoreapp3.1\staticwebassets\TeusControleApi.StaticWebAssets.Manifest.cache
-D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\TeusControleApi\obj\Debug\netcoreapp3.1\staticwebassets\TeusControleApi.StaticWebAssets.xml
-D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\TeusControleApi\obj\Debug\netcoreapp3.1\scopedcss\bundle\TeusControleApi.styles.css
 D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\TeusControleApi\obj\Debug\netcoreapp3.1\TeusControleApi.RazorTargetAssemblyInfo.cache
 D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\TeusControleApi\obj\Debug\netcoreapp3.1\TeusControleApi.csproj.CopyComplete
 D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\TeusControleApi\obj\Debug\netcoreapp3.1\TeusControleApi.dll
@@ -167,3 +165,5 @@ D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debu
 D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
 D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\TeusControleApi\bin\Debug\netcoreapp3.1\TeusControleApi.StaticWebAssets.xml
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\TeusControleApi\obj\Debug\netcoreapp3.1\TeusControleApi.GeneratedMSBuildEditorConfig.editorconfig

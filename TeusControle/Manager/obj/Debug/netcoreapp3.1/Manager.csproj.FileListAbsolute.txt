@@ -28,3 +28,4 @@ D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Manager\obj\Debug\netcor
 D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Manager\obj\Debug\netcoreapp3.1\Manager.csproj.CopyComplete
 D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Manager\obj\Debug\netcoreapp3.1\Manager.dll
 D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Manager\obj\Debug\netcoreapp3.1\Manager.pdb
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Manager\obj\Debug\netcoreapp3.1\Manager.GeneratedMSBuildEditorConfig.editorconfig

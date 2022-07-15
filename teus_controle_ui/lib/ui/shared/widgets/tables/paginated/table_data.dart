@@ -35,6 +35,7 @@ class TableColumn {
   final bool show;
   final bool showInPrint;
   final bool isImage;
+  final bool isMoney;
   final ImageType? imageType;
 
   TableColumn({
@@ -46,8 +47,12 @@ class TableColumn {
     this.showInPrint = false,
     this.isImage = false,
     this.imageType,
-  }) : assert(!(isImage && imageType == null),
-            "Deveria ser informado tipo de imagem");
+    this.isMoney = false,
+  })  : assert(!(isImage && imageType == null),
+            "Deveria ser informado tipo de imagem"),
+        assert(!(isImage && isMoney), "Não é possível ser imagem e dinheiro"),
+        assert(!(isImage && showInPrint),
+            "Não é possível ser imagem e estar no print");
 }
 
 enum OrderByType {

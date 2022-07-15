@@ -38,3 +38,4 @@ D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Data\obj\Debug\netcoreap
 D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Data\obj\Debug\netcoreapp3.1\Data.dll
 D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Data\obj\Debug\netcoreapp3.1\Data.pdb
 D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Data\obj\Debug\netcoreapp3.1\Data.genruntimeconfig.cache
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Data\obj\Debug\netcoreapp3.1\Data.GeneratedMSBuildEditorConfig.editorconfig

@@ -18,3 +18,4 @@ D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Core.Shared\obj\Debug\ne
 D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Core.Shared\obj\Debug\netcoreapp3.1\Core.Shared.csproj.CoreCompileInputs.cache
 D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Core.Shared\obj\Debug\netcoreapp3.1\Core.Shared.dll
 D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Core.Shared\obj\Debug\netcoreapp3.1\Core.Shared.pdb
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Core.Shared\obj\Debug\netcoreapp3.1\Core.Shared.GeneratedMSBuildEditorConfig.editorconfig

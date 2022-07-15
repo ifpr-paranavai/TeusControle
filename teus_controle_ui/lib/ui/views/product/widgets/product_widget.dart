@@ -72,6 +72,7 @@ class ProductWidget extends State<ProductPage> {
       TableColumn(
         label: "Preço",
         reference: "price",
+        isMoney: true,
       ),
       TableColumn(
         label: "Em Estoque",

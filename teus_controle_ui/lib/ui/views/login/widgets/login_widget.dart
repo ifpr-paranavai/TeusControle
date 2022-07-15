@@ -80,7 +80,7 @@ class LoginWidget extends State<LoginPage> {
   RoundedButton _loginButton() {
     return RoundedButton(
       label: controller.getButtonLabel,
-      widget: controller.getButtonWidget,
+      isLoading: controller.isLoading,
       onPressed: () async {
         setState(
           () => controller.changeLoading(),

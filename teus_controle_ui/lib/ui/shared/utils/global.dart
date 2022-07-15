@@ -2,6 +2,7 @@ library my_prj.globals;
 
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,6 +16,7 @@ const String userProfileImage = 'profile-image';
 const String userName = 'profile-name';
 final navigatorKey = GlobalKey<NavigatorState>();
 
+final oCcy = NumberFormat.simpleCurrency(locale: 'pt_br');
 //#region USER
 void setJwtToken(String jwt) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -115,4 +117,29 @@ String formatReceivedDate(String inDate) {
 
   return '${dates[2]}/${dates[1]}/${dates[0]}';
 }
+
+String formatReceivedDouble(String value) {
+  return value.replaceAll(".", ",");
+}
+
+double formatSentDouble(String value) {
+  if (value.isEmpty) {
+    return 0.0;
+  }
+
+  List<String> values = value.split(',');
+  String intValue = values[0].replaceAll('.', '');
+  String floatValue = values.length == 1 ? '0' : values[1];
+
+  return double.parse('$intValue.$floatValue');
+}
+
+String isEmptyToPrint(String? value) {
+  if (value == null) {
+    return '-';
+  }
+
+  return value.isEmpty ? '-' : value;
+}
+
 //#endregion

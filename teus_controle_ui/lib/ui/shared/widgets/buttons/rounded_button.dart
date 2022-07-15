@@ -8,6 +8,7 @@ class RoundedButton extends StatelessWidget {
     this.widget,
     this.leading,
     this.minWidth = 180.0,
+    this.isLoading = false,
   })  : assert(
           !(label == null && widget == null),
           "É necessário informar, um label, ou um widget.",
@@ -23,6 +24,7 @@ class RoundedButton extends StatelessWidget {
   final String? label;
   final void Function()? onPressed;
   final double minWidth;
+  final bool isLoading;
 
   final List<Widget> textChild = [];
 
@@ -59,6 +61,18 @@ class RoundedButton extends StatelessWidget {
       );
     }
 
+    return SizedBox(
+      height: 55.0,
+      width: isLoading ? 55 : null,
+      child: isLoading ? _loadingProgress() : _materialButton(context),
+    );
+  }
+
+  Widget _loadingProgress() {
+    return const CircularProgressIndicator();
+  }
+
+  Widget _materialButton(BuildContext context) {
     return Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(100.0),

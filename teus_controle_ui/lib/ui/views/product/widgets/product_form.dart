@@ -57,16 +57,10 @@ class ProductFormState extends State<ProductForm> {
                 _gtinField(widget.controller),
                 _inStockField(widget.controller),
                 _avgPriceField(widget.controller),
-                _maxPriceField(widget.controller),
-                _grossWeightField(widget.controller),
-                _netWeightField(widget.controller),
                 _brandNameField(widget.controller),
                 _brandPictureField(widget.controller),
                 _gpcCodeField(widget.controller),
                 _gpcDescriptionField(widget.controller),
-                _heightField(widget.controller),
-                _lengthField(widget.controller),
-                _widthField(widget.controller),
                 _ncmCodeField(widget.controller),
                 _ncmDescriptionField(widget.controller),
                 _ncmFullDescriptionField(widget.controller),
@@ -110,16 +104,6 @@ class ProductFormState extends State<ProductForm> {
     );
   }
 
-  TextInputField _maxPriceField(ProductController controller) {
-    return TextInputField(
-      labelText: "Preço máximo",
-      paddingBottom: 10.0,
-      mask: controller.priceFormatter,
-      controller: controller.maxPriceController,
-      validator: controller.maxPriceValidator,
-    );
-  }
-
   TextInputField _priceField(ProductController controller) {
     return TextInputField(
       labelText: "Preço",
@@ -127,26 +111,6 @@ class ProductFormState extends State<ProductForm> {
       mask: controller.priceFormatter,
       controller: controller.priceController,
       validator: controller.priceValidator,
-    );
-  }
-
-  TextInputField _grossWeightField(ProductController controller) {
-    return TextInputField(
-      labelText: "Peso bruto",
-      paddingBottom: 10.0,
-      mask: controller.weightFormatter,
-      controller: controller.grossWeightController,
-      validator: controller.grossWeightValidator,
-    );
-  }
-
-  TextInputField _netWeightField(ProductController controller) {
-    return TextInputField(
-      labelText: "Peso líquido",
-      paddingBottom: 10.0,
-      mask: controller.weightFormatter,
-      controller: controller.netWeightController,
-      validator: controller.netWeightValidator,
     );
   }
 
@@ -192,36 +156,6 @@ class ProductFormState extends State<ProductForm> {
       paddingBottom: 10.0,
       validator: controller.gtinValidator,
       controller: controller.gtinController,
-    );
-  }
-
-  TextInputField _heightField(ProductController controller) {
-    return TextInputField(
-      labelText: "Altura",
-      paddingBottom: 10.0,
-      mask: controller.heightFormatter,
-      validator: controller.heightValidator,
-      controller: controller.heightController,
-    );
-  }
-
-  TextInputField _lengthField(ProductController controller) {
-    return TextInputField(
-      labelText: "Comprimento",
-      paddingBottom: 10.0,
-      mask: controller.lengthFormatter,
-      validator: controller.lengthValidator,
-      controller: controller.lengthController,
-    );
-  }
-
-  TextInputField _widthField(ProductController controller) {
-    return TextInputField(
-      labelText: "Largura",
-      paddingBottom: 10.0,
-      mask: controller.widthFormatter,
-      validator: controller.widthValidator,
-      controller: controller.widthController,
     );
   }
 

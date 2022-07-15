@@ -102,24 +102,6 @@
             </summary>
             <example>10.55</example>
         </member>
-        <member name="P:Core.Shared.Models.Product.CreateProductModel.MaxPrice">
-            <summary>
-            Preço máximo
-            </summary>
-            <example>15.55</example>
-        </member>
-        <member name="P:Core.Shared.Models.Product.CreateProductModel.GrossWeight">
-            <summary>
-            Peso bruto
-            </summary>
-            <example>0.155</example>
-        </member>
-        <member name="P:Core.Shared.Models.Product.CreateProductModel.NetWeight">
-            <summary>
-            Preço líquido
-            </summary>
-            <example>0.106</example>
-        </member>
         <member name="P:Core.Shared.Models.Product.CreateProductModel.BrandName">
             <summary>
             Nome da marca
@@ -149,24 +131,6 @@
             Código de barras
             </summary>
             <example>7891910000197</example>
-        </member>
-        <member name="P:Core.Shared.Models.Product.CreateProductModel.Height">
-            <summary>
-            Altura
-            </summary>
-            <example>10.05</example>
-        </member>
-        <member name="P:Core.Shared.Models.Product.CreateProductModel.Length">
-            <summary>
-            Comprimento
-            </summary>
-            <example>10.05</example>
-        </member>
-        <member name="P:Core.Shared.Models.Product.CreateProductModel.Width">
-            <summary>
-            Largura
-            </summary>
-            <example>10.05</example>
         </member>
         <member name="P:Core.Shared.Models.Product.CreateProductModel.NcmCode">
             <summary>

@@ -20,3 +20,4 @@ D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Core\bin\Debug\netcoreap
 D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Core\bin\Debug\netcoreapp3.1\Core.Shared.pdb
 D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Core\bin\Debug\netcoreapp3.1\Core.Shared.xml
 D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Core\obj\Debug\netcoreapp3.1\Core.csproj.CopyComplete
+D:\Meus Docs\Desktop\4ano\TCC\TeusControle\TeusControle\Core\obj\Debug\netcoreapp3.1\Core.GeneratedMSBuildEditorConfig.editorconfig

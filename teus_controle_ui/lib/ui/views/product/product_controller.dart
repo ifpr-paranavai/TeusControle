@@ -17,18 +17,12 @@ class ProductController {
 
   final descriptionController = TextEditingController();
   final avgPriceController = TextEditingController();
-  final maxPriceController = TextEditingController();
   final priceController = TextEditingController();
-  final grossWeightController = TextEditingController();
-  final netWeightController = TextEditingController();
   final brandNameController = TextEditingController();
   final brandImageController = TextEditingController();
   final gpcCodeController = TextEditingController();
   final gpcDescriptionController = TextEditingController();
   final gtinController = TextEditingController();
-  final heightController = TextEditingController();
-  final lengthController = TextEditingController();
-  final widthController = TextEditingController();
   final ncmCodeController = TextEditingController();
   final ncmDescriptionController = TextEditingController();
   final ncmFullDescriptionController = TextEditingController();
@@ -38,18 +32,12 @@ class ProductController {
   void disposeFields() {
     descriptionController.dispose();
     avgPriceController.dispose();
-    maxPriceController.dispose();
     priceController.dispose();
-    grossWeightController.dispose();
-    netWeightController.dispose();
     brandNameController.dispose();
     brandImageController.dispose();
     gpcCodeController.dispose();
     gpcDescriptionController.dispose();
     gtinController.dispose();
-    heightController.dispose();
-    lengthController.dispose();
-    widthController.dispose();
     ncmCodeController.dispose();
     ncmDescriptionController.dispose();
     ncmFullDescriptionController.dispose();
@@ -60,18 +48,12 @@ class ProductController {
   void clearFields() {
     descriptionController.clear();
     avgPriceController.clear();
-    maxPriceController.clear();
     priceController.clear();
-    grossWeightController.clear();
-    netWeightController.clear();
     brandNameController.clear();
     brandImageController.clear();
     gpcCodeController.clear();
     gpcDescriptionController.clear();
     gtinController.clear();
-    heightController.clear();
-    lengthController.clear();
-    widthController.clear();
     ncmCodeController.clear();
     ncmDescriptionController.clear();
     ncmFullDescriptionController.clear();
@@ -81,24 +63,61 @@ class ProductController {
 
   void autoCompleteFields(ProductGetResponseModel product) {
     descriptionController.text = product.description;
-    avgPriceController.text = product.avgPrice.toString();
-    maxPriceController.text = product.maxPrice.toString();
-    priceController.text = product.price.toString();
-    grossWeightController.text = product.grossWeight.toString();
-    netWeightController.text = product.netWeight.toString();
+    avgPriceController.text =
+        globals.formatReceivedDouble(product.avgPrice.toString());
+    priceController.text =
+        globals.formatReceivedDouble(product.price.toString());
     brandNameController.text = product.brandName;
     brandImageController.text = product.brandPicture;
     gpcCodeController.text = product.gpcCode;
     gpcDescriptionController.text = product.gpcDescription;
     gtinController.text = product.gtin;
-    heightController.text = product.height.toString();
-    lengthController.text = product.length.toString();
-    widthController.text = product.width.toString();
     ncmCodeController.text = product.ncmCode;
     ncmDescriptionController.text = product.ncmDescription;
     ncmFullDescriptionController.text = product.ncmFullDescription;
     thumbnailController.text = product.thumbnail;
-    inStockController.text = product.inStock.toString();
+    inStockController.text = product.inStock.toString().replaceAll('.0', '');
+  }
+
+  List<TextInputFormatter> get priceFormatter {
+    return [
+      FilteringTextInputFormatter.digitsOnly,
+      CentavosInputFormatter(),
+    ];
+  }
+
+  List<TextInputFormatter> get inStockFormatter {
+    return [
+      FilteringTextInputFormatter.digitsOnly,
+    ];
+  }
+
+  List<TextInputFormatter> get heightFormatter {
+    return [
+      FilteringTextInputFormatter.digitsOnly,
+      AlturaInputFormatter(),
+    ];
+  }
+
+  List<TextInputFormatter> get lengthFormatter {
+    return [
+      FilteringTextInputFormatter.digitsOnly,
+      AlturaInputFormatter(),
+    ];
+  }
+
+  List<TextInputFormatter> get widthFormatter {
+    return [
+      FilteringTextInputFormatter.digitsOnly,
+      AlturaInputFormatter(),
+    ];
+  }
+
+  List<TextInputFormatter> get weightFormatter {
+    return [
+      FilteringTextInputFormatter.digitsOnly,
+      PesoInputFormatter(),
+    ];
   }
 
   MultiValidator get descriptionValidator {
@@ -119,10 +138,6 @@ class ProductController {
     return MultiValidator([]);
   }
 
-  MultiValidator get maxPriceValidator {
-    return MultiValidator([]);
-  }
-
   MultiValidator get priceValidator {
     return MultiValidator([
       RequiredValidator(errorText: 'Campo obrigatório'),
@@ -133,14 +148,6 @@ class ProductController {
     return MultiValidator([
       RequiredValidator(errorText: 'Campo obrigatório'),
     ]);
-  }
-
-  MultiValidator get netWeightValidator {
-    return MultiValidator([]);
-  }
-
-  MultiValidator get grossWeightValidator {
-    return MultiValidator([]);
   }
 
   MultiValidator get brandNameValidator {
@@ -185,18 +192,6 @@ class ProductController {
     ]);
   }
 
-  MultiValidator get heightValidator {
-    return MultiValidator([]);
-  }
-
-  MultiValidator get lengthValidator {
-    return MultiValidator([]);
-  }
-
-  MultiValidator get widthValidator {
-    return MultiValidator([]);
-  }
-
   MultiValidator get ncmCodeValidator {
     return MultiValidator([]);
   }
@@ -207,47 +202,6 @@ class ProductController {
 
   MultiValidator get ncmFullDescriptionValidator {
     return MultiValidator([]);
-  }
-
-  List<TextInputFormatter> get priceFormatter {
-    return [
-      FilteringTextInputFormatter.digitsOnly,
-      RealInputFormatter(),
-    ];
-  }
-
-  List<TextInputFormatter> get inStockFormatter {
-    return [
-      FilteringTextInputFormatter.digitsOnly,
-    ];
-  }
-
-  List<TextInputFormatter> get heightFormatter {
-    return [
-      FilteringTextInputFormatter.digitsOnly,
-      AlturaInputFormatter(),
-    ];
-  }
-
-  List<TextInputFormatter> get lengthFormatter {
-    return [
-      FilteringTextInputFormatter.digitsOnly,
-      AlturaInputFormatter(),
-    ];
-  }
-
-  List<TextInputFormatter> get widthFormatter {
-    return [
-      FilteringTextInputFormatter.digitsOnly,
-      AlturaInputFormatter(),
-    ];
-  }
-
-  List<TextInputFormatter> get weightFormatter {
-    return [
-      FilteringTextInputFormatter.digitsOnly,
-      PesoInputFormatter(),
-    ];
   }
 
   Future<void> onConfirmButton(
@@ -298,23 +252,17 @@ class ProductController {
   Future<bool> _postRequest(BuildContext context) async {
     var data = ProductPostRequestModel(
       description: descriptionController.text,
-      height: stringToDouble(heightController.text),
-      width: stringToDouble(widthController.text),
-      length: stringToDouble(lengthController.text),
-      avgPrice: stringToDouble(avgPriceController.text),
+      avgPrice: globals.formatSentDouble(avgPriceController.text),
       brandName: brandNameController.text,
       brandPicture: brandImageController.text,
       gpcCode: gpcCodeController.text,
       gpcDescription: gpcDescriptionController.text,
-      grossWeight: stringToDouble(grossWeightController.text),
       gtin: gtinController.text,
-      inStock: stringToDouble(inStockController.text),
-      maxPrice: stringToDouble(maxPriceController.text),
+      inStock: globals.formatSentDouble(inStockController.text),
       ncmCode: ncmCodeController.text,
       ncmDescription: ncmDescriptionController.text,
       ncmFullDescription: ncmFullDescriptionController.text,
-      netWeight: stringToDouble(netWeightController.text),
-      price: stringToDouble(priceController.text),
+      price: globals.formatSentDouble(priceController.text),
       thumbnail: thumbnailController.text,
     );
 
@@ -333,23 +281,17 @@ class ProductController {
   Future<bool> _putRequest(BuildContext context, int id, bool active) async {
     var data = ProductPutRequestModel(
       description: descriptionController.text,
-      height: stringToDouble(heightController.text),
-      width: stringToDouble(widthController.text),
-      length: stringToDouble(lengthController.text),
-      avgPrice: stringToDouble(avgPriceController.text),
+      avgPrice: globals.formatSentDouble(avgPriceController.text),
       brandName: brandNameController.text,
       brandPicture: brandImageController.text,
       gpcCode: gpcCodeController.text,
       gpcDescription: gpcDescriptionController.text,
-      grossWeight: stringToDouble(grossWeightController.text),
       gtin: gtinController.text,
-      inStock: stringToDouble(inStockController.text),
-      maxPrice: stringToDouble(maxPriceController.text),
+      inStock: globals.formatSentDouble(inStockController.text),
       ncmCode: ncmCodeController.text,
       ncmDescription: ncmDescriptionController.text,
       ncmFullDescription: ncmFullDescriptionController.text,
-      netWeight: stringToDouble(netWeightController.text),
-      price: stringToDouble(priceController.text),
+      price: globals.formatSentDouble(priceController.text),
       thumbnail: thumbnailController.text,
       active: active,
       id: id,
@@ -382,12 +324,5 @@ class ProductController {
     int id,
   ) async {
     await service.deleteRequest(context, id);
-  }
-
-  double stringToDouble(String value) {
-    if (value.isEmpty) {
-      return 0.0;
-    }
-    return double.parse(value);
   }
 }

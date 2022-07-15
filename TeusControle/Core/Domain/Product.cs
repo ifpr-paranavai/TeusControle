@@ -15,12 +15,6 @@ namespace Core.Domain
         public decimal? AvgPrice { get; set; }
 
         public decimal Price { get; set; }
-        
-        public decimal? MaxPrice { get; set; }
-
-        public decimal? GrossWeight { get; set; }
-
-        public decimal? NetWeight { get; set; }
 
         public string BrandName { get; set; }
 
@@ -31,12 +25,6 @@ namespace Core.Domain
         public string GpcDescription { get; set; }
 
         public string Gtin { get; set; }
-
-        public decimal? Height { get; set; }
-
-        public decimal? Length { get; set; }
-
-        public decimal? Width { get; set; }
 
         public string NcmCode { get; set; }
 

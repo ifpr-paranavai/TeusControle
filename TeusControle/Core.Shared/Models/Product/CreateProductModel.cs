@@ -27,24 +27,6 @@ namespace Core.Shared.Models.Product
         public decimal Price { get; set; }
 
         /// <summary>
-        /// Preço máximo
-        /// </summary>
-        /// <example>15.55</example>
-        public decimal? MaxPrice { get; set; }
-
-        /// <summary>
-        /// Peso bruto
-        /// </summary>
-        /// <example>0.155</example>
-        public decimal? GrossWeight { get; set; }
-
-        /// <summary>
-        /// Preço líquido
-        /// </summary>
-        /// <example>0.106</example>
-        public decimal? NetWeight { get; set; }
-
-        /// <summary>
         /// Nome da marca
         /// </summary>
         /// <example>STR MICRONS</example>
@@ -73,24 +55,6 @@ namespace Core.Shared.Models.Product
         /// </summary>
         /// <example>7891910000197</example>
         public string Gtin { get; set; }
-
-        /// <summary>
-        /// Altura
-        /// </summary>
-        /// <example>10.05</example>
-        public decimal? Height { get; set; }
-
-        /// <summary>
-        /// Comprimento
-        /// </summary>
-        /// <example>10.05</example>
-        public decimal? Length { get; set; }
-
-        /// <summary>
-        /// Largura
-        /// </summary>
-        /// <example>10.05</example>
-        public decimal? Width { get; set; }
 
         /// <summary>
         /// Código NCM
