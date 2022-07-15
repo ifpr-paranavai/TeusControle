@@ -18,3 +18,8 @@
 /TeusControle/TeusControleApi/obj/Debug/netcoreapp3.1/TeusControleApi.GeneratedMSBuildEditorConfig.editorconfig
 /TeusControle/TeusControleApi/bin/Debug/netcoreapp3.1/TeusControleApi.StaticWebAssets.xml
 /TeusControle/WebApi.Tests/obj/Debug/netcoreapp3.1/WebApi.Tests.GeneratedMSBuildEditorConfig.editorconfig
+/TeusControle/.vs/TeusControle/v17
+/TeusControle/Core/obj/Debug/netcoreapp3.1
+/TeusControle/Data/obj/Debug/netcoreapp3.1
+/TeusControle/Manager/obj/Debug/netcoreapp3.1
+/TeusControle/TeusControleApi/obj/Debug/netcoreapp3.1
