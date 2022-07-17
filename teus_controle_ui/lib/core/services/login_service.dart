@@ -2,11 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import '../../ui/shared/utils/global.dart' as globals;
-import '../apis/dio_config.dart';
+import '../apis/teus_controle_dio_config.dart';
 
 class LoginService {
   String endpoint = 'Auth';
-  Future<Dio> futureDio = DioConfig.builderConfig();
+  Future<Dio> futureDio = TeusControleDioConfig.builderConfig();
 
   Future<String?> postLogin(
     String email,

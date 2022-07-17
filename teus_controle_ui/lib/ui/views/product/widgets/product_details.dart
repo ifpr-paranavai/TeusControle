@@ -67,10 +67,6 @@ class _ProductDetailsState extends State<ProductDetails> {
     return Column(
       children: [
         ListTile(
-          title: const Text('Imagem do Produto'),
-          subtitle: Text(globals.isEmptyToPrint(product!.thumbnail)),
-        ),
-        ListTile(
           title: const Text('Descrição'),
           subtitle: Text(globals.isEmptyToPrint(product!.description)),
         ),
@@ -125,6 +121,10 @@ class _ProductDetailsState extends State<ProductDetails> {
         ListTile(
           title: const Text('Última Alteração'),
           subtitle: Text(globals.isEmptyToPrint(product!.lastChange)),
+        ),
+        ListTile(
+          title: const Text('Imagem do Produto'),
+          subtitle: Text(globals.isEmptyToPrint(product!.thumbnail)),
         ),
       ],
     );

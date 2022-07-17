@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import '../../ui/shared/utils/global.dart' as globals;
-import '../apis/dio_config.dart';
+import '../apis/teus_controle_dio_config.dart';
 import '../models/paginated/filter_params.dart';
 import '../models/paginated/paged_model.dart';
 import '../models/paginated/sorting_params.dart';
@@ -10,7 +10,7 @@ import '../models/paginated/sorting_params.dart';
 abstract class BaseService {
   BaseService({required this.endpoint});
 
-  Future<Dio> futureDio = DioConfig.builderConfig();
+  Future<Dio> futureDio = TeusControleDioConfig.builderConfig();
   final String endpoint;
 
   List<SortingParams> sortingParams = [];

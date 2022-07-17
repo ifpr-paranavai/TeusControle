@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 
 import '../../ui/shared/utils/global.dart' as globals;
 
-class DioConfig {
+class TeusControleDioConfig {
   static Future<Dio> builderConfig() async {
     Map<String, String> header = {
       "Content-Type": "application/json",
@@ -14,8 +14,8 @@ class DioConfig {
     }
 
     var options = BaseOptions(
-      baseUrl: "https://172.21.102.251:45455/api/",
-      // baseUrl: "https://10.0.0.199:45455/api/",
+      // baseUrl: "https://172.21.102.251:45455/api/",
+      baseUrl: "https://10.0.0.199:45455/api/",
       // baseUrl: "https://192.168.237.68:45455/api/",
       connectTimeout: 15000,
       receiveTimeout: 15000,
