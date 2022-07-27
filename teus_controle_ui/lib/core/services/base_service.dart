@@ -2,7 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import '../../ui/shared/utils/global.dart' as globals;
+import '../../ui/shared/widgets/tables/paginated/table_data.dart';
 import '../apis/teus_controle_dio_config.dart';
+import '../models/paginated/enums/filter_enum.dart';
 import '../models/paginated/filter_params.dart';
 import '../models/paginated/paged_model.dart';
 import '../models/paginated/sorting_params.dart';
@@ -28,6 +30,17 @@ abstract class BaseService {
 
   void addFilter(FilterParam filterParam) {
     filterParams.add(filterParam);
+  }
+
+  void addSearchFilter(List<TableColumn> tableColumn, String value) {
+    tableColumn.map(
+      (e) => addFilter(
+        FilterParam(
+            columnName: e.reference,
+            filterValue: value,
+            filterOption: FilterEnum.contains),
+      ),
+    );
   }
 
   void addSort(SortingParams sortingParam) {

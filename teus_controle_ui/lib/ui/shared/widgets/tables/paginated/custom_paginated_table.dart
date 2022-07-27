@@ -51,13 +51,14 @@ class _CustomTableState extends State<CustomPaginatedTable> {
 
   @override
   void initState() {
-    canBeSelected = widget.tableData.columns.any((element) => element.isId);
-    if (canBeSelected) {
-      idReference = widget.tableData.columns
-          .where((element) => element.isId)
-          .first
-          .reference;
-    }
+    // canBeSelected = widget.tableData.columns.any((element) => element.isId); //todo: resolver seleção para impressão
+    canBeSelected = false;
+    // if (canBeSelected) {
+    idReference = widget.tableData.columns
+        .where((element) => element.isId)
+        .first
+        .reference;
+    // }
 
     super.initState();
   }

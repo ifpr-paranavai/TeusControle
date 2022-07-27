@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart' as cuppertino;
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -138,7 +139,7 @@ class HomeWidget extends State<HomePage> with SingleTickerProviderStateMixin {
           onChangePage: () => tabController.animateTo(0),
         ),
         DrawerListItem(
-          icon: Icons.shopping_bag,
+          icon: cuppertino.CupertinoIcons.barcode,
           title: "Produtos",
           isActive: tabController.index == 1,
           drawerStatus: drawerStatus,
@@ -174,6 +175,21 @@ class HomeWidget extends State<HomePage> with SingleTickerProviderStateMixin {
                         color: Theme.of(context).primaryColorLight,
                       ),
                     );
+                  },
+                  loadingBuilder: (BuildContext context, Widget child,
+                      ImageChunkEvent? loadingProgress) {
+                    if (loadingProgress == null) {
+                      return child;
+                    }
+                    return Center(
+                      child: CircularProgressIndicator(
+                        value: loadingProgress.expectedTotalBytes != null
+                            ? loadingProgress.cumulativeBytesLoaded /
+                                loadingProgress.expectedTotalBytes!
+                            : null,
+                      ),
+                    );
+                    return Container();
                   },
                 ),
               ),

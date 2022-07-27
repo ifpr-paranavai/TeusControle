@@ -4,7 +4,7 @@ import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'core/styles/app_theme_data.dart';
+import 'ui/shared/styles/app_theme_data.dart';
 import 'ui/shared/utils/my_custom_scroll_behavior.dart';
 import 'ui/views/home/home_page.dart';
 import 'ui/views/landing/landing_page.dart';

@@ -87,6 +87,10 @@ class _UserDetailsState extends State<UserDetails> {
           subtitle: Text(user!.email),
         ),
         ListTile(
+          title: const Text('Imagem'),
+          subtitle: Text(user!.profileImage ?? '-'),
+        ),
+        ListTile(
           title: const Text('Data Criação'),
           subtitle: Text(user!.createdDate ?? '-'),
         ),

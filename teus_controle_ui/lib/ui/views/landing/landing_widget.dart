@@ -19,6 +19,7 @@ class LandingWidget extends State<LandingPage> {
     if (_jwtToken == "" || !await globals.isJwtValid(_jwtToken)) {
       Navigator.pushNamedAndRemoveUntil(
           context, LoginPage.route, ModalRoute.withName(LoginPage.route));
+      return;
     }
 
     Navigator.pushNamedAndRemoveUntil(
