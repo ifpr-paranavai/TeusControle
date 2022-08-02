@@ -4,7 +4,7 @@ import 'custom_dialog.dart';
 
 class DeleteDialog extends StatefulWidget {
   final String value;
-  final Future Function() onConfirm;
+  final Future Function()? onConfirm;
 
   const DeleteDialog({
     Key? key,
@@ -30,7 +30,7 @@ class _DeleteDialogState extends State<DeleteDialog> {
         child: _content(),
       ),
       title: "Excluir",
-      onConfirm: _onConfirm,
+      onConfirm: widget.onConfirm != null ? _onConfirm : null,
     );
   }
 
@@ -46,7 +46,7 @@ class _DeleteDialogState extends State<DeleteDialog> {
       _isLoading = !_isLoading;
     });
 
-    await widget.onConfirm();
+    await widget.onConfirm!();
 
     setState(() {
       _isLoading = !_isLoading;

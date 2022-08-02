@@ -10,7 +10,7 @@ UserPagedModel _$UserPagedModelFromJson(Map<String, dynamic> json) =>
     UserPagedModel(
       id: json['id'] as int,
       name: json['name'] as String,
-      cpfCnpj: json['cpfCnpj'] as String,
+      profileType: json['profileType'] as String,
       email: json['email'] as String,
       birthDate: json['birthDate'] as String,
     );
@@ -19,7 +19,7 @@ Map<String, dynamic> _$UserPagedModelToJson(UserPagedModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'cpfCnpj': instance.cpfCnpj,
+      'profileType': instance.profileType,
       'email': instance.email,
       'birthDate': instance.birthDate,
     };

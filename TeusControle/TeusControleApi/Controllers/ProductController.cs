@@ -24,10 +24,10 @@ namespace TeusControleApi.Controllers
         /// <summary>
         /// Retorna todos os produtos paginado.
         /// </summary>
-        [HttpGet]
+        [HttpPost("paged")]
         [ProducesResponseType(typeof(PaginatedResponse<ProductPagedModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public IActionResult Get([FromQuery] PaginatedRequest pagingParams)
+        public IActionResult Get([FromBody] PaginatedRequest pagingParams)
         {
             var paged = productManager.GetPaged(pagingParams);
             if (paged == null)

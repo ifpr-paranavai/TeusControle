@@ -37,6 +37,7 @@ class TableColumn {
   final bool isImage;
   final bool isMoney;
   final ImageType? imageType;
+  final bool shouldIncludeInFilter;
 
   TableColumn({
     required this.label,
@@ -48,6 +49,7 @@ class TableColumn {
     this.isImage = false,
     this.imageType,
     this.isMoney = false,
+    this.shouldIncludeInFilter = true,
   })  : assert(!(isImage && imageType == null),
             "Deveria ser informado tipo de imagem"),
         assert(!(isImage && isMoney), "Não é possível ser imagem e dinheiro"),

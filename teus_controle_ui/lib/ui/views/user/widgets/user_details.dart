@@ -70,10 +70,10 @@ class _UserDetailsState extends State<UserDetails> {
           title: const Text('Nome'),
           subtitle: Text(user!.name),
         ),
-        ListTile(
-          title: Text(user!.documentType == 1 ? 'CPF' : 'CNPJ'),
-          subtitle: Text(user!.cpfCnpj),
-        ),
+        // ListTile(
+        //   title: Text(user!.documentType == 1 ? 'CPF' : 'CNPJ'),
+        //   subtitle: Text(user!.cpfCnpj),
+        // ),
         ListTile(
           title: const Text('Nascimento'),
           subtitle: Text(globals.formatReceivedDate(user!.birthDate)),

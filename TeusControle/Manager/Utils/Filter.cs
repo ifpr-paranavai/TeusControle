@@ -23,7 +23,7 @@ namespace Manager.Utils
             IEnumerable<T> data
         )
         {
-
+            IEnumerable<T> outData = Enumerable.Empty<T>();
             IEnumerable<string> distinctColumns = filterParams.Where(x => !String.IsNullOrEmpty(x.ColumnName))
                 .Select(x => x.ColumnName)
                 .Distinct();
@@ -36,38 +36,19 @@ namespace Manager.Utils
                 );
                 if (filterColumn != null)
                 {
-                    IEnumerable<FilterParamsRequest> filterValues = filterParams
+                    FilterParamsRequest filterValues = filterParams
                         .Where(x => x.ColumnName.Equals(colName))
-                        .Distinct();
+                        .FirstOrDefault();
 
-                    if (filterValues.Count() > 1)
-                    {
-                        IEnumerable<T> sameColData = Enumerable.Empty<T>();
-
-                        foreach (var val in filterValues)
-                        {
-                            sameColData = sameColData.Concat(FilterData(
-                                val.FilterOption, 
-                                data, 
-                                filterColumn, 
-                                val.FilterValue
-                            ));
-                        }
-
-                        data = data.Intersect(sameColData);
-                    }
-                    else
-                    {
-                        data = FilterData(
-                            filterValues.FirstOrDefault().FilterOption,
-                            data,
-                            filterColumn,
-                            filterValues.FirstOrDefault().FilterValue
-                        );
-                    }
+                    outData = outData.Concat(FilterData(
+                        filterValues.FilterOption,
+                        data,
+                        filterColumn,
+                        filterValues.FilterValue
+                    ));
                 }
             }
-            return data;
+            return outData.Distinct();
         }
 
         private static IEnumerable<T> FilterData(

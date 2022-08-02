@@ -32,15 +32,21 @@ abstract class BaseService {
     filterParams.add(filterParam);
   }
 
+  void removeFilters() {
+    filterParams = [];
+  }
+
   void addSearchFilter(List<TableColumn> tableColumn, String value) {
-    tableColumn.map(
-      (e) => addFilter(
-        FilterParam(
-            columnName: e.reference,
-            filterValue: value,
-            filterOption: FilterEnum.contains),
-      ),
-    );
+    for (var e in tableColumn) {
+      if (e.shouldIncludeInFilter) {
+        addFilter(
+          FilterParam(
+              columnName: e.reference,
+              filterValue: value,
+              filterOption: FilterEnum.contains),
+        );
+      }
+    }
   }
 
   void addSort(SortingParams sortingParam) {
@@ -64,13 +70,13 @@ abstract class BaseService {
     Dio dio = await futureDio;
 
     try {
-      var response = await dio.get(
-        endpoint,
-        queryParameters: {
-          'SortingParams': sortingParams,
-          'FilterParams': filterParams,
-          'PageNumber': pageNumber,
-          'PageSize': pageSize,
+      var response = await dio.post(
+        endpoint + "/paged",
+        data: {
+          'sortingParams': sortingParams,
+          'filterParams': filterParams,
+          'pageNumber': pageNumber,
+          'pageSize': pageSize,
         },
       );
       PagedModel responseData = deserializePagedResponse(response.data);

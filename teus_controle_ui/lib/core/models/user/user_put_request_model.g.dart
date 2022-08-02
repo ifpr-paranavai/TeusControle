@@ -9,8 +9,6 @@ part of 'user_put_request_model.dart';
 UserPutRequestModel _$UserPutRequestModelFromJson(Map<String, dynamic> json) =>
     UserPutRequestModel(
       name: json['name'] as String,
-      cpfCnpj: json['cpfCnpj'] as String,
-      documentType: json['documentType'] as int,
       birthDate: json['birthDate'] as String,
       profileImage: json['profileImage'] as String,
       profileType: json['profileType'] as String,
@@ -24,8 +22,6 @@ Map<String, dynamic> _$UserPutRequestModelToJson(
         UserPutRequestModel instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'cpfCnpj': instance.cpfCnpj,
-      'documentType': instance.documentType,
       'birthDate': instance.birthDate,
       'profileImage': instance.profileImage,
       'profileType': instance.profileType,

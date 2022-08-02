@@ -16,6 +16,7 @@ class TextInputField extends StatefulWidget {
     this.controller,
     this.icon,
     this.validator,
+    this.onFieldSubmitted,
   })  : assert(
           !(isPassword && icon != null),
           'Não é permitido informar um ícone e ser um campo de senha ao mesmo tempo.',
@@ -35,6 +36,7 @@ class TextInputField extends StatefulWidget {
   final Color color;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
+  final void Function(String)? onFieldSubmitted;
 
   @override
   _TextInputField createState() => _TextInputField();
@@ -101,6 +103,7 @@ class _TextInputField extends State<TextInputField> {
           suffixIcon: _passwordSuffix(),
         ),
         validator: widget.validator,
+        onFieldSubmitted: widget.onFieldSubmitted,
       ),
     );
   }

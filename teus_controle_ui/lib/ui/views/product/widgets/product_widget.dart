@@ -49,12 +49,14 @@ class ProductWidget extends State<ProductPage> {
         reference: "id",
         isId: true,
         show: false,
+        shouldIncludeInFilter: false,
       ),
       TableColumn(
         label: "Imagem",
         reference: "thumbnail",
         isImage: true,
         imageType: ImageType.network,
+        shouldIncludeInFilter: false,
       ),
       TableColumn(
         label: "Descrição",
@@ -77,6 +79,7 @@ class ProductWidget extends State<ProductPage> {
       TableColumn(
         label: "Em Estoque",
         reference: "inStock",
+        shouldIncludeInFilter: false,
       ),
     ];
   }

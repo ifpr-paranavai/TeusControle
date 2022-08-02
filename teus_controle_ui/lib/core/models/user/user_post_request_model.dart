@@ -6,8 +6,8 @@ part 'user_post_request_model.g.dart';
 class UserPostRequestModel {
   UserPostRequestModel({
     required this.name,
-    required this.cpfCnpj,
-    required this.documentType,
+    // required this.cpfCnpj,
+    // required this.documentType,
     required this.birthDate,
     required this.profileImage,
     required this.profileType,
@@ -15,8 +15,8 @@ class UserPostRequestModel {
     required this.email,
   });
   late final String name;
-  late final String cpfCnpj;
-  late final int documentType;
+  // late final String cpfCnpj;
+  // late final int documentType;
   late final String birthDate;
   late final String profileImage;
   late final String profileType;

@@ -152,9 +152,12 @@ class _DefaultScreenState<T> extends State<DefaultScreen> {
             labelText: "Buscar",
             paddingBottom: 0.0,
             icon: Icons.search,
-            onChanged: (value) {
-              // widget.columns[]
-              // widget.service.filterParams
+            onFieldSubmitted: (value) {
+              widget.service.addSearchFilter(widget.columns, value);
+              setState(() {});
+            },
+            onChanged: (string) {
+              widget.service.removeFilters();
             },
           ),
         ),

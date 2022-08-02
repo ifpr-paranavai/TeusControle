@@ -7,6 +7,7 @@ using Manager.Implementation.Base;
 using Manager.Interfaces;
 using Manager.Interfaces.Repositories;
 using Manager.Interfaces.Services;
+using Manager.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
@@ -102,10 +103,10 @@ namespace Manager.Implementation
                     {
                         Id = s.Id,
                         Name = s.Name,
-                        CpfCnpj = s.CpfCnpj,
-                        DocumentType = s.DocumentType,
+                        /*CpfCnpj = s.CpfCnpj,
+                        DocumentType = s.DocumentType,*/
                         ProfileImage = s.ProfileImage,
-                        ProfileType = s.ProfileType,
+                        ProfileType = s.ProfileType, // TODO: listar descrição e editar model cadastro e edição
                         Email = s.Email,
                         Active = s.Active,
                         CreatedDate = s.CreatedDate,
@@ -132,7 +133,8 @@ namespace Manager.Implementation
                     x => new UserPagedModel {
                         Id = x.Id,
                         Name = x.Name,
-                        CpfCnpj = x.CpfCnpj,
+                        ProfileType = EnumExtension.GetDescription(x.ProfileType),
+                        /*CpfCnpj = x.CpfCnpj,*/
                         Email = x.Email,
                         BirthDate = x.BirthDate.Value.ToString("dd/MM/yyyy")
                     }

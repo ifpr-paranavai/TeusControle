@@ -14,7 +14,7 @@ namespace Core.Shared.Models.User
         /// <example>John Doe</example>
         public string Name { get; set; }
 
-        /// <summary>
+        /*/// <summary>
         /// Documento do usuário CPF ou CNPJ
         /// </summary>
         /// <example>69909465043</example>
@@ -24,7 +24,7 @@ namespace Core.Shared.Models.User
         /// Tipo do documento do usuário
         /// </summary>
         /// <example>1</example>
-        public int DocumentType { get; set; }
+        public int DocumentType { get; set; }*/
 
         /// <summary>
         /// Data de nascimento do usuário

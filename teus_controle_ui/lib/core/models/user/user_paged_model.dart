@@ -6,14 +6,14 @@ part 'user_paged_model.g.dart';
 class UserPagedModel {
   late final int id;
   late final String name;
-  late final String cpfCnpj;
+  late final String profileType;
   late final String email;
   late final String birthDate;
 
   UserPagedModel({
     required this.id,
     required this.name,
-    required this.cpfCnpj,
+    required this.profileType,
     required this.email,
     required this.birthDate,
   });
@@ -26,7 +26,7 @@ class UserPagedModel {
   dynamic getProp(String key) => <String, dynamic>{
         'id': id,
         'name': name,
-        'cpfCnpj': cpfCnpj,
+        'profileType': profileType,
         'email': email,
         'birthDate': birthDate,
       }[key];

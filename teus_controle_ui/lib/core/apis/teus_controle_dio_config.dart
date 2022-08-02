@@ -14,8 +14,8 @@ class TeusControleDioConfig {
     }
 
     var options = BaseOptions(
-      baseUrl: "https://172.21.102.251:45455/api/",
-      // baseUrl: "https://10.0.0.199:45455/api/",
+      // baseUrl: "https://172.21.102.251:45455/api/",
+      baseUrl: "https://10.0.0.199:45455/api/",
       // baseUrl: "https://192.168.237.68:45455/api/",
       connectTimeout: 15000,
       receiveTimeout: 15000,

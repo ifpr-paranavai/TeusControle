@@ -16,7 +16,7 @@ class UserController {
   final formKey = GlobalKey<FormState>();
 
   final nameController = TextEditingController();
-  final cpfCnpjController = TextEditingController();
+  // final cpfCnpjController = TextEditingController();
   final birthDateController = TextEditingController();
   final profileImageController = TextEditingController();
   final passwordController = TextEditingController();
@@ -25,7 +25,7 @@ class UserController {
 
   void disposeFields() {
     nameController.dispose();
-    cpfCnpjController.dispose();
+    // cpfCnpjController.dispose();
     birthDateController.dispose();
     profileImageController.dispose();
     passwordController.dispose();
@@ -34,7 +34,7 @@ class UserController {
 
   void clearFields() {
     nameController.clear();
-    cpfCnpjController.clear();
+    // cpfCnpjController.clear();
     birthDateController.clear();
     profileImageController.clear();
     passwordController.clear();
@@ -44,7 +44,7 @@ class UserController {
 
   void autoCompleteFields(UserGetResponseModel user) {
     nameController.text = user.name;
-    cpfCnpjController.text = user.cpfCnpj;
+    // cpfCnpjController.text = user.cpfCnpj;
     birthDateController.text = globals.formatReceivedDate(user.birthDate);
     profileImageController.text = user.profileImage ?? "";
     passwordController.text = user.password ?? "";
@@ -170,8 +170,8 @@ class UserController {
   Future<bool> _postRequest(BuildContext context) async {
     var data = UserPostRequestModel(
       name: nameController.text,
-      cpfCnpj: cpfCnpjController.text.replaceAll(RegExp('[^A-Za-z0-9]'), ''),
-      documentType: cpfCnpjController.text.length > 11 ? 2 : 1,
+      // cpfCnpj: cpfCnpjController.text.replaceAll(RegExp('[^A-Za-z0-9]'), ''),
+      // documentType: cpfCnpjController.text.length > 11 ? 2 : 1,
       birthDate: globals.formatSentDate(birthDateController.text),
       profileImage: profileImageController.text,
       profileType: profileType ?? "",
@@ -194,8 +194,8 @@ class UserController {
   Future<bool> _putRequest(BuildContext context, int id, bool active) async {
     var data = UserPutRequestModel(
       name: nameController.text,
-      cpfCnpj: cpfCnpjController.text.replaceAll(RegExp('[^A-Za-z0-9]'), ''),
-      documentType: cpfCnpjController.text.length > 11 ? 2 : 1,
+      // cpfCnpj: cpfCnpjController.text.replaceAll(RegExp('[^A-Za-z0-9]'), ''),
+      // documentType: cpfCnpjController.text.length > 11 ? 2 : 1,
       birthDate: globals.formatSentDate(birthDateController.text),
       profileImage: profileImageController.text,
       profileType: profileType ?? "",

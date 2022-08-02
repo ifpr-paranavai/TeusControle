@@ -24,11 +24,11 @@ namespace TeusControleApi.Controllers
         /// <summary>
         /// Retorna todos os usuários paginado.
         /// </summary>
-        [HttpGet]
+        [HttpPost("paged")]
         [ProducesResponseType(typeof(PaginatedResponse<UserPagedModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public IActionResult Get([FromQuery] PaginatedRequest pagingParams)
+        public IActionResult Get([FromBody] PaginatedRequest pagingParams)
         {
             var paged = usersManager.GetPaged(pagingParams);
             if (paged == null)

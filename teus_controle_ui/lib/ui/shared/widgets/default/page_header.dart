@@ -14,10 +14,10 @@ class PageHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text("> $pageTitle"),
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.report_problem_rounded),
-        ),
+        // IconButton( //todo: fazer funcionalidade de reportar erro
+        //   onPressed: () {},
+        //   icon: const Icon(Icons.report_problem_rounded),
+        // ),
       ],
     );
   }

@@ -10,8 +10,8 @@ class UserPostResponseModel {
     required this.id,
     required this.active,
     required this.name,
-    required this.cpfCnpj,
-    required this.documentType,
+    // required this.cpfCnpj,
+    // required this.documentType,
     required this.birthDate,
     required this.profileImage,
     required this.profileType,
@@ -23,8 +23,8 @@ class UserPostResponseModel {
   late final int id;
   late final bool active;
   late final String name;
-  late final String cpfCnpj;
-  late final int documentType;
+  // late final String cpfCnpj;
+  // late final int documentType;
   late final String birthDate;
   late final String profileImage;
   late final String profileType;

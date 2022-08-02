@@ -15,9 +15,9 @@ namespace Core.Domain
 
         public string Name { get; set; }
 
-        public string CpfCnpj { get; set; }
+        /*public string CpfCnpj { get; set; }*/
 
-        public int DocumentType { get; set; }
+       /* public int DocumentType { get; set; }*/
 
         public DateTime? BirthDate { get; set; }
 

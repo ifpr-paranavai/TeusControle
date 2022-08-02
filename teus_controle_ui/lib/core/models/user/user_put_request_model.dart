@@ -8,8 +8,8 @@ part 'user_put_request_model.g.dart';
 class UserPutRequestModel extends UserPostRequestModel {
   UserPutRequestModel({
     required String name,
-    required String cpfCnpj,
-    required int documentType,
+    // required String cpfCnpj,
+    // required int documentType,
     required String birthDate,
     required String profileImage,
     required String profileType,
@@ -24,8 +24,8 @@ class UserPutRequestModel extends UserPostRequestModel {
           profileType: profileType,
           profileImage: profileImage,
           birthDate: birthDate,
-          documentType: documentType,
-          cpfCnpj: cpfCnpj,
+          // documentType: documentType,
+          // cpfCnpj: cpfCnpj,
         );
 
   final int id;

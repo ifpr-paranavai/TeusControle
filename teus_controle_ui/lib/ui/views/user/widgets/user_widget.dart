@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:teus_controle_ui/ui/views/user/widgets/user_details.dart';
 
+import '../../../shared/utils/global.dart' as globals;
 import '../../../shared/widgets/default/default_screen.dart';
 import '../../../shared/widgets/dialogs/delete_dialog.dart';
 import '../../../shared/widgets/tables/paginated/table_data.dart';
@@ -10,6 +11,13 @@ import 'user_form.dart';
 
 class UserWidget extends State<UserPage> {
   UserController controller = UserController();
+  late String loggedUserId;
+
+  @override
+  void initState() {
+    globals.getLoggedUserId().then((value) => loggedUserId = value);
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -37,7 +45,9 @@ class UserWidget extends State<UserPage> {
       ),
       deleteDialog: (id, value) => DeleteDialog(
         value: value,
-        onConfirm: () => controller.onDelete(context, id),
+        onConfirm: loggedUserId != id.toString()
+            ? () => controller.onDelete(context, id)
+            : null,
       ),
     );
   }
@@ -49,15 +59,12 @@ class UserWidget extends State<UserPage> {
         reference: "id",
         isId: true,
         show: false,
+        shouldIncludeInFilter: false,
       ),
       TableColumn(
         label: "Nome",
         reference: "name",
         showInPrint: true,
-      ),
-      TableColumn(
-        label: "CPF",
-        reference: "cpfCnpj",
       ),
       TableColumn(
         label: "E-mail",
@@ -66,6 +73,12 @@ class UserWidget extends State<UserPage> {
       TableColumn(
         label: "Data de Nascimento",
         reference: "birthDate",
+        shouldIncludeInFilter: false,
+      ),
+      TableColumn(
+        label: "Tipo de Perfil",
+        reference: "profileType",
+        shouldIncludeInFilter: false,
       ),
     ];
   }

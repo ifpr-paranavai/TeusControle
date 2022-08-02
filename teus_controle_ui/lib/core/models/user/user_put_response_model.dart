@@ -6,8 +6,8 @@ part 'user_put_response_model.g.dart';
 class UserPutResponseModel {
   UserPutResponseModel({
     required this.name,
-    required this.cpfCnpj,
-    required this.documentType,
+    // required this.cpfCnpj,
+    // required this.documentType,
     required this.birthDate,
     required this.profileImage,
     required this.profileType,
@@ -19,8 +19,8 @@ class UserPutResponseModel {
     required this.lastChange,
   });
   late final String name;
-  late final String cpfCnpj;
-  late final int documentType;
+  // late final String cpfCnpj;
+  // late final int documentType;
   late final String birthDate;
   late final String profileImage;
   late final String profileType;

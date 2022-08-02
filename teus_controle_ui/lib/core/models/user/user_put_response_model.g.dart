@@ -10,8 +10,6 @@ UserPutResponseModel _$UserPutResponseModelFromJson(
         Map<String, dynamic> json) =>
     UserPutResponseModel(
       name: json['name'] as String,
-      cpfCnpj: json['cpfCnpj'] as String,
-      documentType: json['documentType'] as int,
       birthDate: json['birthDate'] as String,
       profileImage: json['profileImage'] as String,
       profileType: json['profileType'] as String,
@@ -27,8 +25,6 @@ Map<String, dynamic> _$UserPutResponseModelToJson(
         UserPutResponseModel instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'cpfCnpj': instance.cpfCnpj,
-      'documentType': instance.documentType,
       'birthDate': instance.birthDate,
       'profileImage': instance.profileImage,
       'profileType': instance.profileType,

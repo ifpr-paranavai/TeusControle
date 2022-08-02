@@ -14,10 +14,10 @@ namespace Core.Shared.Models.User
         /// </summary>
         public string Name { get; set; }
 
-        /// <summary>
+/*        /// <summary>
         /// Cpf ou Cnpj
         /// </summary>
-        public string CpfCnpj { get; set; }
+        public string CpfCnpj { get; set; }*/
 
         /// <summary>
         /// E-mail
@@ -28,6 +28,11 @@ namespace Core.Shared.Models.User
         /// Data de nascimento
         /// </summary>
         public string BirthDate { get; set; }
+
+        /// <summary>
+        /// Tipo do Perfil
+        /// </summary>
+        public string ProfileType { get; set; }
 
         public object Clone()
         {

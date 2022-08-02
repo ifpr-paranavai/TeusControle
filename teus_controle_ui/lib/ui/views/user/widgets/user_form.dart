@@ -55,7 +55,7 @@ class _UserFormState extends State<UserForm> {
             child: Column(
               children: [
                 _nameField(widget.controller),
-                _cpfCnpjField(widget.controller),
+                // _cpfCnpjField(widget.controller),
                 _birthDateField(widget.controller, setState),
                 _profileImageField(widget.controller),
                 _profileTypeInput(widget.controller, setState),
@@ -90,15 +90,15 @@ class _UserFormState extends State<UserForm> {
     );
   }
 
-  TextInputField _cpfCnpjField(UserController controller) {
-    return TextInputField(
-      labelText: "Cpf ou Cnpj",
-      paddingBottom: 10.0,
-      mask: controller.cpfMaskFormatter,
-      controller: controller.cpfCnpjController,
-      validator: controller.cpfCnpjValidator,
-    );
-  }
+  // TextInputField _cpfCnpjField(UserController controller) {
+  //   return TextInputField(
+  //     labelText: "Cpf ou Cnpj",
+  //     paddingBottom: 10.0,
+  //     mask: controller.cpfMaskFormatter,
+  //     controller: controller.cpfCnpjController,
+  //     validator: controller.cpfCnpjValidator,
+  //   );
+  // }
 
   DateInputField _birthDateField(
     UserController controller,
