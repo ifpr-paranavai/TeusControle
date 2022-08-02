@@ -368,18 +368,6 @@
             </summary>
             <example>John Doe</example>
         </member>
-        <member name="P:Core.Shared.Models.User.CreateUserModel.CpfCnpj">
-            <summary>
-            Documento do usuário CPF ou CNPJ
-            </summary>
-            <example>69909465043</example>
-        </member>
-        <member name="P:Core.Shared.Models.User.CreateUserModel.DocumentType">
-            <summary>
-            Tipo do documento do usuário
-            </summary>
-            <example>1</example>
-        </member>
         <member name="P:Core.Shared.Models.User.CreateUserModel.BirthDate">
             <summary>
             Data de nascimento do usuário
@@ -451,11 +439,6 @@
             Nome
             </summary>
         </member>
-        <member name="P:Core.Shared.Models.User.UserPagedModel.CpfCnpj">
-            <summary>
-            Cpf ou Cnpj
-            </summary>
-        </member>
         <member name="P:Core.Shared.Models.User.UserPagedModel.Email">
             <summary>
             E-mail
@@ -464,6 +447,11 @@
         <member name="P:Core.Shared.Models.User.UserPagedModel.BirthDate">
             <summary>
             Data de nascimento
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.User.UserPagedModel.ProfileType">
+            <summary>
+            Tipo do Perfil
             </summary>
         </member>
     </members>
