@@ -18,7 +18,6 @@ namespace Core.Domain.Base
 
         public virtual User CreatedByUser { get; set; }
 
-        
         public virtual object Clone()
         {
             return MemberwiseClone();

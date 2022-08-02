@@ -16,13 +16,13 @@ namespace Core.Domain.Base
 
         public DateTime? LastChange { get; set; }
 
-        public int CreatedBy { get; set; }
+        public int? CreatedBy { get; set; }
+
+        public virtual User CreatedByUser { get; set; }
 
         public object Clone()
         {
             return MemberwiseClone();
         }
-
-        // public Users CreatedByUser { get; set; }
     }
 }

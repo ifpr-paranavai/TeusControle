@@ -11,6 +11,7 @@ namespace Core.Domain
         {
             CreatedUsers = new HashSet<User>();
             Products = new HashSet<Product>();
+            Entries = new HashSet<Entry>();
         }
 
         public string Name { get; set; }
@@ -32,8 +33,11 @@ namespace Core.Domain
         public ICollection<User> CreatedUsers { get; set; }
 
         public ICollection<Product> Products { get; set; }
-
         
+        public ICollection<Entry> Entries { get; set; }
+
+        public ICollection<ProductEntry> ProductsEntry { get; set; }
+
         public override object Clone()
         {
             return MemberwiseClone();
@@ -49,7 +53,5 @@ namespace Core.Domain
         // public ICollection<Disposals> Disposals { get; set; }
 
         // public ICollection<ProductDisposals> ProductDisposals { get; set; }
-
-        // public ICollection<Entries> Entries { get; set; }
     }
 }

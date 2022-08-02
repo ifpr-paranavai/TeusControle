@@ -1,4 +1,5 @@
 ﻿using Core.Domain.Base;
+using System.Collections.Generic;
 
 namespace Core.Domain
 {
@@ -6,8 +7,8 @@ namespace Core.Domain
     {
         public Product()
         {
-            /*ProductEntries = new HashSet<ProductEntries>();
-            ProductDisposals = new HashSet<ProductDisposals>();*/
+            ProductsEntry = new HashSet<ProductEntry>();
+            /*ProductDisposals = new HashSet<ProductDisposals>();*/
         }
 
         public string Description { get; set; }
@@ -36,7 +37,7 @@ namespace Core.Domain
 
         public decimal InStock { get; set; }
 
-        /*public ICollection<ProductEntries> ProductEntries { get; set; }*/
+        public ICollection<ProductEntry> ProductsEntry { get; set; }
 
         /*public ICollection<ProductDisposals> ProductDisposals { get; set; }*/
     }
