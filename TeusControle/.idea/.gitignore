@@ -1,0 +1,24 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+../.idea/
+../.vs/
+../TeusControle/Core/bin/
+../TeusControle/Core/obj/
+../TeusControle/Core.Shared/obj/
+../TeusControle/Core.Shared/bin/
+../TeusControle/Data/obj/
+../TeusControle/Data/bin/
+../TeusControle/FakeData/obj/
+../TeusControle/FakeData/bin/
+../TeusControle/Manager/obj/
+../TeusControle/Manager/bin/
+../TeusControle/Manager.Tests/obj/
+../TeusControle/Manager.Tests/bin/
+../TeusControle/Repository.Tests/obj/
+../TeusControle/Repository.Tests/bin/
+../TeusControle/TeusControleApi/obj/
+../TeusControle/TeusControleApi/bin/
+../TeusControle/WebApi.Tests/bin/
+../TeusControle/WebApi.Tests/obj/
+/misc.xml

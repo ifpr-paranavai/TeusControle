@@ -1,5 +1,4 @@
-/TeusControle/.vs/TeusControle/v17/.futdcache.v1
-/TeusControle/.vs/TeusControle/FileContentIndex/113121e6-7497-49fb-8fd4-29ca88af67a2.vsidx
+/TeusControle/.vs/
 /TeusControle/Core/bin/
 /TeusControle/Core/obj/
 /TeusControle/Core.Shared/obj/
@@ -12,10 +11,8 @@
 /TeusControle/Manager/bin/
 /TeusControle/Manager.Tests/obj/
 /TeusControle/Manager.Tests/bin/
-/TeusControle/.vs/TeusControle/
 /TeusControle/Repository.Tests/obj/
 /TeusControle/Repository.Tests/bin/
-/TeusControle/.vs/ProjectEvaluation/
 /TeusControle/TeusControleApi/obj/
 /TeusControle/TeusControleApi/bin/
 /TeusControle/WebApi.Tests/bin/
