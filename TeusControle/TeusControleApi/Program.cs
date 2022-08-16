@@ -7,8 +7,15 @@ using System.IO;
 
 namespace TeusControleApi
 {
+    /// <summary>
+    /// Classe principal da aplicação
+    /// </summary>
     public class Program
     {
+        /// <summary>
+        /// Método principal
+        /// </summary>
+        /// <param name="args"></param>
         public static void Main(string[] args)
         {
             IConfigurationRoot configuration = GetConfiguration();
@@ -48,6 +55,11 @@ namespace TeusControleApi
             return configuration;
         }
 
+        /// <summary>
+        /// Constrói Host
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .UseSerilog()

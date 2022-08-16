@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace TeusControleApi.Controllers
 {
+    /// <summary>
+    /// Controlador de produtos
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
@@ -16,6 +19,10 @@ namespace TeusControleApi.Controllers
     {
         private readonly IProductManager productManager;
 
+        /// <summary>
+        /// Controlador de produtos
+        /// </summary>
+        /// <param name="usersManager"></param>
         public ProductController(IProductManager usersManager)
         {
             this.productManager = usersManager;

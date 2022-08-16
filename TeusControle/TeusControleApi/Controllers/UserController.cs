@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace TeusControleApi.Controllers
 {
+    /// <summary>
+    /// Controlador para entidade usuário
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
@@ -16,6 +19,10 @@ namespace TeusControleApi.Controllers
     {
         private readonly IUserManager usersManager;
 
+        /// <summary>
+        /// Controlador para entidade usuário
+        /// </summary>
+        /// <param name="usersManager"></param>
         public UserController(IUserManager usersManager)
         {
             this.usersManager = usersManager;

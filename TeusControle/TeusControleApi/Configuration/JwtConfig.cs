@@ -9,8 +9,16 @@ using System.Text;
 
 namespace TeusControleApi.Configuration
 {
+    /// <summary>
+    /// Classe de configuração do JWT
+    /// </summary>
     public static class JwtConfig
     {
+        /// <summary>
+        /// Adiciona configurações para JWT
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
         public static void AddJwtConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddSingleton<IJwtService, JwtService>();
@@ -38,6 +46,10 @@ namespace TeusControleApi.Configuration
             });
         }
 
+        /// <summary>
+        /// Aplica configurações para JWT
+        /// </summary>
+        /// <param name="app"></param>
         public static void UseJwtConfiguration(this IApplicationBuilder app)
         {
             app.UseAuthentication();

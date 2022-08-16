@@ -3,6 +3,7 @@ using Core.Shared.Models.Request;
 using Core.Shared.Models.Responses;
 using FluentValidation;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -30,9 +31,17 @@ namespace Manager.Interfaces.Managers.Base
         /// <typeparam name="TValidator"></typeparam>
         /// <param name="inputModel"></param>
         /// <returns></returns>
-        Task<TOutputModel> AddAsync<TInputModel, TOutputModel, TValidator>(TInputModel inputModel)
-            where TValidator : AbstractValidator<TEntity>
+        Task<TOutputModel> AddAsync<TInputModel, TOutputModel>(TInputModel inputModel)
             where TInputModel : class
+            where TOutputModel : class;
+
+        /// <summary>
+        /// Cria novos registros
+        /// </summary>
+        /// <typeparam name="TOutputModel"></typeparam>
+        /// <param name="inputModel"></param>
+        /// <returns></returns>
+        Task<TOutputModel> AddAsync<TOutputModel>(ICollection<TEntity> inputModel)
             where TOutputModel : class;
 
         /// <summary>
@@ -53,6 +62,12 @@ namespace Manager.Interfaces.Managers.Base
             int id, 
             int id2
         );
+
+        /// <summary>
+        /// Exclui fisicamente todos os registros a partir do id
+        /// </summary>
+        /// <param name="id"></param>
+        Task PhysicalDeleteAsync(int id);
 
         /// <summary>
         /// Atualiza um registro

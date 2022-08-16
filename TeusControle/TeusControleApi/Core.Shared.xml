@@ -4,6 +4,118 @@
         <name>Core.Shared</name>
     </assembly>
     <members>
+        <member name="T:Core.Shared.Models.Entry.CreateEntryModel">
+            <summary>
+            Objeto para criação de uma novo entrada
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Entry.CreateEntryModel.Origin">
+            <summary>
+            Origem
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Entry.CreateEntryModel.Status">
+            <summary>
+            Status da entrada
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Entry.CreateEntryModel.Products">
+            <summary>
+            Produtos da entrada
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Entry.ProductEntryModel.ProductId">
+            <summary>
+            Id do produto
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Entry.ProductEntryModel.Amount">
+            <summary>
+            Quantidade entrando
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Entry.ProductEntryModel.UnitPrice">
+            <summary>
+            Preço pago por unidade
+            </summary>
+        </member>
+        <member name="T:Core.Shared.Models.Entry.EntryModel">
+            <summary>
+            Objeto de retorno de entrada
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Entry.EntryModel.CreatedDate">
+            <summary>
+            Data e hora de criação do registro
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Entry.EntryModel.LastChange">
+            <summary>
+            Data e hora da última atualização do registro
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Entry.EntryPagedModel.Id">
+            <summary>
+            Identificador
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Entry.EntryPagedModel.Origin">
+            <summary>
+            Origem
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Entry.EntryPagedModel.Status">
+            <summary>
+            Status da entrada
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Entry.EntryPagedModel.ClosingDate">
+            <summary>
+            Data de fechamento da entrada
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Entry.EntryPagedModel.TotalPrice">
+            <summary>
+            Preço total da entrada
+            </summary>
+        </member>
+        <member name="T:Core.Shared.Models.Entry.UpdateEntryModel">
+            <summary>
+            Objeto para alteração de uma entrada
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Entry.UpdateEntryModel.Id">
+            <summary>
+            Id da entrada
+            </summary>
+            <example>123</example>
+        </member>
+        <member name="P:Core.Shared.Models.Entry.UpdateEntryModel.Active">
+            <summary>
+            Status do registro
+            </summary>
+            <example>true</example>
+        </member>
+        <member name="F:Core.Shared.Models.Enums.EntryStatusEnum.Open">
+            <summary>
+            0 - Aberto
+            </summary>
+        </member>
+        <member name="F:Core.Shared.Models.Enums.EntryStatusEnum.Closed">
+            <summary>
+            2 - Fechado
+            </summary>
+        </member>
+        <member name="F:Core.Shared.Models.Enums.EntryStatusEnum.Canceled">
+            <summary>
+            3 - Cancelado
+            </summary>
+        </member>
+        <member name="F:Core.Shared.Models.Enums.EntryStatusEnum.Pending">
+            <summary>
+            4 - Pendente
+            </summary>
+        </member>
         <member name="F:Core.Shared.Models.Enums.FilterEnum.StartsWith">
             <summary>
             1 - Começa com

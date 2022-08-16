@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31515.178
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeusControleApi", "TeusControleApi\TeusControleApi.csproj", "{C8C3E2C1-E349-441C-8CC4-F9717405DEEB}"
 EndProject
@@ -33,9 +33,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi.Tests", "WebApi.Test
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FakeData", "FakeData\FakeData.csproj", "{97CA1BBB-56E9-435B-B31C-D8D4D178E0DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Manager.Tests", "Manager.Tests\Manager.Tests.csproj", "{E5E616B2-78FE-4D45-A9D9-8E0627CB74E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Manager.Tests", "Manager.Tests\Manager.Tests.csproj", "{E5E616B2-78FE-4D45-A9D9-8E0627CB74E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository.Tests", "Repository.Tests\Repository.Tests.csproj", "{8BCBC50F-08A3-4B96-B0E8-F9619A2CC54C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository.Tests", "Repository.Tests\Repository.Tests.csproj", "{8BCBC50F-08A3-4B96-B0E8-F9619A2CC54C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{43D3B324-A3BC-465F-8902-3681D43D9B95}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

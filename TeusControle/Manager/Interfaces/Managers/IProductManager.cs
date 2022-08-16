@@ -10,7 +10,7 @@ namespace Manager.Interfaces
     public interface IProductManager : IBaseManager<Product>
     {
         Task<ProductModel> DeleteById(int id);
-        Task<ProductModel> GetById(long id);
+        Task<ProductModel> GetById(int id);
         new PaginatedResponse<ProductPagedModel> GetPaged(PaginatedRequest pagingParams);
         Task<ProductModel> Insert(CreateProductModel newUser);
         Task<ProductModel> Update(UpdateProductModel updatedUser);

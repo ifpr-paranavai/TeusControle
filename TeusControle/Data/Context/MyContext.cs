@@ -8,6 +8,8 @@ namespace Data.Context
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
+        public new DbSet<Entry> Entry { get; set; }
+        public DbSet<ProductEntry> ProductEntry { get; set; }
 
         public MyContext()
         {
@@ -24,6 +26,8 @@ namespace Data.Context
 
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            modelBuilder.ApplyConfiguration(new EntryConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductEntryConfiguration());
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Core.Domain
             CreatedUsers = new HashSet<User>();
             Products = new HashSet<Product>();
             Entries = new HashSet<Entry>();
+            ProductsEntry = new HashSet<ProductEntry>();
         }
 
         public string Name { get; set; }

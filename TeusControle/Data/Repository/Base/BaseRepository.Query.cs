@@ -53,7 +53,7 @@ namespace Data.Repository.Base
             if (filter == null)
                 throw new ArgumentNullException("É necessário informar o filtro");
 
-            return query.Where(filter).AsNoTracking();
+            return query.AsNoTracking().Where(filter);
         }
 
         /// <summary>

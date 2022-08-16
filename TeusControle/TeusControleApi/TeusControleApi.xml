@@ -10,6 +10,35 @@
             </summary>
             <param name="login"></param>
         </member>
+        <member name="M:TeusControleApi.Controllers.EntryController.Get(Core.Shared.Models.Request.PaginatedRequest)">
+            <summary>
+            Retorna todas as entradas paginada.
+            </summary>
+        </member>
+        <member name="M:TeusControleApi.Controllers.EntryController.Get(System.Int32)">
+            <summary>
+            Retorna uma entrada buscada pelo id.
+            </summary>
+            <param name="id" example="123">Id da entrada.</param>
+        </member>
+        <member name="M:TeusControleApi.Controllers.EntryController.Post(Core.Shared.Models.Entry.CreateEntryModel)">
+            <summary>
+            Insere uma nova entrada.
+            </summary>
+            <param name="newEntry"></param>
+        </member>
+        <member name="M:TeusControleApi.Controllers.EntryController.Put(Core.Shared.Models.Entry.UpdateEntryModel)">
+            <summary>
+            Altera uma entrada.
+            </summary>
+            <param name="entry"></param>
+        </member>
+        <member name="M:TeusControleApi.Controllers.EntryController.Delete(System.Int32)">
+            <summary>
+            Exclui uma entrada por id.
+            </summary>
+            <param name="id" example="123">Id da entrada.</param>
+        </member>
         <member name="M:TeusControleApi.Controllers.ProductController.Get(Core.Shared.Models.Request.PaginatedRequest)">
             <summary>
             Retorna todos os produtos paginado.

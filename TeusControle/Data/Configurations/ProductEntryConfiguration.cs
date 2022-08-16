@@ -10,17 +10,25 @@ namespace Data.Configurations
         {
             builder.ToTable("products_entry");
 
+            builder.HasKey(p => new { 
+                p.Id, 
+                p.Id2 
+            });
+
             builder.HasOne(p => p.CreatedByUser)
                .WithMany(p => p.ProductsEntry)
                .HasForeignKey(p => p.CreatedBy);
 
             builder.HasOne(p => p.Entry)
                 .WithMany(p => p.ProductsEntry)
-                .HasForeignKey(p => p.EntryId);
+                .HasForeignKey(p => p.Id);
 
             builder.HasOne(p => p.Product)
                 .WithMany(p => p.ProductsEntry)
-                .HasForeignKey(p => p.ProductId);
+                .HasForeignKey(p => p.Id2);
+
+            builder.Property(p => p.TotalPrice)
+                .HasComputedColumnSql("Amount * UnitPrice", stored: true);
         }
     }
 }

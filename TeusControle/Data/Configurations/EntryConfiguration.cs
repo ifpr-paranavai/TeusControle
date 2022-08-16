@@ -20,6 +20,9 @@ namespace Data.Configurations
                 .HasConversion(
                     p => p.ToString(),
                     p => (EntryStatusEnum)Enum.Parse(typeof(EntryStatusEnum), p));
+
+            builder.Property(p => p.TotalPrice)
+                .HasDefaultValue(0);
         }
     }
 }

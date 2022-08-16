@@ -1,4 +1,5 @@
 ﻿using Core.Domain.Base;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Core.Domain
 {
@@ -10,14 +11,12 @@ namespace Core.Domain
         /// <summary>
         /// Produto
         /// </summary>
-        public int ProductId { get; set; }
-        public virtual Product Product { get; set; }
+        public Product Product { get; set; }
 
         /// <summary>
         /// Registro da entrada de produto relacionada
-        /// </summary>
-        public int EntryId { get; set; }
-        public virtual Entry Entry { get; set; }
+        /// </summary
+        public Entry Entry { get; set; }
 
         /// <summary>
         /// Quantidade de produtos a serem inseridos
@@ -30,8 +29,9 @@ namespace Core.Domain
         public decimal UnitPrice { get; set; }
 
         /// <summary>
-        /// Preço total
+        /// Preço total do produto
         /// </summary>
-        public decimal TotalPrice { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public decimal TotalPrice { get; private set; }
     }
 }

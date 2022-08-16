@@ -6,6 +6,8 @@ using Manager.Interfaces.Managers.Base;
 using Manager.Interfaces.Repositories.Base;
 using Microsoft.AspNetCore.Http;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -59,25 +61,20 @@ namespace Manager.Implementation.Base
             await _baseRepository.UpdateFieldsAsync(entity, b => b.Deleted);
         }
 
-        public async Task<TOutputModel> AddAsync<TInputModel, TOutputModel, TValidator>(TInputModel inputModel)
+        /// <summary>
+        /// Cria um novo registro
+        /// </summary>
+        /// <typeparam name="TInputModel"></typeparam>
+        /// <typeparam name="TOutputModel"></typeparam>
+        /// <param name="inputModel"></param>
+        /// <returns></returns>
+        public async virtual Task<TOutputModel> AddAsync<TInputModel, TOutputModel>(TInputModel inputModel)
             where TInputModel : class
             where TOutputModel : class
-            where TValidator : AbstractValidator<TEntity>
         {
             TEntity entity = _mapper.Map<TEntity>(inputModel);
 
-            entity.CreatedBy = int.Parse(_httpContextAccessor
-                .HttpContext.User.FindFirst(
-                    CustomClaimTypes.Id
-                )
-                .Value
-            );
-
-            await _baseRepository.InsertAsync(entity);
-
-            TOutputModel outputModel = _mapper.Map<TOutputModel>(entity);
-
-            return outputModel;
+            return await AddAsync<TOutputModel>(entity);
         }
 
         /// <summary>
@@ -104,11 +101,54 @@ namespace Manager.Implementation.Base
         }
 
         /// <summary>
-        /// Exclui fisicamente um registro a partir do id
+        /// Cria novos registros
+        /// </summary>
+        /// <typeparam name="TOutputModel"></typeparam>
+        /// <param name="inputModel"></param>
+        /// <returns></returns>
+        public async Task<TOutputModel> AddAsync<TOutputModel>(ICollection<TEntity> inputModel)
+            where TOutputModel : class
+        {
+            foreach (var item in inputModel)
+            {
+                item.CreatedBy = int.Parse(_httpContextAccessor
+                    .HttpContext.User.FindFirst(
+                        CustomClaimTypes.Id
+                    )
+                    .Value
+                );
+                item.CreatedDate = DateTime.Now;
+                item.Active = true;
+            }
+            
+            await _baseRepository.InsertAsync(inputModel);
+
+            TOutputModel outputModel = _mapper.Map<TOutputModel>(inputModel);
+
+            return outputModel;
+        }
+
+        /// <summary>
+        /// Exclui fisicamente um registro a partir do id e id2
         /// </summary>
         /// <param name="id"></param>
         /// <param name="id2"></param>
         public async Task PhysicalDeleteAsync(int id, int id2) => await _baseRepository.PhysicalDeleteAsync(id, id2);
+
+        /// <summary>
+        /// Exclui fisicamente todos os registros a partir do id
+        /// </summary>
+        /// <param name="id"></param>
+        public async Task PhysicalDeleteAsync(int id)
+        {
+            List<TEntity> entities = _baseRepository.Query(q => q.Id == id)
+                .ToList();
+
+            foreach (var item in entities)
+            {
+                await PhysicalDeleteAsync(item.Id, item.Id2);
+            }
+        }
 
         /// <summary>
         /// Atualiza um registro

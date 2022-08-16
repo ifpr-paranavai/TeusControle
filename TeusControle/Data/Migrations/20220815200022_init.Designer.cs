@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20220801224850_ajusteUser")]
-    partial class ajusteUser
+    [Migration("20220815200022_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,6 +18,49 @@ namespace Data.Migrations
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.10");
+
+            modelBuilder.Entity("Core.Domain.Entry", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit(1)");
+
+                    b.Property<DateTime?>("ClosingDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit(1)");
+
+                    b.Property<DateTime?>("LastChange")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Origin")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<decimal>("TotalPrice")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("decimal(65,30)")
+                        .HasDefaultValue(0m);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.ToTable("entries");
+                });
 
             modelBuilder.Entity("Core.Domain.Product", b =>
                 {
@@ -88,6 +131,48 @@ namespace Data.Migrations
                     b.ToTable("products");
                 });
 
+            modelBuilder.Entity("Core.Domain.ProductEntry", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit(1)");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit(1)");
+
+                    b.Property<int>("Id2")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("LastChange")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<decimal>("TotalPrice")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("Id2");
+
+                    b.ToTable("products_entry");
+                });
+
             modelBuilder.Entity("Core.Domain.User", b =>
                 {
                     b.Property<int>("Id")
@@ -137,6 +222,15 @@ namespace Data.Migrations
                     b.ToTable("users");
                 });
 
+            modelBuilder.Entity("Core.Domain.Entry", b =>
+                {
+                    b.HasOne("Core.Domain.User", "CreatedByUser")
+                        .WithMany("Entries")
+                        .HasForeignKey("CreatedBy");
+
+                    b.Navigation("CreatedByUser");
+                });
+
             modelBuilder.Entity("Core.Domain.Product", b =>
                 {
                     b.HasOne("Core.Domain.User", "CreatedByUser")
@@ -144,6 +238,31 @@ namespace Data.Migrations
                         .HasForeignKey("CreatedBy");
 
                     b.Navigation("CreatedByUser");
+                });
+
+            modelBuilder.Entity("Core.Domain.ProductEntry", b =>
+                {
+                    b.HasOne("Core.Domain.User", "CreatedByUser")
+                        .WithMany("ProductsEntry")
+                        .HasForeignKey("CreatedBy");
+
+                    b.HasOne("Core.Domain.Entry", "Entry")
+                        .WithMany("ProductsEntry")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Domain.Product", "Product")
+                        .WithMany("ProductsEntry")
+                        .HasForeignKey("Id2")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CreatedByUser");
+
+                    b.Navigation("Entry");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Core.Domain.User", b =>
@@ -155,11 +274,25 @@ namespace Data.Migrations
                     b.Navigation("CreatedByUser");
                 });
 
+            modelBuilder.Entity("Core.Domain.Entry", b =>
+                {
+                    b.Navigation("ProductsEntry");
+                });
+
+            modelBuilder.Entity("Core.Domain.Product", b =>
+                {
+                    b.Navigation("ProductsEntry");
+                });
+
             modelBuilder.Entity("Core.Domain.User", b =>
                 {
                     b.Navigation("CreatedUsers");
 
+                    b.Navigation("Entries");
+
                     b.Navigation("Products");
+
+                    b.Navigation("ProductsEntry");
                 });
 #pragma warning restore 612, 618
         }

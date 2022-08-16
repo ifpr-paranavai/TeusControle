@@ -9,6 +9,7 @@ using FluentAssertions;
 using Manager.Implementation;
 using Manager.Interfaces;
 using Manager.Interfaces.Repositories;
+using Manager.Mapping.Entry;
 using Manager.Mapping.Product;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -45,7 +46,7 @@ namespace Manager.Tests.Managers
             httpContextAccessor = mockHttpContextAccessor.Object;
             productRepository = Substitute.For<IProductRepository>();
             mapper = new MapperConfiguration(p => {
-                p.AddProfile<CreateProductMappingProfile>();
+                p.AddProfile<CreateEntryMappingProfile>();
                 p.AddProfile<ProductModelMappingProfile>();
                 p.AddProfile<ProductPagedModelMappingProfile>();
             }).CreateMapper();

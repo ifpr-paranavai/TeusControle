@@ -2,6 +2,7 @@
 using Data.Context;
 using Manager.Interfaces.Repositories.Base;
 using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -26,6 +27,16 @@ namespace Data.Repository.Base
         public async Task InsertAsync(TEntity obj)
         {
             await _context.Set<TEntity>().AddAsync(obj);
+            await _context.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Insere novos registros
+        /// </summary>
+        /// <param name="obj"></param>
+        public async Task InsertAsync(ICollection<TEntity> obj)
+        {
+            await _context.Set<TEntity>().AddRangeAsync(obj);
             await _context.SaveChangesAsync();
         }
 

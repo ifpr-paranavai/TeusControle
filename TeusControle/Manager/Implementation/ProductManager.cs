@@ -70,7 +70,7 @@ namespace Manager.Implementation
             }
         }
 
-        public async Task<ProductModel> GetById(long id)
+        public async Task<ProductModel> GetById(int id)
         {
             try
             {

@@ -6,12 +6,19 @@ using System.Threading.Tasks;
 
 namespace TeusControleApi.Controllers
 {
+    /// <summary>
+    /// Controlador de login
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
         private readonly IUserManager userManager;
 
+        /// <summary>
+        /// Controlador de login
+        /// </summary>
+        /// <param name="userManager"></param>
         public AuthController(IUserManager userManager)
         {
             this.userManager = userManager;

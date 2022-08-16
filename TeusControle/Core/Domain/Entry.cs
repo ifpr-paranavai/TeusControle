@@ -2,6 +2,7 @@
 using Core.Shared.Models.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Core.Domain
 {
@@ -13,6 +14,7 @@ namespace Core.Domain
         public Entry()
         {
             ProductsEntry = new HashSet<ProductEntry>();
+            TotalPrice = 0;
         }
 
         /// <summary>
@@ -31,8 +33,14 @@ namespace Core.Domain
         public EntryStatusEnum Status { get; set; }
 
         /// <summary>
-        /// Produto de uma entrada
+        /// Produtos de uma entrada
         /// </summary>
         public ICollection<ProductEntry> ProductsEntry { get; set; }
+        
+        /// <summary>
+        /// Soma de todo o valor de entrada
+        /// </summary>
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public decimal TotalPrice { get; private set; }
     }
 }

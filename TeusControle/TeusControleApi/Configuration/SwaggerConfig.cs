@@ -8,8 +8,15 @@ using System.Reflection;
 
 namespace TeusControleApi.Configuration
 {
+    /// <summary>
+    /// Configurações para swagger
+    /// </summary>
     public static class SwaggerConfig
     {
+        /// <summary>
+        /// Adiciona configurações do swagger
+        /// </summary>
+        /// <param name="services"></param>
         public static void AddSwaggerConfiguration(this IServiceCollection services)
         {
             services.AddSwaggerGen(c =>
@@ -54,6 +61,10 @@ namespace TeusControleApi.Configuration
             services.AddFluentValidationRulesToSwagger();
         }
 
+        /// <summary>
+        /// Configurações para implementar swagger
+        /// </summary>
+        /// <param name="app"></param>
         public static void UseSwaggerConfiguration(this IApplicationBuilder app)
         {
             app.UseSwagger();

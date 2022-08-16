@@ -20,6 +20,12 @@ namespace Manager.Interfaces.Repositories.Base
         Task InsertAsync(TEntity obj);
 
         /// <summary>
+        /// Insere um novo registro
+        /// </summary>
+        /// <param name="obj"></param>
+        Task InsertAsync(ICollection<TEntity> obj);
+
+        /// <summary>
         /// Atualiza um registro
         /// </summary>
         /// <param name="obj"></param>

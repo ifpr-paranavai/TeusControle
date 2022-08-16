@@ -1,24 +1,35 @@
-using Data.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
 using TeusControleApi.Configuration;
 
 namespace TeusControleApi
 {
+    /// <summary>
+    /// Classe de inicialização da aplicação
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Classe de inicialização da aplicação
+        /// </summary>
+        /// <param name="configuration"></param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+        /// <summary>
+        /// Configuração
+        /// </summary>
         public IConfiguration Configuration { get; }
 
+        /// <summary>
+        /// Configuração de serviços
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
@@ -36,6 +47,11 @@ namespace TeusControleApi
             services.AddSwaggerConfiguration();
         }
 
+        /// <summary>
+        /// Configura aplicação
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseExceptionHandler("/error");

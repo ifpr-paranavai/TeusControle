@@ -7,8 +7,16 @@ using System;
 
 namespace TeusControleApi.Configuration
 {
+    /// <summary>
+    /// Classe de configuração da base de dados
+    /// </summary>
     public static class DataBaseConfig
     {
+        /// <summary>
+        /// Adiciona configuração para base de dados
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
         public static void AddDataBaseConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<MyContext>(options => {
@@ -19,6 +27,10 @@ namespace TeusControleApi.Configuration
             });
         }
 
+        /// <summary>
+        /// Aplica configuração da base
+        /// </summary>
+        /// <param name="app"></param>
         public static void UseDataBaseConfiguration(this IApplicationBuilder app)
         {
             using var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope();

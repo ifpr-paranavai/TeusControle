@@ -36,7 +36,6 @@ namespace Manager.Implementation.Base
         /// </summary>
         /// <typeparam name="TInputModel"></typeparam>
         /// <typeparam name="TOutputModel"></typeparam>
-        /// <typeparam name="TValidator"></typeparam>
         /// <param name="inputModel"></param>
         /// <returns></returns>
         public async virtual Task<TOutputModel> AddAsync<TInputModel, TOutputModel>(TInputModel inputModel)

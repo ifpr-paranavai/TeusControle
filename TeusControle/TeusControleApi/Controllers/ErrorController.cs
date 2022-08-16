@@ -5,10 +5,17 @@ using System.Diagnostics;
 
 namespace TeusControleApi.Controllers
 {
+    /// <summary>
+    /// Controlador para erro
+    /// </summary>
     [ApiExplorerSettings(IgnoreApi = true)]
     [ApiController]
     public class ErrorController : Controller
     {
+        /// <summary>
+        /// Endpoint de erro
+        /// </summary>
+        /// <returns></returns>
         [Route("error")]
         public ErrorResponse Error()
         {
