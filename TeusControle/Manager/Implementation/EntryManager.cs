@@ -20,8 +20,9 @@ namespace Manager.Implementation
     public class EntryManager : BaseManager<Entry>, IEntryManager
     {
         private readonly ILogger<EntryManager> logger;
-        public IProductEntryManager ProductEntryManager { get; set; }
-        public IProductManager ProductManager { get; set; }
+        public IProductEntryManager _productEntryManager;
+        public IProductManager _productManager;
+        public IMapper _mapper;
 
         public EntryManager(
             IHttpContextAccessor httpContextAccessor,
@@ -33,19 +34,24 @@ namespace Manager.Implementation
         ) : base (entryRepository, httpContextAccessor, mapper)
         {
             this.logger = logger;
-            this.ProductEntryManager = productEntryManager;
-            this.ProductManager = productManager;
+            this._productEntryManager = productEntryManager;
+            this._productManager = productManager;
+            this._mapper = mapper;
         }
 
         public async Task<EntryModel> Insert(CreateEntryModel newEntry)
         {
             try
             {
-                var entryData = await AddAsync<CreateEntryModel, EntryModel>(newEntry);
-                await AddProductEntry(newEntry.Products, entryData);
+                Entry entity = _mapper.Map<Entry>(newEntry);
+                if (entity.Status == EntryStatusEnum.Closed)
+                    entity.ClosingDate = DateTime.Now;
+
+                EntryModel data = await AddAsync<EntryModel>(entity);
+                await AddProductEntry(newEntry.Products, data);
                 await UpdateProducts(newEntry);
 
-                return entryData;
+                return data;
             }
             catch (Exception ex)
             {
@@ -59,7 +65,7 @@ namespace Manager.Implementation
             List<ProductEntry> products = new List<ProductEntry>();
             foreach (var item in productsEntry)
             {
-                Boolean dbHasProduct = await ProductManager.AnyAsync(q => q.Id == item.ProductId);
+                Boolean dbHasProduct = await _productManager.AnyAsync(q => q.Id == item.ProductId);
                 if (!dbHasProduct)
                     throw new Exception("Produto não encontrado!");
 
@@ -72,7 +78,7 @@ namespace Manager.Implementation
                 });
             }
 
-            await ProductEntryManager.AddAsync<List<ProductEntry>>(products);
+            await _productEntryManager.AddAsync<List<ProductEntry>>(products);
         }
 
         private async Task<bool> HasValidStatusToUpdateDb(int id)
@@ -90,9 +96,13 @@ namespace Manager.Implementation
                 if (!await HasValidStatusToUpdateDb(updatedEntry.Id))
                     throw new Exception("Não é possível atualizar entrada já fechada.");
 
-                EntryModel data = await UpdateAsync<UpdateEntryModel, EntryModel>(updatedEntry);
+                Entry entity = _mapper.Map<Entry>(updatedEntry);
+                if (entity.Status == EntryStatusEnum.Closed)
+                    entity.ClosingDate = DateTime.Now;
 
-                await ProductEntryManager.PhysicalDeleteAsync(updatedEntry.Id);
+                EntryModel data = await UpdateAsync<EntryModel>(entity);
+
+                await _productEntryManager.PhysicalDeleteAsync(updatedEntry.Id);
                 await AddProductEntry(updatedEntry.Products, data);
                 await UpdateProducts(updatedEntry);
 
@@ -105,18 +115,20 @@ namespace Manager.Implementation
             return null;
         }
 
-        private async Task UpdateProducts(CreateEntryModel newEntry)
+        private async Task UpdateProducts(CreateEntryModel entry)
         {
-            if (newEntry.Status == EntryStatusEnum.Closed)
-                foreach (var item in newEntry.Products)
+            if (entry.Status == EntryStatusEnum.Closed)
+            {
+                foreach (var item in entry.Products)
                 {
                     await UpdateProductAmount(item.ProductId, item.Amount);
                 }
+            }
         }
 
         private async Task UpdateProductAmount(int id, decimal amount)
         {
-            Product product = ProductManager.Query(q => q.Id == id)
+            Product product = _productManager.Query(q => q.Id == id)
                 .First();
 
             if (product == null)
@@ -125,7 +137,7 @@ namespace Manager.Implementation
             product.InStock += amount;
             product.LastChange = DateTime.Now;
 
-            await ProductManager.UpdateSomeFieldsAsync(
+            await _productManager.UpdateSomeFieldsAsync(
                 product, 
                 q => q.InStock, 
                 q => q.LastChange
@@ -146,7 +158,7 @@ namespace Manager.Implementation
             }
         }
 
-        public async Task<EntryModel> GetById(int id)
+        public async Task<object> GetById(int id)
         {
             try
             {
@@ -157,18 +169,21 @@ namespace Manager.Implementation
                     throw new Exception("Registro não encontrado.");
 
                 var data = Query(x => x.Id == id)
-                    .Select(s => new EntryModel
+                    .Select(s => new
                     {
-                        Id = s.Id,
-                        Origin = s.Origin,
-                        Status = s.Status,
-                        Active = s.Active,
-                        CreatedDate = s.CreatedDate,
-                        LastChange = s.LastChange,
-                        Products = s.ProductsEntry.Select(x => new ProductEntryModel {
+                        s.Id,
+                        s.Origin,
+                        s.Status,
+                        s.Active,
+                        s.CreatedDate,
+                        s.LastChange,
+                        Products = s.ProductsEntry.Select(x => new {
                             ProductId = x.Id2,
-                            Amount = x.Amount,
-                            UnitPrice = x.UnitPrice
+                            x.Amount,
+                            x.UnitPrice,
+                            x.TotalPrice,
+                            x.Product.Description,
+                            x.Product.Gtin
                         }).ToList()
                     })
                     .FirstOrDefault();
@@ -191,10 +206,10 @@ namespace Manager.Implementation
                     x => new EntryPagedModel
                     {
                         Id = x.Id,
-                       ClosingDate = x.ClosingDate.ToString(),
-                       Origin = x.Origin,
-                       Status = EnumExtension.GetDescription(x.Status),
-                       TotalPrice = x.TotalPrice.ToString()
+                        ClosingDate = x.ClosingDate.ToString(),
+                        Origin = x.Origin,
+                        Status = EnumExtension.GetDescription(x.Status),
+                        TotalPrice = x.TotalPrice
                     }
                 );
 

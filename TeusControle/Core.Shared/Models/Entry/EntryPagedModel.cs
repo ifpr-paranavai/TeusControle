@@ -27,7 +27,7 @@ namespace Core.Shared.Models.Entry
         /// <summary>
         /// Preço total da entrada
         /// </summary>
-        public string TotalPrice { get; set; }
+        public decimal TotalPrice { get; set; }
 
         public object Clone()
         {

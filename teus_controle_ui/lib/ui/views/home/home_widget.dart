@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart' as cuppertino;
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:teus_controle_ui/ui/views/entry/entry_page.dart';
 
 import '../../shared/utils/global.dart' as globals;
 import '../../shared/widgets/drawer/drawer_list_item.dart';
@@ -19,6 +20,7 @@ class HomeWidget extends State<HomePage> with SingleTickerProviderStateMixin {
   List<Widget> tabsScreen = [
     const UserPage(),
     const ProductPage(),
+    const EntryPage(),
   ];
 
   @override
@@ -145,6 +147,14 @@ class HomeWidget extends State<HomePage> with SingleTickerProviderStateMixin {
           drawerStatus: drawerStatus,
           context: context,
           onChangePage: () => tabController.animateTo(1),
+        ),
+        DrawerListItem(
+          icon: Icons.shopping_basket_outlined,
+          title: "Entradas",
+          isActive: tabController.index == 2,
+          drawerStatus: drawerStatus,
+          context: context,
+          onChangePage: () => tabController.animateTo(2),
         ),
       ],
     );
