@@ -10,9 +10,9 @@ EntryProductGetResponseModel _$EntryProductGetResponseModelFromJson(
         Map<String, dynamic> json) =>
     EntryProductGetResponseModel(
       productId: json['productId'] as int,
-      amount: json['amount'] as int,
-      unitPrice: json['unitPrice'] as int,
-      totalPrice: json['totalPrice'] as int,
+      amount: (json['amount'] as num).toDouble(),
+      unitPrice: (json['unitPrice'] as num).toDouble(),
+      totalPrice: (json['totalPrice'] as num).toDouble(),
       description: json['description'] as String,
       gtin: json['gtin'] as String,
     );

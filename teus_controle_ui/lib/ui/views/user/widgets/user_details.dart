@@ -80,7 +80,7 @@ class _UserDetailsState extends State<UserDetails> {
         ),
         ListTile(
           title: const Text('Tipo Perfil'),
-          subtitle: Text(user!.profileType),
+          subtitle: Text(user!.profileTypeDescription),
         ),
         ListTile(
           title: const Text('E-mail'),

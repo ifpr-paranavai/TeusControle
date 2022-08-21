@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/models/entry/entry_get_response_model.dart';
-import '../../../../ui/shared/utils/global.dart' as globals;
+import '../../../../core/models/entry/entry_product_get_response_model.dart';
+import '../../../shared/utils/global.dart' as globals;
 import '../../../shared/widgets/dialogs/custom_dialog.dart';
 import '../entry_controller.dart';
 
@@ -22,6 +23,10 @@ class EntryDetails extends StatefulWidget {
 class _EntryDetailsState extends State<EntryDetails> {
   bool isLoading = false;
   EntryGetResponseModel? entry;
+
+  final scrollControllerVerticalDetails = ScrollController();
+  final scrollControllerVerticalProductsVertical = ScrollController();
+  final scrollControllerVerticalProductsHorizontal = ScrollController();
 
   @override
   void initState() {
@@ -41,16 +46,11 @@ class _EntryDetailsState extends State<EntryDetails> {
   @override
   Widget build(BuildContext context) {
     return CustomDialog(
-      width: 750,
-      height: 500,
-      body: Form(
-        key: widget.controller.formKey,
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-            child: isLoading ? _shimmerEffect() : _data(),
-          ),
-        ),
+      width: 950,
+      height: 550,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+        child: isLoading ? _shimmerEffect() : _data(),
       ),
       title: 'Detalhes',
       isLoading: isLoading,
@@ -59,47 +59,194 @@ class _EntryDetailsState extends State<EntryDetails> {
   }
 
   Widget _data() {
-    // if (!isLoading && entry == null) {
-    //   Navigator.pop(context);
-    //   return Container();
-    // }
+    if (!isLoading && entry == null) {
+      Navigator.pop(context);
+      return Container();
+    }
+    double tableSize = 600;
 
-    return Column(
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        // ListTile(
-        //   title: const Text('Nome'),
-        //   subtitle: Text(entry!.name),
-        // ),
-        // ListTile(
-        //   title: Text(user!.documentType == 1 ? 'CPF' : 'CNPJ'),
-        //   subtitle: Text(user!.cpfCnpj),
-        // ),
-        ListTile(
-          title: const Text('Descrição'),
-          subtitle: Text(globals.formatReceivedDate(entry!.origin)),
+        Expanded(
+          flex: 3,
+          child: SingleChildScrollView(
+            controller: scrollControllerVerticalDetails,
+            child: Column(
+              children: [
+                ListTile(
+                  title: const Text('Descrição'),
+                  subtitle: Text(entry!.origin),
+                ),
+                ListTile(
+                  title: const Text('Status'),
+                  subtitle: Text(entry!.status),
+                ),
+                ListTile(
+                  title: const Text('Criado Por'),
+                  subtitle: Text(entry!.createdBy),
+                ),
+                ListTile(
+                  title: const Text('Data Fechamento'),
+                  subtitle: Text(entry!.closingDate ?? '-'),
+                ),
+                ListTile(
+                  title: const Text('Data Criação'),
+                  subtitle: Text(entry!.createdDate ?? '-'),
+                ),
+                ListTile(
+                  title: const Text('Última Alteração'),
+                  subtitle: Text(entry!.lastChange ?? '-'),
+                ),
+              ],
+            ),
+          ),
         ),
-        ListTile(
-          title: const Text('Status'),
-          subtitle: Text(entry!.status),
-        ),
-        // ListTile(
-        //   title: const Text('Data de C'),
-        //   subtitle: Text(entry!.createdDate),
-        // ),
-        // ListTile(
-        //   title: const Text('Imagem'),
-        //   subtitle: Text(user!.profileImage ?? '-'),
-        // ),
-        ListTile(
-          title: const Text('Data Criação'),
-          subtitle: Text(entry!.createdDate ?? '-'),
-        ),
-        ListTile(
-          title: const Text('Última Alteração'),
-          subtitle: Text(entry!.lastChange ?? '-'),
-        ),
+        Expanded(
+          flex: 7,
+          child: SingleChildScrollView(
+            controller: scrollControllerVerticalProductsVertical,
+            scrollDirection: Axis.vertical,
+            child: Column(
+              children: [
+                SingleChildScrollView(
+                  controller: scrollControllerVerticalProductsHorizontal,
+                  scrollDirection: Axis.horizontal,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      const Text(
+                        "Produtos da Entrada",
+                        style: TextStyle(fontSize: 15),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Container(
+                        constraints: BoxConstraints(
+                          minWidth: tableSize,
+                        ),
+                        child: DataTable(
+                          columns: _getColumns([
+                            'Código',
+                            'Descrição',
+                            'Quantidade',
+                            'Valor Unitário',
+                            'Valor Total',
+                          ]),
+                          columnSpacing: 10,
+                          rows: _getCells(entry!.products),
+                        ),
+                      ),
+                      Container(
+                        color: Theme.of(context).primaryColorLight,
+                        constraints: BoxConstraints(
+                          minWidth: tableSize,
+                        ),
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(bottom: 5),
+                            child: Text(
+                              "${entry?.products.length} itens",
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        constraints: BoxConstraints(
+                          maxWidth: tableSize,
+                        ),
+                        child: ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          title: const Text('Valor Total'),
+                          subtitle:
+                              Text(globals.currency.format(entry!.totalPrice)),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        )
       ],
     );
+  }
+
+  List<DataColumn> _getColumns(List<String> columnNames) {
+    List<DataColumn> result = [];
+
+    for (String name in columnNames) {
+      result.add(DataColumn(
+        label: Expanded(child: Text(name, textAlign: TextAlign.center)),
+      ));
+    }
+
+    return result;
+  }
+
+  List<DataRow> _getCells(List<EntryProductGetResponseModel> products) {
+    List<DataRow> result = [];
+    int rowIndex = 1;
+
+    for (EntryProductGetResponseModel product in products) {
+      result.add(
+        DataRow(
+          color: MaterialStateColor.resolveWith(
+            (states) {
+              // intercala cores das rows da tabela entre branco e cinza
+              if (rowIndex % 2 == 0) {
+                rowIndex++;
+                return Colors.grey.shade100;
+              } else {
+                rowIndex++;
+                return Colors.white;
+              }
+            },
+          ),
+          cells: [
+            DataCell(Center(child: Text(product.gtin.toString()))),
+            DataCell(
+              Center(
+                child: SizedBox(
+                  width: 150,
+                  child: RichText(
+                    maxLines: 2,
+                    textWidthBasis: TextWidthBasis.parent,
+                    overflow: TextOverflow.ellipsis,
+                    text: TextSpan(
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.black,
+                      ),
+                      text: product.description,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            DataCell(
+              Center(child: Text(product.amount.toString())),
+            ),
+            DataCell(
+              Center(child: Text(globals.currency.format(product.unitPrice))),
+            ),
+            DataCell(
+              Center(child: Text(globals.currency.format(product.totalPrice))),
+            ),
+          ],
+        ),
+      );
+    }
+
+    return result;
   }
 
   Widget _shimmerEffect() {

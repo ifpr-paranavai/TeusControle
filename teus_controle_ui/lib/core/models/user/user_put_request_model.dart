@@ -34,5 +34,6 @@ class UserPutRequestModel extends UserPostRequestModel {
   factory UserPutRequestModel.fromJson(Map<String, dynamic> json) =>
       _$UserPutRequestModelFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$UserPutRequestModelToJson(this);
 }

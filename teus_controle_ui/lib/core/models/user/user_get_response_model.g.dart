@@ -19,7 +19,7 @@ UserGetResponseModel _$UserGetResponseModelFromJson(
       profileType: json['profileType'] as String,
       password: json['password'] as String?,
       email: json['email'] as String,
-    );
+    )..profileTypeDescription = json['profileTypeDescription'] as String;
 
 Map<String, dynamic> _$UserGetResponseModelToJson(
         UserGetResponseModel instance) =>
@@ -31,6 +31,7 @@ Map<String, dynamic> _$UserGetResponseModelToJson(
       'name': instance.name,
       'birthDate': instance.birthDate,
       'profileImage': instance.profileImage,
+      'profileTypeDescription': instance.profileTypeDescription,
       'profileType': instance.profileType,
       'password': instance.password,
       'email': instance.email,

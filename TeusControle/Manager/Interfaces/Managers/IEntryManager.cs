@@ -10,7 +10,7 @@ namespace Manager.Interfaces
     public interface IEntryManager : IBaseManager<Entry>
     {
         Task<EntryModel> DeleteById(int id);
-        Task<EntryModel> GetById(int id);
+        Task<object> GetById(int id);
         new PaginatedResponse<EntryPagedModel> GetPaged(PaginatedRequest pagingParams);
         Task<EntryModel> Insert(CreateEntryModel newUser);
         Task<EntryModel> Update(UpdateEntryModel updatedUser);

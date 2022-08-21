@@ -14,9 +14,9 @@ class EntryProductGetResponseModel {
   });
 
   late final int productId;
-  late final int amount;
-  late final int unitPrice;
-  late final int totalPrice;
+  late final double amount;
+  late final double unitPrice;
+  late final double totalPrice;
   late final String description;
   late final String gtin;
 

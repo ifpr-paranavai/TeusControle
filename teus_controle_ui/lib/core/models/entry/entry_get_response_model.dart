@@ -21,6 +21,9 @@ class EntryGetResponseModel {
   late final bool active;
   late final String? createdDate;
   late final String? lastChange;
+  late final String? closingDate;
+  late final String createdBy;
+  late final double totalPrice;
   late final List<EntryProductGetResponseModel> products;
 
   factory EntryGetResponseModel.fromJson(Map<String, dynamic> json) =>

@@ -88,7 +88,7 @@ namespace Manager.Implementation
             }
         }
 
-        public virtual async Task<UserModel> GetById(int id)
+        public virtual async Task<object> GetById(int id)
         {
             try
             {
@@ -99,14 +99,15 @@ namespace Manager.Implementation
                     throw new Exception("Registro não encontrado.");
 
                 var data = Query(x => x.Id == id)
-                    .Select(s => new UserModel
+                    .Select(s => new 
                     {
                         Id = s.Id,
                         Name = s.Name,
                         /*CpfCnpj = s.CpfCnpj,
                         DocumentType = s.DocumentType,*/
                         ProfileImage = s.ProfileImage,
-                        ProfileType = s.ProfileType, // TODO: listar descrição e editar model cadastro e edição
+                        ProfileTypeDescription = EnumExtension.GetDescription(s.ProfileType), // TODO: listar descrição e editar model cadastro e edição
+                        ProfileType = s.ProfileType,
                         Email = s.Email,
                         Active = s.Active,
                         CreatedDate = s.CreatedDate,

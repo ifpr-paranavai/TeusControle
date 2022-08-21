@@ -110,6 +110,7 @@ class _DefaultScreenState<T> extends State<DefaultScreen> {
                     if (snapShot.connectionState == ConnectionState.done) {
                       return PdfPreviewPage(
                         tableData: _getTableData(snapShot),
+                        title: widget.pageName,
                       );
                     }
                     return const CircularProgressIndicator();

@@ -27,6 +27,7 @@ class UserGetResponseModel {
   // late final int documentType;
   late final String birthDate;
   late final String? profileImage;
+  late final String profileTypeDescription;
   late final String profileType;
   late final String? password;
   late final String email;

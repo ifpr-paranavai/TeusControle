@@ -7,9 +7,11 @@ import '../dialogs/custom_dialog.dart';
 
 class PdfPreviewPage extends StatelessWidget {
   final TableData tableData;
+  final String title;
   const PdfPreviewPage({
     Key? key,
     required this.tableData,
+    required this.title,
   }) : super(key: key);
 
   @override
@@ -22,7 +24,7 @@ class PdfPreviewPage extends StatelessWidget {
       height: 950,
       hasConfirmButton: false,
       body: pw.PdfPreview(
-        build: (context) => service.makeDefaultPdf(context),
+        build: (context) => service.makeDefaultPdf(context, title),
         canDebug: false,
         canChangeOrientation: false,
       ),

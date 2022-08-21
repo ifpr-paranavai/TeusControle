@@ -8,7 +8,7 @@ namespace Core.Shared.Models.Enums
         /// 0 - Aberto
         /// </summary>
         [Description("Aberto")]
-        Open = 1,
+        Opened = 1,
 
         /// <summary>
         /// 2 - Fechado

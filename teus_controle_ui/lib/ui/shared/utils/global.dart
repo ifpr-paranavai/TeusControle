@@ -16,7 +16,7 @@ const String userProfileImage = 'profile-image';
 const String userName = 'profile-name';
 final navigatorKey = GlobalKey<NavigatorState>();
 
-final oCcy = NumberFormat.simpleCurrency(locale: 'pt_br');
+final currency = NumberFormat.simpleCurrency(locale: 'pt_br');
 //#region USER
 void setJwtToken(String jwt) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();

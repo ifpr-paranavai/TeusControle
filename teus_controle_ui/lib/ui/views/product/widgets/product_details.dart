@@ -76,11 +76,11 @@ class _ProductDetailsState extends State<ProductDetails> {
         ),
         ListTile(
           title: const Text('Preço'),
-          subtitle: Text(globals.oCcy.format(product!.price)),
+          subtitle: Text(globals.currency.format(product!.price)),
         ),
         ListTile(
           title: const Text('Preço Médio'),
-          subtitle: Text(globals.oCcy.format(product!.avgPrice)),
+          subtitle: Text(globals.currency.format(product!.avgPrice)),
         ),
         ListTile(
           title: const Text('Em Estoque'),

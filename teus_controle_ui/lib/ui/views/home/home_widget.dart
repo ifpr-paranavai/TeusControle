@@ -199,7 +199,6 @@ class HomeWidget extends State<HomePage> with SingleTickerProviderStateMixin {
                             : null,
                       ),
                     );
-                    return Container();
                   },
                 ),
               ),

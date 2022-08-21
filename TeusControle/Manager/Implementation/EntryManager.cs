@@ -173,10 +173,13 @@ namespace Manager.Implementation
                     {
                         s.Id,
                         s.Origin,
-                        s.Status,
+                        Status = EnumExtension.GetDescription(s.Status),
                         s.Active,
                         s.CreatedDate,
                         s.LastChange,
+                        s.TotalPrice,
+                        s.ClosingDate,
+                        CreatedBy = s.CreatedByUser.Name,
                         Products = s.ProductsEntry.Select(x => new {
                             ProductId = x.Id2,
                             x.Amount,

@@ -374,7 +374,7 @@ class _CustomTableState extends State<CustomPaginatedTable> {
             return DataCell(Center(
               child: Text(rowValue.isEmpty
                   ? '-'
-                  : globals.oCcy.format(double.parse(rowValue))),
+                  : globals.currency.format(double.parse(rowValue))),
             ));
           }
 

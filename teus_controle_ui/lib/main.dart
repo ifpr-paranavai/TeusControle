@@ -15,7 +15,6 @@ void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   await DesktopWindow.setMinWindowSize(const Size(400, 400));
-
   runApp(const MyApp());
 }
 

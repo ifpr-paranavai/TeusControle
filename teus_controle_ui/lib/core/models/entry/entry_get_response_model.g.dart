@@ -13,12 +13,16 @@ EntryGetResponseModel _$EntryGetResponseModelFromJson(
       origin: json['origin'] as String,
       status: json['status'] as String,
       active: json['active'] as bool,
-      createdDate: json['createdDate'] as String,
-      lastChange: json['lastChange'] as String,
-    )..products = (json['products'] as List<dynamic>)
-        .map((e) =>
-            EntryProductGetResponseModel.fromJson(e as Map<String, dynamic>))
-        .toList();
+      createdDate: json['createdDate'] as String?,
+      lastChange: json['lastChange'] as String?,
+    )
+      ..closingDate = json['closingDate'] as String?
+      ..createdBy = json['createdBy'] as String
+      ..totalPrice = (json['totalPrice'] as num).toDouble()
+      ..products = (json['products'] as List<dynamic>)
+          .map((e) =>
+              EntryProductGetResponseModel.fromJson(e as Map<String, dynamic>))
+          .toList();
 
 Map<String, dynamic> _$EntryGetResponseModelToJson(
         EntryGetResponseModel instance) =>
@@ -29,5 +33,8 @@ Map<String, dynamic> _$EntryGetResponseModelToJson(
       'active': instance.active,
       'createdDate': instance.createdDate,
       'lastChange': instance.lastChange,
+      'closingDate': instance.closingDate,
+      'createdBy': instance.createdBy,
+      'totalPrice': instance.totalPrice,
       'products': instance.products,
     };
