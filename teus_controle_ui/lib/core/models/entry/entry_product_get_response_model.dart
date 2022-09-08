@@ -11,6 +11,7 @@ class EntryProductGetResponseModel {
     required this.totalPrice,
     required this.description,
     required this.gtin,
+    required this.thumbnail,
   });
 
   late final int productId;
@@ -19,6 +20,7 @@ class EntryProductGetResponseModel {
   late final double totalPrice;
   late final String description;
   late final String gtin;
+  late final String thumbnail;
 
   factory EntryProductGetResponseModel.fromJson(Map<String, dynamic> json) =>
       _$EntryProductGetResponseModelFromJson(json);

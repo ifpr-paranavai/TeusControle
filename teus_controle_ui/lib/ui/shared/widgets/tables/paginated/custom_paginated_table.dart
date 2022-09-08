@@ -378,9 +378,26 @@ class _CustomTableState extends State<CustomPaginatedTable> {
             ));
           }
 
-          return DataCell(Center(
-            child: Text(rowValue.isEmpty ? '-' : rowValue),
-          ));
+          return DataCell(
+            Center(
+              child: SizedBox(
+                width: 150,
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  textWidthBasis: TextWidthBasis.parent,
+                  overflow: TextOverflow.ellipsis,
+                  text: TextSpan(
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.black,
+                    ),
+                    text: rowValue.isEmpty ? '-' : rowValue,
+                  ),
+                ),
+              ),
+            ),
+          );
         },
       ).toList();
 

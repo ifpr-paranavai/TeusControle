@@ -15,6 +15,7 @@ EntryProductGetResponseModel _$EntryProductGetResponseModelFromJson(
       totalPrice: (json['totalPrice'] as num).toDouble(),
       description: json['description'] as String,
       gtin: json['gtin'] as String,
+      thumbnail: json['thumbnail'] as String,
     );
 
 Map<String, dynamic> _$EntryProductGetResponseModelToJson(
@@ -26,4 +27,5 @@ Map<String, dynamic> _$EntryProductGetResponseModelToJson(
       'totalPrice': instance.totalPrice,
       'description': instance.description,
       'gtin': instance.gtin,
+      'thumbnail': instance.thumbnail,
     };

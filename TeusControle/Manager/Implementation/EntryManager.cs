@@ -186,7 +186,8 @@ namespace Manager.Implementation
                             x.UnitPrice,
                             x.TotalPrice,
                             x.Product.Description,
-                            x.Product.Gtin
+                            x.Product.Gtin,
+                            x.Product.Thumbnail,
                         }).ToList()
                     })
                     .FirstOrDefault();

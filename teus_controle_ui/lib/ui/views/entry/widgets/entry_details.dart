@@ -63,7 +63,6 @@ class _EntryDetailsState extends State<EntryDetails> {
       Navigator.pop(context);
       return Container();
     }
-    double tableSize = 600;
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,34 +72,7 @@ class _EntryDetailsState extends State<EntryDetails> {
           flex: 3,
           child: SingleChildScrollView(
             controller: scrollControllerVerticalDetails,
-            child: Column(
-              children: [
-                ListTile(
-                  title: const Text('Descrição'),
-                  subtitle: Text(entry!.origin),
-                ),
-                ListTile(
-                  title: const Text('Status'),
-                  subtitle: Text(entry!.status),
-                ),
-                ListTile(
-                  title: const Text('Criado Por'),
-                  subtitle: Text(entry!.createdBy),
-                ),
-                ListTile(
-                  title: const Text('Data Fechamento'),
-                  subtitle: Text(entry!.closingDate ?? '-'),
-                ),
-                ListTile(
-                  title: const Text('Data Criação'),
-                  subtitle: Text(entry!.createdDate ?? '-'),
-                ),
-                ListTile(
-                  title: const Text('Última Alteração'),
-                  subtitle: Text(entry!.lastChange ?? '-'),
-                ),
-              ],
-            ),
+            child: getDetails(),
           ),
         ),
         Expanded(
@@ -108,74 +80,106 @@ class _EntryDetailsState extends State<EntryDetails> {
           child: SingleChildScrollView(
             controller: scrollControllerVerticalProductsVertical,
             scrollDirection: Axis.vertical,
-            child: Column(
-              children: [
-                SingleChildScrollView(
-                  controller: scrollControllerVerticalProductsHorizontal,
-                  scrollDirection: Axis.horizontal,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      const Text(
-                        "Produtos da Entrada",
-                        style: TextStyle(fontSize: 15),
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Container(
-                        constraints: BoxConstraints(
-                          minWidth: tableSize,
-                        ),
-                        child: DataTable(
-                          columns: _getColumns([
-                            'Código',
-                            'Descrição',
-                            'Quantidade',
-                            'Valor Unitário',
-                            'Valor Total',
-                          ]),
-                          columnSpacing: 10,
-                          rows: _getCells(entry!.products),
-                        ),
-                      ),
-                      Container(
-                        color: Theme.of(context).primaryColorLight,
-                        constraints: BoxConstraints(
-                          minWidth: tableSize,
-                        ),
-                        child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.only(bottom: 5),
-                            child: Text(
-                              "${entry?.products.length} itens",
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        constraints: BoxConstraints(
-                          maxWidth: tableSize,
-                        ),
-                        child: ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          title: const Text('Valor Total'),
-                          subtitle:
-                              Text(globals.currency.format(entry!.totalPrice)),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            child: getProductDetails(),
           ),
         )
+      ],
+    );
+  }
+
+  SingleChildScrollView getProductDetails() {
+    double tableSize = 625;
+
+    return SingleChildScrollView(
+      controller: scrollControllerVerticalProductsHorizontal,
+      scrollDirection: Axis.horizontal,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(
+            height: 15,
+          ),
+          const Text(
+            "Produtos da Entrada",
+            style: TextStyle(fontSize: 15),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Container(
+            constraints: BoxConstraints(
+              minWidth: tableSize,
+            ),
+            child: DataTable(
+              columns: _getColumns([
+                'Código',
+                'Descrição',
+                'Quantidade',
+                'Valor Unitário',
+                'Valor Total',
+              ]),
+              columnSpacing: 10,
+              rows: _getCells(entry!.products),
+            ),
+          ),
+          Container(
+            color: Theme.of(context).primaryColorLight,
+            constraints: BoxConstraints(
+              minWidth: tableSize,
+            ),
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 5),
+                child: Text(
+                  "${entry?.products.length} itens",
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+          Container(
+            constraints: BoxConstraints(
+              maxWidth: tableSize,
+            ),
+            child: ListTile(
+              contentPadding: EdgeInsets.zero,
+              title: const Text('Valor Total'),
+              subtitle: Text(globals.currency.format(entry!.totalPrice)),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Column getDetails() {
+    return Column(
+      children: [
+        ListTile(
+          title: const Text('Descrição'),
+          subtitle: Text(entry!.origin),
+        ),
+        ListTile(
+          title: const Text('Status'),
+          subtitle: Text(entry!.status),
+        ),
+        ListTile(
+          title: const Text('Criado Por'),
+          subtitle: Text(entry!.createdBy),
+        ),
+        ListTile(
+          title: const Text('Data Fechamento'),
+          subtitle: Text(entry!.closingDate ?? '-'),
+        ),
+        ListTile(
+          title: const Text('Data Criação'),
+          subtitle: Text(entry!.createdDate ?? '-'),
+        ),
+        ListTile(
+          title: const Text('Última Alteração'),
+          subtitle: Text(entry!.lastChange ?? '-'),
+        ),
       ],
     );
   }
