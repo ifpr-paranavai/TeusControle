@@ -14,5 +14,7 @@ namespace Manager.Interfaces
         new PaginatedResponse<ProductPagedModel> GetPaged(PaginatedRequest pagingParams);
         Task<ProductModel> Insert(CreateProductModel newUser);
         Task<ProductModel> Update(UpdateProductModel updatedUser);
+        Task<object> GetProductByCode(string gtinCode);
+
     }
 }

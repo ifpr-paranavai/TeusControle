@@ -9,6 +9,9 @@ class DropDownField<T> extends StatelessWidget {
   final double paddingBottom;
   final double paddingTop;
   final String? Function(T?)? validator;
+  final Color? backgroundColor;
+  final Color? textColor;
+  final bool enabled;
 
   const DropDownField({
     Key? key,
@@ -20,6 +23,9 @@ class DropDownField<T> extends StatelessWidget {
     this.paddingBottom = 5,
     this.paddingTop = 0,
     this.validator,
+    this.backgroundColor,
+    this.textColor,
+    this.enabled = true,
   }) : super(key: key);
 
   @override
@@ -33,14 +39,19 @@ class DropDownField<T> extends StatelessWidget {
         items: options.map((T value) {
           return DropdownMenuItem<T>(
             value: value,
-            child: Text(getLabel(value)),
+            child: Text(
+              getLabel(value),
+            ),
           );
         }).toList(),
-        onChanged: onChanged,
+        onChanged: !enabled ? null : onChanged,
         value: value,
         validator: validator,
         elevation: 2,
-        style: const TextStyle(color: Colors.black, fontSize: 16),
+        style: TextStyle(
+          color: textColor ?? Colors.black,
+          fontSize: 16,
+        ),
         isDense: true,
         iconSize: 30.0,
         iconEnabledColor: Theme.of(context).primaryColorDark,
@@ -51,15 +62,18 @@ class DropDownField<T> extends StatelessWidget {
           ),
           labelText: labelText,
           labelStyle: TextStyle(
-            color: Theme.of(context).primaryColor,
+            color: backgroundColor != null
+                ? Colors.white
+                : Theme.of(context).primaryColor,
             fontWeight: FontWeight.w400,
             fontSize: 17,
           ),
-          enabledBorder: _customBorder(context),
-          border: _customBorder(context),
-          focusedBorder: _customBorder(context),
+          enabledBorder: _customBorder(context, backgroundColor),
+          border: _customBorder(context, backgroundColor),
+          focusedBorder: _customBorder(context, backgroundColor),
           errorBorder: _customBorder(context, Colors.red),
-          fillColor: Colors.transparent,
+          filled: backgroundColor != null,
+          fillColor: backgroundColor ?? Colors.transparent,
           hoverColor: Colors.transparent,
           focusColor: Colors.transparent,
         ),

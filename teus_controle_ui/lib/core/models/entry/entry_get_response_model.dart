@@ -10,6 +10,7 @@ class EntryGetResponseModel {
     required this.id,
     required this.origin,
     required this.status,
+    required this.statusDescription,
     required this.active,
     required this.createdDate,
     required this.lastChange,
@@ -18,6 +19,7 @@ class EntryGetResponseModel {
   late final int id;
   late final String origin;
   late final String status;
+  late final String statusDescription;
   late final bool active;
   late final String? createdDate;
   late final String? lastChange;

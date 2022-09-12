@@ -33,6 +33,7 @@ namespace TeusControleApi.Configuration
             services.AddScoped<IProductManager, ProductManager>();
             services.AddScoped<IEntryManager, EntryManager>();
             services.AddScoped<IProductEntryManager, ProductEntryManager>();
+            services.AddScoped<ISelectManager, SelectManager>();
             #endregion
         }
     }

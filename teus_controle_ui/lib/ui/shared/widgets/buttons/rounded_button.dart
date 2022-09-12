@@ -49,13 +49,15 @@ class RoundedButton extends StatelessWidget {
 
     if (label != null) {
       textChild.add(
-        Text(
-          label!,
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w600,
-            fontSize: 15,
+        FittedBox(
+          fit: BoxFit.fitWidth,
+          child: Text(
+            label!,
+            style: const TextStyle(
+              fontSize: 15,
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
       );
@@ -85,6 +87,7 @@ class RoundedButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(35),
         ),
         onPressed: onPressed,
+        disabledColor: Colors.grey,
         minWidth: minWidth,
         height: 55.0,
         child: label == null

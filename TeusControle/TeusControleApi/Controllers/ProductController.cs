@@ -117,5 +117,24 @@ namespace TeusControleApi.Controllers
             }
             return NoContent();
         }
+
+        /// <summary>
+        /// Busca informações produto por código de barras
+        /// </summary>
+        /// <param name="gtinCode" example="123">Código de barras do produto.</param>
+        [ProducesResponseType(typeof(ProductModel), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        [HttpGet("gtincode/{gtinCode}")]
+        public async Task<IActionResult> GetProductByCode(string gtinCode)
+        {
+
+            var product = await productManager.GetProductByCode(gtinCode);
+            if (product == null)
+            {
+                return NotFound("Não foi possível buscar o produto.");
+            }
+            return Ok(product);
+        }
     }
 }

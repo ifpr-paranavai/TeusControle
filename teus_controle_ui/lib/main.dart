@@ -14,7 +14,7 @@ void main() async {
   HttpOverrides.global = MyHttpOverrides();
 
   WidgetsFlutterBinding.ensureInitialized();
-  await DesktopWindow.setMinWindowSize(const Size(400, 400));
+  await DesktopWindow.setMinWindowSize(const Size(550, 550));
   runApp(const MyApp());
 }
 

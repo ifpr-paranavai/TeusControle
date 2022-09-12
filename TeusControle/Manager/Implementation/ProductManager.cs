@@ -138,5 +138,37 @@ namespace Manager.Implementation
             }
             return null;
         }
+
+        /// <summary>
+        /// Busca produto por código de barras
+        /// </summary>
+        /// <param name="gtinCode"></param>
+        /// <returns></returns>
+        public async Task<object> GetProductByCode(string gtinCode)
+        {
+            try
+            {
+                if (!await AnyAsync(x =>
+                    x.Gtin == gtinCode &&
+                    !x.Deleted
+                ))
+                    throw new Exception("Registro não encontrado.");
+
+                var product = Query(x => x.Gtin == gtinCode)
+                    .Select(s => new {
+                        s.Id,
+                        s.Description,
+                        s.Gtin,
+                        s.Thumbnail,
+                    }).FirstOrDefault();
+
+                return product;
+            } catch (Exception ex)
+            {
+                logger.LogError("ERRO AO REALIZAR BUSCA PÁGINADA DE PRODUTOS COM OS PARAMETROS: {@pagingParams}", gtinCode, ex);
+            }
+
+            return null;
+        }
     }
 }

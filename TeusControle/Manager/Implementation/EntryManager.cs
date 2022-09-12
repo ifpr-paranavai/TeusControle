@@ -93,6 +93,17 @@ namespace Manager.Implementation
         {
             try
             {
+                // TODO: ENCONTRAR MANEIRA DE ATUALIZAR APENAS ORIGIN
+                /*Entry dbEntry = Query(q => q.Id == updatedEntry.Id).FirstOrDefault();
+                
+                bool canUpdate = true;
+                foreach(ProductEntry product in dbEntry.ProductsEntry) {
+                    if (updatedEntry.Products.Where(e => e.ProductId == product.Id).First() != null)
+                    {
+                        canUpdate = false;
+                    }
+                }*/
+
                 if (!await HasValidStatusToUpdateDb(updatedEntry.Id))
                     throw new Exception("Não é possível atualizar entrada já fechada.");
 
@@ -173,7 +184,8 @@ namespace Manager.Implementation
                     {
                         s.Id,
                         s.Origin,
-                        Status = EnumExtension.GetDescription(s.Status),
+                        Status = s.Status,
+                        StatusDescription = EnumExtension.GetDescription(s.Status),
                         s.Active,
                         s.CreatedDate,
                         s.LastChange,

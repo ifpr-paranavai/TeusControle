@@ -1,17 +1,34 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../core/models/entry/entry_get_response_model.dart';
 import '../../../core/models/entry/entry_product_get_response_model.dart';
+import '../../../core/models/entry/entry_product_item_post_request_model.dart';
+import '../../../core/models/entry/entry_product_post_request_model.dart';
+import '../../../core/models/entry/entry_product_post_response_model.dart';
+import '../../../core/models/entry/entry_product_put_request_model.dart';
+import '../../../core/models/select/select_model.dart';
 import '../../../core/services/entry_service.dart';
+import '../../../core/services/product_service.dart';
+import '../../../core/services/select_service.dart';
 import '../../../ui/shared/utils/global.dart' as globals;
 
 class EntryController {
   EntryService service = EntryService();
+  ProductService productService = ProductService();
+  SelectService selectService = SelectService();
   final formKey = GlobalKey<FormState>();
+  bool editable = true;
 
   List<EntryProductGetResponseModel> products = [];
   double totalPrice = 0;
-  String status = '';
+  // String statusDescription = 'Aberto';
+  // String status = 'Opened';
+  SelectModel entryStatusSelect =
+      SelectModel(value: 'Opened', description: 'Aberto');
+  int? id;
+  String? thumbnail;
   final codeController = TextEditingController();
   final descriptionController = TextEditingController();
   final priceController = TextEditingController();
@@ -24,97 +41,59 @@ class EntryController {
     priceController.dispose();
     amountController.dispose();
     productController.dispose();
+    editable = true;
   }
 
   void clearFields() {
     products = [];
     totalPrice = 0;
-    status = '';
-    codeController.clear();
+    entryStatusSelect = SelectModel(value: 'Opened', description: 'Aberto');
+    id = null;
+    thumbnail = null;
+    // statusDescription = 'Aberto';
+    // status = 'Opened';
     descriptionController.clear();
+    codeController.clear();
     priceController.clear();
     amountController.clear();
     productController.clear();
+    editable = true;
   }
 
   void autoCompleteFields(EntryGetResponseModel entry) {
     descriptionController.text = entry.origin;
     totalPrice = entry.totalPrice;
     products = entry.products;
-    status = '';
+    entryStatusSelect = SelectModel(
+      value: entry.status,
+      description: entry.statusDescription,
+    );
+    // statusDescription = entry.statusDescription;
+    // status = entry.status;
   }
 
-  void getProductByGtinCode() {}
+  List<TextInputFormatter> get priceFormatter {
+    return [
+      FilteringTextInputFormatter.digitsOnly,
+      CentavosInputFormatter(),
+    ];
+  }
 
-  // MultiValidator get nameValidator {
-  //   return MultiValidator([
-  //     RequiredValidator(errorText: 'Campo obrigatório'),
-  //     MaxLengthValidator(
-  //       200,
-  //       errorText: 'Campo deve possuir no máximo  200 caracteres',
-  //     ),
-  //     MinLengthValidator(
-  //       10,
-  //       errorText: 'Campo deve possuir no mínimo 10 caracteres',
-  //     ),
-  //   ]);
-  // }
-  //
-  // MultiValidator get cpfCnpjValidator {
-  //   return MultiValidator([
-  //     RequiredValidator(errorText: 'Campo obrigatório'),
-  //     MinLengthValidator(
-  //       11,
-  //       errorText: 'Campo deve possuir no mínimo 11 caracteres',
-  //     ),
-  //     MaxLengthValidator(
-  //       18,
-  //       errorText: 'Campo deve possuir no máximo 14 caracteres',
-  //     ),
-  //   ]);
-  // }
-  //
-  // List<TextInputFormatter> get cpfMaskFormatter {
-  //   return [
-  //     FilteringTextInputFormatter.digitsOnly,
-  //     CpfOuCnpjFormatter(),
-  //   ];
-  // }
-  //
-  // MultiValidator get birthDateValidator {
-  //   return MultiValidator([
-  //     RequiredValidator(errorText: 'Campo obrigatório'),
-  //   ]);
-  // }
-  //
-  // MultiValidator get profileImageUrlValidator {
-  //   var urlPattern =
-  //       r"[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)";
-  //
-  //   return MultiValidator([
-  //     PatternValidator(
-  //       urlPattern,
-  //       errorText: 'Url da imagem está em um formato inválido',
-  //     ),
-  //   ]);
-  // }
-  //
-  // String? profileTypeValidator(String? value) {
-  //   return value == null || value == "" ? "Campo obrigatório" : null;
-  // }
-  //
-  // MultiValidator get emailValidator {
-  //   return MultiValidator([
-  //     RequiredValidator(errorText: 'Campo obrigatório'),
-  //     EmailValidator(errorText: 'E-mail está em um formato inválido'),
-  //   ]);
-  // }
-  //
-  // MultiValidator get passwordValidator {
-  //   return MultiValidator([
-  //     RequiredValidator(errorText: 'Campo obrigatório'),
-  //   ]);
-  // }
+  List<TextInputFormatter> get amountFormatter {
+    return [
+      FilteringTextInputFormatter.digitsOnly,
+    ];
+  }
+
+  String? enumStatusValidator(SelectModel? value) {
+    return value == null || value.description == "" || value.value == ""
+        ? "Campo obrigatório"
+        : null;
+  }
+
+  Future<List<SelectModel>?> getEntryStatusSelect(BuildContext context) async {
+    return selectService.getEntryStatusSelect(context);
+  }
 
   Future<void> onConfirmButton(
     BuildContext context,
@@ -162,51 +141,53 @@ class EntryController {
   }
 
   Future<bool> _postRequest(BuildContext context) async {
-    // var data = UserPostRequestModel(
-    //   name: nameController.text,
-    //   // cpfCnpj: cpfCnpjController.text.replaceAll(RegExp('[^A-Za-z0-9]'), ''),
-    //   // documentType: cpfCnpjController.text.length > 11 ? 2 : 1,
-    //   birthDate: globals.formatSentDate(birthDateController.text),
-    //   profileImage: profileImageController.text,
-    //   profileType: profileType ?? "",
-    //   email: emailController.text,
-    //   password: passwordController.text,
-    // );
-    //
-    // UserPostResponseModel? createdUser = await service.postRequest(
-    //   context,
-    //   data.toJson(),
-    // );
-    //
-    // if (createdUser != null) {
-    //   return true;
-    // }
+    var data = EntryProductPostRequestModel(
+      origin: descriptionController.text,
+      status: entryStatusSelect.value,
+      products: products
+          .map((e) => EntryProductItemPostRequestModel(
+                productId: e.productId,
+                amount: e.amount,
+                unitPrice: e.unitPrice,
+              ))
+          .toList(),
+    );
+
+    EntryProductPostResponseModel? createdProduct = await service.postRequest(
+      context,
+      data.toJson(),
+    );
+
+    if (createdProduct != null) {
+      return true;
+    }
 
     return false;
   }
 
   Future<bool> _putRequest(BuildContext context, int id, bool active) async {
-    // var data = UserPutRequestModel(
-    //   name: nameController.text,
-    //   // cpfCnpj: cpfCnpjController.text.replaceAll(RegExp('[^A-Za-z0-9]'), ''),
-    //   // documentType: cpfCnpjController.text.length > 11 ? 2 : 1,
-    //   birthDate: globals.formatSentDate(birthDateController.text),
-    //   profileImage: profileImageController.text,
-    //   profileType: profileType ?? "",
-    //   email: emailController.text,
-    //   password: passwordController.text,
-    //   id: id,
-    //   active: active,
-    // );
-    //
-    // UserPutResponseModel? updatedUser = await service.putRequest(
-    //   context,
-    //   data.toJson(),
-    // );
-    //
-    // if (updatedUser != null) {
-    //   return true;
-    // }
+    var data = EntryProductPutRequestModel(
+      origin: descriptionController.text,
+      status: entryStatusSelect.value,
+      active: true,
+      id: id,
+      products: products
+          .map((e) => EntryProductItemPostRequestModel(
+                productId: e.productId,
+                amount: e.amount,
+                unitPrice: e.unitPrice,
+              ))
+          .toList(),
+    );
+
+    EntryProductPostResponseModel? updatedProduct = await service.putRequest(
+      context,
+      data.toJson(),
+    );
+
+    if (updatedProduct != null) {
+      return true;
+    }
 
     return false;
   }
@@ -226,5 +207,59 @@ class EntryController {
     int id,
   ) async {
     await service.deleteRequest(context, id);
+  }
+
+  Future getProductByGtinCode(
+    BuildContext context,
+    String gtinCode,
+  ) async {
+    var value = await productService.getProductByGtinCode(context, gtinCode);
+
+    if (value == null) {
+      // todo: tratar quando não existir produto
+      // sugestão, abrir tela para cadastrar produto
+      return;
+    }
+    productController.text = value.description;
+    id = value.id;
+    thumbnail = value.thumbnail;
+  }
+
+  void addProductOnPressed() {
+    if (id == null) {
+      return;
+    }
+
+    if (products.where((element) => element.productId == id).isNotEmpty) {
+      return;
+      // todo: se ja existe, questionar se deseja editar
+    }
+
+    double amount = double.parse(amountController.text);
+    double price = double.parse(
+      priceController.text.replaceAll('.', '').replaceAll(',', '.'),
+    );
+    double subTotalPrice = amount * price;
+
+    totalPrice += subTotalPrice;
+
+    products.add(
+      EntryProductGetResponseModel(
+        productId: id ?? 0,
+        amount: amount,
+        unitPrice: price,
+        totalPrice: subTotalPrice,
+        description: productController.text,
+        gtin: codeController.text,
+        thumbnail: thumbnail ?? '',
+      ),
+    );
+
+    codeController.clear();
+    priceController.clear();
+    amountController.clear();
+    productController.clear();
+    id = null;
+    thumbnail = null;
   }
 }

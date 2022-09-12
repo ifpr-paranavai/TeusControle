@@ -162,7 +162,7 @@ class _EntryDetailsState extends State<EntryDetails> {
         ),
         ListTile(
           title: const Text('Status'),
-          subtitle: Text(entry!.status),
+          subtitle: Text(entry!.statusDescription),
         ),
         ListTile(
           title: const Text('Criado Por'),

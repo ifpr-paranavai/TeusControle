@@ -22,8 +22,8 @@ class LoginWidget extends State<LoginPage> {
         child: Container(
           margin: const EdgeInsets.all(15.0),
           constraints: const BoxConstraints(
-            maxHeight: 450,
-            minHeight: 350,
+            maxHeight: 550,
+            minHeight: 450,
             maxWidth: 600,
             minWidth: 500,
           ),

@@ -1,9 +1,12 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:teus_controle_ui/ui/shared/widgets/buttons/circle_icon_button.dart';
 
 import '../../../../core/models/entry/entry_product_get_response_model.dart';
+import '../../../../core/models/select/select_model.dart';
 import '../../../shared/utils/global.dart' as globals;
+import '../../../shared/widgets/buttons/rounded_button.dart';
 import '../../../shared/widgets/dialogs/custom_dialog.dart';
+import '../../../shared/widgets/inputs/drop_down_field.dart';
 import '../../../shared/widgets/inputs/text_input_field.dart';
 import '../entry_controller.dart';
 
@@ -29,20 +32,33 @@ class _EntryFormState extends State<EntryForm> {
   bool isLoading = false;
   final scrollControllerVertical = ScrollController();
   final scrollControllerHorizontal = ScrollController();
+  List<SelectModel>? entryStatusSelect = [];
+  var myGroup = AutoSizeGroup();
 
   @override
   void initState() {
     super.initState();
     // Busca se for para atualizar e preencher campos
     if (!widget.isCreate && widget.id != null) {
-      widget.controller.onLoadEntry(
+      widget.controller
+          .onLoadEntry(
         context,
         widget.id!,
         () => setState(() {
           isLoading = !isLoading;
         }),
-      );
+      )
+          .then((value) {
+        widget.controller.editable = !(widget.id != null &&
+            widget.controller.entryStatusSelect.description == 'Fechado');
+      });
     }
+
+    widget.controller
+        .getEntryStatusSelect(context)
+        .then((value) => setState(() {
+              entryStatusSelect = value;
+            }));
   }
 
   @override
@@ -58,14 +74,19 @@ class _EntryFormState extends State<EntryForm> {
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Column(
                 children: [
-                  _descriptionField(widget.controller),
-                  _productFormFields(),
+                  _descriptionField(),
+                  _productFormFields(context),
                   const SizedBox(
                     height: 10,
                   ),
-                  SingleChildScrollView(
-                    controller: scrollControllerVertical,
-                    child: _tableProducts(),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      controller: scrollControllerVertical,
+                      child: _tableProducts(),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 74,
                   ),
                 ],
               ),
@@ -83,16 +104,37 @@ class _EntryFormState extends State<EntryForm> {
                 width: double.infinity,
                 height: 75,
                 child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                  child: Text(
-                    'Total ${globals.currency.format(widget.controller.totalPrice)} ',
-                    textAlign: TextAlign.end,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 15,
+                    horizontal: 20,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      SizedBox(
+                        width: 200,
+                        child: _profileTypeInput(context),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      SizedBox(
+                        width: 190,
+                        child: AutoSizeText(
+                          'Total ${globals.currency.format(widget.controller.totalPrice)} ',
+                          overflow: TextOverflow.ellipsis,
+                          group: myGroup,
+                          maxFontSize: 30,
+                          textAlign: TextAlign.end,
+                          maxLines: 1,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -103,6 +145,7 @@ class _EntryFormState extends State<EntryForm> {
       title: widget.isCreate ? 'Cadastro' : 'Edição',
       onClose: widget.controller.clearFields,
       isLoading: isLoading,
+      // hasConfirmButton: widget.controller.editable,
       onConfirm: () => widget.controller.onConfirmButton(
         context,
         () => setState(() {
@@ -281,85 +324,122 @@ class _EntryFormState extends State<EntryForm> {
     return result;
   }
 
-  Row _productFormFields() {
+  Row _productFormFields(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.max,
       children: [
         Expanded(
           flex: 1,
-          child: _codeField(widget.controller),
+          child: _codeField(context),
         ),
         const SizedBox(
           width: 10,
         ),
         Expanded(
           flex: 3,
-          child: _productDescriptionField(widget.controller),
+          child: _productDescriptionField(),
         ),
         const SizedBox(
           width: 10,
         ),
         Expanded(
           flex: 1,
-          child: _priceField(widget.controller),
+          child: _priceField(),
         ),
         const SizedBox(
           width: 10,
         ),
         Expanded(
           flex: 1,
-          child: _amountField(widget.controller),
+          child: _amountField(),
         ),
         const SizedBox(
           width: 10,
         ),
-        const CircleIconButton(
-          icon: Icons.add,
+        RoundedButton(
+          minWidth: 170,
+          label: 'Adicionar',
+          onPressed:
+              widget.controller.entryStatusSelect.description == 'Fechado'
+                  ? null
+                  : () {
+                      setState(() {
+                        widget.controller.addProductOnPressed();
+                      });
+                    },
         ),
       ],
     );
   }
 
-  TextInputField _descriptionField(EntryController controller) {
+  TextInputField _descriptionField() {
     return TextInputField(
       labelText: "Descrição",
       paddingTop: 15,
       paddingBottom: 10,
-      controller: controller.descriptionController,
+      controller: widget.controller.descriptionController,
     );
   }
 
-  TextInputField _codeField(EntryController controller) {
+  TextInputField _codeField(BuildContext context) {
     return TextInputField(
       labelText: "Código",
-      // validator: controller.descriptionValidator,
-      onFieldSubmitted: (value) {},
-      controller: controller.codeController,
+      enabled: widget.controller.entryStatusSelect.description != 'Fechado',
+      onFieldSubmitted: (value) {
+        widget.controller.getProductByGtinCode(context, value);
+      },
+      controller: widget.controller.codeController,
     );
   }
 
-  TextInputField _productDescriptionField(EntryController controller) {
+  TextInputField _productDescriptionField() {
     return TextInputField(
       labelText: "Produto",
-      // validator: controller.descriptionValidator,
-      controller: controller.productController,
+      enabled: false,
+      controller: widget.controller.productController,
       icon: Icons.search,
     );
   }
 
-  TextInputField _priceField(EntryController controller) {
+  TextInputField _priceField() {
     return TextInputField(
       labelText: "Preço",
-      // validator: controller.descriptionValidator,
-      controller: controller.priceController,
+      mask: widget.controller.priceFormatter,
+      enabled: widget.controller.entryStatusSelect.description != 'Fechado',
+      controller: widget.controller.priceController,
     );
   }
 
-  TextInputField _amountField(EntryController controller) {
+  TextInputField _amountField() {
     return TextInputField(
       labelText: "Quantidade",
-      // validator: controller.descriptionValidator,
-      controller: controller.amountController,
+      keyboardType: TextInputType.number,
+      mask: widget.controller.amountFormatter,
+      enabled: widget.controller.entryStatusSelect.description != 'Fechado',
+      controller: widget.controller.amountController,
+    );
+  }
+
+  DropDownField _profileTypeInput(BuildContext context) {
+    return DropDownField<SelectModel>(
+      enabled: widget.controller.editable,
+      paddingTop: 5,
+      labelText: 'Status',
+      getLabel: (value) => value.description,
+      validator: widget.controller.enumStatusValidator,
+      backgroundColor: Colors.white.withOpacity(0.2),
+      onChanged: (value) {
+        if (value != null) {
+          setState(() {
+            widget.controller.entryStatusSelect = SelectModel(
+              value: value.value,
+              description: value.description,
+            );
+          });
+        }
+      },
+      options: entryStatusSelect ?? [],
+      value: widget.controller.entryStatusSelect,
     );
   }
 }

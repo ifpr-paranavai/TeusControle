@@ -198,6 +198,35 @@
             </summary>
             <param name="id" example="123">Id do produto.</param>
         </member>
+        <member name="M:TeusControleApi.Controllers.ProductController.GetProductByCode(System.String)">
+            <summary>
+            Busca informações produto por código de barras
+            </summary>
+            <param name="gtinCode" example="123">Código de barras do produto.</param>
+        </member>
+        <member name="T:TeusControleApi.Controllers.SelectController">
+            <summary>
+            Controlador para buscar opções de seleção
+            </summary>
+        </member>
+        <member name="M:TeusControleApi.Controllers.SelectController.#ctor(Manager.Interfaces.ISelectManager)">
+            <summary>
+            Controlador para buscar opções de seleção
+            </summary>
+            <param name="selectManager"></param>
+        </member>
+        <member name="M:TeusControleApi.Controllers.SelectController.GetEntryStatusSelect">
+            <summary>
+            Busca status para entradas
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControleApi.Controllers.SelectController.GetUserTypeSelect">
+            <summary>
+            Busca tipos de usuários
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:TeusControleApi.Controllers.UserController">
             <summary>
             Controlador para entidade usuário
