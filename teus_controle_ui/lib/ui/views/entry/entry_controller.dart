@@ -278,6 +278,7 @@ class EntryController {
 
   void removeProductFromList(int productId) {
     var removedProduct = products.where((e) => e.productId == productId).first;
+    totalPrice -= removedProduct.totalPrice;
     products.remove(removedProduct);
   }
 }
