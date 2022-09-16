@@ -16,6 +16,7 @@ EntryGetResponseModel _$EntryGetResponseModelFromJson(
       active: json['active'] as bool,
       createdDate: json['createdDate'] as String?,
       lastChange: json['lastChange'] as String?,
+      canBeDeleted: json['canBeDeleted'] as bool,
     )
       ..closingDate = json['closingDate'] as String?
       ..createdBy = json['createdBy'] as String
@@ -38,5 +39,6 @@ Map<String, dynamic> _$EntryGetResponseModelToJson(
       'closingDate': instance.closingDate,
       'createdBy': instance.createdBy,
       'totalPrice': instance.totalPrice,
+      'canBeDeleted': instance.canBeDeleted,
       'products': instance.products,
     };

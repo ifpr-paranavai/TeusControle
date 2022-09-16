@@ -45,7 +45,7 @@ class UserWidget extends State<UserPage> {
       ),
       deleteDialog: (id, value) => DeleteDialog(
         value: value,
-        onConfirm: loggedUserId != id.toString()
+        onConfirmAsync: loggedUserId != id.toString()
             ? () => controller.onDelete(context, id)
             : null,
       ),

@@ -79,6 +79,11 @@
             Preço total da entrada
             </summary>
         </member>
+        <member name="P:Core.Shared.Models.Entry.EntryPagedModel.CanBeDeleted">
+            <summary>
+            Deve permitir exclusão?
+            </summary>
+        </member>
         <member name="T:Core.Shared.Models.Entry.UpdateEntryModel">
             <summary>
             Objeto para alteração de uma entrada
@@ -96,7 +101,7 @@
             </summary>
             <example>true</example>
         </member>
-        <member name="F:Core.Shared.Models.Enums.EntryStatusEnum.Open">
+        <member name="F:Core.Shared.Models.Enums.EntryStatusEnum.Opened">
             <summary>
             0 - Aberto
             </summary>
@@ -564,6 +569,11 @@
         <member name="P:Core.Shared.Models.User.UserPagedModel.ProfileType">
             <summary>
             Tipo do Perfil
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.User.UserPagedModel.CanBeDeleted">
+            <summary>
+            Deve permitir exclusão?
             </summary>
         </member>
     </members>

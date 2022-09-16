@@ -2,25 +2,27 @@ import 'package:flutter/material.dart';
 
 import 'custom_dialog.dart';
 
-class DeleteDialog extends StatefulWidget {
+class ConfirmDialog extends StatefulWidget {
   final String value;
+  final String confirmActionDescription;
   final Future Function()? onConfirmAsync;
   final Function()? onConfirm;
 
-  const DeleteDialog({
+  const ConfirmDialog({
     Key? key,
     required this.value,
     this.onConfirmAsync,
     this.onConfirm,
+    this.confirmActionDescription = 'confirmar',
   })  : assert(!(onConfirm != null && onConfirmAsync != null),
             'Não pode existir duas funçoes de confirmação para este widget'),
         super(key: key);
 
   @override
-  State<DeleteDialog> createState() => _DeleteDialogState();
+  State<ConfirmDialog> createState() => _ConfirDialogState();
 }
 
-class _DeleteDialogState extends State<DeleteDialog> {
+class _ConfirDialogState extends State<ConfirmDialog> {
   bool _isLoading = false;
 
   @override
@@ -33,7 +35,7 @@ class _DeleteDialogState extends State<DeleteDialog> {
         padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
         child: _content(),
       ),
-      title: "Excluir",
+      title: "Confirmar",
       onConfirm: widget.onConfirmAsync != null || widget.onConfirm != null
           ? _onConfirm
           : null,
@@ -42,7 +44,7 @@ class _DeleteDialogState extends State<DeleteDialog> {
 
   Widget _content() {
     return Text(
-      "Tem certeza que deseja excluir ${widget.value}?",
+      "Tem certeza que deseja ${widget.confirmActionDescription} ${widget.value}?",
       style: const TextStyle(fontSize: 20),
     );
   }

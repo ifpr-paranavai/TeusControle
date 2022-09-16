@@ -433,16 +433,22 @@ class _CustomTableState extends State<CustomPaginatedTable> {
         }
 
         if (widget.onDeleteAction != null) {
+          bool canBeDeleted = row['canBeDeleted'] as bool? ?? true;
+
           actionsChildren.add(
             IconButton(
-              onPressed: () => widget.onDeleteAction!(
-                id,
-                widget.tableData.printValue(id, idReference),
-                () => selected.remove(id),
-              ),
+              onPressed: canBeDeleted
+                  ? () => widget.onDeleteAction!(
+                        id,
+                        widget.tableData.printValue(id, idReference),
+                        () => selected.remove(id),
+                      )
+                  : null,
               icon: Icon(
                 Icons.delete,
-                color: Theme.of(context).primaryColorDark,
+                color: canBeDeleted
+                    ? Theme.of(context).primaryColorDark
+                    : Colors.grey,
               ),
             ),
           );

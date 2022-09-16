@@ -14,6 +14,7 @@ class EntryGetResponseModel {
     required this.active,
     required this.createdDate,
     required this.lastChange,
+    required this.canBeDeleted,
   });
 
   late final int id;
@@ -26,6 +27,7 @@ class EntryGetResponseModel {
   late final String? closingDate;
   late final String createdBy;
   late final double totalPrice;
+  late final bool canBeDeleted;
   late final List<EntryProductGetResponseModel> products;
 
   factory EntryGetResponseModel.fromJson(Map<String, dynamic> json) =>

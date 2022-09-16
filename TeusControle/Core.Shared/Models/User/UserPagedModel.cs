@@ -34,6 +34,11 @@ namespace Core.Shared.Models.User
         /// </summary>
         public string ProfileType { get; set; }
 
+        /// <summary>
+        /// Deve permitir exclusão?
+        /// </summary>
+        public bool CanBeDeleted { get; set; }
+
         public object Clone()
         {
             return MemberwiseClone();

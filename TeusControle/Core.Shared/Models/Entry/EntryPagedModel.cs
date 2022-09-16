@@ -29,6 +29,11 @@ namespace Core.Shared.Models.Entry
         /// </summary>
         public decimal TotalPrice { get; set; }
 
+        /// <summary>
+        /// Deve permitir exclusão?
+        /// </summary>
+        public bool CanBeDeleted { get; set; }
+
         public object Clone()
         {
             return MemberwiseClone();

@@ -262,4 +262,22 @@ class EntryController {
     id = null;
     thumbnail = null;
   }
+
+  void editProductFromList(int productId) {
+    var editedItem = products.where((e) => e.productId == productId).first;
+    codeController.text = editedItem.gtin;
+    productController.text = editedItem.description;
+    priceController.text =
+        globals.formatReceivedDouble(editedItem.unitPrice.toString());
+    amountController.text = editedItem.amount.toString();
+    id = editedItem.productId;
+    thumbnail = editedItem.thumbnail;
+
+    removeProductFromList(productId);
+  }
+
+  void removeProductFromList(int productId) {
+    var removedProduct = products.where((e) => e.productId == productId).first;
+    products.remove(removedProduct);
+  }
 }

@@ -137,7 +137,8 @@ namespace Manager.Implementation
                         ProfileType = EnumExtension.GetDescription(x.ProfileType),
                         /*CpfCnpj = x.CpfCnpj,*/
                         Email = x.Email,
-                        BirthDate = x.BirthDate.Value.ToString("dd/MM/yyyy")
+                        BirthDate = x.BirthDate.Value.ToString("dd/MM/yyyy"),
+                        CanBeDeleted = x.Id != GetLoggedUserId()
                     }
                 );
 

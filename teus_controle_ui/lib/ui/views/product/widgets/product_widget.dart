@@ -37,7 +37,7 @@ class ProductWidget extends State<ProductPage> {
       ),
       deleteDialog: (id, value) => DeleteDialog(
         value: value,
-        onConfirm: () => controller.onDelete(context, id),
+        onConfirmAsync: () => controller.onDelete(context, id),
       ),
     );
   }

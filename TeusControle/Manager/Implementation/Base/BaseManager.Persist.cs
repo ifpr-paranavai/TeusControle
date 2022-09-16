@@ -125,17 +125,22 @@ namespace Manager.Implementation.Base
         public async Task<TOutputModel> UpdateAsync<TOutputModel>(TEntity inputModel)
             where TOutputModel : class
         {
-            inputModel.CreatedBy = int.Parse(_httpContextAccessor
-                .HttpContext.User.FindFirst(
-                    CustomClaimTypes.Id
-                )
-                .Value
-            );
+            inputModel.CreatedBy = GetLoggedUserId();
             await _baseRepository.UpdateAsync(inputModel);
 
             TOutputModel outputModel = _mapper.Map<TOutputModel>(inputModel);
 
             return outputModel;
+        }
+
+        protected int GetLoggedUserId()
+        {
+            return int.Parse(_httpContextAccessor
+                            .HttpContext.User.FindFirst(
+                                CustomClaimTypes.Id
+                            )
+                            .Value
+                        );
         }
 
         /// <summary>

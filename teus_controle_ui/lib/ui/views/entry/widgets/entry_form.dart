@@ -1,11 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:teus_controle_ui/ui/shared/widgets/dialogs/confirm_dialog.dart';
 
 import '../../../../core/models/entry/entry_product_get_response_model.dart';
 import '../../../../core/models/select/select_model.dart';
 import '../../../shared/utils/global.dart' as globals;
 import '../../../shared/widgets/buttons/rounded_button.dart';
 import '../../../shared/widgets/dialogs/custom_dialog.dart';
+import '../../../shared/widgets/dialogs/delete_dialog.dart';
+import '../../../shared/widgets/dialogs/overlayable.dart';
 import '../../../shared/widgets/inputs/drop_down_field.dart';
 import '../../../shared/widgets/inputs/text_input_field.dart';
 import '../entry_controller.dart';
@@ -75,7 +78,7 @@ class _EntryFormState extends State<EntryForm> {
               child: Column(
                 children: [
                   _descriptionField(),
-                  _productFormFields(context),
+                  if (_isClosed()) _productFormFields(context),
                   const SizedBox(
                     height: 10,
                   ),
@@ -113,7 +116,7 @@ class _EntryFormState extends State<EntryForm> {
                     children: [
                       SizedBox(
                         width: 200,
-                        child: _profileTypeInput(context),
+                        child: _statusInput(context),
                       ),
                       const SizedBox(
                         width: 20,
@@ -172,6 +175,7 @@ class _EntryFormState extends State<EntryForm> {
               'Preço Unitário',
               'Quantidade',
               'Preço Total',
+              if (_isClosed()) 'Ação'
             ]),
             rows: _getCells(widget.controller.products),
           ),
@@ -210,6 +214,7 @@ class _EntryFormState extends State<EntryForm> {
         DataCell(Container()),
         DataCell(Container()),
         DataCell(Container()),
+        if (_isClosed()) DataCell(Container()),
       ];
 
       while (rowIndex <= 3) {
@@ -316,6 +321,47 @@ class _EntryFormState extends State<EntryForm> {
             DataCell(
               Center(child: Text(globals.currency.format(product.totalPrice))),
             ),
+            if (_isClosed())
+              DataCell(Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        Overlayable(
+                          widget: ConfirmDialog(
+                            value: product.description,
+                            confirmActionDescription: 'editar',
+                            onConfirm: () => setState(() => widget.controller
+                                .editProductFromList(product.productId)),
+                          ),
+                        ),
+                      );
+                    },
+                    icon: Icon(
+                      Icons.edit,
+                      color: Theme.of(context).primaryColorDark,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        Overlayable(
+                          widget: DeleteDialog(
+                            value: product.description,
+                            onConfirm: () => setState(() => widget.controller
+                                .removeProductFromList(product.productId)),
+                          ),
+                        ),
+                      );
+                    },
+                    icon: Icon(
+                      Icons.delete,
+                      color: Theme.of(context).primaryColorDark,
+                    ),
+                  ),
+                ],
+              )),
           ],
         ),
       );
@@ -384,7 +430,7 @@ class _EntryFormState extends State<EntryForm> {
   TextInputField _codeField(BuildContext context) {
     return TextInputField(
       labelText: "Código",
-      enabled: widget.controller.entryStatusSelect.description != 'Fechado',
+      enabled: _isClosed(),
       onFieldSubmitted: (value) {
         widget.controller.getProductByGtinCode(context, value);
       },
@@ -405,7 +451,7 @@ class _EntryFormState extends State<EntryForm> {
     return TextInputField(
       labelText: "Preço",
       mask: widget.controller.priceFormatter,
-      enabled: widget.controller.entryStatusSelect.description != 'Fechado',
+      enabled: _isClosed(),
       controller: widget.controller.priceController,
     );
   }
@@ -415,12 +461,12 @@ class _EntryFormState extends State<EntryForm> {
       labelText: "Quantidade",
       keyboardType: TextInputType.number,
       mask: widget.controller.amountFormatter,
-      enabled: widget.controller.entryStatusSelect.description != 'Fechado',
+      enabled: _isClosed(),
       controller: widget.controller.amountController,
     );
   }
 
-  DropDownField _profileTypeInput(BuildContext context) {
+  DropDownField _statusInput(BuildContext context) {
     return DropDownField<SelectModel>(
       enabled: widget.controller.editable,
       paddingTop: 5,
@@ -441,5 +487,9 @@ class _EntryFormState extends State<EntryForm> {
       options: entryStatusSelect ?? [],
       value: widget.controller.entryStatusSelect,
     );
+  }
+
+  bool _isClosed() {
+    return widget.controller.entryStatusSelect.description != 'Fechado';
   }
 }

@@ -81,49 +81,94 @@ namespace Manager.Implementation
             await _productEntryManager.AddAsync<List<ProductEntry>>(products);
         }
 
-        private async Task<bool> HasValidStatusToUpdateDb(int id)
-        {
-            return await AnyAsync(
-                q => q.Id == id &&
-                q.Status != EntryStatusEnum.Closed
-            );
-        }
 
         public async Task<EntryModel> Update(UpdateEntryModel updatedEntry)
         {
             try
             {
-                // TODO: ENCONTRAR MANEIRA DE ATUALIZAR APENAS ORIGIN
-                /*Entry dbEntry = Query(q => q.Id == updatedEntry.Id).FirstOrDefault();
-                
-                bool canUpdate = true;
-                foreach(ProductEntry product in dbEntry.ProductsEntry) {
-                    if (updatedEntry.Products.Where(e => e.ProductId == product.Id).First() != null)
-                    {
-                        canUpdate = false;
-                    }
-                }*/
+                bool isNotClosed = await IsNotClosed(updatedEntry);
+                bool hasSameProducts = HasSameAmountAndValue(updatedEntry);
 
-                if (!await HasValidStatusToUpdateDb(updatedEntry.Id))
+                if (!(isNotClosed || hasSameProducts))
                     throw new Exception("Não é possível atualizar entrada já fechada.");
 
                 Entry entity = _mapper.Map<Entry>(updatedEntry);
-                if (entity.Status == EntryStatusEnum.Closed)
-                    entity.ClosingDate = DateTime.Now;
+                if (isNotClosed)
+                    return await UpdateNotClosed(entity, updatedEntry);
 
-                EntryModel data = await UpdateAsync<EntryModel>(entity);
-
-                await _productEntryManager.PhysicalDeleteAsync(updatedEntry.Id);
-                await AddProductEntry(updatedEntry.Products, data);
-                await UpdateProducts(updatedEntry);
-
-                return data;
+                if (hasSameProducts) { 
+                    entity.Origin = updatedEntry.Origin;
+                    entity.LastChange = DateTime.Now;
+                    return await UpdateClosed(entity);
+                }
             }
             catch (Exception ex)
             {
                 logger.LogError("ERRO AO ATUALIZAR ENTRADA: {@updatedEntry}", updatedEntry, ex);
             }
             return null;
+        }
+
+        private async Task<EntryModel> UpdateNotClosed(Entry entity, UpdateEntryModel updatedEntry)
+        {
+            if (updatedEntry.Status == EntryStatusEnum.Closed)
+                entity.ClosingDate = DateTime.Now;
+
+            EntryModel data = await UpdateAsync<EntryModel>(entity);
+
+            await _productEntryManager.PhysicalDeleteAsync(updatedEntry.Id);
+            await AddProductEntry(updatedEntry.Products, data);
+            await UpdateProducts(updatedEntry);
+
+            return data;
+        }
+
+
+        private async Task<EntryModel> UpdateClosed(Entry entity)
+        {
+            await UpdateSomeFieldsAsync(
+                entity,
+                q => q.Origin,
+                q => q.LastChange
+                );
+
+            EntryModel outputModel = _mapper.Map<EntryModel>(entity);
+            return outputModel;
+        }
+
+
+        private async Task<bool> IsNotClosed(UpdateEntryModel updatedEntry)
+        {
+            bool isNotClosed = await AnyAsync(
+                q => q.Id == updatedEntry.Id &&
+                q.Status != EntryStatusEnum.Closed
+            );
+
+            return isNotClosed;
+        }
+
+        private bool HasSameAmountAndValue(UpdateEntryModel updatedEntry)
+        {
+            var dbEntry = Query(q => q.Id == updatedEntry.Id).Select(s => new { 
+                s.TotalPrice,
+                ProductsEntryCount = s.ProductsEntry.Count,
+            }).FirstOrDefault();
+            
+            if (dbEntry == null)
+            {
+                return false;
+            }
+
+            decimal totalUpdatedEntry = 0;
+            foreach (ProductEntryModel products in updatedEntry.Products)
+            {
+                totalUpdatedEntry += products.UnitPrice * products.Amount;
+            }
+
+            bool hasSameCountOfProducts = dbEntry.ProductsEntryCount == updatedEntry.Products.Count;            
+            bool hasSameValue = dbEntry.TotalPrice == totalUpdatedEntry;
+
+            return hasSameCountOfProducts && hasSameValue;
         }
 
         private async Task UpdateProducts(CreateEntryModel entry)
@@ -192,6 +237,7 @@ namespace Manager.Implementation
                         s.TotalPrice,
                         s.ClosingDate,
                         CreatedBy = s.CreatedByUser.Name,
+                        CanBeDeleted = s.Status != EntryStatusEnum.Closed,
                         Products = s.ProductsEntry.Select(x => new {
                             ProductId = x.Id2,
                             x.Amount,
@@ -225,7 +271,8 @@ namespace Manager.Implementation
                         ClosingDate = x.ClosingDate.ToString(),
                         Origin = x.Origin,
                         Status = EnumExtension.GetDescription(x.Status),
-                        TotalPrice = x.TotalPrice
+                        TotalPrice = x.TotalPrice,
+                        CanBeDeleted = x.Status != EntryStatusEnum.Closed,
                     }
                 );
 
