@@ -12,7 +12,7 @@ namespace Manager.Interfaces
         Task<EntryModel> DeleteById(int id);
         Task<object> GetById(int id);
         new PaginatedResponse<EntryPagedModel> GetPaged(PaginatedRequest pagingParams);
-        Task<EntryModel> Insert(CreateEntryModel newUser);
-        Task<EntryModel> Update(UpdateEntryModel updatedUser);
+        Task<EntryModel> Insert(CreateEntryModel newEntry);
+        Task<EntryModel> Update(UpdateEntryModel updatedEntry);
     }
 }

@@ -15,6 +15,8 @@ namespace Manager.Interfaces
         Task<ProductModel> Insert(CreateProductModel newUser);
         Task<ProductModel> Update(UpdateProductModel updatedUser);
         Task<object> GetProductByCode(string gtinCode);
+        Task UpdateProductAmountAdd(int id, decimal amount);
+        Task UpdateProductAmountSubtract(int id, decimal amount);
 
     }
 }

@@ -5,9 +5,9 @@ using Data.Repository.Base;
 
 namespace Data.Repository
 {
-    public class ProductSaleRepository : BaseDoubleRepository<ProductSale>, IProductSaleRepository
+    public class SaleRepository : BaseRepository<Sale>, ISaleRepository
     {
-        public ProductSaleRepository(MyContext context) : base(context)
+        public SaleRepository(MyContext context) : base(context)
         {
         }
     }

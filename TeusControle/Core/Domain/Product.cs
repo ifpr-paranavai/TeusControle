@@ -8,7 +8,7 @@ namespace Core.Domain
         public Product()
         {
             ProductsEntry = new HashSet<ProductEntry>();
-            /*ProductDisposals = new HashSet<ProductDisposals>();*/
+            ProductsSale = new HashSet<ProductSale>();
         }
 
         public string Description { get; set; }
@@ -39,6 +39,6 @@ namespace Core.Domain
 
         public ICollection<ProductEntry> ProductsEntry { get; set; }
 
-        /*public ICollection<ProductDisposals> ProductDisposals { get; set; }*/
+        public ICollection<ProductSale> ProductsSale{ get; set; }
     }
 }

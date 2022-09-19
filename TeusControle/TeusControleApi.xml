@@ -204,6 +204,46 @@
             </summary>
             <param name="gtinCode" example="123">Código de barras do produto.</param>
         </member>
+        <member name="T:TeusControleApi.Controllers.SaleController">
+            <summary>
+            Controlador para venda de produtos
+            </summary>
+        </member>
+        <member name="M:TeusControleApi.Controllers.SaleController.#ctor(Manager.Interfaces.ISaleManager)">
+            <summary>
+            Controlador para venda de produtos
+            </summary>
+            <param name="saleManager"></param>
+        </member>
+        <member name="M:TeusControleApi.Controllers.SaleController.Get(Core.Shared.Models.Request.PaginatedRequest)">
+            <summary>
+            Retorna todas as vendas paginada.
+            </summary>
+        </member>
+        <member name="M:TeusControleApi.Controllers.SaleController.Get(System.Int32)">
+            <summary>
+            Retorna uma venda buscada pelo id.
+            </summary>
+            <param name="id" example="123">Id da venda.</param>
+        </member>
+        <member name="M:TeusControleApi.Controllers.SaleController.Post(Core.Shared.Models.Sale.CreateSaleModel)">
+            <summary>
+            Insere uma nova venda.
+            </summary>
+            <param name="newSale"></param>
+        </member>
+        <member name="M:TeusControleApi.Controllers.SaleController.Put(Core.Shared.Models.Sale.UpdateSaleModel)">
+            <summary>
+            Altera uma venda.
+            </summary>
+            <param name="sale"></param>
+        </member>
+        <member name="M:TeusControleApi.Controllers.SaleController.Delete(System.Int32)">
+            <summary>
+            Exclui uma venda por id.
+            </summary>
+            <param name="id" example="123">Id da venda.</param>
+        </member>
         <member name="T:TeusControleApi.Controllers.SelectController">
             <summary>
             Controlador para buscar opções de seleção

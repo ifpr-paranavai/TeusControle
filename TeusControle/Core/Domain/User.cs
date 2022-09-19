@@ -13,6 +13,7 @@ namespace Core.Domain
             Products = new HashSet<Product>();
             Entries = new HashSet<Entry>();
             ProductsEntry = new HashSet<ProductEntry>();
+            ProductsSale = new HashSet<ProductSale>();
         }
 
         public string Name { get; set; }
@@ -49,9 +50,9 @@ namespace Core.Domain
             return (User)Clone();
         }
 
-        // public ICollection<ProductEntries> ProductEntries { get; set; }
+        public ICollection<Sale> Sales { get; set; }
 
-        // public ICollection<Disposals> Disposals { get; set; }
+        public ICollection<ProductSale> ProductsSale { get; set; }
 
         // public ICollection<ProductDisposals> ProductDisposals { get; set; }
     }

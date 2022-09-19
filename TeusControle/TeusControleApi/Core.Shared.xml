@@ -181,6 +181,26 @@
             12 - Ñão é Igual
             </summary>
         </member>
+        <member name="F:Core.Shared.Models.Enums.SaleStatusEnum.Opened">
+            <summary>
+            0 - Aberto
+            </summary>
+        </member>
+        <member name="F:Core.Shared.Models.Enums.SaleStatusEnum.Closed">
+            <summary>
+            2 - Fechado
+            </summary>
+        </member>
+        <member name="F:Core.Shared.Models.Enums.SaleStatusEnum.Canceled">
+            <summary>
+            3 - Cancelado
+            </summary>
+        </member>
+        <member name="F:Core.Shared.Models.Enums.SaleStatusEnum.Pending">
+            <summary>
+            4 - Pendente
+            </summary>
+        </member>
         <member name="T:Core.Shared.Models.Enums.SortEnum">
             <summary>
             Enumeradores para ordenação
@@ -473,6 +493,123 @@
             <param name="pageIndex"></param>
             <param name="pageSize"></param>
             <returns></returns>
+        </member>
+        <member name="T:Core.Shared.Models.Sale.CreateSaleModel">
+            <summary>
+            Objeto para criação de uma nova venda
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Sale.CreateSaleModel.CpfCnpj">
+            <summary>
+            CpfCnpj
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Sale.CreateSaleModel.Status">
+            <summary>
+            Status da venda
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Sale.CreateSaleModel.Products">
+            <summary>
+            Produtos da venda
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Sale.CreateSaleModel.TotalDiscount">
+            <summary>
+            Total do desconto em valor monetário
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Sale.ProductSaleModel.ProductId">
+            <summary>
+            Id do produto
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Sale.ProductSaleModel.Amount">
+            <summary>
+            Quantidade vendida
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Sale.ProductSaleModel.UnitPrice">
+            <summary>
+            Preço pago por unidade
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Sale.ProductSaleModel.Discount">
+            <summary>
+            Desconto em valor monetário
+            </summary>
+        </member>
+        <member name="T:Core.Shared.Models.Sale.SaleModel">
+            <summary>
+            Objeto de retorno de venda
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Sale.SaleModel.CreatedDate">
+            <summary>
+            Data e hora de criação do registro
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Sale.SaleModel.LastChange">
+            <summary>
+            Data e hora da última atualização do registro
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Sale.SalePagedModel.Id">
+            <summary>
+            Identificador
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Sale.SalePagedModel.CpfCnpj">
+            <summary>
+            Cpf ou Cnpj do cliente
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Sale.SalePagedModel.Status">
+            <summary>
+            Status da venda
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Sale.SalePagedModel.ClosingDate">
+            <summary>
+            Data de fechamento da venda
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Sale.SalePagedModel.TotalPrice">
+            <summary>
+            Preço total da venda
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Sale.SalePagedModel.TotalOutPrice">
+            <summary>
+            Preço total da venda com desconto
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Sale.SalePagedModel.Discount">
+            <summary>
+            Desconto
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Sale.SalePagedModel.CanBeDeleted">
+            <summary>
+            Deve permitir exclusão?
+            </summary>
+        </member>
+        <member name="T:Core.Shared.Models.Sale.UpdateSaleModel">
+            <summary>
+            Objeto para alteração de venda
+            </summary>
+        </member>
+        <member name="P:Core.Shared.Models.Sale.UpdateSaleModel.Id">
+            <summary>
+            Id da venda
+            </summary>
+            <example>123</example>
+        </member>
+        <member name="P:Core.Shared.Models.Sale.UpdateSaleModel.Active">
+            <summary>
+            Status do registro
+            </summary>
+            <example>true</example>
         </member>
         <member name="T:Core.Shared.Models.User.CreateUserModel">
             <summary>

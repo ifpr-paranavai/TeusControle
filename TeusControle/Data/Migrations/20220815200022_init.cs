@@ -4,7 +4,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Migrations
 {
+#pragma warning disable IDE1006 // Estilos de Nomenclatura
     public partial class init : Migration
+#pragma warning restore IDE1006 // Estilos de Nomenclatura
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -26,6 +26,8 @@ namespace TeusControleApi.Configuration
             services.AddScoped<IEntryRepository, EntryRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IProductEntryRepository, ProductEntryRepository>();
+            services.AddScoped<ISaleRepository, SaleRepository>();
+            services.AddScoped<IProductSaleRepository, ProductSaleRepository>();
             #endregion
 
             #region [Manager]
@@ -34,6 +36,8 @@ namespace TeusControleApi.Configuration
             services.AddScoped<IEntryManager, EntryManager>();
             services.AddScoped<IProductEntryManager, ProductEntryManager>();
             services.AddScoped<ISelectManager, SelectManager>();
+            services.AddScoped<ISaleManager, SaleManager>();
+            services.AddScoped<IProductSaleManager, ProductSaleManager>();
             #endregion
         }
     }

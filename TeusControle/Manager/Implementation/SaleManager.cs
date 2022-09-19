@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Core.Domain;
-using Core.Shared.Models.Entry;
 using Core.Shared.Models.Enums;
 using Core.Shared.Models.Request;
 using Core.Shared.Models.Responses;
+using Core.Shared.Models.Sale;
 using Manager.Implementation.Base;
 using Manager.Interfaces;
 using Manager.Interfaces.Repositories;
@@ -17,141 +17,142 @@ using System.Threading.Tasks;
 
 namespace Manager.Implementation
 {
-    public class EntryManager : BaseManager<Entry>, IEntryManager
+    public class SaleManager : BaseManager<Sale>, ISaleManager
     {
-        private readonly ILogger<EntryManager> logger;
-        public IProductEntryManager _productEntryManager;
+        private readonly ILogger<SaleManager> logger;
+        public IProductSaleManager _productSaleManager;
         public IProductManager _productManager;
         public IMapper _mapper;
 
-        public EntryManager(
+        public SaleManager(
             IHttpContextAccessor httpContextAccessor,
-            IEntryRepository entryRepository, 
+            ISaleRepository saleRepository, 
             IMapper mapper, 
-            ILogger<EntryManager> logger,
-            IProductEntryManager productEntryManager,
+            ILogger<SaleManager> logger,
+            IProductSaleManager productSaleManager,
             IProductManager productManager
-        ) : base (entryRepository, httpContextAccessor, mapper)
+        ) : base (saleRepository, httpContextAccessor, mapper)
         {
             this.logger = logger;
-            this._productEntryManager = productEntryManager;
+            this._productSaleManager = productSaleManager;
             this._productManager = productManager;
             this._mapper = mapper;
         }
 
-        public async Task<EntryModel> Insert(CreateEntryModel newEntry)
+        public async Task<SaleModel> Insert(CreateSaleModel newSale)
         {
             try
             {
-                Entry entity = _mapper.Map<Entry>(newEntry);
-                if (entity.Status == EntryStatusEnum.Closed)
+                Sale entity = _mapper.Map<Sale>(newSale);
+                if (entity.Status == SaleStatusEnum.Closed)
                     entity.ClosingDate = DateTime.Now;
 
-                EntryModel data = await AddAsync<EntryModel>(entity);
-                await AddProductEntry(newEntry.Products, data);
-                await UpdateProducts(newEntry);
+                SaleModel data = await AddAsync<SaleModel>(entity);
+                await AddProductSale(newSale.Products, data);
+                await UpdateProducts(newSale);
 
                 return data;
             }
             catch (Exception ex)
             {
-                logger.LogError("ERRO AO INSERIR ENTRADA: {@newEntry}", newEntry, ex);
+                logger.LogError("ERRO AO INSERIR VENDA: {@newSale}", newSale, ex);
             }
             return null;
         }
 
-        private async Task AddProductEntry(ICollection<ProductEntryModel> productsEntry, EntryModel entryData)
+        private async Task AddProductSale(ICollection<ProductSaleModel> productsSale, SaleModel saleData)
         {
-            List<ProductEntry> products = new List<ProductEntry>();
-            foreach (var item in productsEntry)
+            List<ProductSale> products = new List<ProductSale>();
+            foreach (var item in productsSale)
             {
-                Boolean dbHasProduct = await _productManager.AnyAsync(q => q.Id == item.ProductId);
+                bool dbHasProduct = await _productManager.AnyAsync(q => q.Id == item.ProductId);
                 if (!dbHasProduct)
                     throw new Exception("Produto não encontrado!");
 
-                products.Add(new ProductEntry
+                products.Add(new ProductSale
                 {
-                    Id = entryData.Id,
+                    Id = saleData.Id,
                     Id2 = item.ProductId,
                     Amount = item.Amount,
-                    UnitPrice = item.UnitPrice
+                    UnitPrice = item.UnitPrice,
+                    Discount = item.Discount                   
                 });
             }
 
-            await _productEntryManager.AddAsync<List<ProductEntry>>(products);
+            await _productSaleManager.AddAsync<List<ProductSale>>(products);
         }
 
 
-        public async Task<EntryModel> Update(UpdateEntryModel updatedEntry)
+        public async Task<SaleModel> Update(UpdateSaleModel updatedSale)
         {
             try
             {
-                bool isNotClosed = await IsNotClosed(updatedEntry);
-                bool hasSameProducts = HasSameAmountAndValue(updatedEntry);
+                bool isNotClosed = await IsNotClosed(updatedSale);
+                bool hasSameProducts = HasSameAmountAndValue(updatedSale);
 
                 if (!(isNotClosed || hasSameProducts))
-                    throw new Exception("Não é possível atualizar entrada já fechada.");
+                    throw new Exception("Não é possível atualizar venda já fechada.");
 
-                Entry entity = _mapper.Map<Entry>(updatedEntry);
+                Sale entity = _mapper.Map<Sale>(updatedSale);
                 if (isNotClosed)
-                    return await UpdateNotClosed(entity, updatedEntry);
+                    return await UpdateNotClosed(entity, updatedSale);
 
                 if (hasSameProducts) { 
-                    entity.Origin = updatedEntry.Origin;
+                    entity.CpfCnpj = updatedSale.CpfCnpj;
                     entity.LastChange = DateTime.Now;
                     return await UpdateClosed(entity);
                 }
             }
             catch (Exception ex)
             {
-                logger.LogError("ERRO AO ATUALIZAR ENTRADA: {@updatedEntry}", updatedEntry, ex);
+                logger.LogError("ERRO AO ATUALIZAR VENDA: {@updatedSale}", updatedSale, ex);
             }
             return null;
         }
 
-        private async Task<EntryModel> UpdateNotClosed(Entry entity, UpdateEntryModel updatedEntry)
+        private async Task<SaleModel> UpdateNotClosed(Sale entity, UpdateSaleModel updatedSale)
         {
-            if (updatedEntry.Status == EntryStatusEnum.Closed)
+            if (updatedSale.Status == SaleStatusEnum.Closed)
                 entity.ClosingDate = DateTime.Now;
 
-            EntryModel data = await UpdateAsync<EntryModel>(entity);
+            SaleModel data = await UpdateAsync<SaleModel>(entity);
 
-            await _productEntryManager.PhysicalDeleteAsync(updatedEntry.Id);
-            await AddProductEntry(updatedEntry.Products, data);
-            await UpdateProducts(updatedEntry);
+            await _productSaleManager.PhysicalDeleteAsync(updatedSale.Id);
+            await AddProductSale(updatedSale.Products, data);
+            await UpdateProducts(updatedSale);
 
             return data;
         }
 
 
-        private async Task<EntryModel> UpdateClosed(Entry entity)
+        private async Task<SaleModel> UpdateClosed(Sale entity)
         {
             await UpdateSomeFieldsAsync(
                 entity,
-                q => q.Origin,
+                q => q.CpfCnpj,
                 q => q.LastChange
                 );
 
-            EntryModel outputModel = _mapper.Map<EntryModel>(entity);
+            SaleModel outputModel = _mapper.Map<SaleModel>(entity);
             return outputModel;
         }
 
 
-        private async Task<bool> IsNotClosed(UpdateEntryModel updatedEntry)
+        private async Task<bool> IsNotClosed(UpdateSaleModel updatedSale)
         {
             bool isNotClosed = await AnyAsync(
-                q => q.Id == updatedEntry.Id &&
-                q.Status != EntryStatusEnum.Closed
+                q => q.Id == updatedSale.Id &&
+                q.Status != SaleStatusEnum.Closed
             );
 
             return isNotClosed;
         }
 
-        private bool HasSameAmountAndValue(UpdateEntryModel updatedEntry)
+        private bool HasSameAmountAndValue(UpdateSaleModel updatedSale)
         {
-            var dbEntry = Query(q => q.Id == updatedEntry.Id).Select(s => new { 
+            var dbEntry = Query(q => q.Id == updatedSale.Id).Select(s => new { 
                 s.TotalPrice,
-                ProductsEntryCount = s.ProductsEntry.Count,
+                ProductsSaleCount = s.ProductsSale.Count,
             }).FirstOrDefault();
             
             if (dbEntry == null)
@@ -160,38 +161,39 @@ namespace Manager.Implementation
             }
 
             decimal totalUpdatedEntry = 0;
-            foreach (ProductEntryModel products in updatedEntry.Products)
+            foreach (ProductSaleModel products in updatedSale.Products)
             {
                 totalUpdatedEntry += products.UnitPrice * products.Amount;
             }
 
-            bool hasSameCountOfProducts = dbEntry.ProductsEntryCount == updatedEntry.Products.Count;            
+            bool hasSameCountOfProducts = dbEntry.ProductsSaleCount == updatedSale.Products.Count;            
             bool hasSameValue = dbEntry.TotalPrice == totalUpdatedEntry;
 
             return hasSameCountOfProducts && hasSameValue;
         }
 
-        private async Task UpdateProducts(CreateEntryModel entry)
+        private async Task UpdateProducts(CreateSaleModel sale)
         {
-            if (entry.Status == EntryStatusEnum.Closed)
+            if (sale.Status == SaleStatusEnum.Closed)
             {
-                foreach (var item in entry.Products)
+                foreach (var item in sale.Products)
                 {
-                    await _productManager.UpdateProductAmountAdd(item.ProductId, item.Amount);
+                    await _productManager.UpdateProductAmountSubtract(item.ProductId, item.Amount);
                 }
             }
         }
 
-        public async Task<EntryModel> DeleteById(int id)
+
+        public async Task<SaleModel> DeleteById(int id)
         {
             try
             {
-                var entry = await LogicalDeleteAsync<EntryModel>(id);
+                var entry = await LogicalDeleteAsync<SaleModel>(id);
                 return entry;
             }
             catch (Exception ex)
             {
-                logger.LogError("ERRO AO EXCLUIR ENTRADA COM ID: {@id}", id, ex);
+                logger.LogError("ERRO AO EXCLUIR VENDA COM ID: {@id}", id, ex);
                 return null;
             }
         }
@@ -210,7 +212,7 @@ namespace Manager.Implementation
                     .Select(s => new
                     {
                         s.Id,
-                        s.Origin,
+                        s.CpfCnpj,
                         s.Status,
                         StatusDescription = EnumExtension.GetDescription(s.Status),
                         s.Active,
@@ -219,8 +221,8 @@ namespace Manager.Implementation
                         s.TotalPrice,
                         s.ClosingDate,
                         CreatedBy = s.CreatedByUser.Name,
-                        CanBeDeleted = s.Status != EntryStatusEnum.Closed,
-                        Products = s.ProductsEntry.Select(x => new {
+                        CanBeDeleted = s.Status != SaleStatusEnum.Closed,
+                        Products = s.ProductsSale.Select(x => new {
                             ProductId = x.Id2,
                             x.Amount,
                             x.UnitPrice,
@@ -228,6 +230,8 @@ namespace Manager.Implementation
                             x.Product.Description,
                             x.Product.Gtin,
                             x.Product.Thumbnail,
+                            x.Discount,
+                            x.UnitOutPrice,
                         }).ToList()
                     })
                     .FirstOrDefault();
@@ -236,25 +240,27 @@ namespace Manager.Implementation
             }
             catch (Exception ex)
             {
-                logger.LogError("ERRO AO BUSCAR ENTRADA COM ID: {@id}", id, ex);
+                logger.LogError("ERRO AO BUSCAR VENDA COM ID: {@id}", id, ex);
             }
             return null;
         }
 
-        public new PaginatedResponse<EntryPagedModel> GetPaged(PaginatedRequest pagingParams)
+        public new PaginatedResponse<SalePagedModel> GetPaged(PaginatedRequest pagingParams)
         {
             try
             {
                 var paginatedEntries = GetPaged(
                     pagingParams,
-                    x => new EntryPagedModel
+                    x => new SalePagedModel
                     {
                         Id = x.Id,
                         ClosingDate = x.ClosingDate.ToString(),
-                        Origin = x.Origin,
+                        CpfCnpj = x.CpfCnpj,
                         Status = EnumExtension.GetDescription(x.Status),
                         TotalPrice = x.TotalPrice,
-                        CanBeDeleted = x.Status != EntryStatusEnum.Closed,
+                        TotalOutPrice = x.TotalOutPrice,
+                        Discount = x.TotalDiscount,
+                        CanBeDeleted = x.Status != SaleStatusEnum.Closed,
                     }
                 );
 
@@ -262,7 +268,7 @@ namespace Manager.Implementation
             }
             catch (Exception ex)
             {
-                logger.LogError("ERRO AO REALIZAR BUSCA PÁGINADA DE ENTRADAS COM OS PARAMETROS: {@pagingParams}", pagingParams, ex);
+                logger.LogError("ERRO AO REALIZAR BUSCA PÁGINADA DE VENDAS COM OS PARAMETROS: {@pagingParams}", pagingParams, ex);
             }
             return null;
         }

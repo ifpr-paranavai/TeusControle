@@ -170,5 +170,44 @@ namespace Manager.Implementation
 
             return null;
         }
+
+        public async Task UpdateProductAmountAdd(int id, decimal amount)
+        {
+            Product product = getProductById(id);
+
+            product.InStock += amount;
+            product.LastChange = DateTime.Now;
+
+            await UpdateSomeFieldsAsync(
+                product,
+                q => q.InStock,
+                q => q.LastChange
+            );
+        }
+
+        public async Task UpdateProductAmountSubtract(int id, decimal amount)
+        {
+            Product product = getProductById(id);
+
+            product.InStock -= amount;
+            product.LastChange = DateTime.Now;
+
+            await UpdateSomeFieldsAsync(
+                product,
+                q => q.InStock,
+                q => q.LastChange
+            );
+        }
+
+        private Product getProductById(int id)
+        {
+            Product product = Query(q => q.Id == id)
+                .First();
+
+            if (product == null)
+                throw new Exception("Produto não encontrado");
+
+            return product;
+        }
     }
 }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Core.Domain
 {
     /// <summary>
-    /// Tabela associativa de produtos para tabela de entrada de produtos
+    /// Tabela associativa de produtos para reistro de entrada de produtos
     /// </summary>
     public class ProductEntry : BaseDoubleEntity
     {
