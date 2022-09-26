@@ -43,6 +43,11 @@ namespace Manager.Implementation
         {
             try
             {
+                if (newEntry.Products.Count == 0)
+                {
+                    throw new Exception("Não é possível salvar uma entrada sem produtos.");
+                }
+
                 Entry entity = _mapper.Map<Entry>(newEntry);
                 if (entity.Status == EntryStatusEnum.Closed)
                     entity.ClosingDate = DateTime.Now;
@@ -81,11 +86,15 @@ namespace Manager.Implementation
             await _productEntryManager.AddAsync<List<ProductEntry>>(products);
         }
 
-
         public async Task<EntryModel> Update(UpdateEntryModel updatedEntry)
         {
             try
             {
+                if (updatedEntry.Products.Count == 0)
+                {
+                    throw new Exception("Não é possível salvar uma entrada sem produtos.");
+                }
+
                 bool isNotClosed = await IsNotClosed(updatedEntry);
                 bool hasSameProducts = HasSameAmountAndValue(updatedEntry);
 
@@ -123,7 +132,6 @@ namespace Manager.Implementation
             return data;
         }
 
-
         private async Task<EntryModel> UpdateClosed(Entry entity)
         {
             await UpdateSomeFieldsAsync(
@@ -135,7 +143,6 @@ namespace Manager.Implementation
             EntryModel outputModel = _mapper.Map<EntryModel>(entity);
             return outputModel;
         }
-
 
         private async Task<bool> IsNotClosed(UpdateEntryModel updatedEntry)
         {

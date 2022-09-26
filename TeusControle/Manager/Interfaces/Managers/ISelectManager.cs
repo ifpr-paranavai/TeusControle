@@ -7,5 +7,7 @@ namespace Manager.Interfaces
         IEnumerable<object> getUserTypeSelect();
 
         IEnumerable<object> getEntryStatusSelect();
+
+        IEnumerable<object> GetSaleStatusSelect();
     }
 }

@@ -10,8 +10,10 @@ select * from products_entry;
 select * from products;
 select * from entries;
 
-drop table sales		;
+drop table sales;
 
+update sales set CpfCnpj = null where id > 1;
+update entries set deleted = 1 where id = 56;
 update products set deleted = 0 where id > 0;
 
 -- drop table entry;
@@ -72,7 +74,7 @@ DELIMITER ;
 -- alter table entry drop column TotalPrice;
 -- alter table entry add column TotalPrice decimal(65,30) default 0;
 
-
+-- drop trigger calculate_total_sale_value_on_insert;
 
 DELIMITER $$
 CREATE TRIGGER calculate_total_sale_value_on_insert 
@@ -90,7 +92,7 @@ FOR EACH ROW
     ON ps.Id = s.Id
     WHERE ps.Id = NEW.Id;
     
-    SELECT SUM(ps.Discount)
+    SELECT SUM(ps.TotalDiscount)
     INTO @total_discount_value 
     FROM webprojectv2.products_sale ps
     INNER JOIN webprojectv2.sales s
@@ -113,6 +115,8 @@ FOR EACH ROW
 $$
 DELIMITER ;
 
+
+drop trigger calculate_total_sale_value_on_update;
 DELIMITER $$
 CREATE TRIGGER calculate_total_sale_value_on_update
 AFTER UPDATE ON products_sale
@@ -129,7 +133,7 @@ FOR EACH ROW
     ON ps.Id = s.Id
     WHERE ps.Id = NEW.Id;
     
-    SELECT SUM(ps.Discount)
+    SELECT SUM(ps.TotalDiscount)
     INTO @total_discount_value 
     FROM webprojectv2.products_sale ps
     INNER JOIN webprojectv2.sales s

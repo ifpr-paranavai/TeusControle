@@ -22,10 +22,10 @@ namespace Core.Shared.Models.Enums
         [Description("Cancelado")]
         Canceled = 3,
 
-        /// <summary>
+        /*/// <summary>
         /// 4 - Pendente
         /// </summary>
         [Description("Pendente")]
-        Pending = 4
+        Pending = 4*/
     }
 }

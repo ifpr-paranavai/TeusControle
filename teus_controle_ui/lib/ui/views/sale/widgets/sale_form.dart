@@ -1,24 +1,24 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:teus_controle_ui/ui/shared/widgets/dialogs/confirm_dialog.dart';
 
-import '../../../../core/models/entry/entry_product_get_response_model.dart';
+import '../../../../core/models/sale/sale_product_get_response_model.dart';
 import '../../../../core/models/select/select_model.dart';
 import '../../../shared/utils/global.dart' as globals;
 import '../../../shared/widgets/buttons/rounded_button.dart';
-import '../../../shared/widgets/dialogs/confirm_dialog.dart';
 import '../../../shared/widgets/dialogs/custom_dialog.dart';
 import '../../../shared/widgets/dialogs/delete_dialog.dart';
 import '../../../shared/widgets/dialogs/overlayable.dart';
 import '../../../shared/widgets/inputs/drop_down_field.dart';
 import '../../../shared/widgets/inputs/text_input_field.dart';
-import '../entry_controller.dart';
+import '../sale_controller.dart';
 
-class EntryForm extends StatefulWidget {
-  final EntryController controller;
+class SaleForm extends StatefulWidget {
+  final SaleController controller;
   final bool isCreate;
   final int? id;
 
-  const EntryForm({
+  const SaleForm({
     Key? key,
     required this.controller,
     this.isCreate = false,
@@ -31,12 +31,14 @@ class EntryForm extends StatefulWidget {
   _EntryFormState createState() => _EntryFormState();
 }
 
-class _EntryFormState extends State<EntryForm> {
+class _EntryFormState extends State<SaleForm> {
   bool isLoading = false;
   final scrollControllerVertical = ScrollController();
   final scrollControllerHorizontal = ScrollController();
-  List<SelectModel>? entryStatusSelect = [];
-  var myGroup = AutoSizeGroup();
+  List<SelectModel>? saleStatusSelect = [];
+  var myGroupPrice = AutoSizeGroup();
+  var myGroupDiscount = AutoSizeGroup();
+  var myGroupOutPrice = AutoSizeGroup();
 
   @override
   void initState() {
@@ -53,15 +55,13 @@ class _EntryFormState extends State<EntryForm> {
       )
           .then((value) {
         widget.controller.editable = !(widget.id != null &&
-            widget.controller.entryStatusSelect.description == 'Fechado');
+            widget.controller.saleStatusSelect.description == 'Fechado');
       });
     }
 
-    widget.controller
-        .getEntryStatusSelect(context)
-        .then((value) => setState(() {
-              entryStatusSelect = value;
-            }));
+    widget.controller.getSaleStatusSelect(context).then((value) => setState(() {
+          saleStatusSelect = value;
+        }));
   }
 
   @override
@@ -77,7 +77,7 @@ class _EntryFormState extends State<EntryForm> {
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Column(
                 children: [
-                  _descriptionField(),
+                  _customerDocumentField(),
                   if (_isClosed()) _productFormFields(context),
                   const SizedBox(
                     height: 10,
@@ -105,7 +105,7 @@ class _EntryFormState extends State<EntryForm> {
                   ),
                 ),
                 width: double.infinity,
-                height: 75,
+                height: 110,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                     vertical: 15,
@@ -115,26 +115,59 @@ class _EntryFormState extends State<EntryForm> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       SizedBox(
-                        width: 200,
+                        width: 170,
                         child: _statusInput(context),
                       ),
                       const SizedBox(
                         width: 20,
                       ),
                       SizedBox(
-                        width: 190,
-                        child: AutoSizeText(
-                          'Total ${globals.currency.format(widget.controller.totalPrice)} ',
-                          overflow: TextOverflow.ellipsis,
-                          group: myGroup,
-                          maxFontSize: 30,
-                          textAlign: TextAlign.end,
-                          maxLines: 1,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        width: 200,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            AutoSizeText(
+                              'Total ${globals.currency.format(widget.controller.totalPrice)} ',
+                              overflow: TextOverflow.ellipsis,
+                              group: myGroupPrice,
+                              maxFontSize: 15,
+                              textAlign: TextAlign.end,
+                              maxLines: 1,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            AutoSizeText(
+                              'Descontos ${globals.currency.format(widget.controller.totalDiscount)} ',
+                              overflow: TextOverflow.ellipsis,
+                              group: myGroupDiscount,
+                              maxFontSize: 15,
+                              textAlign: TextAlign.end,
+                              maxLines: 1,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            AutoSizeText(
+                              'Subtotal ${globals.currency.format(widget.controller.totalOutPrice)} ',
+                              overflow: TextOverflow.ellipsis,
+                              group: myGroupOutPrice,
+                              maxFontSize: 70,
+                              minFontSize: 20,
+                              textAlign: TextAlign.end,
+                              maxLines: 1,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 70,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -175,6 +208,8 @@ class _EntryFormState extends State<EntryForm> {
               'Preço Unitário',
               'Quantidade',
               'Preço Total',
+              'Desconto Total',
+              'Preço Liquído',
               if (_isClosed()) 'Ação'
             ]),
             rows: _getCells(widget.controller.products),
@@ -203,12 +238,14 @@ class _EntryFormState extends State<EntryForm> {
     return result;
   }
 
-  List<DataRow> _getCells(List<EntryProductGetResponseModel> products) {
+  List<DataRow> _getCells(List<SaleProductGetResponseModel> products) {
     List<DataRow> result = [];
     int rowIndex = 1;
 
     if (products.isEmpty) {
       List<DataCell> cells = [
+        DataCell(Container()),
+        DataCell(Container()),
         DataCell(Container()),
         DataCell(Container()),
         DataCell(Container()),
@@ -239,7 +276,7 @@ class _EntryFormState extends State<EntryForm> {
       return result;
     }
 
-    for (EntryProductGetResponseModel product in products) {
+    for (SaleProductGetResponseModel product in products) {
       result.add(
         DataRow(
           color: MaterialStateColor.resolveWith(
@@ -320,6 +357,14 @@ class _EntryFormState extends State<EntryForm> {
             ),
             DataCell(
               Center(child: Text(globals.currency.format(product.totalPrice))),
+            ),
+            DataCell(
+              Center(
+                  child: Text(globals.currency.format(product.totalDiscount))),
+            ),
+            DataCell(
+              Center(
+                  child: Text(globals.currency.format(product.totalOutPrice))),
             ),
             if (_isClosed())
               DataCell(Row(
@@ -402,28 +447,36 @@ class _EntryFormState extends State<EntryForm> {
         const SizedBox(
           width: 10,
         ),
+        Expanded(
+          flex: 1,
+          child: _discountField(),
+        ),
+        const SizedBox(
+          width: 10,
+        ),
         RoundedButton(
           minWidth: 170,
           label: 'Adicionar',
-          onPressed:
-              widget.controller.entryStatusSelect.description == 'Fechado'
-                  ? null
-                  : () {
-                      setState(() {
-                        widget.controller.addProductOnPressed();
-                      });
-                    },
+          onPressed: widget.controller.saleStatusSelect.description == 'Fechado'
+              ? null
+              : () {
+                  setState(() {
+                    widget.controller.addProductOnPressed();
+                  });
+                },
         ),
       ],
     );
   }
 
-  TextInputField _descriptionField() {
+  TextInputField _customerDocumentField() {
     return TextInputField(
-      labelText: "Descrição",
+      labelText: "Documento do Cliente",
       paddingTop: 15,
       paddingBottom: 10,
-      controller: widget.controller.descriptionController,
+      controller: widget.controller.cpfCnpjController,
+      validator: widget.controller.cpfCnpjValidator,
+      mask: widget.controller.cpfMaskFormatter,
     );
   }
 
@@ -466,10 +519,25 @@ class _EntryFormState extends State<EntryForm> {
     );
   }
 
+  TextInputField _discountField() {
+    return TextInputField(
+      labelText: "Desconto",
+      mask: widget.controller.discountFormatter,
+      enabled: _isClosed(),
+      controller: widget.controller.discountController,
+      keyboardType: TextInputType.number,
+      onChanged: (value) {
+        if (value.isEmpty) {
+          widget.controller.discountController.text = '0,00';
+        }
+      },
+    );
+  }
+
   DropDownField _statusInput(BuildContext context) {
     return DropDownField<SelectModel>(
       enabled: widget.controller.editable,
-      paddingTop: 5,
+      // paddingTop: 5,
       labelText: 'Status',
       getLabel: (value) => value.description,
       validator: widget.controller.enumStatusValidator,
@@ -477,19 +545,19 @@ class _EntryFormState extends State<EntryForm> {
       onChanged: (value) {
         if (value != null) {
           setState(() {
-            widget.controller.entryStatusSelect = SelectModel(
+            widget.controller.saleStatusSelect = SelectModel(
               value: value.value,
               description: value.description,
             );
           });
         }
       },
-      options: entryStatusSelect ?? [],
-      value: widget.controller.entryStatusSelect,
+      options: saleStatusSelect ?? [],
+      value: widget.controller.saleStatusSelect,
     );
   }
 
   bool _isClosed() {
-    return widget.controller.entryStatusSelect.description != 'Fechado';
+    return widget.controller.saleStatusSelect.description != 'Fechado';
   }
 }

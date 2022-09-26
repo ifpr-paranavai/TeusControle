@@ -160,6 +160,7 @@ namespace Manager.Implementation
                         s.Description,
                         s.Gtin,
                         s.Thumbnail,
+                        s.Price,
                     }).FirstOrDefault();
 
                 return product;

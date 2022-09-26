@@ -27,4 +27,42 @@ class SelectService {
       return null;
     }
   }
+
+  Future<List<SelectModel>?> getSaleStatusSelect(BuildContext context) async {
+    Dio dio = await futureDio;
+
+    try {
+      var response = await dio.get(
+        '$endpoint/saleStatus',
+      );
+      dynamic responseData = SelectModel.fromJsonList(response.data);
+
+      return responseData;
+    } catch (e) {
+      globals.errorSnackBar(
+        context: context,
+        message: 'Não foi possível realizar a busca do registro',
+      );
+      return null;
+    }
+  }
+
+  Future<List<SelectModel>?> getUserTypeSelect(BuildContext context) async {
+    Dio dio = await futureDio;
+
+    try {
+      var response = await dio.get(
+        '$endpoint/userType',
+      );
+      dynamic responseData = SelectModel.fromJsonList(response.data);
+
+      return responseData;
+    } catch (e) {
+      globals.errorSnackBar(
+        context: context,
+        message: 'Não foi possível realizar a busca do registro',
+      );
+      return null;
+    }
+  }
 }

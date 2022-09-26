@@ -71,5 +71,32 @@ namespace Manager.Implementation
             }
             return null;
         }
+
+        /// <summary>
+        /// Busca status para vendas
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<object> GetSaleStatusSelect()
+        {
+            try
+            {
+                List<object> result = new List<object>();
+                foreach (SaleStatusEnum enumerator in EnumExtension.GetValues<SaleStatusEnum>())
+                {
+                    result.Add(new
+                    {
+                        Value = enumerator,
+                        Description = EnumExtension.GetDescription(enumerator)
+                    });
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError("ERRO AO BUSCAR ITENS DE SELEÇÃO PARA SALESTATUS", ex);
+            }
+            return null;
+        }
     }
 }

@@ -9,11 +9,13 @@ class SimpleProductModel {
     required this.description,
     required this.gtin,
     required this.thumbnail,
+    required this.price,
   });
   late final int id;
   late final String description;
   late final String gtin;
   late final String thumbnail;
+  late final double price;
 
   factory SimpleProductModel.fromJson(Map<String, dynamic> json) =>
       _$SimpleProductModelFromJson(json);

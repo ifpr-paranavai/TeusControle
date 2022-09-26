@@ -24,6 +24,10 @@ abstract class BaseService {
     pageNumber++;
   }
 
+  void firstPage() {
+    pageNumber = 1;
+  }
+
   void previousPage() {
     pageNumber--;
   }

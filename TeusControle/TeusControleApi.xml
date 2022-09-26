@@ -267,6 +267,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:TeusControleApi.Controllers.SelectController.GetSaleStatusSelect">
+            <summary>
+            Busca status para venda
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:TeusControleApi.Controllers.UserController">
             <summary>
             Controlador para entidade usuário

@@ -116,11 +116,6 @@
             3 - Cancelado
             </summary>
         </member>
-        <member name="F:Core.Shared.Models.Enums.EntryStatusEnum.Pending">
-            <summary>
-            4 - Pendente
-            </summary>
-        </member>
         <member name="F:Core.Shared.Models.Enums.FilterEnum.StartsWith">
             <summary>
             1 - Começa com
@@ -194,11 +189,6 @@
         <member name="F:Core.Shared.Models.Enums.SaleStatusEnum.Canceled">
             <summary>
             3 - Cancelado
-            </summary>
-        </member>
-        <member name="F:Core.Shared.Models.Enums.SaleStatusEnum.Pending">
-            <summary>
-            4 - Pendente
             </summary>
         </member>
         <member name="T:Core.Shared.Models.Enums.SortEnum">
@@ -512,11 +502,6 @@
         <member name="P:Core.Shared.Models.Sale.CreateSaleModel.Products">
             <summary>
             Produtos da venda
-            </summary>
-        </member>
-        <member name="P:Core.Shared.Models.Sale.CreateSaleModel.TotalDiscount">
-            <summary>
-            Total do desconto em valor monetário
             </summary>
         </member>
         <member name="P:Core.Shared.Models.Sale.ProductSaleModel.ProductId">

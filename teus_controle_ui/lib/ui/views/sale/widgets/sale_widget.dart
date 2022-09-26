@@ -4,13 +4,13 @@ import '../../../shared/utils/global.dart' as globals;
 import '../../../shared/widgets/default/default_screen.dart';
 import '../../../shared/widgets/dialogs/delete_dialog.dart';
 import '../../../shared/widgets/tables/paginated/table_data.dart';
-import '../entry_controller.dart';
-import '../entry_page.dart';
-import 'entry_details.dart';
-import 'entry_form.dart';
+import '../sale_controller.dart';
+import '../sale_page.dart';
+import 'sale_details.dart';
+import 'sale_form.dart';
 
-class EntryWidget extends State<EntryPage> {
-  EntryController controller = EntryController();
+class SaleWidget extends State<SalePage> {
+  SaleController controller = SaleController();
   late String loggedUserId;
 
   @override
@@ -29,17 +29,17 @@ class EntryWidget extends State<EntryPage> {
   Widget build(BuildContext context) {
     return DefaultScreen(
       columns: _userColumns(),
-      pageName: "Entradas",
+      pageName: "Vendas",
       service: controller.service,
-      addDialog: EntryForm(
+      addDialog: SaleForm(
         controller: controller,
         isCreate: true,
       ),
-      editDialog: (id) => EntryForm(
+      editDialog: (id) => SaleForm(
         controller: controller,
         id: id,
       ),
-      detailsDialog: (id) => EntryDetails(
+      detailsDialog: (id) => SaleDetails(
         controller: controller,
         id: id,
       ),
@@ -60,8 +60,8 @@ class EntryWidget extends State<EntryPage> {
         shouldIncludeInFilter: false,
       ),
       TableColumn(
-        label: "Descrição",
-        reference: "origin",
+        label: "Documento",
+        reference: "cpfCnpj",
         showInPrint: true,
       ),
       TableColumn(
@@ -75,7 +75,7 @@ class EntryWidget extends State<EntryPage> {
       ),
       TableColumn(
         label: "Preço Total",
-        reference: "totalPrice",
+        reference: "totalOutPrice",
         isMoney: true,
         shouldIncludeInFilter: false,
       ),

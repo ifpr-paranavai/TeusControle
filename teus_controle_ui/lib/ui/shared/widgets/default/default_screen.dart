@@ -155,6 +155,7 @@ class _DefaultScreenState<T> extends State<DefaultScreen> {
             icon: Icons.search,
             onFieldSubmitted: (value) {
               widget.service.addSearchFilter(widget.columns, value);
+              widget.service.firstPage();
               setState(() {});
             },
             onChanged: (string) {

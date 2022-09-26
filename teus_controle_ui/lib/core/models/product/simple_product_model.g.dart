@@ -12,6 +12,7 @@ SimpleProductModel _$SimpleProductModelFromJson(Map<String, dynamic> json) =>
       description: json['description'] as String,
       gtin: json['gtin'] as String,
       thumbnail: json['thumbnail'] as String,
+      price: (json['price'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$SimpleProductModelToJson(SimpleProductModel instance) =>
@@ -20,4 +21,5 @@ Map<String, dynamic> _$SimpleProductModelToJson(SimpleProductModel instance) =>
       'description': instance.description,
       'gtin': instance.gtin,
       'thumbnail': instance.thumbnail,
+      'price': instance.price,
     };

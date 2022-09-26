@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart' as cuppertino;
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:teus_controle_ui/ui/views/entry/entry_page.dart';
 
 import '../../shared/utils/global.dart' as globals;
 import '../../shared/widgets/drawer/drawer_list_item.dart';
+import '../entry/entry_page.dart';
 import '../login/login_page.dart';
 import '../product/product_page.dart';
+import '../sale/sale_page.dart';
 import '../user/user_page.dart';
 import 'home_page.dart';
 
@@ -21,6 +22,7 @@ class HomeWidget extends State<HomePage> with SingleTickerProviderStateMixin {
     const UserPage(),
     const ProductPage(),
     const EntryPage(),
+    const SalePage(),
   ];
 
   @override
@@ -149,12 +151,20 @@ class HomeWidget extends State<HomePage> with SingleTickerProviderStateMixin {
           onChangePage: () => tabController.animateTo(1),
         ),
         DrawerListItem(
-          icon: Icons.shopping_basket_outlined,
+          icon: cuppertino.CupertinoIcons.cube_box_fill,
           title: "Entradas",
           isActive: tabController.index == 2,
           drawerStatus: drawerStatus,
           context: context,
           onChangePage: () => tabController.animateTo(2),
+        ),
+        DrawerListItem(
+          icon: Icons.shopping_basket,
+          title: "Vendas",
+          isActive: tabController.index == 3,
+          drawerStatus: drawerStatus,
+          context: context,
+          onChangePage: () => tabController.animateTo(3),
         ),
       ],
     );

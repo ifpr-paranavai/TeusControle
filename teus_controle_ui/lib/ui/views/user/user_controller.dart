@@ -5,15 +5,18 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:teus_controle_ui/core/models/user/user_post_response_model.dart';
 import 'package:teus_controle_ui/core/models/user/user_put_response_model.dart';
 
+import '../../../core/models/select/select_model.dart';
 import '../../../core/models/user/user_get_response_model.dart';
 import '../../../core/models/user/user_post_request_model.dart';
 import '../../../core/models/user/user_put_request_model.dart';
+import '../../../core/services/select_service.dart';
 import '../../../core/services/user_service.dart';
 import '../../../ui/shared/utils/global.dart' as globals;
 
 class UserController {
   UserService service = UserService();
   final formKey = GlobalKey<FormState>();
+  SelectService selectService = SelectService();
 
   final nameController = TextEditingController();
   // final cpfCnpjController = TextEditingController();
@@ -21,7 +24,11 @@ class UserController {
   final profileImageController = TextEditingController();
   final passwordController = TextEditingController();
   final emailController = TextEditingController();
-  String? profileType;
+  SelectModel profileType = SelectModel(
+    value: 'Saler',
+    description: 'Vendedor',
+  );
+  // String? profileType;
 
   void disposeFields() {
     nameController.dispose();
@@ -39,7 +46,10 @@ class UserController {
     profileImageController.clear();
     passwordController.clear();
     emailController.clear();
-    profileType = null;
+    profileType = SelectModel(
+      value: 'Saler',
+      description: 'Vendedor',
+    );
   }
 
   void autoCompleteFields(UserGetResponseModel user) {
@@ -49,7 +59,10 @@ class UserController {
     profileImageController.text = user.profileImage ?? "";
     passwordController.text = user.password ?? "";
     emailController.text = user.email;
-    profileType = user.profileType;
+    profileType = SelectModel(
+      value: user.profileType,
+      description: user.profileTypeDescription,
+    );
   }
 
   MultiValidator get nameValidator {
@@ -116,6 +129,12 @@ class UserController {
     ]);
   }
 
+  String? enumStatusValidator(SelectModel? value) {
+    return value == null || value.description == "" || value.value == ""
+        ? "Campo obrigatório"
+        : null;
+  }
+
   MultiValidator get passwordValidator {
     return MultiValidator([
       RequiredValidator(errorText: 'Campo obrigatório'),
@@ -174,7 +193,7 @@ class UserController {
       // documentType: cpfCnpjController.text.length > 11 ? 2 : 1,
       birthDate: globals.formatSentDate(birthDateController.text),
       profileImage: profileImageController.text,
-      profileType: profileType ?? "",
+      profileType: profileType.value,
       email: emailController.text,
       password: passwordController.text,
     );
@@ -198,7 +217,7 @@ class UserController {
       // documentType: cpfCnpjController.text.length > 11 ? 2 : 1,
       birthDate: globals.formatSentDate(birthDateController.text),
       profileImage: profileImageController.text,
-      profileType: profileType ?? "",
+      profileType: profileType.value,
       email: emailController.text,
       password: passwordController.text,
       id: id,
@@ -232,5 +251,9 @@ class UserController {
     int id,
   ) async {
     await service.deleteRequest(context, id);
+  }
+
+  Future<List<SelectModel>?> getProfileTypeSelect(BuildContext context) async {
+    return selectService.getUserTypeSelect(context);
   }
 }

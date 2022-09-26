@@ -59,5 +59,23 @@ namespace TeusControleApi.Controllers
             }
             return Ok(select);
         }
+
+        /// <summary>
+        /// Busca status para venda
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("saleStatus")]
+        [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public IActionResult GetSaleStatusSelect()
+        {
+            var select = selectManager.GetSaleStatusSelect();
+            if (select == null)
+            {
+                return NotFound("Não foi possível buscar itens.");
+            }
+            return Ok(select);
+        }
     }
 }

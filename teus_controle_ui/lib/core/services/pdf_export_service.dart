@@ -59,7 +59,8 @@ class PdfExportService {
     for (dynamic dataTb in tableData.data) {
       List<String> line = [];
       for (TableColumn column in tableData.columns) {
-        line.add(dataTb[column.reference].toString());
+        String text = dataTb[column.reference].toString();
+        line.add(text == 'null' ? '-' : text);
       }
 
       data.add(line);

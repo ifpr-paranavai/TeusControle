@@ -47,9 +47,15 @@ namespace Core.Domain
         public decimal TotalOutPrice { get; private set; }
 
         /// <summary>
-        /// Desconto em valor monetário
+        /// Desconto em valor monetário por item 
         /// Padrão é ZERO
         /// </summary>
         public decimal Discount { get; set; }
+
+        /// <summary>
+        /// Desconto total [quantidade * valor desconto por item]
+        /// </summary>
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public decimal TotalDiscount { get; private set; }
     }
 }

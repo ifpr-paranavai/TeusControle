@@ -1,72 +1,76 @@
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 
-import '../../../core/models/entry/entry_get_response_model.dart';
-import '../../../core/models/entry/entry_product_get_response_model.dart';
-import '../../../core/models/entry/entry_product_item_post_request_model.dart';
-import '../../../core/models/entry/entry_product_post_request_model.dart';
-import '../../../core/models/entry/entry_product_post_response_model.dart';
-import '../../../core/models/entry/entry_product_put_request_model.dart';
+import '../../../core/models/sale/sale_get_response_model.dart';
+import '../../../core/models/sale/sale_product_get_response_model.dart';
+import '../../../core/models/sale/sale_product_item_post_request_model.dart';
+import '../../../core/models/sale/sale_product_post_request_model.dart';
+import '../../../core/models/sale/sale_product_post_response_model.dart';
+import '../../../core/models/sale/sale_product_put_request_model.dart';
 import '../../../core/models/select/select_model.dart';
-import '../../../core/services/entry_service.dart';
 import '../../../core/services/product_service.dart';
+import '../../../core/services/sale_service.dart';
 import '../../../core/services/select_service.dart';
 import '../../../ui/shared/utils/global.dart' as globals;
 
-class EntryController {
-  EntryService service = EntryService();
+class SaleController {
+  SaleService service = SaleService();
   ProductService productService = ProductService();
   SelectService selectService = SelectService();
   final formKey = GlobalKey<FormState>();
   bool editable = true;
 
-  List<EntryProductGetResponseModel> products = [];
+  List<SaleProductGetResponseModel> products = [];
   double totalPrice = 0;
-  // String statusDescription = 'Aberto';
-  // String status = 'Opened';
-  SelectModel entryStatusSelect =
+  double totalDiscount = 0;
+  double totalOutPrice = 0;
+  SelectModel saleStatusSelect =
       SelectModel(value: 'Opened', description: 'Aberto');
   int? id;
   String? thumbnail;
   final codeController = TextEditingController();
-  final descriptionController = TextEditingController();
+  final cpfCnpjController = TextEditingController();
   final priceController = TextEditingController();
   final amountController = TextEditingController();
   final productController = TextEditingController();
+  final discountController = TextEditingController();
 
   void disposeFields() {
     codeController.dispose();
-    descriptionController.dispose();
+    cpfCnpjController.dispose();
     priceController.dispose();
     amountController.dispose();
     productController.dispose();
+    discountController.dispose();
     editable = true;
   }
 
   void clearFields() {
     products = [];
     totalPrice = 0;
-    entryStatusSelect = SelectModel(value: 'Opened', description: 'Aberto');
+    saleStatusSelect = SelectModel(value: 'Opened', description: 'Aberto');
     id = null;
     thumbnail = null;
-    // statusDescription = 'Aberto';
-    // status = 'Opened';
-    descriptionController.clear();
+    cpfCnpjController.clear();
     codeController.clear();
     priceController.clear();
     amountController.clear();
     productController.clear();
+    discountController.clear();
     editable = true;
   }
 
-  void autoCompleteFields(EntryGetResponseModel entry) {
-    descriptionController.text = entry.origin;
-    totalPrice = entry.totalPrice;
-    products = entry.products;
-    entryStatusSelect = SelectModel(
-      value: entry.status,
-      description: entry.statusDescription,
+  void autoCompleteFields(SaleGetResponseModel sale) {
+    cpfCnpjController.text = sale.cpfCnpj ?? '';
+    totalPrice = sale.totalPrice;
+    totalOutPrice = sale.totalOutPrice;
+    totalDiscount = sale.totalDiscount;
+    products = sale.products;
+    saleStatusSelect = SelectModel(
+      value: sale.status,
+      description: sale.statusDescription,
     );
     // statusDescription = entry.statusDescription;
     // status = entry.status;
@@ -79,9 +83,37 @@ class EntryController {
     ];
   }
 
+  List<TextInputFormatter> get discountFormatter {
+    return [
+      FilteringTextInputFormatter.digitsOnly,
+      CentavosInputFormatter(),
+    ];
+  }
+
   List<TextInputFormatter> get amountFormatter {
     return [
       FilteringTextInputFormatter.digitsOnly,
+    ];
+  }
+
+  MultiValidator get cpfCnpjValidator {
+    return MultiValidator([
+      // RequiredValidator(errorText: 'Campo obrigatório'),
+      MinLengthValidator(
+        11,
+        errorText: 'Campo deve possuir no mínimo 11 caracteres',
+      ),
+      MaxLengthValidator(
+        18,
+        errorText: 'Campo deve possuir no máximo 14 caracteres',
+      ),
+    ]);
+  }
+
+  List<TextInputFormatter> get cpfMaskFormatter {
+    return [
+      FilteringTextInputFormatter.digitsOnly,
+      CpfOuCnpjFormatter(),
     ];
   }
 
@@ -91,8 +123,8 @@ class EntryController {
         : null;
   }
 
-  Future<List<SelectModel>?> getEntryStatusSelect(BuildContext context) async {
-    return selectService.getEntryStatusSelect(context);
+  Future<List<SelectModel>?> getSaleStatusSelect(BuildContext context) async {
+    return selectService.getSaleStatusSelect(context);
   }
 
   Future<void> onConfirmButton(
@@ -104,7 +136,7 @@ class EntryController {
     if (products.isEmpty) {
       globals.errorSnackBar(
         context: context,
-        message: 'Não é possível salvar uma entrada sem produtos.',
+        message: 'Não é possível salvar uma venda sem produtos.',
       );
       return;
     }
@@ -137,31 +169,32 @@ class EntryController {
   Future<void> onLoadEntry(
       BuildContext context, int id, Function setStateLoading) async {
     setStateLoading();
-    EntryGetResponseModel? entry = await getRequest(
+    SaleGetResponseModel? sale = await getRequest(
       context,
       id,
     );
     setStateLoading();
 
-    if (entry != null) {
-      autoCompleteFields(entry);
+    if (sale != null) {
+      autoCompleteFields(sale);
     }
   }
 
   Future<bool> _postRequest(BuildContext context) async {
-    var data = EntryProductPostRequestModel(
-      origin: descriptionController.text,
-      status: entryStatusSelect.value,
+    var data = SaleProductPostRequestModel(
+      cpfCnpj: cpfCnpjController.text,
+      status: saleStatusSelect.value,
       products: products
-          .map((e) => EntryProductItemPostRequestModel(
+          .map((e) => SaleProductItemPostRequestModel(
                 productId: e.productId,
                 amount: e.amount,
                 unitPrice: e.unitPrice,
+                discount: e.discount,
               ))
           .toList(),
     );
 
-    EntryProductPostResponseModel? createdProduct = await service.postRequest(
+    SaleProductPostResponseModel? createdProduct = await service.postRequest(
       context,
       data.toJson(),
     );
@@ -174,21 +207,22 @@ class EntryController {
   }
 
   Future<bool> _putRequest(BuildContext context, int id, bool active) async {
-    var data = EntryProductPutRequestModel(
-      origin: descriptionController.text,
-      status: entryStatusSelect.value,
+    var data = SaleProductPutRequestModel(
+      cpfCnpj: cpfCnpjController.text,
+      status: saleStatusSelect.value,
       active: true,
       id: id,
       products: products
-          .map((e) => EntryProductItemPostRequestModel(
+          .map((e) => SaleProductItemPostRequestModel(
                 productId: e.productId,
                 amount: e.amount,
                 unitPrice: e.unitPrice,
+                discount: e.discount,
               ))
           .toList(),
     );
 
-    EntryProductPostResponseModel? updatedProduct = await service.putRequest(
+    SaleProductPostResponseModel? updatedProduct = await service.putRequest(
       context,
       data.toJson(),
     );
@@ -200,7 +234,7 @@ class EntryController {
     return false;
   }
 
-  Future<EntryGetResponseModel?> getRequest(
+  Future<SaleGetResponseModel?> getRequest(
     BuildContext context,
     int id,
   ) async {
@@ -229,8 +263,11 @@ class EntryController {
       return;
     }
     productController.text = value.description;
-    id = value.id;
+    priceController.text = globals.formatReceivedDouble(value.price.toString());
+    amountController.text = '1';
+    discountController.text = '0,00';
     thumbnail = value.thumbnail;
+    id = value.id;
   }
 
   void addProductOnPressed() {
@@ -247,12 +284,19 @@ class EntryController {
     double price = double.parse(
       priceController.text.replaceAll('.', '').replaceAll(',', '.'),
     );
+    double discount = double.parse(
+      discountController.text.replaceAll('.', '').replaceAll(',', '.'),
+    );
     double subTotalPrice = amount * price;
+    double itemTotalDiscount = discount * amount;
 
+    double outPrice = subTotalPrice - itemTotalDiscount;
     totalPrice += subTotalPrice;
+    totalOutPrice += outPrice;
+    totalDiscount += itemTotalDiscount;
 
     products.add(
-      EntryProductGetResponseModel(
+      SaleProductGetResponseModel(
         productId: id ?? 0,
         amount: amount,
         unitPrice: price,
@@ -260,6 +304,9 @@ class EntryController {
         description: productController.text,
         gtin: codeController.text,
         thumbnail: thumbnail ?? '',
+        discount: discount,
+        totalDiscount: itemTotalDiscount,
+        totalOutPrice: outPrice,
       ),
     );
 
@@ -267,6 +314,7 @@ class EntryController {
     priceController.clear();
     amountController.clear();
     productController.clear();
+    discountController.clear();
     id = null;
     thumbnail = null;
   }
@@ -275,6 +323,8 @@ class EntryController {
     var editedItem = products.where((e) => e.productId == productId).first;
     codeController.text = editedItem.gtin;
     productController.text = editedItem.description;
+    discountController.text =
+        globals.formatReceivedDouble(editedItem.discount.toString());
     priceController.text =
         globals.formatReceivedDouble(editedItem.unitPrice.toString());
     amountController.text = editedItem.amount.toString();
@@ -287,6 +337,9 @@ class EntryController {
   void removeProductFromList(int productId) {
     var removedProduct = products.where((e) => e.productId == productId).first;
     totalPrice -= removedProduct.totalPrice;
+    totalDiscount -= removedProduct.totalDiscount;
+    totalOutPrice -= removedProduct.totalOutPrice;
+
     products.remove(removedProduct);
   }
 }

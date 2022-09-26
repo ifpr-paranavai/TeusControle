@@ -43,6 +43,11 @@ namespace Manager.Implementation
         {
             try
             {
+                if (newSale.Products.Count == 0)
+                {
+                    throw new Exception("Não é possível salvar uma venda sem produtos.");
+                }
+
                 Sale entity = _mapper.Map<Sale>(newSale);
                 if (entity.Status == SaleStatusEnum.Closed)
                     entity.ClosingDate = DateTime.Now;
@@ -82,11 +87,15 @@ namespace Manager.Implementation
             await _productSaleManager.AddAsync<List<ProductSale>>(products);
         }
 
-
         public async Task<SaleModel> Update(UpdateSaleModel updatedSale)
         {
             try
             {
+                if (updatedSale.Products.Count == 0)
+                {
+                    throw new Exception("Não é possível salvar uma venda sem produtos.");
+                }
+
                 bool isNotClosed = await IsNotClosed(updatedSale);
                 bool hasSameProducts = HasSameAmountAndValue(updatedSale);
 
@@ -124,7 +133,6 @@ namespace Manager.Implementation
             return data;
         }
 
-
         private async Task<SaleModel> UpdateClosed(Sale entity)
         {
             await UpdateSomeFieldsAsync(
@@ -136,7 +144,6 @@ namespace Manager.Implementation
             SaleModel outputModel = _mapper.Map<SaleModel>(entity);
             return outputModel;
         }
-
 
         private async Task<bool> IsNotClosed(UpdateSaleModel updatedSale)
         {
@@ -183,7 +190,6 @@ namespace Manager.Implementation
             }
         }
 
-
         public async Task<SaleModel> DeleteById(int id)
         {
             try
@@ -219,6 +225,8 @@ namespace Manager.Implementation
                         s.CreatedDate,
                         s.LastChange,
                         s.TotalPrice,
+                        s.TotalOutPrice,
+                        s.TotalDiscount,
                         s.ClosingDate,
                         CreatedBy = s.CreatedByUser.Name,
                         CanBeDeleted = s.Status != SaleStatusEnum.Closed,
@@ -231,7 +239,8 @@ namespace Manager.Implementation
                             x.Product.Gtin,
                             x.Product.Thumbnail,
                             x.Discount,
-                            x.UnitOutPrice,
+                            x.TotalOutPrice,
+                            x.TotalDiscount,
                         }).ToList()
                     })
                     .FirstOrDefault();

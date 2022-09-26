@@ -23,10 +23,10 @@ namespace Core.Shared.Models.Sale
         /// </summary>
         public ICollection<ProductSaleModel> Products { get; set; }
 
-        /// <summary>
+/*        /// <summary>
         /// Total do desconto em valor monetário
         /// </summary>
-        public decimal TotalDiscount { get; set; }
+        public decimal TotalDiscount { get; set; }*/
     }
 
     public class ProductSaleModel

@@ -392,7 +392,8 @@ class _CustomTableState extends State<CustomPaginatedTable> {
                       fontSize: 16,
                       color: Colors.black,
                     ),
-                    text: rowValue.isEmpty ? '-' : rowValue,
+                    text:
+                        rowValue == 'null' || rowValue.isEmpty ? '-' : rowValue,
                   ),
                 ),
               ),

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/models/select/select_model.dart';
 import '../../../shared/widgets/dialogs/custom_dialog.dart';
 import '../../../shared/widgets/inputs/date_input_field.dart';
 import '../../../shared/widgets/inputs/drop_down_field.dart';
@@ -27,6 +28,7 @@ class UserForm extends StatefulWidget {
 
 class _UserFormState extends State<UserForm> {
   bool isLoading = false;
+  List<SelectModel>? profileTypeSelect = [];
 
   @override
   void initState() {
@@ -40,6 +42,12 @@ class _UserFormState extends State<UserForm> {
         }),
       );
     }
+
+    widget.controller
+        .getProfileTypeSelect(context)
+        .then((value) => setState(() {
+              profileTypeSelect = value;
+            }));
   }
 
   @override
@@ -58,7 +66,7 @@ class _UserFormState extends State<UserForm> {
                 // _cpfCnpjField(widget.controller),
                 _birthDateField(widget.controller, setState),
                 _profileImageField(widget.controller),
-                _profileTypeInput(widget.controller, setState),
+                _profileTypeInput(context),
                 _emailField(widget.controller),
                 _passwordField(widget.controller),
               ],
@@ -130,26 +138,48 @@ class _UserFormState extends State<UserForm> {
     );
   }
 
-  DropDownField _profileTypeInput(
-    UserController controller,
-    void Function(void Function()) setState,
-  ) {
-    return DropDownField<String>(
-      labelText: 'Tipo de perfil',
-      getLabel: (value) => value,
+  DropDownField _profileTypeInput(BuildContext context) {
+    return DropDownField<SelectModel>(
       paddingBottom: 10.0,
-      validator: controller.profileTypeValidator,
+      labelText: 'Tipo de perfil',
+      getLabel: (value) => value.description,
+      validator: widget.controller.enumStatusValidator,
+      // backgroundColor: Colors.white.withOpacity(0.2),
       onChanged: (value) {
         if (value != null) {
           setState(() {
-            controller.profileType = value;
+            widget.controller.profileType = SelectModel(
+              value: value.value,
+              description: value.description,
+            );
           });
         }
       },
-      options: _getProfileOptions(),
-      value: controller.profileType,
+      options: profileTypeSelect ?? [],
+      value: widget.controller.profileType,
     );
   }
+
+  // DropDownField _profileTypeInput(
+  //   UserController controller,
+  //   void Function(void Function()) setState,
+  // ) {
+  //   return DropDownField<String>(
+  //     labelText: 'Tipo de perfil',
+  //     getLabel: (value) => value,
+  //     paddingBottom: 10.0,
+  //     validator: controller.profileTypeValidator,
+  //     onChanged: (value) {
+  //       if (value != null) {
+  //         setState(() {
+  //           controller.profileType = value;
+  //         });
+  //       }
+  //     },
+  //     options: _getProfileOptions(),
+  //     value: controller.profileType,
+  //   );
+  // }
 
   List<String> _getProfileOptions() {
     return [
