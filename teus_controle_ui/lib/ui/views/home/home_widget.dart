@@ -5,7 +5,6 @@ import 'package:shimmer/shimmer.dart';
 import '../../shared/utils/global.dart' as globals;
 import '../../shared/widgets/drawer/drawer_list_item.dart';
 import '../entry/entry_page.dart';
-import '../login/login_page.dart';
 import '../product/product_page.dart';
 import '../sale/sale_page.dart';
 import '../user/user_page.dart';
@@ -68,9 +67,9 @@ class HomeWidget extends State<HomePage> with SingleTickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: globals.isCollapsed,
-        title: _appLogoImage(),
+        title: globals.appLogoImage(),
         actions: [
-          _disconnectUser(),
+          globals.disconnectUserButton(context),
         ],
       ),
       body: Row(
@@ -99,27 +98,6 @@ class HomeWidget extends State<HomePage> with SingleTickerProviderStateMixin {
       drawer: Drawer(
         child: _listDrawerItems(true),
       ),
-    );
-  }
-
-  Image _appLogoImage() {
-    return Image.asset(
-      'assets/images/TEUS_CONTROLE_WHITE.png',
-      height: 25,
-    );
-  }
-
-  Widget _disconnectUser() {
-    return IconButton(
-      onPressed: () {
-        globals.disconnectUser();
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          LoginPage.route,
-          ModalRoute.withName(LoginPage.route),
-        );
-      },
-      icon: const Icon(Icons.logout),
     );
   }
 

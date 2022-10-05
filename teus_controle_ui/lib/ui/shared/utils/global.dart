@@ -5,8 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:teus_controle_ui/ui/views/login/login_page.dart';
 
 import '../../../core/models/user/user_logged_model.dart';
+import '../../views/home/home_page.dart';
+import '../../views/point_of_sale/point_of_sale_page.dart';
 
 bool isCollapsed = true;
 const String jwtTokenRef = 'jwt-token';
@@ -18,11 +21,11 @@ final navigatorKey = GlobalKey<NavigatorState>();
 
 final currency = NumberFormat.simpleCurrency(locale: 'pt_br');
 //#region USER
-void setJwtToken(String jwt) async {
+Future setJwtToken(String jwt) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
   await prefs.setString(jwtTokenRef, jwt);
-  setUserData(jwt);
+  await setUserData(jwt);
 }
 
 Future<String> getJwtToken() async {
@@ -43,6 +46,7 @@ Future setUserData(String jwt) async {
 
 Future<bool> isJwtValid() async {
   String jwt = await getJwtToken();
+  if (jwt.isEmpty) return false;
 
   return !JwtDecoder.isExpired(jwt);
 }
@@ -71,7 +75,7 @@ Future<String> getLoggedUserImage() async {
   return prefs.getString(userProfileImage) ?? '';
 }
 
-Future disconnectUser() async {
+Future _disconnectUser() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
   await prefs.setString(jwtTokenRef, '');
@@ -144,4 +148,52 @@ String isEmptyToPrint(String? value) {
   return value.isEmpty ? '-' : value;
 }
 
+void goToHomeScreen(String userRole, BuildContext context) {
+  switch (userRole) {
+    case 'Admin':
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        HomePage.route,
+        ModalRoute.withName(HomePage.route),
+      );
+      break;
+    case 'Saler':
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        PointOfSalePage.route,
+        ModalRoute.withName(PointOfSalePage.route),
+      );
+      break;
+    default:
+      break;
+  }
+}
+
+//#endregion
+
+//#region IMAGES
+Image appLogoImage() {
+  return Image.asset(
+    'assets/images/TEUS_CONTROLE_WHITE.png',
+    height: 25,
+  );
+}
+//#endregion
+
+//#region WIDGETS
+Widget disconnectUserButton(BuildContext context) {
+  return IconButton(
+    onPressed: () {
+      _disconnectUser();
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        LoginPage.route,
+        ModalRoute.withName(
+          LoginPage.route,
+        ),
+      );
+    },
+    icon: const Icon(Icons.logout),
+  );
+}
 //#endregion

@@ -3,7 +3,6 @@ import 'package:form_field_validator/form_field_validator.dart';
 
 import '../../../core/services/login_service.dart';
 import '../../shared/utils/global.dart' as globals;
-import '../home/home_page.dart';
 
 class LoginController {
   LoginService service = LoginService();
@@ -54,11 +53,13 @@ class LoginController {
         var success = await _loginRequest(context);
 
         if (success) {
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            HomePage.route,
-            ModalRoute.withName(HomePage.route),
-          );
+          String userRole = await globals.getLoggedUserRole();
+          globals.goToHomeScreen(userRole, context);
+          // Navigator.pushNamedAndRemoveUntil(
+          //   context,
+          //   HomePage.route,
+          //   ModalRoute.withName(HomePage.route),
+          // );
         }
       }
     }
@@ -72,7 +73,7 @@ class LoginController {
     );
 
     if (jwtToken != null) {
-      globals.setJwtToken(jwtToken);
+      await globals.setJwtToken(jwtToken);
       return true;
     }
 

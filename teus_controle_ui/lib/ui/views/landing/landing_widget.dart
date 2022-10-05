@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../shared/utils/global.dart' as globals;
-import '../home/home_page.dart';
 import '../login/login_page.dart';
-import '../point_of_sale/point_of_sale_page.dart';
 import 'landing_page.dart';
 
 class LandingWidget extends State<LandingPage> {
@@ -20,7 +18,7 @@ class LandingWidget extends State<LandingPage> {
     }
 
     String userRole = await globals.getLoggedUserRole();
-    _goToHomeScreen(userRole);
+    globals.goToHomeScreen(userRole, context);
   }
 
   void _goToLogin() {
@@ -29,27 +27,6 @@ class LandingWidget extends State<LandingPage> {
       LoginPage.route,
       ModalRoute.withName(LoginPage.route),
     );
-  }
-
-  void _goToHomeScreen(String userRole) {
-    switch (userRole) {
-      case 'Admin':
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          HomePage.route,
-          ModalRoute.withName(HomePage.route),
-        );
-        break;
-      case 'Saler':
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          HomePage.route,
-          ModalRoute.withName(PointOfSalePage.route),
-        );
-        break;
-      default:
-        break;
-    }
   }
 
   @override

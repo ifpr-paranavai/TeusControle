@@ -157,6 +157,8 @@ $$
 DELIMITER ;
 
 SELECT * from users u;
+-- DELETE FROM teuscontroledb.users WHERE Name = 'Usuario Administrador';
+
 
 
 INSERT INTO

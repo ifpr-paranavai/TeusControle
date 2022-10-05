@@ -6,32 +6,31 @@ import '../../../../core/models/sale/sale_product_get_response_model.dart';
 import '../../../../core/models/select/select_model.dart';
 import '../../../shared/utils/global.dart' as globals;
 import '../../../shared/widgets/buttons/rounded_button.dart';
-import '../../../shared/widgets/dialogs/custom_dialog.dart';
 import '../../../shared/widgets/dialogs/delete_dialog.dart';
 import '../../../shared/widgets/dialogs/overlayable.dart';
 import '../../../shared/widgets/inputs/drop_down_field.dart';
 import '../../../shared/widgets/inputs/text_input_field.dart';
-import '../sale_controller.dart';
+import '../../sale/sale_controller.dart';
 
-class SaleForm extends StatefulWidget {
+class PointOfSaleForm extends StatefulWidget {
   final SaleController controller;
   final bool isCreate;
   final int? id;
 
-  const SaleForm({
+  const PointOfSaleForm({
     Key? key,
     required this.controller,
-    this.isCreate = false,
+    this.isCreate = true,
     this.id,
   })  : assert(!(!isCreate && id == null),
             'É necessário informar o id quando não for para edição'),
         super(key: key);
 
   @override
-  EntryFormState createState() => EntryFormState();
+  PointOfSaleFormState createState() => PointOfSaleFormState();
 }
 
-class EntryFormState extends State<SaleForm> {
+class PointOfSaleFormState extends State<PointOfSaleForm> {
   bool isLoading = false;
   final scrollControllerVertical = ScrollController();
   final scrollControllerHorizontal = ScrollController();
@@ -66,25 +65,27 @@ class EntryFormState extends State<SaleForm> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomDialog(
-      width: 1800,
-      height: 1000,
-      body: Form(
-        key: widget.controller.formKey,
-        child: saleFormWidget(context),
-      ),
-      title: widget.isCreate ? 'Cadastro' : 'Edição',
-      onClose: widget.controller.clearFields,
-      isLoading: isLoading,
-      // hasConfirmButton: widget.controller.editable,
-      onConfirm: () => widget.controller.onConfirmButton(
-        context,
-        () => setState(() {
-          isLoading = !isLoading;
-        }),
-        widget.isCreate,
-        widget.id,
-      ),
+    return
+        // CustomDialog(
+        // width: 1800,
+        // height: 1000,
+        // body:
+        Form(
+      key: widget.controller.formKey,
+      child: saleFormWidget(context),
+      // ),
+      // title: widget.isCreate ? 'Cadastro' : 'Edição',
+      // onClose: widget.controller.clearFields,
+      // isLoading: isLoading,
+      // // hasConfirmButton: widget.controller.editable,
+      // onConfirm: () => widget.controller.onConfirmButton(
+      //   context,
+      //   () => setState(() {
+      //     isLoading = !isLoading;
+      //   }),
+      //   widget.isCreate,
+      //   widget.id,
+      // ),
     );
   }
 
@@ -527,7 +528,7 @@ class EntryFormState extends State<SaleForm> {
     return TextInputField(
       labelText: "Desconto",
       mask: widget.controller.discountFormatter,
-      enabled: _isClosed(),
+      enabled: false,
       controller: widget.controller.discountController,
       keyboardType: TextInputType.number,
       onChanged: (value) {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'point_of_sale_widget.dart';
+import 'widgets/point_of_sale_widget.dart';
 
 class PointOfSalePage extends StatefulWidget {
   static const String route = '/point-of-sale';
