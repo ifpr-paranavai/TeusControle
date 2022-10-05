@@ -50,6 +50,7 @@ class ProductWidget extends State<ProductPage> {
         isId: true,
         show: false,
         shouldIncludeInFilter: false,
+        columnSize: 1,
       ),
       TableColumn(
         label: "Imagem",

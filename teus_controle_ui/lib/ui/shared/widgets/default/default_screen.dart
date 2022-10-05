@@ -105,7 +105,7 @@ class _DefaultScreenState<T> extends State<DefaultScreen> {
                 .push(
               Overlayable(
                 widget: FutureBuilder<PagedModel?>(
-                  future: widget.service.getPagedRequest(context),
+                  future: widget.service.getPagedRequest(context, true),
                   builder: (context, snapShot) {
                     if (snapShot.connectionState == ConnectionState.done) {
                       return PdfPreviewPage(

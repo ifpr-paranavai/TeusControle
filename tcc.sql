@@ -1,7 +1,7 @@
-create database webprojectV2;
-use webprojectV2;
+create database teuscontroledb;
+use teuscontroledb;
 
--- drop database webprojectV2;
+-- drop database teuscontroledb;
 
 
 select * from products_sale; 
@@ -18,8 +18,8 @@ update products set deleted = 0 where id > 0;
 
 -- drop table entry;
 -- drop table productentry;
--- drop database webprojectV2;
--- UPDATE `webprojectv2`.`users` SET `deleted` = 0 where `Id` > 1;
+-- drop database teuscontroledb;
+-- UPDATE `teuscontroledb`.`users` SET `deleted` = 0 where `Id` > 1;
 
 drop trigger calculate_total_entry_value_on_update;
 drop trigger calculate_total_entry_value_on_insert;
@@ -33,8 +33,8 @@ FOR EACH ROW
 	
     SELECT SUM(pe.TotalPrice) 
     INTO @total_entry_value 
-    FROM webprojectv2.products_entry pe
-    INNER JOIN webprojectv2.entries e
+    FROM teuscontroledb.products_entry pe
+    INNER JOIN teuscontroledb.entries e
     ON pe.Id = e.Id
     WHERE pe.Id = NEW.Id;
   
@@ -54,8 +54,8 @@ FOR EACH ROW
 	
     SELECT SUM(pe.TotalPrice) 
     INTO @total_entry_value 
-    FROM webprojectv2.products_entry pe
-    INNER JOIN webprojectv2.entries e
+    FROM teuscontroledb.products_entry pe
+    INNER JOIN teuscontroledb.entries e
     ON pe.Id = e.Id
     WHERE pe.Id = NEW.Id;
   
@@ -87,22 +87,22 @@ FOR EACH ROW
 	
     SELECT SUM(ps.TotalPrice)
     INTO @total_sale_value 
-    FROM webprojectv2.products_sale ps
-    INNER JOIN webprojectv2.sales s
+    FROM teuscontroledb.products_sale ps
+    INNER JOIN teuscontroledb.sales s
     ON ps.Id = s.Id
     WHERE ps.Id = NEW.Id;
     
     SELECT SUM(ps.TotalDiscount)
     INTO @total_discount_value 
-    FROM webprojectv2.products_sale ps
-    INNER JOIN webprojectv2.sales s
+    FROM teuscontroledb.products_sale ps
+    INNER JOIN teuscontroledb.sales s
     ON ps.Id = s.Id
     WHERE ps.Id = NEW.Id;
     
     SELECT SUM(ps.TotalOutPrice)
     INTO @total_sale_out_value 
-    FROM webprojectv2.products_sale ps
-    INNER JOIN webprojectv2.sales s
+    FROM teuscontroledb.products_sale ps
+    INNER JOIN teuscontroledb.sales s
     ON ps.Id = s.Id
     WHERE ps.Id = NEW.Id;
   
@@ -116,7 +116,7 @@ $$
 DELIMITER ;
 
 
-drop trigger calculate_total_sale_value_on_update;
+-- drop trigger calculate_total_sale_value_on_update;
 DELIMITER $$
 CREATE TRIGGER calculate_total_sale_value_on_update
 AFTER UPDATE ON products_sale
@@ -128,22 +128,22 @@ FOR EACH ROW
 	
     SELECT SUM(ps.TotalPrice)
     INTO @total_sale_value 
-    FROM webprojectv2.products_sale ps
-    INNER JOIN webprojectv2.sales s
+    FROM teuscontroledb.products_sale ps
+    INNER JOIN teuscontroledb.sales s
     ON ps.Id = s.Id
     WHERE ps.Id = NEW.Id;
     
     SELECT SUM(ps.TotalDiscount)
     INTO @total_discount_value 
-    FROM webprojectv2.products_sale ps
-    INNER JOIN webprojectv2.sales s
+    FROM teuscontroledb.products_sale ps
+    INNER JOIN teuscontroledb.sales s
     ON ps.Id = s.Id
     WHERE ps.Id = NEW.Id;
     
     SELECT SUM(ps.TotalOutPrice)
     INTO @total_sale_out_value 
-    FROM webprojectv2.products_sale ps
-    INNER JOIN webprojectv2.sales s
+    FROM teuscontroledb.products_sale ps
+    INNER JOIN teuscontroledb.sales s
     ON ps.Id = s.Id
     WHERE ps.Id = NEW.Id;
   
@@ -155,3 +155,34 @@ FOR EACH ROW
   end;
 $$
 DELIMITER ;
+
+SELECT * from users u;
+
+
+INSERT INTO
+	teuscontroledb.users
+(Name,
+	BirthDate,
+	ProfileImage,
+	ProfileType,
+	Password,
+	Email,
+	Active,
+	Deleted,
+	CreatedDate,
+	LastChange,
+	CreatedBy)
+VALUES('Usuario Administrador',
+'2001-11-27 00:00:00',
+'https://ciclovivo.com.br/wp-content/uploads/2018/10/iStock-536613027-696x464.jpg',
+'Admin',
+'AQAAAAEAACcQAAAAEBk6g+HOnrf1xQioBXKKBwj2MK8JtYAx3UUsWI31fz5dUQO2ZY/B8GTI90AhS0YXfw==',
+'admin@admin.com',
+1,
+0,
+'2022-10-04 22:52:24.064144',
+null,
+null);
+
+
+

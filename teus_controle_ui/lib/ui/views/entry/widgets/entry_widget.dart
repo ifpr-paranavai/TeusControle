@@ -58,6 +58,7 @@ class EntryWidget extends State<EntryPage> {
         isId: true,
         show: false,
         shouldIncludeInFilter: false,
+        columnSize: 1,
       ),
       TableColumn(
         label: "Descrição",

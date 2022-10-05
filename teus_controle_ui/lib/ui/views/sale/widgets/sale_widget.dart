@@ -28,7 +28,7 @@ class SaleWidget extends State<SalePage> {
   @override
   Widget build(BuildContext context) {
     return DefaultScreen(
-      columns: _userColumns(),
+      columns: _saleColumns(),
       pageName: "Vendas",
       service: controller.service,
       addDialog: SaleForm(
@@ -50,7 +50,7 @@ class SaleWidget extends State<SalePage> {
     );
   }
 
-  List<TableColumn> _userColumns() {
+  List<TableColumn> _saleColumns() {
     return [
       TableColumn(
         label: "Id",
@@ -58,6 +58,7 @@ class SaleWidget extends State<SalePage> {
         isId: true,
         show: false,
         shouldIncludeInFilter: false,
+        columnSize: 1,
       ),
       TableColumn(
         label: "Documento",

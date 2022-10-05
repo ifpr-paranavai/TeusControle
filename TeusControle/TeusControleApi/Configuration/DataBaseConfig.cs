@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using System;
 
 namespace TeusControleApi.Configuration
@@ -19,10 +20,24 @@ namespace TeusControleApi.Configuration
         /// <param name="configuration"></param>
         public static void AddDataBaseConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<MyContext>(options => {
+            var host = configuration["DBHOST"] ?? "localhost";
+            var port = configuration["DBPORT"] ?? "3306";
+            var password = configuration["MYSQL_PASSWORD"] ?? configuration.GetConnectionString("MYSQL_PASSWORD");
+            var userid = configuration["MYSQL_USER"] ?? configuration.GetConnectionString("MYSQL_USER");
+            var productsdb = configuration["MYSQL_DATABASE"] ?? configuration.GetConnectionString("MYSQL_DATABASE");
+            var options = configuration["MYSQL_OPTIONS"] ?? configuration.GetConnectionString("MYSQL_OPTIONS");
+
+            string mySqlConnStr = $"server={host}; userid={userid};pwd={password};port={port};database={productsdb}; {options}";
+
+            services.AddDbContext<MyContext>(options =>
+            {
                 options.UseMySql(
-                    configuration.GetConnectionString("MyConnection"),
-                    new MySqlServerVersion(new Version(8, 0, 11))
+                    mySqlConnStr,
+                    ServerVersion.AutoDetect(mySqlConnStr),
+                    mysql =>
+                    {
+                        mysql.EnableRetryOnFailure();
+                    }
                 );
             });
         }

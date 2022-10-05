@@ -41,7 +41,9 @@ Future setUserData(String jwt) async {
   await prefs.setString(userProfileImage, payload.profileimage);
 }
 
-Future<bool> isJwtValid(String jwt) async {
+Future<bool> isJwtValid() async {
+  String jwt = await getJwtToken();
+
   return !JwtDecoder.isExpired(jwt);
 }
 

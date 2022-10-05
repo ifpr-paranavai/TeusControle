@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:teus_controle_ui/ui/views/point_of_sale/point_of_sale_page.dart';
 
 import 'ui/shared/styles/app_theme_data.dart';
 import 'ui/shared/utils/my_custom_scroll_behavior.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         LandingPage.route: (context) => const LandingPage(),
         LoginPage.route: (context) => const LoginPage(),
         HomePage.route: (context) => const HomePage(),
+        PointOfSalePage.route: (context) => const PointOfSalePage(),
       },
     );
   }

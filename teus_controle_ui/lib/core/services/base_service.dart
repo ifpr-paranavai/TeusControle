@@ -70,7 +70,8 @@ abstract class BaseService {
     return pagedResponse;
   }
 
-  Future<PagedModel?> getPagedRequest(BuildContext context) async {
+  Future<PagedModel?> getPagedRequest(BuildContext context,
+      [bool getAll = false]) async {
     Dio dio = await futureDio;
 
     try {
@@ -80,7 +81,7 @@ abstract class BaseService {
           'sortingParams': sortingParams,
           'filterParams': filterParams,
           'pageNumber': pageNumber,
-          'pageSize': pageSize,
+          'pageSize': getAll ? 999999999 : pageSize,
         },
       );
       PagedModel responseData = deserializePagedResponse(response.data);

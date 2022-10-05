@@ -14,8 +14,9 @@ class TeusControleDioConfig {
     }
 
     var options = BaseOptions(
-      // baseUrl: "https://172.21.50.191:45455/api/", // ifpr
-      baseUrl: "https://10.0.0.199:45455/api/", // casa
+      // baseUrl: "https://172.21.52.168:45455/api/", // ifpr
+      // baseUrl: "https://10.0.0.199:45455/api/", // casa
+      baseUrl: "https://10.0.0.199:51107/api/",
       // baseUrl: "https://192.168.237.68:45455/api/",
       connectTimeout: 15000,
       receiveTimeout: 15000,

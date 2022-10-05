@@ -25,6 +25,10 @@ class TableData {
 
     return '"$value"';
   }
+
+  List<String> getTableColumn() {
+    return columns.map((e) => e.label).toList();
+  }
 }
 
 class TableColumn {
@@ -38,6 +42,7 @@ class TableColumn {
   final bool isMoney;
   final ImageType? imageType;
   final bool shouldIncludeInFilter;
+  final double columnSize;
 
   TableColumn({
     required this.label,
@@ -50,6 +55,7 @@ class TableColumn {
     this.imageType,
     this.isMoney = false,
     this.shouldIncludeInFilter = true,
+    this.columnSize = 2,
   })  : assert(!(isImage && imageType == null),
             "Deveria ser informado tipo de imagem"),
         assert(!(isImage && isMoney), "Não é possível ser imagem e dinheiro"),
