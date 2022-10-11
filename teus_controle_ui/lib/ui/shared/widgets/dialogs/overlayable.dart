@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Overlayable extends ModalRoute<void> {
+class Overlayable extends ModalRoute<dynamic> {
   final Widget widget;
   Overlayable({
     required this.widget,

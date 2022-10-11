@@ -14,6 +14,10 @@ import '../../../core/services/product_service.dart';
 import '../../../core/services/sale_service.dart';
 import '../../../core/services/select_service.dart';
 import '../../../ui/shared/utils/global.dart' as globals;
+import '../../shared/widgets/default/ticket_pdf_preview_page.dart';
+import '../../shared/widgets/dialogs/confirm_dialog.dart';
+import '../../shared/widgets/dialogs/overlayable.dart';
+import '../product/product_modal_page.dart';
 
 class SaleController {
   SaleService service = SaleService();
@@ -45,6 +49,10 @@ class SaleController {
     productController.dispose();
     discountController.dispose();
     editable = true;
+  }
+
+  void setSaleStatusSelectClose() {
+    saleStatusSelect = SelectModel(value: 'Closed', description: 'Fechado');
   }
 
   void clearFields() {
@@ -144,7 +152,7 @@ class SaleController {
     if (formKey.currentState != null) {
       if (formKey.currentState?.validate() ?? true) {
         setStateLoading();
-        var success = isCreate && id == null
+        var data = isCreate && id == null
             ? await _postRequest(context)
             : await _putRequest(
                 context,
@@ -153,17 +161,51 @@ class SaleController {
               );
         setStateLoading();
 
-        if (success) {
+        if (data != null) {
+          if (saleStatusSelect.value == 'Closed') {
+            bool showTicket = false;
+
+            await Navigator.of(context).push(
+              Overlayable(
+                widget: ConfirmDialog(
+                  confirmActionDescription: 'Gerar',
+                  onConfirm: () {
+                    showTicket = true;
+                  },
+                  value: 'Gerar Recibo',
+                ),
+              ),
+            );
+
+            SaleGetResponseModel? getById = await getRequest(context, data.id);
+
+            if (showTicket && getById != null) {
+              await openTicket(context, getById);
+            }
+          }
+
+          String userRole = await globals.getLoggedUserRole();
+
           clearFields();
-          Navigator.pop(context, true); // fecha modal
-          globals.successSnackBar(
-            context: context,
-            message: 'Cadastro realizado com sucesso',
-          );
+          if (!isCreate || userRole == 'Admin') {
+            Navigator.pop(context, true); // fecha modal
+            globals.successSnackBar(
+              context: context,
+              message: 'Cadastro realizado com sucesso',
+            );
+          }
         }
         // continua editando modal
       }
     }
+  }
+
+  Future openTicket(BuildContext context, SaleGetResponseModel sale) async {
+    await Navigator.of(context).push(
+      Overlayable(
+        widget: TicketPdfPreviewPage(sale: sale),
+      ),
+    );
   }
 
   Future<void> onLoadEntry(
@@ -180,7 +222,8 @@ class SaleController {
     }
   }
 
-  Future<bool> _postRequest(BuildContext context) async {
+  Future<SaleProductPostResponseModel?> _postRequest(
+      BuildContext context) async {
     var data = SaleProductPostRequestModel(
       cpfCnpj: cpfCnpjController.text,
       status: saleStatusSelect.value,
@@ -199,14 +242,11 @@ class SaleController {
       data.toJson(),
     );
 
-    if (createdProduct != null) {
-      return true;
-    }
-
-    return false;
+    return createdProduct;
   }
 
-  Future<bool> _putRequest(BuildContext context, int id, bool active) async {
+  Future<SaleProductPostResponseModel?> _putRequest(
+      BuildContext context, int id, bool active) async {
     var data = SaleProductPutRequestModel(
       cpfCnpj: cpfCnpjController.text,
       status: saleStatusSelect.value,
@@ -227,11 +267,7 @@ class SaleController {
       data.toJson(),
     );
 
-    if (updatedProduct != null) {
-      return true;
-    }
-
-    return false;
+    return updatedProduct;
   }
 
   Future<SaleGetResponseModel?> getRequest(
@@ -251,6 +287,7 @@ class SaleController {
     await service.deleteRequest(context, id);
   }
 
+  // todo: alterar rota para também buscar por id
   Future getProductByGtinCode(
     BuildContext context,
     String gtinCode,
@@ -341,5 +378,15 @@ class SaleController {
     totalOutPrice -= removedProduct.totalOutPrice;
 
     products.remove(removedProduct);
+  }
+
+  Future openSearchProduct(BuildContext context) async {
+    await Navigator.of(context)
+        .push(
+          Overlayable(
+            widget: const ProductModalPage(),
+          ),
+        )
+        .then((value) => print(value));
   }
 }

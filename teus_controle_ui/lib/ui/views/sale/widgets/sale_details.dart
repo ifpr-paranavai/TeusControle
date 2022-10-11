@@ -6,6 +6,7 @@ import 'package:shimmer/shimmer.dart';
 import '../../../../core/models/sale/sale_get_response_model.dart';
 import '../../../../core/models/sale/sale_product_get_response_model.dart';
 import '../../../shared/utils/global.dart' as globals;
+import '../../../shared/widgets/buttons/rounded_button.dart';
 import '../../../shared/widgets/dialogs/custom_dialog.dart';
 import '../sale_controller.dart';
 
@@ -202,6 +203,14 @@ class _SaleDetailsState extends State<SaleDetails> {
         ListTile(
           title: const Text('Última Alteração'),
           subtitle: Text(sale!.lastChange ?? '-'),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: RoundedButton(
+            canBeExpanded: true,
+            label: 'Gerar Recibo',
+            onPressed: () => widget.controller.openTicket(context, sale!),
+          ),
         ),
       ],
     );

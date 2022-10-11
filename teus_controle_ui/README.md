@@ -31,3 +31,22 @@ Remove-Migration
 atualiza base
 update-database
 
+
+publishing to heroku
+
+nome da aplicacao
+teuscontroleapi
+
+>heroku auth:token
+- pegar token e usar para logar no docker 
+>docker login --password="0152bd2e-776d-4721-afdc-9fb236585a30" registry.heroku.com
+
+add container para push
+>docker tag teuscontroleapi registry.heroku.com/teuscontroleapi/web
+
+realiza push
+>docker push registry.heroku.com/teuscontroleapi/web
+
+release a versao
+>heroku container:release web -a teuscontroleapi
+ 

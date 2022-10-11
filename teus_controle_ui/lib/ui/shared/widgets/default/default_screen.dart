@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:teus_controle_ui/core/models/paginated/paged_model.dart';
-import 'package:teus_controle_ui/ui/shared/widgets/default/pdf_preview_page.dart';
 
+import '../../../../core/models/paginated/paged_model.dart';
 import '../../../../core/services/base_service.dart';
 import '../buttons/circle_icon_button.dart';
 import '../buttons/rounded_button.dart';
@@ -9,6 +8,7 @@ import '../dialogs/overlayable.dart';
 import '../inputs/text_input_field.dart';
 import '../tables/paginated/custom_paginated_table.dart';
 import '../tables/paginated/table_data.dart';
+import 'default_pdf_preview_page.dart';
 import 'page_header.dart';
 
 class DefaultScreen<T> extends StatefulWidget {
@@ -40,7 +40,6 @@ class DefaultScreen<T> extends StatefulWidget {
 
 class _DefaultScreenState<T> extends State<DefaultScreen> {
   final ScrollController verticalScroll = ScrollController();
-  int x = 10;
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +107,7 @@ class _DefaultScreenState<T> extends State<DefaultScreen> {
                   future: widget.service.getPagedRequest(context, true),
                   builder: (context, snapShot) {
                     if (snapShot.connectionState == ConnectionState.done) {
-                      return PdfPreviewPage(
+                      return DefaultPdfPreviewPage(
                         tableData: _getTableData(snapShot),
                         title: widget.pageName,
                       );

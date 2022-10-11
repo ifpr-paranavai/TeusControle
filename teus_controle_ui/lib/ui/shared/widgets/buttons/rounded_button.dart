@@ -9,6 +9,7 @@ class RoundedButton extends StatelessWidget {
     this.leading,
     this.minWidth = 180.0,
     this.isLoading = false,
+    this.canBeExpanded = false,
   })  : assert(
           !(label == null && widget == null),
           "É necessário informar, um label, ou um widget.",
@@ -25,6 +26,7 @@ class RoundedButton extends StatelessWidget {
   final void Function()? onPressed;
   final double minWidth;
   final bool isLoading;
+  final bool canBeExpanded;
 
   final List<Widget> textChild = [];
 
@@ -49,17 +51,13 @@ class RoundedButton extends StatelessWidget {
 
     if (label != null) {
       textChild.add(
-        FittedBox(
-          fit: BoxFit.fitWidth,
-          child: Text(
-            label!,
-            style: const TextStyle(
-              fontSize: 15,
-              color: Colors.white,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ),
+        canBeExpanded
+            ? Expanded(
+                child: _getLabelText(),
+              )
+            : SizedBox(
+                child: _getLabelText(),
+              ),
       );
     }
 
@@ -88,7 +86,7 @@ class RoundedButton extends StatelessWidget {
         ),
         onPressed: onPressed,
         disabledColor: Colors.grey,
-        minWidth: minWidth,
+        minWidth: canBeExpanded ? null : minWidth,
         height: 55.0,
         child: label == null
             ? widget
@@ -96,6 +94,23 @@ class RoundedButton extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: textChild,
               ),
+      ),
+    );
+  }
+
+  Widget _getLabelText() {
+    return RichText(
+      textAlign: TextAlign.center,
+      maxLines: 1,
+      textWidthBasis: TextWidthBasis.parent,
+      overflow: TextOverflow.ellipsis,
+      text: TextSpan(
+        style: const TextStyle(
+          fontSize: 15,
+          color: Colors.white,
+          fontWeight: FontWeight.w600,
+        ),
+        text: label!,
       ),
     );
   }

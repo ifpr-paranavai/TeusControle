@@ -13,7 +13,7 @@ class ConfirmDialog extends StatefulWidget {
     required this.value,
     this.onConfirmAsync,
     this.onConfirm,
-    this.confirmActionDescription = 'confirmar',
+    this.confirmActionDescription = 'Confirmar',
   })  : assert(!(onConfirm != null && onConfirmAsync != null),
             'Não pode existir duas funçoes de confirmação para este widget'),
         super(key: key);

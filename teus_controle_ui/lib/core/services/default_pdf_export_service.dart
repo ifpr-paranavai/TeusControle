@@ -8,10 +8,10 @@ import 'package:string_extensions/string_extensions.dart';
 
 import '../../ui/shared/widgets/tables/paginated/table_data.dart';
 
-class PdfExportService {
+class DefaultPdfExportService {
   final TableData tableData;
 
-  PdfExportService({required this.tableData});
+  DefaultPdfExportService({required this.tableData});
 
   Future<Uint8List> makeDefaultPdf(PdfPageFormat format, String title) async {
     final pdf = pw.Document();

@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:teus_controle_ui/ui/shared/widgets/dialogs/confirm_dialog.dart';
 
 import '../../../../core/models/sale/sale_product_get_response_model.dart';
-import '../../../../core/models/select/select_model.dart';
 import '../../../shared/utils/global.dart' as globals;
 import '../../../shared/widgets/buttons/rounded_button.dart';
 import '../../../shared/widgets/dialogs/delete_dialog.dart';
 import '../../../shared/widgets/dialogs/overlayable.dart';
-import '../../../shared/widgets/inputs/drop_down_field.dart';
 import '../../../shared/widgets/inputs/text_input_field.dart';
 import '../../sale/sale_controller.dart';
 
@@ -34,7 +32,7 @@ class PointOfSaleFormState extends State<PointOfSaleForm> {
   bool isLoading = false;
   final scrollControllerVertical = ScrollController();
   final scrollControllerHorizontal = ScrollController();
-  List<SelectModel>? saleStatusSelect = [];
+  // List<SelectModel>? saleStatusSelect = [];
   var myGroupPrice = AutoSizeGroup();
   var myGroupDiscount = AutoSizeGroup();
   var myGroupOutPrice = AutoSizeGroup();
@@ -43,24 +41,24 @@ class PointOfSaleFormState extends State<PointOfSaleForm> {
   void initState() {
     super.initState();
     // Busca se for para atualizar e preencher campos
-    if (!widget.isCreate && widget.id != null) {
-      widget.controller
-          .onLoadEntry(
-        context,
-        widget.id!,
-        () => setState(() {
-          isLoading = !isLoading;
-        }),
-      )
-          .then((value) {
-        widget.controller.editable = !(widget.id != null &&
-            widget.controller.saleStatusSelect.description == 'Fechado');
-      });
-    }
-
-    widget.controller.getSaleStatusSelect(context).then((value) => setState(() {
-          saleStatusSelect = value;
-        }));
+    // if (!widget.isCreate && widget.id != null) {
+    //   widget.controller
+    //       .onLoadEntry(
+    //     context,
+    //     widget.id!,
+    //     () => setState(() {
+    //       isLoading = !isLoading;
+    //     }),
+    //   )
+    //       .then((value) {
+    //     widget.controller.editable = !(widget.id != null &&
+    //         widget.controller.saleStatusSelect.description == 'Fechado');
+    //   });
+    // }
+    //
+    // widget.controller.getSaleStatusSelect(context).then((value) => setState(() {
+    //       saleStatusSelect = value;
+    //     }));
   }
 
   @override
@@ -97,7 +95,7 @@ class PointOfSaleFormState extends State<PointOfSaleForm> {
           child: Column(
             children: [
               _customerDocumentField(),
-              if (_isClosed()) _productFormFields(context),
+              _productFormFields(context),
               const SizedBox(
                 height: 10,
               ),
@@ -133,13 +131,13 @@ class PointOfSaleFormState extends State<PointOfSaleForm> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  SizedBox(
-                    width: 170,
-                    child: _statusInput(context),
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
+                  // SizedBox(
+                  //   width: 170,
+                  //   child: _statusInput(context),
+                  // ),
+                  // const SizedBox(
+                  //   width: 20,
+                  // ),
                   SizedBox(
                     width: 200,
                     child: Column(
@@ -212,10 +210,9 @@ class PointOfSaleFormState extends State<PointOfSaleForm> {
               'Descrição',
               'Preço Unitário',
               'Quantidade',
-              'Preço Total',
               'Desconto Total',
               'Preço Liquído',
-              if (_isClosed()) 'Ação'
+              'Ação'
             ]),
             rows: _getCells(widget.controller.products),
           ),
@@ -256,10 +253,9 @@ class PointOfSaleFormState extends State<PointOfSaleForm> {
         DataCell(Container()),
         DataCell(Container()),
         DataCell(Container()),
-        if (_isClosed()) DataCell(Container()),
       ];
 
-      while (rowIndex <= 3) {
+      while (rowIndex <= 5) {
         result.add(
           DataRow.byIndex(
             index: rowIndex,
@@ -361,9 +357,6 @@ class PointOfSaleFormState extends State<PointOfSaleForm> {
               Center(child: Text(product.amount.toString())),
             ),
             DataCell(
-              Center(child: Text(globals.currency.format(product.totalPrice))),
-            ),
-            DataCell(
               Center(
                   child: Text(globals.currency.format(product.totalDiscount))),
             ),
@@ -371,47 +364,46 @@ class PointOfSaleFormState extends State<PointOfSaleForm> {
               Center(
                   child: Text(globals.currency.format(product.totalOutPrice))),
             ),
-            if (_isClosed())
-              DataCell(Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        Overlayable(
-                          widget: ConfirmDialog(
-                            value: product.description,
-                            confirmActionDescription: 'editar',
-                            onConfirm: () => setState(() => widget.controller
-                                .editProductFromList(product.productId)),
-                          ),
+            DataCell(Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      Overlayable(
+                        widget: ConfirmDialog(
+                          value: product.description,
+                          confirmActionDescription: 'editar',
+                          onConfirm: () => setState(() => widget.controller
+                              .editProductFromList(product.productId)),
                         ),
-                      );
-                    },
-                    icon: Icon(
-                      Icons.edit,
-                      color: Theme.of(context).primaryColorDark,
-                    ),
+                      ),
+                    );
+                  },
+                  icon: Icon(
+                    Icons.edit,
+                    color: Theme.of(context).primaryColorDark,
                   ),
-                  IconButton(
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        Overlayable(
-                          widget: DeleteDialog(
-                            value: product.description,
-                            onConfirm: () => setState(() => widget.controller
-                                .removeProductFromList(product.productId)),
-                          ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      Overlayable(
+                        widget: DeleteDialog(
+                          value: product.description,
+                          onConfirm: () => setState(() => widget.controller
+                              .removeProductFromList(product.productId)),
                         ),
-                      );
-                    },
-                    icon: Icon(
-                      Icons.delete,
-                      color: Theme.of(context).primaryColorDark,
-                    ),
+                      ),
+                    );
+                  },
+                  icon: Icon(
+                    Icons.delete,
+                    color: Theme.of(context).primaryColorDark,
                   ),
-                ],
-              )),
+                ),
+              ],
+            )),
           ],
         ),
       );
@@ -462,13 +454,11 @@ class PointOfSaleFormState extends State<PointOfSaleForm> {
         RoundedButton(
           minWidth: 170,
           label: 'Adicionar',
-          onPressed: widget.controller.saleStatusSelect.description == 'Fechado'
-              ? null
-              : () {
-                  setState(() {
-                    widget.controller.addProductOnPressed();
-                  });
-                },
+          onPressed: () {
+            setState(() {
+              widget.controller.addProductOnPressed();
+            });
+          },
         ),
       ],
     );
@@ -488,7 +478,6 @@ class PointOfSaleFormState extends State<PointOfSaleForm> {
   TextInputField _codeField(BuildContext context) {
     return TextInputField(
       labelText: "Código",
-      enabled: _isClosed(),
       onFieldSubmitted: (value) {
         widget.controller.getProductByGtinCode(context, value);
       },
@@ -509,7 +498,6 @@ class PointOfSaleFormState extends State<PointOfSaleForm> {
     return TextInputField(
       labelText: "Preço",
       mask: widget.controller.priceFormatter,
-      enabled: _isClosed(),
       controller: widget.controller.priceController,
     );
   }
@@ -519,7 +507,6 @@ class PointOfSaleFormState extends State<PointOfSaleForm> {
       labelText: "Quantidade",
       keyboardType: TextInputType.number,
       mask: widget.controller.amountFormatter,
-      enabled: _isClosed(),
       controller: widget.controller.amountController,
     );
   }
@@ -539,30 +526,26 @@ class PointOfSaleFormState extends State<PointOfSaleForm> {
     );
   }
 
-  DropDownField _statusInput(BuildContext context) {
-    return DropDownField<SelectModel>(
-      enabled: widget.controller.editable,
-      // paddingTop: 5,
-      labelText: 'Status',
-      getLabel: (value) => value.description,
-      validator: widget.controller.enumStatusValidator,
-      backgroundColor: Colors.white.withOpacity(0.2),
-      onChanged: (value) {
-        if (value != null) {
-          setState(() {
-            widget.controller.saleStatusSelect = SelectModel(
-              value: value.value,
-              description: value.description,
-            );
-          });
-        }
-      },
-      options: saleStatusSelect ?? [],
-      value: widget.controller.saleStatusSelect,
-    );
-  }
-
-  bool _isClosed() {
-    return widget.controller.saleStatusSelect.description != 'Fechado';
-  }
+  // DropDownField _statusInput(BuildContext context) {
+  //   return DropDownField<SelectModel>(
+  //     enabled: widget.controller.editable,
+  //     // paddingTop: 5,
+  //     labelText: 'Status',
+  //     getLabel: (value) => value.description,
+  //     validator: widget.controller.enumStatusValidator,
+  //     backgroundColor: Colors.white.withOpacity(0.2),
+  //     onChanged: (value) {
+  //       if (value != null) {
+  //         setState(() {
+  //           widget.controller.saleStatusSelect = SelectModel(
+  //             value: value.value,
+  //             description: value.description,
+  //           );
+  //         });
+  //       }
+  //     },
+  //     options: saleStatusSelect ?? [],
+  //     value: widget.controller.saleStatusSelect,
+  //   );
+  // }
 }

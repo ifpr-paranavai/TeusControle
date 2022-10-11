@@ -123,7 +123,7 @@ class EntryFormState extends State<SaleForm> {
               ),
             ),
             width: double.infinity,
-            height: 110,
+            height: 115,
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 vertical: 15,
@@ -146,7 +146,7 @@ class EntryFormState extends State<SaleForm> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         AutoSizeText(
-                          'Total ${globals.currency.format(widget.controller.totalPrice)} ',
+                          'Subtotal ${globals.currency.format(widget.controller.totalPrice)} ',
                           overflow: TextOverflow.ellipsis,
                           group: myGroupPrice,
                           maxFontSize: 15,
@@ -172,7 +172,7 @@ class EntryFormState extends State<SaleForm> {
                           ),
                         ),
                         AutoSizeText(
-                          'Subtotal ${globals.currency.format(widget.controller.totalOutPrice)} ',
+                          'Total ${globals.currency.format(widget.controller.totalOutPrice)} ',
                           overflow: TextOverflow.ellipsis,
                           group: myGroupOutPrice,
                           maxFontSize: 70,
@@ -501,6 +501,9 @@ class EntryFormState extends State<SaleForm> {
       enabled: false,
       controller: widget.controller.productController,
       icon: Icons.search,
+      onTap: () async {
+        await widget.controller.openSearchProduct(context);
+      },
     );
   }
 

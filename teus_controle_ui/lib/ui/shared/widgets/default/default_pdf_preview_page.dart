@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:printing/printing.dart' as pw;
 import 'package:teus_controle_ui/ui/shared/widgets/tables/paginated/table_data.dart';
 
-import '../../../../core/services/pdf_export_service.dart';
+import '../../../../core/services/default_pdf_export_service.dart';
 import '../dialogs/custom_dialog.dart';
 
-class PdfPreviewPage extends StatelessWidget {
+class DefaultPdfPreviewPage extends StatelessWidget {
   final TableData tableData;
   final String title;
-  const PdfPreviewPage({
+  const DefaultPdfPreviewPage({
     Key? key,
     required this.tableData,
     required this.title,
@@ -16,7 +16,8 @@ class PdfPreviewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    PdfExportService service = PdfExportService(tableData: tableData);
+    DefaultPdfExportService service =
+        DefaultPdfExportService(tableData: tableData);
 
     return CustomDialog(
       title: 'Pré-visualizar',

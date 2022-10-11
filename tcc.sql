@@ -9,20 +9,21 @@ select * from sales;
 select * from products_entry;
 select * from products;
 select * from entries;
+SELECT * from users u;
 
-drop table sales;
+-- drop table sales;
 
-update sales set CpfCnpj = null where id > 1;
-update entries set deleted = 1 where id = 56;
-update products set deleted = 0 where id > 0;
+-- update sales set CpfCnpj = null where id > 1;
+-- update entries set deleted = 1 where id = 56;
+-- update products set deleted = 0 where id > 0;
 
 -- drop table entry;
 -- drop table productentry;
 -- drop database teuscontroledb;
 -- UPDATE `teuscontroledb`.`users` SET `deleted` = 0 where `Id` > 1;
 
-drop trigger calculate_total_entry_value_on_update;
-drop trigger calculate_total_entry_value_on_insert;
+-- drop trigger calculate_total_entry_value_on_update;
+-- drop trigger calculate_total_entry_value_on_insert;
 
 DELIMITER $$
 CREATE TRIGGER calculate_total_entry_value_on_insert 
@@ -156,7 +157,7 @@ FOR EACH ROW
 $$
 DELIMITER ;
 
-SELECT * from users u;
+
 -- DELETE FROM teuscontroledb.users WHERE Name = 'Usuario Administrador';
 
 

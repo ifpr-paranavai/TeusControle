@@ -19,7 +19,15 @@ class CustomPaginatedTable extends StatefulWidget {
     required this.nextPage,
     required this.previousPage,
     required this.changePageSize,
-  }) : super(key: key);
+    this.height,
+    this.width,
+    this.selectionType = SelectionType.multipleSelection,
+    this.canBeSelected = false,
+    this.getSelected,
+    this.selected,
+  })  : assert(!(canBeSelected && getSelected == null),
+            'Deve ser recebido o metodo getSelected por parametro'),
+        super(key: key);
 
   final TableData tableData;
   final void Function(int id, String value, Function() callBack)?
@@ -33,6 +41,12 @@ class CustomPaginatedTable extends StatefulWidget {
   final void Function()? nextPage;
   final void Function()? previousPage;
   final void Function(int size) changePageSize;
+  final double? width;
+  final double? height;
+  final SelectionType selectionType;
+  final bool canBeSelected;
+  final Function(List<int>)? getSelected;
+  final List<int>? selected;
 
   @override
   State<CustomPaginatedTable> createState() => _CustomTableState();
@@ -43,7 +57,6 @@ class _CustomTableState extends State<CustomPaginatedTable> {
   final ScrollController verticalScroll = ScrollController();
   final double width = 12;
   List<int> selected = [];
-  late final bool canBeSelected;
   late final String idReference;
   int itemsPerPage = 10;
   bool isLastPage = false;
@@ -51,22 +64,34 @@ class _CustomTableState extends State<CustomPaginatedTable> {
 
   @override
   void initState() {
-    // canBeSelected = widget.tableData.columns.any((element) => element.isId); //todo: resolver seleção para impressão
-    canBeSelected = false;
-    // if (canBeSelected) {
+    if (!widget.tableData.columns.any((element) => element.isId) &&
+        widget.canBeSelected) {
+      throw Exception(
+          'É preciso que exista uma coluna IDENTIFICADORA para a tabela');
+    }
+
     idReference = widget.tableData.columns
         .where((element) => element.isId)
         .first
         .reference;
-    // }
 
     super.initState();
   }
 
   @override
+  void didUpdateWidget(oldWidget) {
+    // if (widget.canBeSelected) widget.getSelected!(selected);
+    selected = [];
+
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
-    final double screenHeight = MediaQuery.of(context).size.height;
+    final double screenWidth =
+        widget.width ?? MediaQuery.of(context).size.width;
+    final double screenHeight =
+        (MediaQuery.of(context).size.height) - (widget.height ?? 0);
     final double tableMinWidth =
         screenWidth - (globals.isCollapsed ? 49 : 358.5);
     final double tableMaxHeight = screenHeight - 296;
@@ -80,7 +105,8 @@ class _CustomTableState extends State<CustomPaginatedTable> {
         46;
 
     isFirstPage = widget.pageIndex == 1;
-    isLastPage = widget.pageIndex == widget.totalPages;
+    isLastPage =
+        widget.pageIndex == widget.totalPages || widget.totalPages == 0;
 
     return Card(
       child: Column(
@@ -137,7 +163,7 @@ class _CustomTableState extends State<CustomPaginatedTable> {
                   scrollDirection: Axis.vertical,
                   controller: verticalScroll,
                   child: DataTable(
-                    onSelectAll: canBeSelected ? _onSelectAll : null,
+                    onSelectAll: widget.canBeSelected ? _onSelectAll : null,
                     columns: _getColumns(),
                     rows: _getRows(),
                     columnSpacing: 20,
@@ -167,7 +193,9 @@ class _CustomTableState extends State<CustomPaginatedTable> {
         child: Padding(
           padding: const EdgeInsets.only(bottom: 5),
           child: Text(
-            (canBeSelected ? 'Selecionados: ${selected.length} de ' : "") +
+            (widget.canBeSelected
+                    ? 'Selecionados: ${selected.isEmpty ? (widget.selected?.length ?? 0) : selected.length} de '
+                    : "") +
                 "${widget.totalItems} items",
             style: const TextStyle(color: Colors.white),
           ),
@@ -230,7 +258,8 @@ class _CustomTableState extends State<CustomPaginatedTable> {
   }
 
   void _onSelectAll(bool? value) {
-    if (value != null) {
+    if (value != null &&
+        widget.selectionType == SelectionType.multipleSelection) {
       setState(
         () {
           if (value) {
@@ -238,6 +267,7 @@ class _CustomTableState extends State<CustomPaginatedTable> {
               int id = item[idReference];
               if (!selected.contains(id)) {
                 selected.add(id);
+                widget.getSelected!(selected);
               }
               // Text((row as UserPagedResponse).getProp(column.reference)), // TODO: resolver
               // selected.add(item[idReference]);
@@ -247,6 +277,7 @@ class _CustomTableState extends State<CustomPaginatedTable> {
               int id = item[idReference];
               if (selected.contains(id)) {
                 selected.remove(id);
+                widget.getSelected!(selected);
               }
             }
           }
@@ -442,7 +473,10 @@ class _CustomTableState extends State<CustomPaginatedTable> {
                   ? () => widget.onDeleteAction!(
                         id,
                         widget.tableData.printValue(id, idReference),
-                        () => selected.remove(id),
+                        () {
+                          selected.remove(id);
+                          widget.getSelected!(selected);
+                        },
                       )
                   : null,
               icon: Icon(
@@ -482,19 +516,28 @@ class _CustomTableState extends State<CustomPaginatedTable> {
             }
           },
         ),
-        selected: canBeSelected
-            ? selected.any((element) => element == (row[idReference]))
-            : false,
-        onSelectChanged: canBeSelected
+        selected: widget.canBeSelected ? isSelectedItem(row) : false,
+        onSelectChanged: widget.canBeSelected
             ? (value) {
+                bool hasItemSelected = selected.isNotEmpty;
+                bool isMultiSelection =
+                    widget.selectionType == SelectionType.multipleSelection;
+
+                bool allowSelectItem =
+                    !((hasItemSelected && isMultiSelection) ||
+                        (hasItemSelected && !isMultiSelection));
+
                 if (value != null) {
                   int id = (row[idReference]);
                   setState(() {
                     if (value) {
-                      !selected.contains(id) ? selected.add(id) : null;
+                      !selected.contains(id) && allowSelectItem
+                          ? selected.add(id)
+                          : null;
                     } else {
                       selected.remove(id);
                     }
+                    widget.getSelected!(selected);
                   });
                 }
               }
@@ -502,4 +545,15 @@ class _CustomTableState extends State<CustomPaginatedTable> {
       );
     }).toList();
   }
+
+  bool isSelectedItem(row) {
+    return selected.any((element) => element == (row[idReference])) ||
+        (widget.selected?.any((element) => element == (row[idReference])) ??
+            false);
+  }
+}
+
+enum SelectionType {
+  singleSelection,
+  multipleSelection,
 }

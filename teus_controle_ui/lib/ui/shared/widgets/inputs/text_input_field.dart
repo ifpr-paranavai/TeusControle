@@ -10,6 +10,7 @@ class TextInputField extends StatefulWidget {
     this.keyboardType,
     this.maxLength,
     this.paddingBottom = 5,
+    this.paddingHorizontal = 0,
     this.paddingTop = 0,
     this.mask,
     this.color = const Color(0xff01879c),
@@ -18,6 +19,7 @@ class TextInputField extends StatefulWidget {
     this.validator,
     this.onFieldSubmitted,
     this.enabled = true,
+    this.onTap,
   })  : assert(
           !(isPassword && icon != null),
           'Não é permitido informar um ícone e ser um campo de senha ao mesmo tempo.',
@@ -32,6 +34,7 @@ class TextInputField extends StatefulWidget {
   final TextInputType? keyboardType;
   final double paddingBottom;
   final double paddingTop;
+  final double paddingHorizontal;
   final int? maxLength;
   final List<TextInputFormatter>? mask;
   final Color color;
@@ -39,6 +42,7 @@ class TextInputField extends StatefulWidget {
   final String? Function(String?)? validator;
   final void Function(String)? onFieldSubmitted;
   final bool enabled;
+  final void Function()? onTap;
 
   @override
   _TextInputField createState() => _TextInputField();
@@ -62,51 +66,56 @@ class _TextInputField extends State<TextInputField> {
       padding: EdgeInsets.only(
         bottom: widget.paddingBottom,
         top: widget.paddingTop,
+        left: widget.paddingHorizontal,
+        right: widget.paddingHorizontal,
       ),
-      child: TextFormField(
-        enabled: widget.enabled,
-        inputFormatters: widget.mask,
-        controller: widget.controller,
-        maxLength: widget.maxLength,
-        cursorColor: widget.color,
-        onChanged: widget.onChanged,
-        obscureText: _esconderTextSenha && (widget.isPassword == true),
-        keyboardType: widget.keyboardType,
-        textInputAction: TextInputAction.next,
-        decoration: InputDecoration(
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 20.0,
-            vertical: 16.0,
-          ),
-          border: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(25),
+      child: GestureDetector(
+        onTap: widget.onTap,
+        child: TextFormField(
+          enabled: widget.enabled,
+          inputFormatters: widget.mask,
+          controller: widget.controller,
+          maxLength: widget.maxLength,
+          cursorColor: widget.color,
+          onChanged: widget.onChanged,
+          obscureText: _esconderTextSenha && (widget.isPassword == true),
+          keyboardType: widget.keyboardType,
+          textInputAction: TextInputAction.next,
+          decoration: InputDecoration(
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 20.0,
+              vertical: 16.0,
             ),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
+            border: const OutlineInputBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(25),
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Theme.of(context).primaryColorDark,
+              ),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(25),
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(
+                Radius.circular(25),
+              ),
+              borderSide: BorderSide(color: _corDaBorda),
+            ),
+            labelText: widget.labelText,
+            labelStyle: TextStyle(
               color: Theme.of(context).primaryColorDark,
+              fontWeight: FontWeight.w400,
+              fontSize: 17,
             ),
-            borderRadius: const BorderRadius.all(
-              Radius.circular(25),
-            ),
+            suffixIcon: _passwordSuffix(),
           ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: const BorderRadius.all(
-              Radius.circular(25),
-            ),
-            borderSide: BorderSide(color: _corDaBorda),
-          ),
-          labelText: widget.labelText,
-          labelStyle: TextStyle(
-            color: Theme.of(context).primaryColorDark,
-            fontWeight: FontWeight.w400,
-            fontSize: 17,
-          ),
-          suffixIcon: _passwordSuffix(),
+          validator: widget.validator,
+          onFieldSubmitted: widget.onFieldSubmitted,
         ),
-        validator: widget.validator,
-        onFieldSubmitted: widget.onFieldSubmitted,
       ),
     );
   }

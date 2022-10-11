@@ -113,6 +113,13 @@ void successSnackBar({
 //#endregion
 
 //#region FUNCTIONS
+String formattedDateTime() {
+  final DateTime now = DateTime.now();
+  final DateFormat formatter = DateFormat('dd/MM/yyyy  H:m:s');
+  final String formatted = formatter.format(now);
+  return formatted;
+}
+
 String formatSentDate(String outDate) {
   List<String> dates = outDate.split('/');
   return '${dates[2]}-${dates[1]}-${dates[0]}';
@@ -126,6 +133,12 @@ String formatReceivedDate(String inDate) {
 
 String formatReceivedDouble(String value) {
   return value.replaceAll(".", ",");
+}
+
+String formatReceivedFromDouble(double value) {
+  String stringValue = value.toString();
+  stringValue.split('.')[1].length == 1 ? stringValue += '0' : null;
+  return stringValue.replaceAll(".", ",");
 }
 
 double formatSentDouble(String value) {
