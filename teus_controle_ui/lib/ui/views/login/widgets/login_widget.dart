@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../shared/utils/global.dart' as globals;
 import '../../../shared/widgets/buttons/rounded_button.dart';
 import '../../../shared/widgets/inputs/text_input_field.dart';
 import '../login_controller.dart';
@@ -38,7 +39,7 @@ class LoginWidget extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                _teusControleLogo(),
+                globals.appLogoImageColorful(),
                 _emailField(),
                 _passwordField(),
                 _loginButton(),
@@ -47,13 +48,6 @@ class LoginWidget extends State<LoginPage> {
           ),
         ),
       ),
-    );
-  }
-
-  Image _teusControleLogo() {
-    return Image.asset(
-      controller.logoPath,
-      height: 65,
     );
   }
 

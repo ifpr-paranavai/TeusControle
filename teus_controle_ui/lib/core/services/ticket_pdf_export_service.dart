@@ -165,7 +165,7 @@ class TicketPdfExportService {
       pw.SizedBox(height: 3),
       pw.Center(
         child: pw.Text(
-          globals.formattedDateTime(),
+          globals.formattedDateTimeNow(),
           style: const pw.TextStyle(fontSize: 7),
         ),
       ),

@@ -49,4 +49,9 @@ realiza push
 
 release a versao
 >heroku container:release web -a teuscontroleapi
- 
+
+
+
+docker-compose build
+
+docker build --no-cache -f Dockerfile -t teuscontroleapi:1.0.0 .. 

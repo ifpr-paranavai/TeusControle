@@ -80,23 +80,23 @@ class _UserDetailsState extends State<UserDetails> {
         ),
         ListTile(
           title: const Text('Tipo Perfil'),
-          subtitle: Text(user!.profileTypeDescription),
+          subtitle: Text(globals.isEmptyToPrint(user!.profileTypeDescription)),
         ),
         ListTile(
           title: const Text('E-mail'),
-          subtitle: Text(user!.email),
+          subtitle: Text(globals.isEmptyToPrint(user!.email)),
         ),
         ListTile(
           title: const Text('Imagem'),
-          subtitle: Text(user!.profileImage ?? '-'),
+          subtitle: Text(globals.isEmptyToPrint(user!.profileImage)),
         ),
         ListTile(
           title: const Text('Data Criação'),
-          subtitle: Text(user!.createdDate ?? '-'),
+          subtitle: Text(globals.isEmptyToPrint(user!.createdDate)),
         ),
         ListTile(
           title: const Text('Última Alteração'),
-          subtitle: Text(user!.lastChange ?? '-'),
+          subtitle: Text(globals.isEmptyToPrint(user!.lastChange)),
         ),
       ],
     );

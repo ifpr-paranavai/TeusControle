@@ -6,14 +6,15 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>..\TeusControleApi.xml</DocumentationFile>
-    <NoWarn>1701;1702;1591</NoWarn>
+  <PropertyGroup>
+    <DocumentationFile></DocumentationFile>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
   
   <PropertyGroup>
-    <NoWarn>NU1701</NoWarn>
+    <NoWarn>NU1701;1701;1702;1591</NoWarn>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+    <Nullable>annotations</Nullable>
   </PropertyGroup>
   
   <ItemGroup>

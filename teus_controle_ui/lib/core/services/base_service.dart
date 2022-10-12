@@ -70,8 +70,11 @@ abstract class BaseService {
     return pagedResponse;
   }
 
-  Future<PagedModel?> getPagedRequest(BuildContext context,
-      [bool getAll = false]) async {
+  Future<PagedModel?> getPagedRequest(
+    BuildContext context, [
+    bool getAll = false,
+    bool showSnackBar = true,
+  ]) async {
     Dio dio = await futureDio;
 
     try {
@@ -86,10 +89,12 @@ abstract class BaseService {
       );
       PagedModel responseData = deserializePagedResponse(response.data);
 
-      globals.successSnackBar(
-        context: context,
-        message: 'Busca realizada com sucesso',
-      );
+      if (showSnackBar) {
+        globals.successSnackBar(
+          context: context,
+          message: 'Busca realizada com sucesso',
+        );
+      }
 
       return responseData;
     } catch (e) {

@@ -89,7 +89,7 @@ class _SaleDetailsState extends State<SaleDetails> {
   }
 
   Widget getProductDetails() {
-    double tableSize = 625;
+    double tableSize = 700;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -119,7 +119,7 @@ class _SaleDetailsState extends State<SaleDetails> {
                 'Quantidade',
                 'Valor Unitário',
                 'Valor Total',
-                'Desconto Unitário',
+                // 'Desconto Unitário',
                 'Desconto Total',
                 'Total'
               ]),
@@ -277,9 +277,9 @@ class _SaleDetailsState extends State<SaleDetails> {
             DataCell(
               Center(child: Text(globals.currency.format(product.totalPrice))),
             ),
-            DataCell(
-              Center(child: Text(globals.currency.format(product.discount))),
-            ),
+            // DataCell(
+            //   Center(child: Text(globals.currency.format(product.discount))),
+            // ),
             DataCell(
               Center(
                   child: Text(globals.currency.format(product.totalDiscount))),

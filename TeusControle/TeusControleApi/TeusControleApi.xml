@@ -4,11 +4,119 @@
         <name>TeusControleApi</name>
     </assembly>
     <members>
+        <member name="T:TeusControleApi.Configuration.AutoMapperConfig">
+            <summary>
+            Configuração de auto mapeamento
+            </summary>
+        </member>
+        <member name="M:TeusControleApi.Configuration.AutoMapperConfig.AddAutoMapperConfiguration(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configuração de auto mapeamento
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="T:TeusControleApi.Configuration.DataBaseConfig">
+            <summary>
+            Classe de configuração da base de dados
+            </summary>
+        </member>
+        <member name="M:TeusControleApi.Configuration.DataBaseConfig.AddDataBaseConfiguration(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Adiciona configuração para base de dados
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:TeusControleApi.Configuration.DataBaseConfig.UseDataBaseConfiguration(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Aplica configuração da base
+            </summary>
+            <param name="app"></param>
+        </member>
+        <member name="T:TeusControleApi.Configuration.DependencyInjectionConfig">
+            <summary>
+            Classe de configuração de injeção de dependência
+            </summary>
+        </member>
+        <member name="M:TeusControleApi.Configuration.DependencyInjectionConfig.UseDependencyInjectionConfiguration(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adiciona configuração de injeção
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="T:TeusControleApi.Configuration.FluentValidationConfig">
+            <summary>
+            Classe de configuração do validador
+            </summary>
+        </member>
+        <member name="M:TeusControleApi.Configuration.FluentValidationConfig.AddFluentValidationConfiguration(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adiciona validadores para objetos de entrada
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="T:TeusControleApi.Configuration.JwtConfig">
+            <summary>
+            Classe de configuração do JWT
+            </summary>
+        </member>
+        <member name="M:TeusControleApi.Configuration.JwtConfig.AddJwtConfiguration(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Adiciona configurações para JWT
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:TeusControleApi.Configuration.JwtConfig.UseJwtConfiguration(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Aplica configurações para JWT
+            </summary>
+            <param name="app"></param>
+        </member>
+        <member name="T:TeusControleApi.Configuration.SwaggerConfig">
+            <summary>
+            Configurações para swagger
+            </summary>
+        </member>
+        <member name="M:TeusControleApi.Configuration.SwaggerConfig.AddSwaggerConfiguration(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adiciona configurações do swagger
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:TeusControleApi.Configuration.SwaggerConfig.UseSwaggerConfiguration(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Configurações para implementar swagger
+            </summary>
+            <param name="app"></param>
+        </member>
+        <member name="T:TeusControleApi.Controllers.AuthController">
+            <summary>
+            Controlador de login
+            </summary>
+        </member>
+        <member name="M:TeusControleApi.Controllers.AuthController.#ctor(Manager.Interfaces.IUserManager)">
+            <summary>
+            Controlador de login
+            </summary>
+            <param name="userManager"></param>
+        </member>
         <member name="M:TeusControleApi.Controllers.AuthController.Login(Core.Shared.Models.Request.LoginRequest)">
             <summary>
             Realiza login
             </summary>
             <param name="login"></param>
+        </member>
+        <member name="T:TeusControleApi.Controllers.EntryController">
+            <summary>
+            Controlador para entrada de produtos
+            </summary>
+        </member>
+        <member name="M:TeusControleApi.Controllers.EntryController.#ctor(Manager.Interfaces.IEntryManager)">
+            <summary>
+            Controlador para entrada de produtos
+            </summary>
+            <param name="entryManager"></param>
         </member>
         <member name="M:TeusControleApi.Controllers.EntryController.Get(Core.Shared.Models.Request.PaginatedRequest)">
             <summary>
@@ -39,6 +147,28 @@
             </summary>
             <param name="id" example="123">Id da entrada.</param>
         </member>
+        <member name="T:TeusControleApi.Controllers.ErrorController">
+            <summary>
+            Controlador para erro
+            </summary>
+        </member>
+        <member name="M:TeusControleApi.Controllers.ErrorController.Error">
+            <summary>
+            Endpoint de erro
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TeusControleApi.Controllers.ProductController">
+            <summary>
+            Controlador de produtos
+            </summary>
+        </member>
+        <member name="M:TeusControleApi.Controllers.ProductController.#ctor(Manager.Interfaces.IProductManager)">
+            <summary>
+            Controlador de produtos
+            </summary>
+            <param name="usersManager"></param>
+        </member>
         <member name="M:TeusControleApi.Controllers.ProductController.Get(Core.Shared.Models.Request.PaginatedRequest)">
             <summary>
             Retorna todos os produtos paginado.
@@ -68,6 +198,92 @@
             </summary>
             <param name="id" example="123">Id do produto.</param>
         </member>
+        <member name="M:TeusControleApi.Controllers.ProductController.GetProductByCode(System.String)">
+            <summary>
+            Busca informações produto por código de barras
+            </summary>
+            <param name="gtinCode" example="123">Código de barras do produto.</param>
+        </member>
+        <member name="T:TeusControleApi.Controllers.SaleController">
+            <summary>
+            Controlador para venda de produtos
+            </summary>
+        </member>
+        <member name="M:TeusControleApi.Controllers.SaleController.#ctor(Manager.Interfaces.ISaleManager)">
+            <summary>
+            Controlador para venda de produtos
+            </summary>
+            <param name="saleManager"></param>
+        </member>
+        <member name="M:TeusControleApi.Controllers.SaleController.Get(Core.Shared.Models.Request.PaginatedRequest)">
+            <summary>
+            Retorna todas as vendas paginada.
+            </summary>
+        </member>
+        <member name="M:TeusControleApi.Controllers.SaleController.Get(System.Int32)">
+            <summary>
+            Retorna uma venda buscada pelo id.
+            </summary>
+            <param name="id" example="123">Id da venda.</param>
+        </member>
+        <member name="M:TeusControleApi.Controllers.SaleController.Post(Core.Shared.Models.Sale.CreateSaleModel)">
+            <summary>
+            Insere uma nova venda.
+            </summary>
+            <param name="newSale"></param>
+        </member>
+        <member name="M:TeusControleApi.Controllers.SaleController.Put(Core.Shared.Models.Sale.UpdateSaleModel)">
+            <summary>
+            Altera uma venda.
+            </summary>
+            <param name="sale"></param>
+        </member>
+        <member name="M:TeusControleApi.Controllers.SaleController.Delete(System.Int32)">
+            <summary>
+            Exclui uma venda por id.
+            </summary>
+            <param name="id" example="123">Id da venda.</param>
+        </member>
+        <member name="T:TeusControleApi.Controllers.SelectController">
+            <summary>
+            Controlador para buscar opções de seleção
+            </summary>
+        </member>
+        <member name="M:TeusControleApi.Controllers.SelectController.#ctor(Manager.Interfaces.ISelectManager)">
+            <summary>
+            Controlador para buscar opções de seleção
+            </summary>
+            <param name="selectManager"></param>
+        </member>
+        <member name="M:TeusControleApi.Controllers.SelectController.GetEntryStatusSelect">
+            <summary>
+            Busca status para entradas
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControleApi.Controllers.SelectController.GetUserTypeSelect">
+            <summary>
+            Busca tipos de usuários
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TeusControleApi.Controllers.SelectController.GetSaleStatusSelect">
+            <summary>
+            Busca status para venda
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TeusControleApi.Controllers.UserController">
+            <summary>
+            Controlador para entidade usuário
+            </summary>
+        </member>
+        <member name="M:TeusControleApi.Controllers.UserController.#ctor(Manager.Interfaces.IUserManager)">
+            <summary>
+            Controlador para entidade usuário
+            </summary>
+            <param name="usersManager"></param>
+        </member>
         <member name="M:TeusControleApi.Controllers.UserController.Get(Core.Shared.Models.Request.PaginatedRequest)">
             <summary>
             Retorna todos os usuários paginado.
@@ -96,6 +312,53 @@
             Exclui um usuário por id.
             </summary>
             <param name="id" example="123">Id do usuário.</param>
+        </member>
+        <member name="T:TeusControleApi.Program">
+            <summary>
+            Classe principal da aplicação
+            </summary>
+        </member>
+        <member name="M:TeusControleApi.Program.Main(System.String[])">
+            <summary>
+            Método principal
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:TeusControleApi.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            Constrói Host
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TeusControleApi.Startup">
+            <summary>
+            Classe de inicialização da aplicação
+            </summary>
+        </member>
+        <member name="M:TeusControleApi.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Classe de inicialização da aplicação
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:TeusControleApi.Startup.Configuration">
+            <summary>
+            Configuração
+            </summary>
+        </member>
+        <member name="M:TeusControleApi.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configuração de serviços
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:TeusControleApi.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Configura aplicação
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
         </member>
     </members>
 </doc>

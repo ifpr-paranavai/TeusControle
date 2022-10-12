@@ -10,8 +10,8 @@ import '../product_modal_page.dart';
 
 class ProductModalWidget extends State<ProductModalPage> {
   ProductController controller = ProductController();
-  double width = 1050;
-  double height = 700;
+  double width = 1350;
+  double height = 970;
   List<int> selected = [];
 
   void _getSelectedItem(List<int> selected) {
@@ -28,7 +28,7 @@ class ProductModalWidget extends State<ProductModalPage> {
       body: Column(
         children: [
           _getSearchField(),
-          _getDataTable(),
+          IntrinsicHeight(child: _getDataTable()),
         ],
       ),
       onConfirm: selected.isNotEmpty
@@ -44,7 +44,7 @@ class ProductModalWidget extends State<ProductModalPage> {
     return Container(
       padding: const EdgeInsets.fromLTRB(15, 5, 15, 15),
       child: FutureBuilder<PagedModel?>(
-        future: controller.service.getPagedRequest(context),
+        future: controller.service.getPagedRequest(context, false, false),
         builder: (context, snapShot) {
           return _getCustomPaginatedTable(snapShot);
         },
@@ -52,7 +52,7 @@ class ProductModalWidget extends State<ProductModalPage> {
     );
   }
 
-  CustomPaginatedTable _getCustomPaginatedTable(
+  Widget _getCustomPaginatedTable(
     AsyncSnapshot<PagedModel?> snapShot,
   ) {
     return CustomPaginatedTable(
@@ -61,7 +61,7 @@ class ProductModalWidget extends State<ProductModalPage> {
       canBeSelected: true,
       selectionType: SelectionType.singleSelection,
       width: width + 320,
-      height: 30,
+      height: 325,
       totalPages: !snapShot.hasData ? 0 : snapShot.data!.totalPages,
       totalItems: !snapShot.hasData ? 0 : snapShot.data!.totalItems,
       pageIndex: !snapShot.hasData ? 1 : snapShot.data!.pageIndex,
@@ -99,8 +99,15 @@ class ProductModalWidget extends State<ProductModalPage> {
         showInPrint: true,
       ),
       TableColumn(
+        label: "Código",
+        reference: "gtin",
+        show: false,
+        columnSize: 1,
+        showInPrint: true,
+      ),
+      TableColumn(
         label: "Imagem",
-        reference: "image",
+        reference: "thumbnail",
         isImage: true,
         imageType: ImageType.network,
         shouldIncludeInFilter: false,
@@ -109,13 +116,11 @@ class ProductModalWidget extends State<ProductModalPage> {
       TableColumn(
           label: "Descrição",
           reference: "description",
-          shouldIncludeInFilter: true,
           columnSize: 1,
           showInPrint: true),
       TableColumn(
         label: "Valor Unitário",
         reference: "price",
-        shouldIncludeInFilter: true,
         columnSize: 1,
         isMoney: true,
       ),

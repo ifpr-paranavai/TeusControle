@@ -10,12 +10,12 @@ namespace Core.Shared.Models.Product
         /// <summary>
         /// Data e hora de criação do registro
         /// </summary>
-        public DateTime? CreatedDate { get; set; }
+        public String CreatedDate { get; set; }
 
         /// <summary>
         /// Data e hora da última atualização do registro
         /// </summary>
-        public DateTime? LastChange { get; set; }
+        public String LastChange { get; set; }
 
         public object Clone()
         {

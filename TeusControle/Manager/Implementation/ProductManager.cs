@@ -98,8 +98,8 @@ namespace Manager.Implementation
                         AvgPrice = s.AvgPrice,
                         Thumbnail = s.Thumbnail,
                         Active = s.Active,
-                        CreatedDate = s.CreatedDate,
-                        LastChange = s.LastChange
+                        CreatedDate = s.CreatedDate != null ? ((DateTime)s.CreatedDate).ToString("dd/MM/yyyy HH:mm:ss") : "",
+                        LastChange = s.LastChange != null ? ((DateTime)s.LastChange).ToString("dd/MM/yyyy HH:mm:ss") : "",
                     })
                     .FirstOrDefault();
 

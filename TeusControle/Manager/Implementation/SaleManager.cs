@@ -222,12 +222,12 @@ namespace Manager.Implementation
                         s.Status,
                         StatusDescription = EnumExtension.GetDescription(s.Status),
                         s.Active,
-                        s.CreatedDate,
-                        s.LastChange,
+                        CreatedDate = s.CreatedDate != null ? ((DateTime)s.CreatedDate).ToString("dd/MM/yyyy HH:mm:ss") : "",
+                        LastChange = s.LastChange != null ? ((DateTime)s.LastChange).ToString("dd/MM/yyyy HH:mm:ss") : "",
                         s.TotalPrice,
                         s.TotalOutPrice,
                         s.TotalDiscount,
-                        s.ClosingDate,
+                        ClosingDate = s.ClosingDate != null ? ((DateTime)s.ClosingDate).ToString("dd/MM/yyyy HH:mm:ss") : "",
                         CreatedBy = s.CreatedByUser.Name,
                         CanBeDeleted = s.Status != SaleStatusEnum.Closed,
                         Products = s.ProductsSale.Select(x => new {
@@ -263,7 +263,7 @@ namespace Manager.Implementation
                     x => new SalePagedModel
                     {
                         Id = x.Id,
-                        ClosingDate = x.ClosingDate.ToString(),
+                        ClosingDate = x.ClosingDate?.ToString("dd/MM/yyyy HH:mm:ss"),
                         CpfCnpj = x.CpfCnpj,
                         Status = EnumExtension.GetDescription(x.Status),
                         TotalPrice = x.TotalPrice,

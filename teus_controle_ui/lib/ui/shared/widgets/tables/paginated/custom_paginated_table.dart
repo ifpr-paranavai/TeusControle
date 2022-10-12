@@ -90,11 +90,10 @@ class _CustomTableState extends State<CustomPaginatedTable> {
   Widget build(BuildContext context) {
     final double screenWidth =
         widget.width ?? MediaQuery.of(context).size.width;
-    final double screenHeight =
-        (MediaQuery.of(context).size.height) - (widget.height ?? 0);
+    final double screenHeight = (MediaQuery.of(context).size.height);
     final double tableMinWidth =
         screenWidth - (globals.isCollapsed ? 49 : 358.5);
-    final double tableMaxHeight = screenHeight - 296;
+    final double tableMaxHeight = screenHeight - (widget.height ?? 296);
 
     final double cardWidth = screenWidth;
     // (altura das rows * quantidade de rows)  + espaço para scrollbar
@@ -140,41 +139,34 @@ class _CustomTableState extends State<CustomPaginatedTable> {
     required double tableMinWidth,
     required double tableMaxHeight,
   }) {
-    return Container(
-      constraints: BoxConstraints(
-        maxWidth: cardWidth,
-        maxHeight: tableMaxHeight,
-      ),
-      height: cardHeight,
-      child: Column(
-        children: [
-          Scrollbar(
+    return Column(
+      children: [
+        Scrollbar(
+          controller: horizontalScroll,
+          scrollbarOrientation: ScrollbarOrientation.bottom,
+          child: SingleChildScrollView(
             controller: horizontalScroll,
-            scrollbarOrientation: ScrollbarOrientation.bottom,
-            child: SingleChildScrollView(
-              controller: horizontalScroll,
-              scrollDirection: Axis.horizontal,
-              child: Container(
-                constraints: BoxConstraints(
-                  minWidth: tableMinWidth,
-                  maxHeight: tableMaxHeight,
-                ),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  controller: verticalScroll,
-                  child: DataTable(
-                    onSelectAll: widget.canBeSelected ? _onSelectAll : null,
-                    columns: _getColumns(),
-                    rows: _getRows(),
-                    columnSpacing: 20,
-                    dataRowHeight: _getRowHeight(),
-                  ),
+            scrollDirection: Axis.horizontal,
+            child: Container(
+              constraints: BoxConstraints(
+                minWidth: tableMinWidth,
+                maxHeight: tableMaxHeight,
+              ),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                controller: verticalScroll,
+                child: DataTable(
+                  onSelectAll: widget.canBeSelected ? _onSelectAll : null,
+                  columns: _getColumns(),
+                  rows: _getRows(),
+                  columnSpacing: 20,
+                  dataRowHeight: _getRowHeight(),
                 ),
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

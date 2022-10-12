@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../shared/utils/global.dart' as globals;
+import '../../shared/widgets/dialogs/overlayable.dart';
 import '../../shared/widgets/drawer/drawer_list_item.dart';
 import '../entry/entry_page.dart';
 import '../product/product_page.dart';
 import '../sale/sale_page.dart';
 import '../user/user_page.dart';
+import 'about_widget.dart';
 import 'home_page.dart';
 
 class HomeWidget extends State<HomePage> with SingleTickerProviderStateMixin {
@@ -102,47 +104,78 @@ class HomeWidget extends State<HomePage> with SingleTickerProviderStateMixin {
   }
 
   Widget _listDrawerItems(bool drawerStatus) {
-    return ListView(
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: _userInformation(),
+    return Column(
+      children: [
+        Expanded(
+          child: ListView(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: _userInformation(),
+              ),
+              const Divider(
+                indent: 10.0,
+                endIndent: 10.0,
+              ),
+              DrawerListItem(
+                icon: Icons.people,
+                title: "Usuários",
+                isActive: tabController.index == 0,
+                drawerStatus: drawerStatus,
+                context: context,
+                onChangePage: () => tabController.animateTo(0),
+              ),
+              DrawerListItem(
+                icon: cuppertino.CupertinoIcons.barcode,
+                title: "Produtos",
+                isActive: tabController.index == 1,
+                drawerStatus: drawerStatus,
+                context: context,
+                onChangePage: () => tabController.animateTo(1),
+              ),
+              DrawerListItem(
+                icon: cuppertino.CupertinoIcons.cube_box_fill,
+                title: "Entradas",
+                isActive: tabController.index == 2,
+                drawerStatus: drawerStatus,
+                context: context,
+                onChangePage: () => tabController.animateTo(2),
+              ),
+              DrawerListItem(
+                icon: Icons.shopping_basket,
+                title: "Vendas",
+                isActive: tabController.index == 3,
+                drawerStatus: drawerStatus,
+                context: context,
+                onChangePage: () => tabController.animateTo(3),
+              ),
+            ],
+          ),
         ),
-        const Divider(
-          indent: 10.0,
-          endIndent: 10.0,
+        Align(
+          alignment: FractionalOffset.bottomCenter,
+          child: Column(
+            children: [
+              const Divider(
+                indent: 10.0,
+                endIndent: 10.0,
+              ),
+              ListTile(
+                leading: const Icon(Icons.info),
+                title: const Text('Sobre'),
+                onTap: () {
+                  Navigator.of(context).push(
+                    Overlayable(
+                      widget: const AboutWidget(),
+                    ),
+                  );
+                },
+              )
+            ],
+          ),
         ),
-        DrawerListItem(
-          icon: Icons.people,
-          title: "Usuários",
-          isActive: tabController.index == 0,
-          drawerStatus: drawerStatus,
-          context: context,
-          onChangePage: () => tabController.animateTo(0),
-        ),
-        DrawerListItem(
-          icon: cuppertino.CupertinoIcons.barcode,
-          title: "Produtos",
-          isActive: tabController.index == 1,
-          drawerStatus: drawerStatus,
-          context: context,
-          onChangePage: () => tabController.animateTo(1),
-        ),
-        DrawerListItem(
-          icon: cuppertino.CupertinoIcons.cube_box_fill,
-          title: "Entradas",
-          isActive: tabController.index == 2,
-          drawerStatus: drawerStatus,
-          context: context,
-          onChangePage: () => tabController.animateTo(2),
-        ),
-        DrawerListItem(
-          icon: Icons.shopping_basket,
-          title: "Vendas",
-          isActive: tabController.index == 3,
-          drawerStatus: drawerStatus,
-          context: context,
-          onChangePage: () => tabController.animateTo(3),
+        const SizedBox(
+          height: 10,
         ),
       ],
     );

@@ -110,8 +110,8 @@ namespace Manager.Implementation
                         ProfileType = s.ProfileType,
                         Email = s.Email,
                         Active = s.Active,
-                        CreatedDate = s.CreatedDate,
-                        LastChange = s.LastChange,
+                        CreatedDate = s.CreatedDate != null ? ((DateTime)s.CreatedDate).ToString("dd/MM/yyyy HH:mm:ss") : "",
+                        LastChange = s.LastChange != null ? ((DateTime)s.LastChange).ToString("dd/MM/yyyy HH:mm:ss") : "",
                         BirthDate = (DateTime)s.BirthDate,
                     })
                     .FirstOrDefault();

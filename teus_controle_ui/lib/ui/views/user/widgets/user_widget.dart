@@ -63,6 +63,12 @@ class UserWidget extends State<UserPage> {
         columnSize: 1,
       ),
       TableColumn(
+        label: "Nascimento",
+        reference: "birthDate",
+        shouldIncludeInFilter: false,
+        show: false,
+      ),
+      TableColumn(
         label: "Nome",
         reference: "name",
         showInPrint: true,
@@ -70,11 +76,6 @@ class UserWidget extends State<UserPage> {
       TableColumn(
         label: "E-mail",
         reference: "email",
-      ),
-      TableColumn(
-        label: "Nascimento",
-        reference: "birthDate",
-        shouldIncludeInFilter: false,
       ),
       TableColumn(
         label: "Tipo de Perfil",

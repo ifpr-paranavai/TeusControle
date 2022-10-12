@@ -16,10 +16,6 @@ class LoginController {
     password.dispose();
   }
 
-  String get logoPath {
-    return 'assets/images/TEUS_CONTROLE_COLORFUL.png';
-  }
-
   void changeLoading() {
     _isLoading = !_isLoading;
   }

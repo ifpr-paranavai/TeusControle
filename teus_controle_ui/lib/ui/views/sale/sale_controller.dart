@@ -2,7 +2,9 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:teus_controle_ui/core/models/product/simple_product_model.dart';
 
+import '../../../core/models/product/product_get_response_model.dart';
 import '../../../core/models/sale/sale_get_response_model.dart';
 import '../../../core/models/sale/sale_product_get_response_model.dart';
 import '../../../core/models/sale/sale_product_item_post_request_model.dart';
@@ -14,6 +16,7 @@ import '../../../core/services/product_service.dart';
 import '../../../core/services/sale_service.dart';
 import '../../../core/services/select_service.dart';
 import '../../../ui/shared/utils/global.dart' as globals;
+import '../../shared/utils/custom_validators.dart';
 import '../../shared/widgets/default/ticket_pdf_preview_page.dart';
 import '../../shared/widgets/dialogs/confirm_dialog.dart';
 import '../../shared/widgets/dialogs/overlayable.dart';
@@ -106,15 +109,16 @@ class SaleController {
 
   MultiValidator get cpfCnpjValidator {
     return MultiValidator([
+      HasLengthValidator([0, 14, 18]),
       // RequiredValidator(errorText: 'Campo obrigatório'),
-      MinLengthValidator(
-        11,
-        errorText: 'Campo deve possuir no mínimo 11 caracteres',
-      ),
-      MaxLengthValidator(
-        18,
-        errorText: 'Campo deve possuir no máximo 14 caracteres',
-      ),
+      // MinLengthValidator(
+      //   11,
+      //   errorText: 'Campo deve possuir no mínimo 11 caracteres',
+      // ),
+      // MaxLengthValidator(
+      //   18,
+      //   errorText: 'Campo deve possuir no máximo 14 caracteres',
+      // ),
     ]);
   }
 
@@ -299,6 +303,11 @@ class SaleController {
       // sugestão, abrir tela para cadastrar produto
       return;
     }
+    autoCompleteProductToBeAdded(value);
+  }
+
+  void autoCompleteProductToBeAdded(SimpleProductModel value) {
+    codeController.text = value.gtin;
     productController.text = value.description;
     priceController.text = globals.formatReceivedDouble(value.price.toString());
     amountController.text = '1';
@@ -381,12 +390,25 @@ class SaleController {
   }
 
   Future openSearchProduct(BuildContext context) async {
-    await Navigator.of(context)
-        .push(
-          Overlayable(
-            widget: const ProductModalPage(),
-          ),
-        )
-        .then((value) => print(value));
+    var id = await Navigator.of(context).push(
+      Overlayable(
+        widget: const ProductModalPage(),
+      ),
+    );
+
+    if (id == null) return;
+
+    ProductGetResponseModel product =
+        await productService.getRequest(context, id);
+
+    autoCompleteProductToBeAdded(
+      SimpleProductModel(
+        id: product.id,
+        description: product.description,
+        gtin: product.gtin,
+        thumbnail: product.thumbnail,
+        price: product.price,
+      ),
+    );
   }
 }

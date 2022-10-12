@@ -71,19 +71,6 @@ class PointOfSaleFormState extends State<PointOfSaleForm> {
         Form(
       key: widget.controller.formKey,
       child: saleFormWidget(context),
-      // ),
-      // title: widget.isCreate ? 'Cadastro' : 'Edição',
-      // onClose: widget.controller.clearFields,
-      // isLoading: isLoading,
-      // // hasConfirmButton: widget.controller.editable,
-      // onConfirm: () => widget.controller.onConfirmButton(
-      //   context,
-      //   () => setState(() {
-      //     isLoading = !isLoading;
-      //   }),
-      //   widget.isCreate,
-      //   widget.id,
-      // ),
     );
   }
 
@@ -131,13 +118,6 @@ class PointOfSaleFormState extends State<PointOfSaleForm> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  // SizedBox(
-                  //   width: 170,
-                  //   child: _statusInput(context),
-                  // ),
-                  // const SizedBox(
-                  //   width: 20,
-                  // ),
                   SizedBox(
                     width: 200,
                     child: Column(
@@ -491,6 +471,9 @@ class PointOfSaleFormState extends State<PointOfSaleForm> {
       enabled: false,
       controller: widget.controller.productController,
       icon: Icons.search,
+      onTap: () async {
+        await widget.controller.openSearchProduct(context);
+      },
     );
   }
 

@@ -221,10 +221,10 @@ namespace Manager.Implementation
                         s.Status,
                         StatusDescription = EnumExtension.GetDescription(s.Status),
                         s.Active,
-                        s.CreatedDate,
-                        s.LastChange,
+                        CreatedDate = s.CreatedDate != null ? ((DateTime)s.CreatedDate).ToString("dd/MM/yyyy HH:mm:ss") : "",
+                        LastChange = s.LastChange != null ? ((DateTime)s.LastChange).ToString("dd/MM/yyyy HH:mm:ss") : "",
                         s.TotalPrice,
-                        s.ClosingDate,
+                        ClosingDate = s.ClosingDate != null ? ((DateTime)s.ClosingDate).ToString("dd/MM/yyyy HH:mm:ss") : "",
                         CreatedBy = s.CreatedByUser.Name,
                         CanBeDeleted = s.Status != EntryStatusEnum.Closed,
                         Products = s.ProductsEntry.Select(x => new {
@@ -257,7 +257,7 @@ namespace Manager.Implementation
                     x => new EntryPagedModel
                     {
                         Id = x.Id,
-                        ClosingDate = x.ClosingDate.ToString(),
+                        ClosingDate = x.ClosingDate?.ToString("dd/MM/yyyy HH:mm:ss"),
                         Origin = x.Origin,
                         Status = EnumExtension.GetDescription(x.Status),
                         TotalPrice = x.TotalPrice,

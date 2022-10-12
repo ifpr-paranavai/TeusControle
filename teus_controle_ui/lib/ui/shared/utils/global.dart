@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:teus_controle_ui/ui/views/login/login_page.dart';
 
 import '../../../core/models/user/user_logged_model.dart';
 import '../../views/home/home_page.dart';
+import '../../views/login/login_page.dart';
 import '../../views/point_of_sale/point_of_sale_page.dart';
 
 bool isCollapsed = true;
@@ -113,10 +113,14 @@ void successSnackBar({
 //#endregion
 
 //#region FUNCTIONS
-String formattedDateTime() {
+String formattedDateTimeNow() {
   final DateTime now = DateTime.now();
+  return formatedDateTime(now);
+}
+
+String formatedDateTime(DateTime datetime) {
   final DateFormat formatter = DateFormat('dd/MM/yyyy  H:m:s');
-  final String formatted = formatter.format(now);
+  final String formatted = formatter.format(datetime);
   return formatted;
 }
 
@@ -191,6 +195,14 @@ Image appLogoImage() {
     height: 25,
   );
 }
+
+Image appLogoImageColorful() {
+  return Image.asset(
+    'assets/images/TEUS_CONTROLE_COLORFUL.png',
+    height: 65,
+  );
+}
+
 //#endregion
 
 //#region WIDGETS
