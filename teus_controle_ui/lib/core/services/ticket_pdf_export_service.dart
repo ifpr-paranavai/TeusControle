@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:pdf/pdf.dart';
@@ -135,18 +134,18 @@ class TicketPdfExportService {
   }
 
   List<pw.Widget> getHeader(SaleGetResponseModel sale) {
-    final image = pw.MemoryImage(
-      File('assets/images/TEUS_CONTROLE_COLORFUL.png').readAsBytesSync(),
-    );
+    // final image = pw.MemoryImage(
+    //   File('assets/images/TEUS_CONTROLE_COLORFUL.png').readAsBytesSync(),
+    // );
 
     pw.TextStyle fontStyle = const pw.TextStyle(fontSize: 5);
 
     return [
       pw.SizedBox(height: 15),
-      pw.Image(
-        image,
-        width: 150,
-      ),
+      // pw.Image(
+      //   image,
+      //   width: 150,
+      // ),
       pw.SizedBox(height: 10),
       pw.Text('Documento: ${sale.cpfCnpj ?? '-'}', style: fontStyle),
       pw.Text('Vendedor: ${sale.createdBy}', style: fontStyle),

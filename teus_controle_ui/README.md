@@ -55,3 +55,11 @@ release a versao
 docker-compose build
 
 docker build --no-cache -f Dockerfile -t teuscontroleapi:1.0.0 .. 
+
+
+
+
+flutter build windows - > gera D:\Meus Docs\Desktop\4ano\TCC\TeusControle\teus_controle_ui\build\windows\runner\Release
+
+- utilizar o app "inno setup compiler" para criar instalador
+- existe o script na raiz do projeto na pasta installer para criar o exe do instalador

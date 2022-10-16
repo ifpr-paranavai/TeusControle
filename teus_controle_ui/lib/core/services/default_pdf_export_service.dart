@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:intl/intl.dart';
@@ -94,19 +93,20 @@ class DefaultPdfExportService {
         DateFormat(DateFormat.YEAR_MONTH_WEEKDAY_DAY, 'pt-Br');
     final String formatted = formatter.format(now);
 
-    final image = pw.MemoryImage(
-      File('assets/images/TEUS_CONTROLE_COLORFUL.png').readAsBytesSync(),
-    );
+    // final image = pw.MemoryImage(
+    //   File('assets/images/TEUS_CONTROLE_COLORFUL.png').readAsBytesSync(),
+    // );
 
     return pw.Column(
       children: [
         pw.Row(
           mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
           children: [
-            pw.Image(
-              image,
-              width: 200,
-            ),
+            pw.Expanded(child: pw.Container()),
+            // pw.Image(
+            //   image,
+            //   width: 200,
+            // ),
             pw.Column(
               mainAxisAlignment: pw.MainAxisAlignment.end,
               crossAxisAlignment: pw.CrossAxisAlignment.end,

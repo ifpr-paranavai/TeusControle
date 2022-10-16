@@ -53,6 +53,11 @@ class ProductWidget extends State<ProductPage> {
         columnSize: 1,
       ),
       TableColumn(
+        label: "Código",
+        reference: "gtin",
+        show: false,
+      ),
+      TableColumn(
         label: "Imagem",
         reference: "thumbnail",
         isImage: true,
@@ -67,10 +72,6 @@ class ProductWidget extends State<ProductPage> {
       TableColumn(
         label: "Marca",
         reference: "brandName",
-      ),
-      TableColumn(
-        label: "Código",
-        reference: "gtin",
       ),
       TableColumn(
         label: "Preço",

@@ -1,6 +1,8 @@
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:form_field_validator/form_field_validator.dart';
+import 'package:teus_controle_ui/core/models/product/simple_product_model.dart';
 
 import '../../../core/models/entry/entry_get_response_model.dart';
 import '../../../core/models/entry/entry_product_get_response_model.dart';
@@ -8,11 +10,14 @@ import '../../../core/models/entry/entry_product_item_post_request_model.dart';
 import '../../../core/models/entry/entry_product_post_request_model.dart';
 import '../../../core/models/entry/entry_product_post_response_model.dart';
 import '../../../core/models/entry/entry_product_put_request_model.dart';
+import '../../../core/models/product/product_get_response_model.dart';
 import '../../../core/models/select/select_model.dart';
 import '../../../core/services/entry_service.dart';
 import '../../../core/services/product_service.dart';
 import '../../../core/services/select_service.dart';
 import '../../../ui/shared/utils/global.dart' as globals;
+import '../../shared/widgets/dialogs/overlayable.dart';
+import '../product/product_modal_page.dart';
 
 class EntryController {
   EntryService service = EntryService();
@@ -70,6 +75,12 @@ class EntryController {
     );
     // statusDescription = entry.statusDescription;
     // status = entry.status;
+  }
+
+  MultiValidator get priceValidator {
+    return MultiValidator([
+      RequiredValidator(errorText: 'Campo obrigatório'),
+    ]);
   }
 
   List<TextInputFormatter> get priceFormatter {
@@ -228,6 +239,11 @@ class EntryController {
       // sugestão, abrir tela para cadastrar produto
       return;
     }
+    autoCompleteProductToBeAdded(value);
+  }
+
+  void autoCompleteProductToBeAdded(SimpleProductModel value) {
+    codeController.text = value.gtin;
     productController.text = value.description;
     id = value.id;
     thumbnail = value.thumbnail;
@@ -241,6 +257,11 @@ class EntryController {
     if (products.where((element) => element.productId == id).isNotEmpty) {
       return;
       // todo: se ja existe, questionar se deseja editar
+    }
+    if (formKey.currentState != null) {
+      if (!(formKey.currentState?.validate() ?? true)) {
+        return;
+      }
     }
 
     double amount = double.parse(amountController.text);
@@ -288,5 +309,28 @@ class EntryController {
     var removedProduct = products.where((e) => e.productId == productId).first;
     totalPrice -= removedProduct.totalPrice;
     products.remove(removedProduct);
+  }
+
+  Future openSearchProduct(BuildContext context) async {
+    var id = await Navigator.of(context).push(
+      Overlayable(
+        widget: const ProductModalPage(),
+      ),
+    );
+
+    if (id == null) return;
+
+    ProductGetResponseModel product =
+        await productService.getRequest(context, id);
+
+    autoCompleteProductToBeAdded(
+      SimpleProductModel(
+        id: product.id,
+        description: product.description,
+        gtin: product.gtin,
+        thumbnail: product.thumbnail,
+        price: product.price,
+      ),
+    );
   }
 }

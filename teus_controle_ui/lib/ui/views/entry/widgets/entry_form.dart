@@ -444,6 +444,9 @@ class _EntryFormState extends State<EntryForm> {
       enabled: false,
       controller: widget.controller.productController,
       icon: Icons.search,
+      onTap: () async {
+        await widget.controller.openSearchProduct(context);
+      },
     );
   }
 
@@ -453,6 +456,7 @@ class _EntryFormState extends State<EntryForm> {
       mask: widget.controller.priceFormatter,
       enabled: _isClosed(),
       controller: widget.controller.priceController,
+      validator: widget.controller.priceValidator,
     );
   }
 
@@ -463,6 +467,7 @@ class _EntryFormState extends State<EntryForm> {
       mask: widget.controller.amountFormatter,
       enabled: _isClosed(),
       controller: widget.controller.amountController,
+      validator: widget.controller.priceValidator,
     );
   }
 

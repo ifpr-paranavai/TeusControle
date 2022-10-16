@@ -89,7 +89,7 @@ class _SaleDetailsState extends State<SaleDetails> {
   }
 
   Widget getProductDetails() {
-    double tableSize = 700;
+    double tableSize = 887;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,

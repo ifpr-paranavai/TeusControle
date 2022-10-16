@@ -15,7 +15,10 @@ void main() async {
   HttpOverrides.global = MyHttpOverrides();
 
   WidgetsFlutterBinding.ensureInitialized();
-  await DesktopWindow.setMinWindowSize(const Size(550, 550));
+  if (Platform.isWindows) {
+    await DesktopWindow.setMinWindowSize(const Size(550, 550));
+  }
+
   runApp(const MyApp());
 }
 
@@ -33,7 +36,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: const [
         Locale('pt', 'BR'),
       ],
-      title: 'Teus Controle',
+      title: 'TeusControle',
       debugShowCheckedModeBanner: false,
       scrollBehavior: MyCustomScrollBehavior(),
       theme: appThemeData,

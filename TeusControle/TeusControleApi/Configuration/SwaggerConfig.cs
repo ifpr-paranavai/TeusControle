@@ -55,8 +55,8 @@ namespace TeusControleApi.Configuration
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
-                xmlPath = Path.Combine(AppContext.BaseDirectory, "Core.Shared.xml");
-                c.IncludeXmlComments(xmlPath);
+                /*xmlPath = Path.Combine(AppContext.BaseDirectory, "Core.Shared.xml");
+                c.IncludeXmlComments(xmlPath);*/
             });
             services.AddFluentValidationRulesToSwagger();
         }
