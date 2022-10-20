@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:teus_controle_ui/core/services/sale_service.dart';
 
+import '../../../../core/models/paginated/enums/sort_enum.dart';
 import '../../../shared/utils/global.dart' as globals;
 import '../../../shared/widgets/default/default_screen.dart';
 import '../../../shared/widgets/dialogs/delete_dialog.dart';
@@ -16,6 +18,7 @@ class SaleWidget extends State<SalePage> {
   @override
   void initState() {
     globals.getLoggedUserId().then((value) => loggedUserId = value);
+    controller.service = SaleService.withSort(_saleColumns());
     super.initState();
   }
 
@@ -53,11 +56,11 @@ class SaleWidget extends State<SalePage> {
   List<TableColumn> _saleColumns() {
     return [
       TableColumn(
-        label: "Id",
+        label: "Número",
         reference: "id",
         isId: true,
-        show: false,
-        shouldIncludeInFilter: false,
+        show: true,
+        // shouldIncludeInFilter: false,
         columnSize: 1,
       ),
       TableColumn(
@@ -73,6 +76,7 @@ class SaleWidget extends State<SalePage> {
         label: "Data do Fechamento",
         reference: "closingDate",
         shouldIncludeInFilter: false,
+        sortingType: SortEnum.desc,
       ),
       TableColumn(
         label: "Preço Total",

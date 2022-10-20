@@ -176,7 +176,7 @@ class SaleController {
                   onConfirm: () {
                     showTicket = true;
                   },
-                  value: 'Gerar Recibo',
+                  value: 'Recibo',
                 ),
               ),
             );

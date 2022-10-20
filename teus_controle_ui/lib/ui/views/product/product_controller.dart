@@ -8,10 +8,12 @@ import '../../../core/models/product/product_post_request_model.dart';
 import '../../../core/models/product/product_post_response_model.dart';
 import '../../../core/models/product/product_put_request_model.dart';
 import '../../../core/models/product/product_put_response_model.dart';
+import '../../../core/services/bluesoft_cosmos_service.dart';
 import '../../../core/services/product_service.dart';
 import '../../../ui/shared/utils/global.dart' as globals;
 
 class ProductController {
+  BluesoftCosmosService cosmosService = BluesoftCosmosService();
   ProductService service = ProductService();
   final formKey = GlobalKey<FormState>();
 
@@ -324,5 +326,18 @@ class ProductController {
     int id,
   ) async {
     await service.deleteRequest(context, id);
+  }
+
+  Future autocompleteProductInfo(String gtin, BuildContext context) async {
+    var product = await cosmosService.getProductInfo(gtin, context);
+    descriptionController.text = product['description'] ?? '';
+    brandNameController.text = product['brand']?['name'] ?? '';
+    ncmCodeController.text = product['ncm']?['code'] ?? '';
+    ncmDescriptionController.text = product['ncm']?['description'] ?? '';
+    ncmFullDescriptionController.text =
+        product['ncm']?['full_description'] ?? '';
+    thumbnailController.text = product['thumbnail'] ?? '';
+    gpcCodeController.text = product['gpc']['code'];
+    gpcDescriptionController.text = product['gpc']['description'];
   }
 }

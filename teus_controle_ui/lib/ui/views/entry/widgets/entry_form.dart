@@ -69,81 +69,85 @@ class _EntryFormState extends State<EntryForm> {
     return CustomDialog(
       width: 1800,
       height: 1000,
-      body: Form(
-        key: widget.controller.formKey,
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25),
-              child: Column(
-                children: [
-                  _descriptionField(),
-                  if (_isClosed()) _productFormFields(context),
-                  const SizedBox(
-                    height: 10,
+      body: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25),
+            child: Column(
+              children: [
+                Form(
+                  key: widget.controller.formKeyDescription,
+                  child: _descriptionField(),
+                ),
+                if (_isClosed())
+                  Form(
+                    key: widget.controller.formKey,
+                    child: _productFormFields(context),
                   ),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      controller: scrollControllerVertical,
-                      child: _tableProducts(),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 74,
-                  ),
-                ],
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
+                const SizedBox(
+                  height: 10,
+                ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    controller: scrollControllerVertical,
+                    child: _tableProducts(),
                   ),
                 ),
-                width: double.infinity,
-                height: 75,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 15,
-                    horizontal: 20,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      SizedBox(
-                        width: 200,
-                        child: _statusInput(context),
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      SizedBox(
-                        width: 190,
-                        child: AutoSizeText(
-                          'Total ${globals.currency.format(widget.controller.totalPrice)} ',
-                          overflow: TextOverflow.ellipsis,
-                          group: myGroup,
-                          maxFontSize: 30,
-                          textAlign: TextAlign.end,
-                          maxLines: 1,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                          ),
+                const SizedBox(
+                  height: 74,
+                ),
+              ],
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+              ),
+              width: double.infinity,
+              height: 75,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 15,
+                  horizontal: 20,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    SizedBox(
+                      width: 200,
+                      child: _statusInput(context),
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    SizedBox(
+                      width: 190,
+                      child: AutoSizeText(
+                        'Total ${globals.currency.format(widget.controller.totalPrice)} ',
+                        overflow: TextOverflow.ellipsis,
+                        group: myGroup,
+                        maxFontSize: 30,
+                        textAlign: TextAlign.end,
+                        maxLines: 1,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
       title: widget.isCreate ? 'Cadastro' : 'Edição',
       onClose: widget.controller.clearFields,
@@ -424,6 +428,7 @@ class _EntryFormState extends State<EntryForm> {
       paddingTop: 15,
       paddingBottom: 10,
       controller: widget.controller.descriptionController,
+      validator: widget.controller.descriptionValidator,
     );
   }
 

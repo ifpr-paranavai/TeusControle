@@ -52,9 +52,9 @@ class ProductFormState extends State<ProductForm> {
             padding: const EdgeInsets.symmetric(horizontal: 25),
             child: Column(
               children: [
+                _gtinField(widget.controller),
                 _descriptionField(widget.controller),
                 _priceField(widget.controller),
-                _gtinField(widget.controller),
                 _inStockField(widget.controller),
                 _avgPriceField(widget.controller),
                 _brandNameField(widget.controller),
@@ -87,7 +87,6 @@ class ProductFormState extends State<ProductForm> {
   TextInputField _descriptionField(ProductController controller) {
     return TextInputField(
       labelText: "Descrição",
-      paddingTop: 15,
       paddingBottom: 10.0,
       validator: controller.descriptionValidator,
       controller: controller.descriptionController,
@@ -153,9 +152,15 @@ class ProductFormState extends State<ProductForm> {
   TextInputField _gtinField(ProductController controller) {
     return TextInputField(
       labelText: "Código de barras",
-      paddingBottom: 10.0,
       validator: controller.gtinValidator,
+      paddingTop: 15,
+      paddingBottom: 10,
       controller: controller.gtinController,
+      onFieldSubmitted: (value) async {
+        // setState(() async {
+        await controller.autocompleteProductInfo(value, context);
+        // });
+      },
     );
   }
 

@@ -24,6 +24,7 @@ class EntryController {
   ProductService productService = ProductService();
   SelectService selectService = SelectService();
   final formKey = GlobalKey<FormState>();
+  final formKeyDescription = GlobalKey<FormState>();
   bool editable = true;
 
   List<EntryProductGetResponseModel> products = [];
@@ -77,6 +78,12 @@ class EntryController {
     // status = entry.status;
   }
 
+  MultiValidator get descriptionValidator {
+    return MultiValidator([
+      RequiredValidator(errorText: 'Campo obrigatório'),
+    ]);
+  }
+
   MultiValidator get priceValidator {
     return MultiValidator([
       RequiredValidator(errorText: 'Campo obrigatório'),
@@ -120,28 +127,33 @@ class EntryController {
       return;
     }
 
-    if (formKey.currentState != null) {
-      if (formKey.currentState?.validate() ?? true) {
-        setStateLoading();
-        var success = isCreate && id == null
-            ? await _postRequest(context)
-            : await _putRequest(
-                context,
-                id!,
-                true, // todo: adicionar campos booleano de status
-              );
-        setStateLoading();
-
-        if (success) {
-          clearFields();
-          Navigator.pop(context, true); // fecha modal
-          globals.successSnackBar(
-            context: context,
-            message: 'Cadastro realizado com sucesso',
-          );
-        }
+    if (formKeyDescription.currentState != null) {
+      if (formKeyDescription.currentState?.validate() ?? true) {
+        await onConfirm(setStateLoading, isCreate, id, context);
         // continua editando modal
       }
+    }
+  }
+
+  Future<void> onConfirm(Function setStateLoading, bool isCreate, int? id,
+      BuildContext context) async {
+    setStateLoading();
+    var success = isCreate && id == null
+        ? await _postRequest(context)
+        : await _putRequest(
+            context,
+            id!,
+            true, // todo: adicionar campos booleano de status
+          );
+    setStateLoading();
+
+    if (success) {
+      clearFields();
+      Navigator.pop(context, true); // fecha modal
+      globals.successSnackBar(
+        context: context,
+        message: 'Cadastro realizado com sucesso',
+      );
     }
   }
 

@@ -57,6 +57,17 @@ abstract class BaseService {
     sortingParams.add(sortingParam);
   }
 
+  void addSorts(List<TableColumn> columns) {
+    for (TableColumn column in columns) {
+      if (column.sortingType != null) {
+        addSort(SortingParams(
+          columnName: column.reference,
+          sortOrder: column.sortingType!,
+        ));
+      }
+    }
+  }
+
   void changePageSize(int size) {
     pageNumber = 1;
     pageSize = size;

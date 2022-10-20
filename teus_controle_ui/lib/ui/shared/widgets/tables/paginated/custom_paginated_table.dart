@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import '../../../../shared/utils/global.dart' as globals;
@@ -93,7 +95,8 @@ class _CustomTableState extends State<CustomPaginatedTable> {
     final double screenHeight = (MediaQuery.of(context).size.height);
     final double tableMinWidth =
         screenWidth - (globals.isCollapsed ? 49 : 358.5);
-    final double tableMaxHeight = screenHeight - (widget.height ?? 296);
+    final double tableMaxHeight = screenHeight -
+        (widget.height ?? (Platform.isWindows ? 290 : 340)); // 340
 
     final double cardWidth = screenWidth;
     // (altura das rows * quantidade de rows)  + espaço para scrollbar
@@ -467,7 +470,9 @@ class _CustomTableState extends State<CustomPaginatedTable> {
                         widget.tableData.printValue(id, idReference),
                         () {
                           selected.remove(id);
-                          widget.getSelected!(selected);
+                          if (widget.canBeSelected) {
+                            widget.getSelected!(selected);
+                          }
                         },
                       )
                   : null,

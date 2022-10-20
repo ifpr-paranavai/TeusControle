@@ -1,3 +1,5 @@
+import '../../../../../core/models/paginated/enums/sort_enum.dart';
+
 class TableData {
   List<TableColumn> columns;
   List data;
@@ -34,7 +36,7 @@ class TableData {
 class TableColumn {
   final String label;
   final String reference;
-  final OrderByType? orderByType;
+  final SortEnum? sortingType;
   final bool isId;
   final bool show;
   final bool showInPrint;
@@ -47,7 +49,7 @@ class TableColumn {
   TableColumn({
     required this.label,
     required this.reference,
-    this.orderByType,
+    this.sortingType,
     this.isId = false,
     this.show = true,
     this.showInPrint = false,
@@ -61,11 +63,6 @@ class TableColumn {
         assert(!(isImage && isMoney), "Não é possível ser imagem e dinheiro"),
         assert(!(isImage && showInPrint),
             "Não é possível ser imagem e estar no print");
-}
-
-enum OrderByType {
-  asc,
-  desc,
 }
 
 enum ImageType {

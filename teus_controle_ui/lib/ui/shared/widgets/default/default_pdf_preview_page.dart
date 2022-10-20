@@ -27,6 +27,7 @@ class DefaultPdfPreviewPage extends StatelessWidget {
       body: pw.PdfPreview(
         build: (context) => service.makeDefaultPdf(context, title),
         canDebug: false,
+        canChangePageFormat: false,
         canChangeOrientation: false,
       ),
     );
