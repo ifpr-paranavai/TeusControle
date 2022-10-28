@@ -63,3 +63,5 @@ flutter build windows - > gera D:\Meus Docs\Desktop\4ano\TCC\TeusControle\teus_c
 
 - utilizar o app "inno setup compiler" para criar instalador
 - existe o script na raiz do projeto na pasta installer para criar o exe do instalador
+  tag mateusbg01/teuscontroleapi gcr.io/teuscontrole/teuscontroleapi
+  docker push gcr.io/teuscontrole/teuscontroleapi
